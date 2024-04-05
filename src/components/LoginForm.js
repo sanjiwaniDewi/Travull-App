@@ -1,10 +1,14 @@
 import { login } from "@/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 export default function LoginForm() {
     const dispatch = useDispatch();
 
+    const { isLogin } = useSelector((store) => store.auth);
+
     const router = useRouter();
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -13,11 +17,17 @@ export default function LoginForm() {
 
         try {
             dispatch(login({ email, password }));
-            router.push("/");
         } catch (err) {
             console.log(err);
         }
     };
+
+    useEffect(() => {
+        if (isLogin) {
+            router.push("/");
+        }
+    }, [isLogin]);
+
     return (
         <form
             onSubmit={handleSubmit}
