@@ -2,16 +2,9 @@
 import { API_KEY, BASE_API } from "@/API/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { BloomFilter } from "next/dist/shared/lib/bloom-filter";
 const initialState = {
-    name: "",
-    username: "",
-    email: "",
-    password: "",
-    passwordRepeat: "",
-    profilePictureUrl: "",
-    phoneNumber: "",
-    bio: "",
-    website: "",
+    isLogin: false,
 };
 
 export const login = createAsyncThunk(
@@ -29,8 +22,38 @@ export const login = createAsyncThunk(
                     headers: { apiKey: API_KEY },
                 }
             );
-            const token = res.data.token;
+            const token = res?.data?.token;
             localStorage.setItem("access_token", token);
+        } catch (err) {
+            return rejectWithValue(err);
+        }
+    }
+);
+
+export const register = createAsyncThunk(
+    "auth/register",
+    async (payload, thunkAPI) => {
+        const { rejectWithValue } = thunkAPI;
+        try {
+            await axios.post(`${BASE_API}/register`, payload, {
+                headers: { apiKey: API_KEY },
+            });
+        } catch (err) {
+            return rejectWithValue(err);
+        }
+    }
+);
+
+export const logout = createAsyncThunk(
+    "auth/logout",
+    async (payload, thunkAPI) => {
+        const { rejectWithValue } = thunkAPI;
+        try {
+            const token = localStorage.getItem("access_token");
+
+            await axios.get(`${BASE_API}/logout`, {
+                headers: { apiKey: API_KEY, Authorization: `Bearer ${token}` },
+            });
         } catch (err) {
             return rejectWithValue(err);
         }
@@ -41,23 +64,22 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        createUser: {
-            prepare(name, username) {
-                return {
-                    payload: { name, username },
-                };
-            },
-            reducer(state, action) {
-                state.name = action.payload.name;
-                state.username = action.payload.username;
-            },
+        loginStatus(state, action) {
+            state.isLogin = action.payload;
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(login.fulfilled, (state, action) => {});
+        builder.addCase(login.fulfilled, (state, action) => {
+            state.isLogin = true;
+        });
+        builder.addCase(register.fulfilled, (state, action) => {});
+        builder.addCase(logout.fulfilled, (state, action) => {
+            localStorage.removeItem("access_token");
+            state.isLogin = false;
+        });
     },
 });
 
-export const { createUser } = authSlice.actions;
+export const { loginStatus } = authSlice.actions;
 
 export default authSlice.reducer;
