@@ -1,4 +1,8 @@
 "use client";
+import Card from "@/components/Card";
+import FormUpdate from "@/components/FormUpdate";
+import Layout from "@/components/Layout";
+import UploadImage from "@/components/UploadImage";
 import { fatchUserLogged, updateUser } from "@/redux/features/user/userSlice";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -7,9 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 export default function UpdateProfilePage() {
     const dispatch = useDispatch();
     const router = useRouter();
-    const { name, email, profilePictureUrl, phoneNumber } = useSelector(
-        (store) => store.user
-    );
+    const dataUser = useSelector((store) => store.user);
+    const { imageUrl } = useSelector((store) => store.image);
 
     const handleUserData = () => {
         dispatch(fatchUserLogged());
@@ -26,12 +29,12 @@ export default function UpdateProfilePage() {
         const name = formData.get("name");
         const phoneNumber = formData.get("phoneNumber");
         const email = formData.get("email");
-        const profilePictureUrl = formData.get("profilePictureUrl");
+
         const user = {
             name,
             email,
             phoneNumber,
-            profilePictureUrl,
+            profilePictureUrl: imageUrl,
         };
 
         console.log(user);
@@ -45,42 +48,18 @@ export default function UpdateProfilePage() {
     };
 
     return (
-        <div>
-            <p>update Profil</p>
-            <form
-                onSubmit={handleUpdateUser}
-                className="flex flex-col  w-96 gap-y-3"
-            >
-                <input
-                    className="text-black"
-                    type="text"
-                    defaultValue={name}
-                    placeholder="name"
-                    name="name"
-                />
-                <input
-                    className="text-black"
-                    type="text"
-                    defaultValue={email}
-                    placeholder="email"
-                    name="email"
-                />
-                <input
-                    className="text-black"
-                    type="text"
-                    defaultValue={profilePictureUrl}
-                    placeholder="profile picture url"
-                    name="profilePictureUrl"
-                />
-                <input
-                    className="text-black"
-                    type="text"
-                    defaultValue={phoneNumber}
-                    placeholder="phone number"
-                    name="phoneNumber"
-                />
-                <button type="sumbit">submit</button>
-            </form>
-        </div>
+        <Layout>
+            <div className="flex justify-center items-center mt-20">
+                <Card>
+                    <div className="flex md:flex-row flex-col md:gap-10 gap:3">
+                        <UploadImage image={dataUser.profilePictureUrl} />
+                        <FormUpdate
+                            handleUpdateUser={handleUpdateUser}
+                            dataUser={dataUser}
+                        />
+                    </div>
+                </Card>
+            </div>
+        </Layout>
     );
 }
