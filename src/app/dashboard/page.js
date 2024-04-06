@@ -1,10 +1,11 @@
 import AllUser from "@/components/AllUser";
+import DashboardLayout from "@/components/DashboardLayout";
 
 export default function DashboardPage() {
     return (
-        <div>
+        <DashboardLayout>
             <p>ini Dashboard</p>
             <AllUser />
-        </div>
+        </DashboardLayout>
     );
 }
