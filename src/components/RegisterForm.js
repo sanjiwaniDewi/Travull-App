@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { register } from "@/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
+import Card from "./Card";
+import Link from "next/link";
 
 export default function RegisterForm() {
     const [image, setImage] = useState("/Avatar-Image.png");
@@ -44,27 +46,64 @@ export default function RegisterForm() {
     };
 
     return (
-        <form
-            onSubmit={handleSubmitForm}
-            className="flex flex-col  w-96 gap-y-2 text-black"
-        >
-            <input type="text" name="name" placeholder="name" />
+        <Card>
+            <h1 className="text-3xl font-bold text-center">Register</h1>
 
-            <input type="text" name="phoneNumber" placeholder="phone number" />
-            <input type="text" name="email" placeholder="email" />
-            <input type="password" name="password" placeholder="password" />
-            <input
-                type="password"
-                name="passwordRepeat"
-                placeholder="repeat password"
-            />
-            <select name="role">
-                <option value="admin">Admin</option>
-                <option value="customer">Customer</option>
-            </select>
-            <button type="submit" className="text-slate-50">
-                Register
-            </button>
-        </form>
+            <form
+                onSubmit={handleSubmitForm}
+                className="flex flex-col  w-96 gap-y-2 text-black mt-8"
+            >
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="name"
+                    className="bg-slate-100 px-2 py-4 rounded-xl focus:outline-none"
+                />
+
+                <input
+                    type="text"
+                    name="phoneNumber"
+                    placeholder="phone number"
+                    className="bg-slate-100 px-2 py-4 rounded-xl focus:outline-none"
+                />
+                <input
+                    type="text"
+                    name="email"
+                    placeholder="email"
+                    className="bg-slate-100 px-2 py-4 rounded-xl focus:outline-none"
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="password"
+                    className="bg-slate-100 px-2 py-4 rounded-xl focus:outline-none"
+                />
+                <input
+                    type="password"
+                    name="passwordRepeat"
+                    placeholder="repeat password"
+                    className="bg-slate-100 px-2 py-4 rounded-xl focus:outline-none"
+                />
+                <select
+                    name="role"
+                    className="bg-slate-100 px-2 py-4 rounded-xl focus:outline-none"
+                >
+                    <option value="admin">Admin</option>
+                    <option value="customer">Customer</option>
+                </select>
+                <button
+                    type="submit"
+                    className="text-slate-50 mt-4  w-96 px-2 py-3 rounded-xl font-bold bg-slate-500"
+                >
+                    Register
+                </button>
+            </form>
+            <div className="mt-4 flex justify-center gap-3">
+                <p>Have an account already?</p>
+                <Link href="/login" className="text-blue-700 underline">
+                    Login
+                </Link>
+            </div>
+        </Card>
     );
 }
