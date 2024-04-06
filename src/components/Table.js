@@ -8,7 +8,7 @@ export default function Table({ data }) {
         <table>
             <thead>
                 <tr>
-                    {tableTitle.map((item) => {
+                    {tableTitle?.map((item) => {
                         if (item === "id") {
                             return <th>No</th>;
                         } else if (item === "profilePictureUrl") {
@@ -20,7 +20,7 @@ export default function Table({ data }) {
                 </tr>
             </thead>
             <tbody>
-                {data.map((item, index) => {
+                {data?.map((item, index) => {
                     return (
                         <tr>
                             {tableTitle.map((head, indexs) => {
