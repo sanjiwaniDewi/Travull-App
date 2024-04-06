@@ -1,4 +1,6 @@
 "use client";
+import Card from "@/components/Card";
+import Layout from "@/components/Layout";
 import Profile from "@/components/Profile";
 import { fatchUserLogged } from "@/redux/features/user/userSlice";
 import Link from "next/link";
@@ -24,9 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function ProfilePage() {
     const dispatch = useDispatch();
-    const { name, email, role, profilePictureUrl, phoneNumber } = useSelector(
-        (store) => store.user
-    );
+    const userData = useSelector((store) => store.user);
 
     const handleUserData = () => {
         dispatch(fatchUserLogged());
@@ -36,12 +36,19 @@ export default function ProfilePage() {
         handleUserData();
     }, []);
 
-    const userData = { name, email, role, profilePictureUrl, phoneNumber };
-
     return (
-        <>
-            <Link href="/profile/update-profile">Edit Profil</Link>
-            <Profile userData={userData} />
-        </>
+        <Layout>
+            <div className="flex justify-center items-center mt-20">
+                <Card>
+                    <Profile userData={userData} />
+
+                    <Link href="/profile/update-profile">
+                        <button className="mt-4 py-3 bg-slate-500 text-white px-4 font-semibold text-sm rounded-xl w-full">
+                            Edit Profile
+                        </button>
+                    </Link>
+                </Card>
+            </div>
+        </Layout>
     );
 }
