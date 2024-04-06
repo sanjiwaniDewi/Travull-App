@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
+import LogoutButton from "./LogoutButton";
 
 export default function DropdownMenu({ dataUser, handleLogout }) {
     const [showDropdown, setShowDropdown] = useState(false);
@@ -54,14 +55,7 @@ export default function DropdownMenu({ dataUser, handleLogout }) {
                     </li>
                 </ul>
                 <div className="py-2">
-                    <button
-                        className="block px-4 py-1 text-sm text-gray-700
-                    hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
-                    dark:hover:text-white"
-                        onClick={handleLogout}
-                    >
-                        Logout
-                    </button>
+                    <LogoutButton handleLogout={handleLogout} />
                 </div>
             </div>
         </>

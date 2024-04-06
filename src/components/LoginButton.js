@@ -24,18 +24,12 @@ export default function LoginButton() {
         checkToken();
     }, []);
 
-    const handleLogout = () => {
-        dispatch(logout());
-    };
     return (
         <>
             {isLogin ? (
                 <div className=" flex flex-row gap-x-5">
                     <div>
-                        <DropdownMenu
-                            dataUser={dataUser}
-                            handleLogout={handleLogout}
-                        />
+                        <DropdownMenu dataUser={dataUser} />
                     </div>
                 </div>
             ) : (
