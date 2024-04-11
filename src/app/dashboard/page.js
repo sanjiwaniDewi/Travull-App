@@ -1,11 +1,11 @@
+"use client";
 import AllUser from "@/components/AllUser";
-import DashboardLayout from "@/components/DashboardLayout";
 
 export default function DashboardPage() {
     return (
-        <DashboardLayout>
-            <p>ini Dashboard</p>
+        <div className="ms-10">
+            <p className="text-3xl font-bold mb-12 mt-10">Dashboard</p>
             <AllUser />
-        </DashboardLayout>
+        </div>
     );
 }
