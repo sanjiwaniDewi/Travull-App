@@ -3,9 +3,11 @@ import ChangeRole from "./ChangeRole";
 export default function Table({ data }) {
     const tableTitle = [
         ...new Set(data?.map((item) => Object.keys(item)).flat()),
-        "action",
     ];
-    // console.log(tableTitle);
+
+    if (tableTitle.length !== 0) {
+        tableTitle.push("action");
+    }
 
     return (
         <table>
