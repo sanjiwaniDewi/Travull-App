@@ -1,8 +1,11 @@
+import ChangeRole from "./ChangeRole";
+
 export default function Table({ data }) {
     const tableTitle = [
         ...new Set(data?.map((item) => Object.keys(item)).flat()),
+        "action",
     ];
-    console.log(tableTitle);
+    // console.log(tableTitle);
 
     return (
         <table>
@@ -39,6 +42,8 @@ export default function Table({ data }) {
                                             {item[head]}
                                         </div>
                                     );
+                                } else if (head === "action") {
+                                    return <ChangeRole userData={item} />;
                                 }
                                 return <td>{item[head]}</td>;
                             })}
