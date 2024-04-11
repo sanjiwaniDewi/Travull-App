@@ -4,28 +4,25 @@ import { BASE_API, API_KEY } from "@/API/api";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Table from "./Table";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUser } from "@/redux/features/user/userSlice";
 
 export default function AllUser() {
-    const [userData, setUserData] = useState();
-    const getUsersData = async () => {
-        const token = localStorage.getItem("access_token");
-        const res = await axios.get(`${BASE_API}/all-user`, {
-            headers: {
-                apiKey: API_KEY,
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    const dispatch = useDispatch();
+    const userData = useSelector((store) => store.user);
 
-        setUserData(res.data.data);
+    const getAllDataUsers = () => {
+        dispatch(getAllUser());
     };
-
     useEffect(() => {
-        getUsersData();
+        getAllDataUsers();
     }, []);
+
+    console.log(userData);
+
     return (
         <div>
-            <p>ini Dashboard</p>
-            <Table data={userData} />
+            <Table data={userData.users.data} />
         </div>
     );
 }
