@@ -18,8 +18,6 @@ export default function AllUser() {
         getAllDataUsers();
     }, []);
 
-    console.log(userData);
-
     return (
         <div>
             <Table data={userData.users.data} />
