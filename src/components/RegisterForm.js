@@ -89,7 +89,7 @@ export default function RegisterForm() {
                     className="bg-slate-100 px-2 py-4 rounded-xl focus:outline-none"
                 >
                     <option value="admin">Admin</option>
-                    <option value="customer">Customer</option>
+                    <option value="User">User</option>
                 </select>
                 <button
                     type="submit"
