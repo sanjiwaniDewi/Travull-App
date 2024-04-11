@@ -37,11 +37,11 @@ export default function UploadImage({ image }) {
 
     return (
         <div className="flex flex-col md:w-96 w-full">
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-3">
                 <img
                     src={newImage}
                     alt="avatar"
-                    className="rounded-full w-80 object-cover "
+                    className="rounded-3xl w-80 h-80 object-cover "
                 />
             </div>
 
