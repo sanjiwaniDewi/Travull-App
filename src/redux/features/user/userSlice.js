@@ -9,6 +9,13 @@ const initialState = {
     role: "",
     profilePictureUrl: "",
     phoneNumber: "",
+    users: {
+        data: [],
+        total: 0,
+        dataShow: [],
+        page: 0,
+        currentPage: 0,
+    },
 };
 
 export const fatchUserLogged = createAsyncThunk(
@@ -33,6 +40,31 @@ export const fatchUserLogged = createAsyncThunk(
                 });
             }
         } catch (err) {}
+    }
+);
+
+export const getAllUser = createAsyncThunk(
+    "user/getAllUser",
+    async (payload, thunkAPI) => {
+        const { rejectWithValue, dispatch } = thunkAPI;
+
+        try {
+            const token = localStorage.getItem("access_token");
+            if (token) {
+                const res = await axios.get(`${BASE_API}/all-user`, {
+                    headers: {
+                        apiKey: API_KEY,
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                return dispatch({
+                    type: "user/setAllUser",
+                    payload: res.data.data,
+                });
+            }
+        } catch (err) {
+            return rejectWithValue(err);
+        }
     }
 );
 
@@ -65,6 +97,33 @@ export const updateUser = createAsyncThunk(
     }
 );
 
+export const updateRoleUser = createAsyncThunk(
+    "user/updateRoleUser",
+    async (payload, thunkAPI) => {
+        const { rejectWithValue, dispatch, fulfillWithValue } = thunkAPI;
+        try {
+            const token = localStorage.getItem("access_token");
+            if (token) {
+                const res = await axios.post(
+                    `${BASE_API}/update-user-role/${payload.id}`,
+                    {
+                        role: payload.role,
+                    },
+                    {
+                        headers: {
+                            apiKey: API_KEY,
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                return fulfillWithValue(payload);
+            }
+        } catch (err) {
+            return rejectWithValue(err);
+        }
+    }
+);
+
 const userSlice = createSlice({
     name: "user",
     initialState,
@@ -77,11 +136,20 @@ const userSlice = createSlice({
             state.profilePictureUrl = action.payload.profilePictureUrl;
             state.phoneNumber = action.payload.phoneNumber;
         },
-        updateUserRole(state, action) {
-            state.role = action.payload;
+        setAllUser(state, action) {
+            state.users.data = action.payload;
         },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fatchUserLogged.fulfilled, (state, action) => {});
+        builder.addCase(updateUser.fulfilled, (state, action) => {});
+        builder.addCase(updateRoleUser.fulfilled, (state, action) => {
+            if (state.id === action.payload.id) {
+                state.role = action.payload.role;
+            }
+        });
     },
 });
 
-export const { getLoggedUser, updateUserRole } = userSlice.actions;
+export const { getLoggedUser } = userSlice.actions;
 export default userSlice.reducer;
