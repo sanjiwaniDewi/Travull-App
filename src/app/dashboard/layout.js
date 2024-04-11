@@ -1,8 +1,8 @@
-import Sidebar from "./Sidebar";
+import Sidebar from "../../components/Sidebar";
 
 export default function DashboardLayout({ children }) {
     return (
-        <main className="flex">
+        <main className="flex relative">
             <Sidebar />
             {children}
         </main>
