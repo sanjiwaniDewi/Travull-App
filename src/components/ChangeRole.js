@@ -8,7 +8,7 @@ export default function ChangeRole({ userData }) {
     }
 
     return (
-        <div className="">
+        <div>
             <button
                 onClick={handleShowModal}
                 className="block px-4 py-1 text-sm bg-slate-600 rounded-lg font-medium hover:bg-slate-300 hover:text-slate-800"
