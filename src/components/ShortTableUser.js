@@ -16,14 +16,14 @@ export default function ShortTableUser({ data }) {
                     <tr>
                         {tableTitle?.map((item) => {
                             if (item === "id") {
-                                return <th>No</th>;
+                                return <th key={item}>No</th>;
                             } else if (
                                 item === "profilePictureUrl" ||
                                 item === "no"
                             ) {
                                 return;
                             } else {
-                                return <th>{item}</th>;
+                                return <th key={item}>{item}</th>;
                             }
                         })}
                     </tr>
@@ -31,10 +31,14 @@ export default function ShortTableUser({ data }) {
                 <tbody>
                     {data?.map((item, index) => {
                         return (
-                            <tr>
+                            <tr key={index}>
                                 {tableTitle.map((head, indexs) => {
                                     if (head === "id") {
-                                        return <td>{item["no"]}</td>;
+                                        return (
+                                            <td key={item["no"]}>
+                                                {item["no"]}
+                                            </td>
+                                        );
                                     } else if (
                                         head === "profilePictureUrl" ||
                                         head === "no"
@@ -42,7 +46,10 @@ export default function ShortTableUser({ data }) {
                                         return;
                                     } else if (indexs === 1) {
                                         return (
-                                            <div className="flex flex-row gap-2">
+                                            <td
+                                                className="flex flex-row gap-2"
+                                                key={item[head]}
+                                            >
                                                 <img
                                                     className="table-avatar w-10 rounded-full h-10"
                                                     src={
@@ -53,12 +60,18 @@ export default function ShortTableUser({ data }) {
                                                     alt="profilePictureUrl"
                                                 />
                                                 {item[head]}
-                                            </div>
+                                            </td>
                                         );
                                     } else if (head === "action") {
-                                        return <ChangeRole userData={item} />;
+                                        return (
+                                            <td key={item["id"]}>
+                                                <ChangeRole userData={item} />
+                                            </td>
+                                        );
                                     }
-                                    return <td>{item[head]}</td>;
+                                    return (
+                                        <td key={item[head]}>{item[head]}</td>
+                                    );
                                 })}
                             </tr>
                         );
