@@ -32,7 +32,7 @@ export default function DashboardPage() {
                     };
                 }
             });
-            const shortData = newData.length > 5 ? newData.slice(-5) : newData;
+            const shortData = newData.length > 3 ? newData.slice(-3) : newData;
 
             setLatestUsers(shortData);
         }
@@ -58,8 +58,8 @@ export default function DashboardPage() {
                     }
                 });
                 const sortBannerData =
-                    newBannerData.length > 5
-                        ? newBannerData.slice(-5)
+                    newBannerData.length > 3
+                        ? newBannerData.slice(-3)
                         : newBannerData;
                 setLatestBanner(sortBannerData);
             } catch (err) {
@@ -88,8 +88,8 @@ export default function DashboardPage() {
                     }
                 });
                 const sortPromoData =
-                    newPromoData.length > 5
-                        ? newPromoData.slice(-5)
+                    newPromoData.length > 3
+                        ? newPromoData.slice(-3)
                         : newPromoData;
                 setLatestPromos(sortPromoData);
             } catch (err) {
@@ -118,8 +118,8 @@ export default function DashboardPage() {
                     }
                 });
                 const sortCategoiesData =
-                    newCategoiesData.length > 5
-                        ? newCategoiesData.slice(-5)
+                    newCategoiesData.length > 3
+                        ? newCategoiesData.slice(-3)
                         : newCategoiesData;
                 setLatestCategories(sortCategoiesData);
             } catch (err) {
@@ -148,8 +148,8 @@ export default function DashboardPage() {
                     }
                 });
                 const sortActivitiesData =
-                    newActivitiesData.length > 5
-                        ? newActivitiesData.slice(-5)
+                    newActivitiesData.length > 3
+                        ? newActivitiesData.slice(-3)
                         : newActivitiesData;
                 setLatestActivities(sortActivitiesData);
             } catch (err) {
