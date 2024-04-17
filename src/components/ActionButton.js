@@ -4,6 +4,7 @@ import {
     changeModalStatus,
     setModalType,
 } from "@/redux/features/modal/modalSlice";
+import handleDeleteItem from "@/utils/handleDeleteItem";
 
 import { useDispatch } from "react-redux";
 
@@ -13,6 +14,9 @@ export default function ActionButtons({ id, type, handler }) {
     const handleShowModal = () => {
         dispatch(changeModalStatus());
         handler(id, type);
+    };
+    const handleDelete = () => {
+        handleDeleteItem(id, type);
     };
     return (
         <>
@@ -26,7 +30,10 @@ export default function ActionButtons({ id, type, handler }) {
                 <button className="bg-slate-500 text-sm text-white p-2 rounded-2xl">
                     Edit
                 </button>
-                <button className="bg-slate-500 text-sm text-white p-2 rounded-2xl">
+                <button
+                    className="bg-slate-500 text-sm text-white p-2 rounded-2xl"
+                    onClick={handleDelete}
+                >
                     Delete
                 </button>
             </div>
