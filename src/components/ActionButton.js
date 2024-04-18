@@ -4,7 +4,7 @@ import {
     changeModalStatus,
     setModalType,
 } from "@/redux/features/modal/modalSlice";
-import handleDeleteItem from "@/utils/handleDeleteItem";
+import { handleDeleteItem } from "@/utils/handleActionButton";
 
 import { useDispatch } from "react-redux";
 
