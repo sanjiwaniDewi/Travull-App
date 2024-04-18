@@ -13,3 +13,14 @@ export async function deletePromo(id) {
         return res.data;
     }
 }
+
+export async function getAllPromoAPI() {
+    const { token, headers } = apiInstance();
+    if (token) {
+        const res = await axios.get(`${BASE_API}/promos`, {
+            headers: headers,
+        });
+
+        return res.data.data;
+    }
+}
