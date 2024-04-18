@@ -2,6 +2,7 @@
 import Card from "@/components/Card";
 import FormUpdate from "@/components/FormUpdate";
 import Layout from "@/components/Layout";
+import ProfieImage from "@/components/ProfileImage";
 import UploadImage from "@/components/UploadImage";
 import { fatchUserLogged, updateUser } from "@/redux/features/user/userSlice";
 import { useRouter } from "next/navigation";
@@ -52,7 +53,12 @@ export default function UpdateProfilePage() {
             <div className="flex justify-center items-center mt-20">
                 <Card>
                     <div className="flex md:flex-row flex-col md:gap-10 gap:3">
-                        <UploadImage image={dataUser.profilePictureUrl} />
+                        <div className="flex flex-col md:w-96 w-full">
+                            <ProfieImage image={dataUser.profilePictureUrl} />
+                            <div className="flex justify-center">
+                                <UploadImage />
+                            </div>
+                        </div>
                         <FormUpdate
                             handleUpdateUser={handleUpdateUser}
                             dataUser={dataUser}

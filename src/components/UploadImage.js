@@ -3,19 +3,10 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadImage } from "@/redux/features/upload/imageSlice";
+import ProfieImage from "./ProfileImage";
 
-export default function UploadImage({ image }) {
-    const [newImage, setNewImage] = useState("");
-    const { imageUrl } = useSelector((store) => store.image);
+export default function UploadImage() {
     const imageUploadRef = useRef();
-
-    const loadedImage = () => {
-        setNewImage(image);
-    };
-
-    useEffect(() => {
-        loadedImage();
-    }, [image]);
 
     const dispatch = useDispatch();
 
@@ -27,44 +18,26 @@ export default function UploadImage({ image }) {
         dispatch(uploadImage(formData));
     };
 
-    const handleImageChange = () => {
-        if (imageUrl) setNewImage(imageUrl);
-    };
-
-    useEffect(() => {
-        handleImageChange();
-    }, [imageUrl]);
-
     return (
-        <div className="flex flex-col md:w-96 w-full">
-            <div className="flex justify-center mb-3">
-                <img
-                    src={newImage}
-                    alt="avatar"
-                    className="rounded-3xl w-80 h-80 object-cover "
-                />
+        <form
+            onSubmit={handleUploadImage}
+            encType="multipart/form-data"
+            className="flex flex-row justify-center gap-x-1 w-96"
+        >
+            <input
+                type="file"
+                name="image"
+                className="self-center bg-slate-200 col-span-2 w-full"
+                ref={imageUploadRef}
+            />
+            <div className="flex justify-start">
+                <button
+                    type="submit"
+                    className="text-sm font-bold rounded-xl px-5 py-2 bg-slate-500 text-white "
+                >
+                    upload
+                </button>
             </div>
-
-            <form
-                onSubmit={handleUploadImage}
-                encType="multipart/form-data"
-                className="grid  grid-cols-3 gap-x-1"
-            >
-                <input
-                    type="file"
-                    name="image"
-                    className="self-center bg-slate-200 col-span-2"
-                    ref={imageUploadRef}
-                />
-                <div className="flex justify-end">
-                    <button
-                        type="submit"
-                        className="text-sm font-bold rounded-xl px-5 py-2 bg-slate-500 text-white  w-full"
-                    >
-                        upload
-                    </button>
-                </div>
-            </form>
-        </div>
+        </form>
     );
 }
