@@ -1,4 +1,5 @@
 import ChangeRole from "./ChangeRole";
+import Image from "next/image";
 
 export default function TableUser({ data }) {
     const tableTitle = [
@@ -38,7 +39,15 @@ export default function TableUser({ data }) {
                                         <div className="flex flex-row gap-2">
                                             <img
                                                 className="table-avatar w-10 rounded-full h-10"
-                                                src={item["profilePictureUrl"]}
+                                                src={
+                                                    item[
+                                                        "profilePictureUrl"
+                                                    ]?.includes("http")
+                                                        ? item[
+                                                              "profilePictureUrl"
+                                                          ]
+                                                        : "/Avatar-Image.png"
+                                                }
                                                 alt="profilePictureUrl"
                                             />
                                             {item[head]}
