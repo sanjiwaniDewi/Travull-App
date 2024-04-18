@@ -1,5 +1,7 @@
 import { getAllBannerAPI } from "@/API/banner";
+import { getAllCategoryAPI } from "@/API/category";
 import { getAllPromoAPI } from "@/API/promo";
+
 import { useState } from "react";
 
 export function useGetAllData() {
@@ -22,5 +24,15 @@ export function useGetAllData() {
         }
     };
 
-    return { getAllBennerData, getAllPromoData };
+    const getAllCategoryData = async () => {
+        try {
+            const res = await getAllCategoryAPI();
+            console.log(res);
+            return res;
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    return { getAllBennerData, getAllPromoData, getAllCategoryData };
 }
