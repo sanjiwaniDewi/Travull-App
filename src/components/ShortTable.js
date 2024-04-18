@@ -9,6 +9,9 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { setModalData, setModalType } from "@/redux/features/modal/modalSlice";
+import AddButton from "./AddButton";
+import { useRouter } from "next/navigation";
+import { handleCreateRoute } from "@/utils/handleActionButton";
 
 export default function ShortTable({ data, title, detileLink, type }) {
     const dispatch = useDispatch();
@@ -16,6 +19,7 @@ export default function ShortTable({ data, title, detileLink, type }) {
     const tableTitle = [
         ...new Set(data?.map((item) => Object.keys(item)).flat()),
     ];
+    const router = useRouter();
 
     if (tableTitle.length !== 0) {
         tableTitle.push("action");
@@ -36,10 +40,17 @@ export default function ShortTable({ data, title, detileLink, type }) {
         }
     };
 
+    const handleAddItem = () => {
+        router.push(handleCreateRoute(type));
+    };
+
     return (
         <>
             <div className="overflow-x-auto">
-                <h1 className="text-2xl font-bold mb-3">{title}</h1>
+                <div>
+                    <h1 className="text-2xl font-bold mb-3">{title}</h1>
+                    <AddButton handleAddItem={handleAddItem} />
+                </div>
                 <table className="table table-compact w-full">
                     <thead className="text-left">
                         <tr>
