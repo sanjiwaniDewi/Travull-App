@@ -1,3 +1,4 @@
+import { getAllActivityAPI } from "@/API/activity";
 import { getAllBannerAPI } from "@/API/banner";
 import { getAllCategoryAPI } from "@/API/category";
 import { getAllPromoAPI } from "@/API/promo";
@@ -33,6 +34,20 @@ export function useGetAllData() {
             console.log(err);
         }
     };
+    const getAllActivityData = async () => {
+        try {
+            const res = await getAllActivityAPI();
+            console.log(res);
+            return res;
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
-    return { getAllBennerData, getAllPromoData, getAllCategoryData };
+    return {
+        getAllBennerData,
+        getAllPromoData,
+        getAllCategoryData,
+        getAllActivityData,
+    };
 }

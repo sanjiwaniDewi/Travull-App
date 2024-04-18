@@ -1,3 +1,30 @@
+"use client";
+import TabelAllData from "@/components/TableAllData";
+import { useGetAllData } from "@/hooks/useGet";
+
+import { useEffect, useState } from "react";
+
 export default function ActivityPage() {
-    return <div>Activity Page</div>;
+    const [activitiesData, setActivitiesData] = useState();
+    const { getAllActivityData } = useGetAllData();
+
+    const handleShowAllData = async () => {
+        await getAllActivityData().then((res) => setActivitiesData(res));
+    };
+
+    useEffect(() => {
+        handleShowAllData();
+    }, []);
+
+    return (
+        <div>
+            {activitiesData && (
+                <TabelAllData
+                    data={activitiesData}
+                    type="category"
+                    title="All Category Data"
+                />
+            )}
+        </div>
+    );
 }
