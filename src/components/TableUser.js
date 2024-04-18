@@ -1,6 +1,6 @@
 import ChangeRole from "./ChangeRole";
 
-export default function Table({ data }) {
+export default function TableUser({ data }) {
     const tableTitle = [
         ...new Set(data?.map((item) => Object.keys(item)).flat()),
     ];
