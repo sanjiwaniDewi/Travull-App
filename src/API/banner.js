@@ -33,3 +33,27 @@ export async function getAllBannerAPI() {
         return res.data.data;
     }
 }
+
+export async function getBannerByIdAPI(id) {
+    const { token, headers } = apiInstance();
+    if (token) {
+        const res = await axios.get(`${BASE_API}/banner/${id}`, {
+            headers: headers,
+        });
+        return res.data.data;
+    }
+}
+
+export async function updateBannerAPI(id, payload) {
+    const { token, headers } = apiInstance();
+    if (token) {
+        const res = await axios.post(
+            `${BASE_API}/update-banner/${id}`,
+            payload,
+            {
+                headers: headers,
+            }
+        );
+        return res.data.data;
+    }
+}
