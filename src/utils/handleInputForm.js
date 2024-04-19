@@ -1,4 +1,4 @@
-export function handleNewPromoForm(formData, figureUrl) {
+export function handlePromoForm(formData, figureUrl) {
     let imageUrl = figureUrl;
     const title = formData.get("title");
     const description = formData.get("description");
