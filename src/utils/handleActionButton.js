@@ -18,21 +18,21 @@ export function handleDeleteItem(id, type) {
     }
 }
 
-export function handleAddItem(type, payload) {
-    const { createBanner } = useCreate();
-    switch (type) {
-        case "banner":
-            return createBanner(payload);
-        case "promo":
-            return;
-        case "category":
-            return;
-        case "activity":
-            return;
-        default:
-            return;
-    }
-}
+// export function handleAddItem(type, payload) {
+//     const { createBanner } = useCreate();
+//     switch (type) {
+//         case "banner":
+//             return createBanner(payload);
+//         case "promo":
+//             return;
+//         case "category":
+//             return;
+//         case "activity":
+//             return;
+//         default:
+//             return;
+//     }
+// }
 
 export function handleCreateRoute(type) {
     switch (type) {
