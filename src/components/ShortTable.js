@@ -12,6 +12,7 @@ import { setModalData, setModalType } from "@/redux/features/modal/modalSlice";
 import AddButton from "./AddButton";
 import { useRouter } from "next/navigation";
 import { handleCreateRoute } from "@/utils/handleActionButton";
+import { formatDate } from "@/utils/handleFormatData";
 
 export default function ShortTable({ data, title, detileLink, type }) {
     const dispatch = useDispatch();
@@ -96,13 +97,13 @@ export default function ShortTable({ data, title, detileLink, type }) {
                                     } else if (head === "updatedAt") {
                                         return (
                                             <td key={`${row[head]}updt`}>
-                                                {row[head]}
+                                                {formatDate(row[head])}
                                             </td>
                                         );
                                     } else if (head === "createdAt") {
                                         return (
                                             <td key={`${row[head]}crt`}>
-                                                {row[head]}
+                                                {formatDate(row[head])}
                                             </td>
                                         );
                                     } else if (
