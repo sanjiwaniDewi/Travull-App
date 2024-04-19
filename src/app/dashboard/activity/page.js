@@ -21,8 +21,8 @@ export default function ActivityPage() {
             {activitiesData && (
                 <TabelAllData
                     data={activitiesData}
-                    type="category"
-                    title="All Category Data"
+                    type="activity"
+                    title="All Activity Data"
                 />
             )}
         </div>
