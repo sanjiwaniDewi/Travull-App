@@ -4,7 +4,12 @@ import useDelete from "@/hooks/useDelete";
 import { useGetDataById } from "@/hooks/useGet";
 
 export function handleDeleteItem(id, type) {
-    const { deleteBannerId, deletePromoId, deleteCategoryId } = useDelete();
+    const {
+        deleteBannerId,
+        deletePromoId,
+        deleteCategoryId,
+        deleteActivityId,
+    } = useDelete();
     switch (type) {
         case "banner":
             return deleteBannerId(id);
@@ -13,7 +18,7 @@ export function handleDeleteItem(id, type) {
         case "category":
             return deleteCategoryId(id);
         case "activity":
-            return;
+            return deleteActivityId(id);
         default:
             return;
     }
