@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { uploadImage } from "@/redux/features/upload/imageSlice";
 import ProfieImage from "./ProfileImage";
 
-export default function UploadImage() {
+export default function UploadImage({ handleMultiple }) {
     const imageUploadRef = useRef();
 
     const dispatch = useDispatch();
@@ -16,6 +16,7 @@ export default function UploadImage() {
         const formData = new FormData();
         formData.append("image", uploadedImage);
         dispatch(uploadImage(formData));
+        handleMultiple();
     };
 
     return (

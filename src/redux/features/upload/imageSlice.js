@@ -39,7 +39,13 @@ const imageSlice = createSlice({
     initialState,
     reducers: {
         getImageUrl(state, action) {
-            state.imageUrl = action.payload;
+            if (state.imageUrl !== "" && typeof state.imageUrl === "string") {
+                state.imageUrl = [state.imageUrl, action.payload];
+            } else if (state.imageUrl !== "" && Array.isArray(state.imageUrl)) {
+                state.imageUrl = [...state.imageUrl, action.payload];
+            } else {
+                state.imageUrl = action.payload;
+            }
         },
         deleteImageUrl(state) {
             state.imageUrl = "";
