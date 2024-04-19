@@ -8,14 +8,14 @@ export default function DetailCategory() {
     return (
         <div>
             <img
-                src={modalData.imageUrl}
+                src={modalData?.imageUrl}
                 className="w-96 object-cover"
                 alt="Category image"
             />
-            <h1 className="text-2xl font-bold mb-3 mt-2">{modalData.name}</h1>
+            <h1 className="text-2xl font-bold mb-3 mt-2">{modalData?.name}</h1>
             <div className="flex gap-2 ">
-                <p>Dibuat : {formatDate(modalData.createdAt)}</p>
-                <p>Diupdate: {formatDate(modalData.updatedAt)}</p>
+                <p>Dibuat : {formatDate(modalData?.createdAt)}</p>
+                <p>Diupdate: {formatDate(modalData?.updatedAt)}</p>
             </div>
         </div>
     );
