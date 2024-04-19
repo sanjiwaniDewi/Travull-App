@@ -4,7 +4,6 @@ import DetailModal from "./DetailModal";
 
 export default function DetailBanner() {
     const { modalData } = useSelector((state) => state.modal);
-    console.log(modalData);
     return (
         <>
             <div>
