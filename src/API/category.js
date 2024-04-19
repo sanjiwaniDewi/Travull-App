@@ -33,3 +33,13 @@ export async function getAllCategoryAPI() {
         return res.data.data;
     }
 }
+
+export async function getCategoryByIdAPI(id) {
+    const { token, headers } = apiInstance();
+    if (token) {
+        const res = await axios.get(`${BASE_API}/category/${id}`, {
+            headers: headers,
+        });
+        return res.data.data;
+    }
+}
