@@ -22,3 +22,15 @@ export function handlePromoForm(formData, figureUrl) {
         terms_condition: termCondition,
     };
 }
+
+export function handleCategoryForm(formData, figureUrl) {
+    let imageUrl = figureUrl;
+    const name = formData.get("name");
+    if (!figureUrl) {
+        imageUrl = formData.get("imageUrl");
+    }
+    return {
+        name,
+        imageUrl,
+    };
+}

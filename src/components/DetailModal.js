@@ -6,6 +6,7 @@ import CloseBtnModal from "./CLoseBtnModal";
 import { useSelector } from "react-redux";
 import DetailPromo from "./DetailPromo";
 import DetailCategory from "./DetailCategory";
+import DetailActivity from "./DetailActivity";
 
 export default function DetailModal() {
     const { type } = useSelector((state) => state.modal);
@@ -16,7 +17,7 @@ export default function DetailModal() {
             {type === "banner" && <DetailBanner />}
             {type === "promo" && <DetailPromo />}
             {type === "category" && <DetailCategory />}
-            {/* {type === "activity" && <Card />} */}
+            {type === "activity" && <DetailActivity />}
         </Modal>
     );
 }
