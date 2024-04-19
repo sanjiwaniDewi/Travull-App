@@ -1,16 +1,17 @@
+import { deletePromo } from "@/API/promo";
 import useCreate from "@/hooks/useCreate";
 import useDelete from "@/hooks/useDelete";
 
 export function handleDeleteItem(id, type) {
-    const { deleteBannerId } = useDelete();
+    const { deleteBannerId, deletePromoId } = useDelete();
     switch (type) {
         case "banner":
             return deleteBannerId(id);
         case "promo":
-            return;
+            return deletePromoId(id);
         case "category":
             return;
-        case "Activity":
+        case "activity":
             return;
         default:
             return;
@@ -26,7 +27,7 @@ export function handleAddItem(type, payload) {
             return;
         case "category":
             return;
-        case "Activity":
+        case "activity":
             return;
         default:
             return;
@@ -41,8 +42,8 @@ export function handleCreateRoute(type) {
             return "/dashboard/promos/create-promo";
         case "category":
             return "/dashboard/categories/create-category";
-        case "Activity":
-            return "/dashboard/activities/create-activity";
+        case "activity":
+            return "/dashboard/activity/create-activity";
         default:
             return;
     }
