@@ -1,16 +1,17 @@
 import { deletePromo } from "@/API/promo";
 import useCreate from "@/hooks/useCreate";
 import useDelete from "@/hooks/useDelete";
+import { useGetDataById } from "@/hooks/useGet";
 
 export function handleDeleteItem(id, type) {
-    const { deleteBannerId, deletePromoId } = useDelete();
+    const { deleteBannerId, deletePromoId, deleteCategoryId } = useDelete();
     switch (type) {
         case "banner":
             return deleteBannerId(id);
         case "promo":
             return deletePromoId(id);
         case "category":
-            return;
+            return deleteCategoryId(id);
         case "activity":
             return;
         default:
@@ -33,6 +34,22 @@ export function handleDeleteItem(id, type) {
 //             return;
 //     }
 // }
+
+export function handlerGetItemById(id, type) {
+    const { getCategoryById } = useGetDataById();
+    switch (type) {
+        case "banner":
+            return;
+        case "promo":
+            return;
+        case "category":
+            return getCategoryById(id);
+        case "activity":
+            return;
+        default:
+            return;
+    }
+}
 
 export function handleCreateRoute(type) {
     switch (type) {
