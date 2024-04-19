@@ -16,7 +16,7 @@ export default function BannersPage() {
         handleShowAllData();
     }, []);
 
-    const handleRefresh = () => {};
+  
 
     return (
         <div>
