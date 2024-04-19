@@ -1,5 +1,5 @@
 import { getAllActivityAPI } from "@/API/activity";
-import { getAllBannerAPI } from "@/API/banner";
+import { getAllBannerAPI, getBannerByIdAPI } from "@/API/banner";
 import { getAllCategoryAPI } from "@/API/category";
 import { getAllPromoAPI } from "@/API/promo";
 import { getCategoryByIdAPI } from "@/API/category";
@@ -54,6 +54,15 @@ export function useGetAllData() {
 }
 
 export function useGetDataById() {
+    const getBannerById = async (id) => {
+        try {
+            const res = await getBannerByIdAPI(id);
+            console.log(res);
+            return res;
+        } catch (err) {
+            console.log(err);
+        }
+    };
     const getCategoryById = async (id) => {
         try {
             const res = await getCategoryByIdAPI(id);
@@ -66,5 +75,6 @@ export function useGetDataById() {
 
     return {
         getCategoryById,
+        getBannerById,
     };
 }
