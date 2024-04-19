@@ -1,13 +1,15 @@
 "use client";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ImagePreview from "./ImagePreview";
 import UploadImage from "./UploadImage";
 import useCreate from "@/hooks/useCreate";
 import { useRouter } from "next/navigation";
+import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
 
 export default function BannerForm() {
     const { createBanner } = useCreate();
     const { imageUrl } = useSelector((store) => store.image);
+    const dispatch = useDispatch();
     const router = useRouter();
     const handleSubmitBanner = (e) => {
         e.preventDefault();
@@ -15,6 +17,7 @@ export default function BannerForm() {
         const formData = new FormData(e.currentTarget);
         const name = formData.get("name");
         createBanner({ name, imageUrl });
+        dispatch(deleteImageUrl());
         router.push("/dashboard");
     };
     return (

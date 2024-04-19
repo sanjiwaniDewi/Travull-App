@@ -4,6 +4,7 @@ import FormUpdate from "@/components/FormUpdate";
 import Layout from "@/components/Layout";
 import ProfieImage from "@/components/ProfileImage";
 import UploadImage from "@/components/UploadImage";
+import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
 import { fatchUserLogged, updateUser } from "@/redux/features/user/userSlice";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -42,10 +43,12 @@ export default function UpdateProfilePage() {
 
         try {
             dispatch(updateUser(user));
+
             router.push("/profile");
         } catch (err) {
             console.log(err);
         }
+        dispatch(deleteImageUrl());
     };
 
     return (

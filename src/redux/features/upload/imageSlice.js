@@ -41,12 +41,15 @@ const imageSlice = createSlice({
         getImageUrl(state, action) {
             state.imageUrl = action.payload;
         },
+        deleteImageUrl(state) {
+            state.imageUrl = "";
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(uploadImage.fulfilled, (state, action) => {});
     },
 });
 
-export const { getImageUrl } = imageSlice.actions;
+export const { getImageUrl, deleteImageUrl } = imageSlice.actions;
 
 export default imageSlice.reducer;
