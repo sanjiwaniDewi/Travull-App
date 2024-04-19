@@ -70,3 +70,18 @@ export function handleCreateRoute(type) {
             return;
     }
 }
+
+export function handleUpdateRoute(id, type) {
+    switch (type) {
+        case "banner":
+            return `/dashboard/banners/${id}`;
+        case "promo":
+            return `/dashboard/promos/${id}`;
+        case "category":
+            return `/dashboard/categories/${id}`;
+        case "activity":
+            return `/dashboard/activity/${id}`;
+        default:
+            return;
+    }
+}
