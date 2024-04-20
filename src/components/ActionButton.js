@@ -1,6 +1,6 @@
 "use client";
 
-import { changeEditStatus } from "@/redux/features/edit/editSilce";
+import { changeEditStatus } from "@/redux/features/status/statusSilce";
 import {
     changeModalStatus,
     setModalType,
@@ -14,23 +14,11 @@ import { useRouter } from "next/navigation";
 
 import { useDispatch } from "react-redux";
 
-export default function ActionButtons({ id, type, handler }) {
-    const dispatch = useDispatch();
-    const router = useRouter();
-
-    const handleShowModal = () => {
-        dispatch(changeModalStatus());
-        handler(id, type);
-    };
-    const handleDelete = () => {
-        handleDeleteItem(id, type);
-    };
-
-    const handleEdit = () => {
-        dispatch(changeEditStatus());
-        router.push(handleUpdateRoute(id, type));
-    };
-
+export default function ActionButtons({
+    handleShowModal,
+    handleDelete,
+    handleEdit,
+}) {
     return (
         <>
             <div className="flex flex-row  gap-x-3">
