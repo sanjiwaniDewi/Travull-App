@@ -16,7 +16,9 @@ export default function UploadImage({ handleMultiple }) {
         const formData = new FormData();
         formData.append("image", uploadedImage);
         dispatch(uploadImage(formData));
-        handleMultiple();
+        if (handleMultiple) {
+            handleMultiple();
+        }
     };
 
     return (
