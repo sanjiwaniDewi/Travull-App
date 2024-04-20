@@ -28,6 +28,7 @@ export default function CategoryForm() {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         createCategory(handleCategoryForm(formData, imageUrl));
+
         dispatch(deleteImageUrl());
         router.push("/dashboard");
     };

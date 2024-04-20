@@ -6,12 +6,16 @@ import useCreate from "@/hooks/useCreate";
 import { useRouter } from "next/navigation";
 import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
 import useUpdate from "@/hooks/useUpdate";
+import {
+    changeCreateSatus,
+    changeEditStatus,
+} from "@/redux/features/status/statusSilce";
 
 export default function BannerForm({ bannerData }) {
     const { createBanner } = useCreate();
     const { updateBanner } = useUpdate();
     const { imageUrl } = useSelector((store) => store.image);
-    const { isEdit } = useSelector((store) => store.edit);
+    const { isEdit } = useSelector((store) => store.status);
     const dispatch = useDispatch();
     const router = useRouter();
     const handleSubmitBanner = (e) => {
@@ -23,8 +27,12 @@ export default function BannerForm({ bannerData }) {
                 name,
                 imageUrl: bannerData.imageUrl,
             });
+            dispatch(changeEditStatus());
+            router.back();
         } else {
             createBanner({ name, imageUrl });
+            dispatch(changeCreateSatus());
+            router.back();
         }
         dispatch(deleteImageUrl());
         // router.push("/dashboard");

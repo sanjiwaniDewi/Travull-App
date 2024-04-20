@@ -14,6 +14,16 @@ import { useRouter } from "next/navigation";
 import { handleCreateRoute } from "@/utils/handleActionButton";
 import { formatDate } from "@/utils/handleFormatData";
 
+import {
+    changeEditStatus,
+    changeDeleteSatus,
+} from "@/redux/features/status/statusSilce";
+import { changeModalStatus } from "@/redux/features/modal/modalSlice";
+import {
+    handleDeleteItem,
+    handleUpdateRoute,
+} from "@/utils/handleActionButton";
+
 export default function ShortTable({ data, title, detileLink, type }) {
     const dispatch = useDispatch();
     const { showModal } = useSelector((state) => state.modal);
@@ -43,6 +53,23 @@ export default function ShortTable({ data, title, detileLink, type }) {
 
     const handleAddItem = () => {
         router.push(handleCreateRoute(type));
+    };
+
+    //  const dispatch = useDispatch();
+    //  const router = useRouter();
+
+    const handleShowModal = (id, type) => {
+        dispatch(changeModalStatus());
+        handlerShowDetail(id, type);
+    };
+    const handleDelete = (id, type) => {
+        dispatch(changeDeleteSatus());
+        handleDeleteItem(id, type);
+    };
+
+    const handleEdit = (id, type) => {
+        dispatch(changeEditStatus());
+        router.push(handleUpdateRoute(id, type));
     };
 
     return (
@@ -88,9 +115,26 @@ export default function ShortTable({ data, title, detileLink, type }) {
                                         return (
                                             <td key={row["id"]}>
                                                 <ActionButtons
-                                                    id={row["id"]}
-                                                    type={type}
-                                                    handler={handlerShowDetail}
+                                                    // id={row["id"]}
+                                                    // type={type}
+                                                    handleShowModal={() =>
+                                                        handleShowModal(
+                                                            row["id"],
+                                                            type
+                                                        )
+                                                    }
+                                                    handleDelete={() =>
+                                                        handleDelete(
+                                                            row["id"],
+                                                            type
+                                                        )
+                                                    }
+                                                    handleEdit={() =>
+                                                        handleEdit(
+                                                            row["id"],
+                                                            type
+                                                        )
+                                                    }
                                                 />
                                             </td>
                                         );
