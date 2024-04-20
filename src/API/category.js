@@ -10,7 +10,7 @@ export async function createCategoryAPI(payload) {
             headers: headers,
         });
         console.log(res.data);
-        return res.data;
+        return res.data.data;
     }
 }
 export async function deleteCategoryAPI(id) {
@@ -19,7 +19,7 @@ export async function deleteCategoryAPI(id) {
         const res = await axios.delete(`${BASE_API}/delete-category/${id}`, {
             headers: headers,
         });
-        return res.data;
+        return res.data.data;
     }
 }
 
