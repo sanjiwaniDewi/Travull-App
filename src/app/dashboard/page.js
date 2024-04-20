@@ -6,6 +6,13 @@ import { useState, useEffect } from "react";
 import AllUser from "@/components/AllUser";
 import ShortTableUser from "@/components/ShortTableUser";
 import ShortTable from "@/components/ShortTable";
+import { useGetAllData } from "@/hooks/useGet";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    changeCreateSatus,
+    changeDeleteSatus,
+    changeEditStatus,
+} from "@/redux/features/status/statusSilce";
 
 export default function DashboardPage() {
     const [latesUsers, setLatestUsers] = useState();
@@ -13,6 +20,18 @@ export default function DashboardPage() {
     const [lastPromos, setLatestPromos] = useState();
     const [lastCategories, setLatestCategories] = useState();
     const [lastActivities, setLatestActivities] = useState();
+
+    const { isDelete, isUpdate, isCreate } = useSelector(
+        (state) => state.status
+    );
+    const dispatch = useDispatch();
+
+    const {
+        getAllActivityData,
+        getAllBennerData,
+        getAllCategoryData,
+        getAllPromoData,
+    } = useGetAllData();
 
     const getAllDataUsers = async () => {
         const token = localStorage.getItem("access_token");
@@ -39,123 +58,71 @@ export default function DashboardPage() {
     };
 
     const getAllBanner = async () => {
-        const token = localStorage.getItem("access_token");
-        if (token) {
-            try {
-                const res = await axios.get(`${BASE_API}/banners`, {
-                    headers: {
-                        apiKey: API_KEY,
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+        const res = await getAllBennerData();
 
-                const newBannerData = res.data.data.map((item, index) => {
-                    {
-                        return {
-                            ...item,
-                            no: index + 1,
-                        };
-                    }
-                });
-                const sortBannerData =
-                    newBannerData.length > 3
-                        ? newBannerData.slice(-3)
-                        : newBannerData;
-                setLatestBanner(sortBannerData);
-            } catch (err) {
-                console.log(err);
+        const newBannerData = res?.map((item, index) => {
+            {
+                return {
+                    ...item,
+                    no: index + 1,
+                };
             }
-        }
+        });
+        const sortBannerData =
+            newBannerData.length > 3 ? newBannerData.slice(-3) : newBannerData;
+        setLatestBanner(sortBannerData);
     };
 
     const getAllPromo = async () => {
-        const token = localStorage.getItem("access_token");
-        if (token) {
-            try {
-                const res = await axios.get(`${BASE_API}/promos`, {
-                    headers: {
-                        apiKey: API_KEY,
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+        const res = await getAllPromoData();
 
-                const newPromoData = res.data.data.map((item, index) => {
-                    {
-                        return {
-                            ...item,
-                            no: index + 1,
-                        };
-                    }
-                });
-                const sortPromoData =
-                    newPromoData.length > 3
-                        ? newPromoData.slice(-3)
-                        : newPromoData;
-                setLatestPromos(sortPromoData);
-            } catch (err) {
-                console.log(err);
+        const newPromoData = res?.map((item, index) => {
+            {
+                return {
+                    ...item,
+                    no: index + 1,
+                };
             }
-        }
+        });
+        const sortPromoData =
+            newPromoData.length > 3 ? newPromoData.slice(-3) : newPromoData;
+        setLatestPromos(sortPromoData);
     };
 
     const getAllCategory = async () => {
-        const token = localStorage.getItem("access_token");
-        if (token) {
-            try {
-                const res = await axios.get(`${BASE_API}/categories`, {
-                    headers: {
-                        apiKey: API_KEY,
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+        const res = await getAllCategoryData();
 
-                const newCategoiesData = res.data.data.map((item, index) => {
-                    {
-                        return {
-                            ...item,
-                            no: index + 1,
-                        };
-                    }
-                });
-                const sortCategoiesData =
-                    newCategoiesData.length > 3
-                        ? newCategoiesData.slice(-3)
-                        : newCategoiesData;
-                setLatestCategories(sortCategoiesData);
-            } catch (err) {
-                console.log(err);
+        const newCategoiesData = res?.map((item, index) => {
+            {
+                return {
+                    ...item,
+                    no: index + 1,
+                };
             }
-        }
+        });
+        const sortCategoiesData =
+            newCategoiesData.length > 3
+                ? newCategoiesData.slice(-3)
+                : newCategoiesData;
+        setLatestCategories(sortCategoiesData);
     };
 
     const getAllActivity = async () => {
-        const token = localStorage.getItem("access_token");
-        if (token) {
-            try {
-                const res = await axios.get(`${BASE_API}/activities`, {
-                    headers: {
-                        apiKey: API_KEY,
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+        const res = await getAllActivityData();
 
-                const newActivitiesData = res.data.data.map((item, index) => {
-                    {
-                        return {
-                            ...item,
-                            no: index + 1,
-                        };
-                    }
-                });
-                const sortActivitiesData =
-                    newActivitiesData.length > 3
-                        ? newActivitiesData.slice(-3)
-                        : newActivitiesData;
-                setLatestActivities(sortActivitiesData);
-            } catch (err) {
-                console.log(err);
+        const newActivitiesData = res?.map((item, index) => {
+            {
+                return {
+                    ...item,
+                    no: index + 1,
+                };
             }
-        }
+        });
+        const sortActivitiesData =
+            newActivitiesData.length > 3
+                ? newActivitiesData.slice(-3)
+                : newActivitiesData;
+        setLatestActivities(sortActivitiesData);
     };
 
     useEffect(() => {
@@ -165,6 +132,35 @@ export default function DashboardPage() {
         getAllCategory();
         getAllActivity();
     }, []);
+
+    const handleOndeleteData = () => {
+        if (isDelete) {
+            getAllDataUsers();
+            getAllBanner();
+            getAllPromo();
+            getAllCategory();
+            getAllActivity();
+            dispatch(changeDeleteSatus());
+        } else if (isCreate) {
+            getAllDataUsers();
+            getAllBanner();
+            getAllPromo();
+            getAllCategory();
+            getAllActivity();
+            dispatch(changeCreateSatus());
+        } else if (isUpdate) {
+            getAllDataUsers();
+            getAllBanner();
+            getAllPromo();
+            getAllCategory();
+            getAllActivity();
+            dispatch(changeEditStatus());
+        }
+    };
+
+    useEffect(() => {
+        handleOndeleteData();
+    }, [isDelete, isCreate, isUpdate]);
 
     return (
         <div className="ms-10 w-full">
