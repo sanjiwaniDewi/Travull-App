@@ -43,3 +43,18 @@ export async function getCategoryByIdAPI(id) {
         return res.data.data;
     }
 }
+
+export async function updateCategoryAPI(id, payload) {
+    const { token, headers } = apiInstance();
+    if (token) {
+        const res = await axios.post(
+            `${BASE_API}/update-category/${id}`,
+            payload,
+            {
+                headers: headers,
+            }
+        );
+        console.log(res.data);
+        return res.data.data;
+    }
+}

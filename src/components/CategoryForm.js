@@ -7,11 +7,18 @@ import { useRouter } from "next/navigation";
 import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
 import { useState } from "react";
 import { handleCategoryForm } from "@/utils/handleInputForm";
+import useUpdate from "@/hooks/useUpdate";
+import {
+    changeCreateSatus,
+    changeEditStatus,
+} from "@/redux/features/status/statusSilce";
+changeCreateSatus;
 
-export default function CategoryForm() {
+export default function CategoryForm({ categoryData }) {
     const [isHaveImageUrl, setIsHaveImageUrl] = useState(false);
     const [isUploadImage, setIsUploadImage] = useState(false);
     const { createCategory } = useCreate();
+    const { updateCategory } = useUpdate();
     const { imageUrl } = useSelector((store) => store.image);
     const dispatch = useDispatch();
     const router = useRouter();
@@ -24,13 +31,23 @@ export default function CategoryForm() {
         setIsHaveImageUrl(false);
     };
 
-    const handleSubmitBanner = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        createCategory(handleCategoryForm(formData, imageUrl));
+        if (categoryData) {
+            updateCategory(categoryData.id, {
+                name: formData.get("name"),
+                imageUrl: categoryData.imageUrl,
+            });
+            dispatch(changeEditStatus());
+            router.back();
+        } else {
+            createCategory(handleCategoryForm(formData, imageUrl));
+            dispatch(changeCreateSatus());
+            router.back();
+        }
 
-        dispatch(deleteImageUrl());
-        router.push("/dashboard");
+        // dispatch(deleteImageUrl());
     };
 
     return (
@@ -39,14 +56,19 @@ export default function CategoryForm() {
                 <button onClick={handleUploadImage}>Upload Image</button>
                 <button onClick={handleHaveImageUrl}>Have Image Url</button>
             </div>
-            {isUploadImage && (
+            {isUploadImage || categoryData ? (
                 <div className="w-1/2 self-center">
-                    <ImagePreview />
+                    <ImagePreview
+                        figureUrl={categoryData && categoryData?.imageUrl}
+                    />
                     <UploadImage />
                 </div>
+            ) : (
+                ""
             )}
-            <form onSubmit={handleSubmitBanner} className="self-center w-1/2">
+            <form onSubmit={handleSubmit} className="self-center w-1/2">
                 <input
+                    defaultValue={categoryData ? categoryData?.name : ""}
                     name="name"
                     className="w-full focus:outline-none py-2 mb-2 "
                     placeholder="Category Name"
