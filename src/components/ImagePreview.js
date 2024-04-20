@@ -8,12 +8,10 @@ export default function ImagePreview({ figureUrl }) {
     const { imageUrl } = useSelector((store) => store.image);
     const dispatch = useDispatch();
 
-    // const handleshowFigure = () => {
-    //     if (figureUrl) setNewImage(figureUrl);
-    // };
-    // useEffect(() => {
-    //     handleshowFigure();
-    // }, []);
+    const handleshowFigure = () => {
+        if (figureUrl) setNewImage(figureUrl);
+    };
+    useEffect(() => {}, []);
 
     const handleFirstLoad = () => {
         if (imageUrl) {
@@ -23,6 +21,7 @@ export default function ImagePreview({ figureUrl }) {
 
     useEffect(() => {
         handleFirstLoad();
+        handleshowFigure();
     }, []);
 
     const handleImageChange = () => {
@@ -35,11 +34,7 @@ export default function ImagePreview({ figureUrl }) {
 
     return (
         <div className="flex justify-center h-96 mb-3">
-            <img
-                src={figureUrl ? figureUrl : imageUrl}
-                alt="avatar"
-                className=""
-            />
+            <img src={newImage} alt="avatar" className="" />
         </div>
     );
 }

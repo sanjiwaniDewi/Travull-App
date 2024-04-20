@@ -35,3 +35,29 @@ export async function createPromoAPI(payload) {
         return res.data;
     }
 }
+
+export async function updatePromoAPI(id, payload) {
+    const { token, headers } = apiInstance();
+    if (token) {
+        const res = await axios.post(
+            `${BASE_API}/update-promo/${id}`,
+            payload,
+            {
+                headers: headers,
+            }
+        );
+        console.log(res.data);
+        return res.data.data;
+    }
+}
+
+export async function getPromoByIdAPI(id) {
+    const { token, headers } = apiInstance();
+    if (token) {
+        const res = await axios.get(`${BASE_API}/promo/${id}`, {
+            headers: headers,
+        });
+        console.log(res.data);
+        return res.data.data;
+    }
+}

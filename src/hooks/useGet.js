@@ -1,7 +1,7 @@
 import { getAllActivityAPI } from "@/API/activity";
 import { getAllBannerAPI, getBannerByIdAPI } from "@/API/banner";
 import { getAllCategoryAPI } from "@/API/category";
-import { getAllPromoAPI } from "@/API/promo";
+import { getAllPromoAPI, getPromoByIdAPI } from "@/API/promo";
 import { getCategoryByIdAPI } from "@/API/category";
 
 import { useState } from "react";
@@ -72,9 +72,19 @@ export function useGetDataById() {
             console.log(err);
         }
     };
+    const getPromoById = async (id) => {
+        try {
+            const res = await getPromoByIdAPI(id);
+            console.log(res);
+            return res;
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return {
         getCategoryById,
         getBannerById,
+        getPromoById,
     };
 }
