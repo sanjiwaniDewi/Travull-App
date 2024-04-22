@@ -14,16 +14,17 @@ export default function HeaderImage() {
     useEffect(() => {
         loadedImage();
     }, []);
+
     return (
-        <div className="w-full h-screen absolute top-0">
-            <div className="">
+        <div className="w-full h-screen ">
+            <div className="w-full h-screen absolute">
                 <ImageCarousel datas={data} />
             </div>
 
             <div className="top-0 w-full  bg-black opacity-50 absolute h-screen"></div>
 
             <div className="absolute top-0 w-full h-screen flex justify-center items-end">
-                <div className="triangle-shape w-screen xl:h-80 h-96 bg-white opacity-60 flex flex-col content-end justify-end">
+                <div className="triangle-shape w-screen xl:h-96 h-96 bg-white opacity-70 flex flex-col content-end justify-end">
                     <div className="text-center">
                         <h1 className="text-5xl mb-2 font-extrabold text-black text-center">
                             Travull
