@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
+import "bootstrap/dist/css/bootstrap.css";
 import "./globals.css";
 import StoreProvider from "@/redux/StoreProvider";
+import BootstrapClient from "@/components/BootstrapClient.js";
 import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,6 +24,7 @@ export default function RootLayout({ children }) {
                     suppressHydrationWarning={true}
                 >
                     {children}
+                    <BootstrapClient />
                 </body>
             </html>
         </StoreProvider>
