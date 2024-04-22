@@ -17,14 +17,14 @@ export default function ImageCarousel({ datas }) {
         // waitForAnimate: false,
     };
     return (
-        <div className="">
+        <div className="static">
             {datas && (
                 <Slider {...settings}>
                     {datas.map((data, index) => (
                         <img
                             key={index}
                             src={data.imageUrl}
-                            className=" w-screen h-screen object-cover"
+                            className=" w-full h-screen object-cover"
                             alt="activity image"
                         />
                     ))}
