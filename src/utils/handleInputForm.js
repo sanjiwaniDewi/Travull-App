@@ -44,7 +44,7 @@ export function handleActivityForm(formData, figureUrl) {
 
     const price = formData.get("price");
     const priceDiscount = formData.get("priceDiscount");
-    const reting = formData.get("reting");
+    const rating = formData.get("rating");
     const totalReviews = formData.get("totalReviews");
     const facilities = formData.get("facilities");
     const address = formData.get("address");
@@ -53,7 +53,7 @@ export function handleActivityForm(formData, figureUrl) {
     const locationMaps = formData.get("locationMaps");
     if (!figureUrl) {
         const url = formData.get("imageUrl");
-        imageUrls = url.split(",");
+        imageUrls = url?.split(",");
     }
     if (category !== "category") {
         return {
@@ -63,7 +63,7 @@ export function handleActivityForm(formData, figureUrl) {
             categoryId: category,
             price: parseInt(price),
             price_discount: parseInt(priceDiscount),
-            reting: parseInt(reting),
+            rating: parseInt(rating),
             total_reviews: parseInt(totalReviews),
             facilities,
             address,

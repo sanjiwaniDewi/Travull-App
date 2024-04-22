@@ -33,3 +33,28 @@ export async function getAllActivityAPI() {
         return res.data.data;
     }
 }
+
+export async function updateActivityAPI(id, payload) {
+    const { token, headers } = apiInstance();
+    if (token) {
+        const res = await axios.post(
+            `${BASE_API}/update-activity/${id}`,
+            payload,
+            {
+                headers: headers,
+            }
+        );
+        console.log(res.data);
+        return res.data.data;
+    }
+}
+
+export async function getActivityByIdAPI(id) {
+    const { token, headers } = apiInstance();
+    if (token) {
+        const res = await axios.get(`${BASE_API}/activity/${id}`, {
+            headers: headers,
+        });
+        return res.data.data;
+    }
+}

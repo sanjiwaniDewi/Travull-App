@@ -1,4 +1,4 @@
-import { getAllActivityAPI } from "@/API/activity";
+import { getActivityByIdAPI, getAllActivityAPI } from "@/API/activity";
 import { getAllBannerAPI, getBannerByIdAPI } from "@/API/banner";
 import { getAllCategoryAPI } from "@/API/category";
 import { getAllPromoAPI, getPromoByIdAPI } from "@/API/promo";
@@ -82,9 +82,18 @@ export function useGetDataById() {
         }
     };
 
+    const getActivityById = async (id) => {
+        try {
+            const res = await getActivityByIdAPI(id);
+
+            return res;
+        } catch (err) {}
+    };
+
     return {
         getCategoryById,
         getBannerById,
         getPromoById,
+        getActivityById,
     };
 }

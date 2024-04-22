@@ -8,8 +8,9 @@ import AddButton from "./AddButton";
 import ImageCarousel from "./ImageCarousel";
 import { handleActivityForm } from "@/utils/handleInputForm";
 import useCreate from "@/hooks/useCreate";
+import useUpdate from "@/hooks/useUpdate";
 
-export default function ActivityForm() {
+export default function ActivityForm({ activityData }) {
     const [categories, setCategories] = useState();
     const [isMultipleImage, setIsMultipleImage] = useState(false);
     const [isHaveImageUrl, setIsHaveImageUrl] = useState(false);
@@ -17,6 +18,7 @@ export default function ActivityForm() {
     const { getAllCategoryData } = useGetAllData();
     const { imageUrl } = useSelector((store) => store.image);
     const { createActivity } = useCreate();
+    const { updateActivity } = useUpdate();
     const handleHaveImageUrl = () => {
         setIsHaveImageUrl(true);
         setIsUploadImage(false);
@@ -26,7 +28,8 @@ export default function ActivityForm() {
         setIsHaveImageUrl(false);
     };
     const handleCategoriesData = async () => {
-        await getAllCategoryData().then((res) => setCategories(res));
+        const res = await getAllCategoryData();
+        setCategories(res);
     };
 
     const handleMultipleImage = () => {
@@ -41,7 +44,19 @@ export default function ActivityForm() {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
-        createActivity(handleActivityForm(formData, imageUrl));
+
+        if (activityData) {
+            const figureUrl = imageUrl ? imageUrl : activityData?.imageUrls;
+            updateActivity(
+                activityData.id,
+                handleActivityForm(formData, figureUrl)
+            );
+
+            // const payload = handleActivityForm(formData, figureUrl);
+            // console.log(payload);
+        } else {
+            createActivity(handleActivityForm(formData, imageUrl));
+        }
     };
 
     return (
@@ -52,10 +67,14 @@ export default function ActivityForm() {
             </div>
             {isUploadImage && (
                 <div className="w-1/2 self-center">
-                    {typeof imageUrl === "string" ? (
-                        <ImagePreview />
+                    {imageUrl && typeof imageUrl === "string" ? (
+                        <ImagePreview figureUrl={activityData?.imageUrl} />
                     ) : (
-                        <ImageCarousel images={imageUrl} />
+                        <ImageCarousel
+                            images={
+                                imageUrl ? imageUrl : activityData?.imageUrls
+                            }
+                        />
                     )}
                     {!imageUrl || !isMultipleImage ? (
                         <div className="mt-8">
@@ -69,14 +88,26 @@ export default function ActivityForm() {
                 </div>
             )}
             <form onSubmit={handleSumitForm} className="flex flex-col">
-                <input name="title" placeholder="Title" />
+                <input
+                    defaultValue={activityData?.title}
+                    name="title"
+                    placeholder="Title"
+                />
                 {isHaveImageUrl && (
                     <div>
-                        <input name="imageUrl" placeholder="Image Url" />
+                        <input
+                            defaultValue={activityData?.imageUrls}
+                            name="imageUrl"
+                            placeholder="Image Url"
+                        />
                     </div>
                 )}
-                <input name="description" placeholder="Description" />
-                <select name="category">
+                <input
+                    defaultValue={activityData?.description}
+                    name="description"
+                    placeholder="Description"
+                />
+                <select value={activityData?.category?.id} name="category">
                     <option value="category">category</option>
                     {categories &&
                         categories.map((category) => (
@@ -86,19 +117,56 @@ export default function ActivityForm() {
                             </option>
                         ))}
                 </select>
-                <input name="price" placeholder="Price" />
-                <input name="priceDiscount" placeholder="Price Discount" />
-                <input name="rating" placeholder="Rating" />
-                <input name="totalReviews" placeholder="Total Reviews" />
-                <input name="facilities" placeholder="Facilities" />
-                <input name="city" placeholder="City" />
-                <input name="province" placeholder="Province" />
-                <textarea name="address" placeholder="Detail Address" />
-                <textarea name="locationMaps" placeholder="Location Maps" />
+                <input
+                    defaultValue={activityData?.price}
+                    name="price"
+                    placeholder="Price"
+                />
+                <input
+                    defaultValue={activityData?.price_discount}
+                    name="priceDiscount"
+                    placeholder="Price Discount"
+                />
+                <input
+                    defaultValue={activityData?.rating}
+                    name="rating"
+                    placeholder="Rating"
+                />
+                <input
+                    defaultValue={activityData?.total_reviews}
+                    name="totalReviews"
+                    placeholder="Total Reviews"
+                />
+                <input
+                    defaultValue={activityData?.facilities}
+                    name="facilities"
+                    placeholder="Facilities"
+                />
+                <input
+                    defaultValue={activityData?.city}
+                    name="city"
+                    placeholder="City"
+                />
+                <input
+                    defaultValue={activityData?.province}
+                    name="province"
+                    placeholder="Province"
+                />
+                <textarea
+                    defaultValue={activityData?.address}
+                    name="address"
+                    placeholder="Detail Address"
+                />
+                <textarea
+                    defaultValue={activityData?.location_maps}
+                    name="locationMaps"
+                    placeholder="Location Maps"
+                />
 
                 <button
                     type="submit"
                     className="bg-slate-500 text-sm text-white p-2 rounded-2xl"
+                    disabled={!isHaveImageUrl && !isUploadImage}
                 >
                     Submit
                 </button>
