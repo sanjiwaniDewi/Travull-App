@@ -24,3 +24,35 @@ body {
         text-wrap: balance;
     }
 }
+
+.triangle-shape {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    background-image: url("../../public/Designer-removebg.png");
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    @media (max-width: 900px) {
+        clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 50% 0%, 0% 50%);
+    }
+}
+
+.orangeGrad {
+    background: rgb(185, 28, 1);
+    background: linear-gradient(
+        0deg,
+        rgba(185, 28, 1, 1) 0%,
+        rgba(0, 0, 0, 0) 52%
+    );
+}
+
+.blueGrad {
+    background: rgb(1, 85, 185);
+    background: linear-gradient(
+        0deg,
+        rgba(1, 85, 185, 1) 0%,
+        rgba(0, 0, 0, 0) 52%
+    );
+}
+.customMargin {
+    margin-right: 7px;
+}
