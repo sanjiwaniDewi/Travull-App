@@ -13,6 +13,7 @@ import {
     changeDeleteSatus,
     changeEditStatus,
 } from "@/redux/features/status/statusSilce";
+import DetailModal from "@/components/DetailModal";
 
 export default function DashboardPage() {
     const [latesUsers, setLatestUsers] = useState();
@@ -20,6 +21,7 @@ export default function DashboardPage() {
     const [lastPromos, setLatestPromos] = useState();
     const [lastCategories, setLatestCategories] = useState();
     const [lastActivities, setLatestActivities] = useState();
+    const { showModal } = useSelector((state) => state.modal);
 
     const { isDelete, isUpdate, isCreate } = useSelector(
         (state) => state.status
@@ -199,6 +201,8 @@ export default function DashboardPage() {
                     type={"activity"}
                 />
             )}
+
+            {showModal && <DetailModal />}
         </div>
     );
 }

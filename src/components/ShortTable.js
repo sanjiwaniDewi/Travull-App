@@ -172,7 +172,7 @@ export default function ShortTable({ data, title, detileLink, type }) {
                     </Link>
                 </div>
             </div>
-            {showModal && <DetailModal />}
+            {/* {showModal && <DetailModal />} */}
         </>
     );
 }
