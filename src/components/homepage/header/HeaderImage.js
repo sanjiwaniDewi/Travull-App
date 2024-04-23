@@ -16,7 +16,7 @@ export default function HeaderImage() {
     }, []);
 
     return (
-        <div className="w-full h-screen ">
+        <div className="relative w-full h-screen ">
             <div className="w-full h-screen absolute">
                 <ImageCarousel datas={data} />
             </div>
