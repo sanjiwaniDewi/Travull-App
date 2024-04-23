@@ -5,13 +5,13 @@ import "slick-carousel/slick/slick-theme.css";
 import PromoImage from "./PromoImage";
 import PromoTitle from "./PromoTitle";
 
-export default function PromoCarausel({ data }) {
+export default function PromoCarausel({ data, height, show }) {
     const settings = {
         dots: true,
         // infinite: true,
         speed: 500,
-        slidesToShow: 2,
-        slidesToScroll: 2,
+        slidesToShow: show,
+        slidesToScroll: show,
         arrows: false,
         responsive: [
             {
@@ -31,8 +31,12 @@ export default function PromoCarausel({ data }) {
                 <Slider {...settings}>
                     {data.map((data, index) => (
                         <div className="relative" key={index}>
-                            <PromoImage imageUrl={data?.imageUrl} />
-                            <PromoTitle promoData={data} />
+                            <PromoImage
+                                imageUrl={data?.imageUrl}
+                                height={height}
+                            />
+
+                            <PromoTitle promoData={data} height={height} />
                         </div>
                     ))}
                 </Slider>

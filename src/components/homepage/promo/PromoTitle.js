@@ -1,10 +1,10 @@
 import { convertPrice } from "@/utils/handleFormatData";
 
-export default function PromoTitle({ promoData }) {
+export default function PromoTitle({ promoData, height }) {
     const promoPrice = convertPrice(promoData.promo_discount_price);
 
     return (
-        <div className="absolute top-0 ms-3 mt-4 w-full h-52">
+        <div className={`absolute top-0 ms-3 mt-4 w-full ${height}`}>
             <h1 className="font-semibold text-xl text-white mb-1 text-wrap">
                 {promoData.title}
             </h1>
