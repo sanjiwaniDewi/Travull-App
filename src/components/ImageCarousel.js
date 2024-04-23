@@ -6,23 +6,23 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default function ImageCarousel({ images }) {
     const settings = {
-        dots: true,
+        // dots: true,
         // infinite: true,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
+        arrows: false,
     };
-    console.log(images);
 
     return (
-        <div className="w-96">
+        <div className="w-full">
             {images && (
                 <Slider {...settings}>
                     {images.map((image, index) => (
                         <img
                             key={index}
                             src={image}
-                            className="w-96 object-cover"
+                            className="w-full h-40 object-cover rounded-t-2xl"
                             alt="activity image"
                         />
                     ))}
