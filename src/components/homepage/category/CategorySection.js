@@ -1,4 +1,4 @@
-import CategoryData from "./CategoryData";
+import CategoriyCarousel from "./CategoryCarousel";
 export default function CategorySection() {
     return (
         <div className="mt-12 container mx-auto w-full px-5 ">
@@ -7,7 +7,7 @@ export default function CategorySection() {
                 <p className="text-sm">Pilihan destinasi yang anda inginkan </p>
             </div>
             <div>
-                <CategoryData />
+                <CategoriyCarousel />
             </div>
         </div>
     );

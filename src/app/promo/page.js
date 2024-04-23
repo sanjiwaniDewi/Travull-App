@@ -19,7 +19,7 @@ export default function PromoPage() {
         handleShowData();
     }, []);
     return (
-        <div className="my-20">
+        <div className="py-20">
             <PromoHeader data={promos} />
             <PromoCards data={promos} />
             <ActivitySection />
