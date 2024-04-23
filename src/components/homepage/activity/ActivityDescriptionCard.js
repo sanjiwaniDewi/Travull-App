@@ -2,8 +2,8 @@ import { priceFormatRp } from "@/utils/handleFormatData";
 
 export default function ActivityDescriptionCard({ activityData }) {
     return (
-        <div className="mt-2 mx-3">
-            <h1 className="text-md font-bold mb-1">{activityData.title}</h1>
+        <div className="mt-2 mx-3 mb-3">
+            <h3 className="text-md font-bold mb-1">{activityData.title}</h3>
             <div className="flex gap-2 text-xs font-medium mb-1">
                 <p>{activityData.rating}/5</p>
                 <p>{`(${activityData.total_reviews} reviews)`}</p>

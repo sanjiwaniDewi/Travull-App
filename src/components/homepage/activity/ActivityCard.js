@@ -7,7 +7,7 @@ export default function ActivityCard({ datas }) {
     return (
         <div className="w-full">
             {datas && (
-                <div className="grid xl:grid-cols-6  md:grid-cols-3 grid-cols-2 gap-2 w-full">
+                <div className="grid xl:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-2 w-full">
                     {datas.map((activity, index) => {
                         if (index < 6) {
                             return (
