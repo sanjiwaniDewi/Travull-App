@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import PromoImage from "./PromoImage";
 import PromoTitle from "./PromoTitle";
 
-export default function PromoCarausel({ data, height, show }) {
+export default function PromoCarausel({ data, height, show, length }) {
     const settings = {
         dots: true,
         // infinite: true,
@@ -29,16 +29,23 @@ export default function PromoCarausel({ data, height, show }) {
         <div className=" mt-8">
             {data && (
                 <Slider {...settings}>
-                    {data.map((data, index) => (
-                        <div className="relative" key={index}>
-                            <PromoImage
-                                imageUrl={data?.imageUrl}
-                                height={height}
-                            />
+                    {data.map((data, index) => {
+                        if (index < length) {
+                            return (
+                                <div className="relative" key={index}>
+                                    <PromoImage
+                                        imageUrl={data?.imageUrl}
+                                        height={height}
+                                    />
 
-                            <PromoTitle promoData={data} height={height} />
-                        </div>
-                    ))}
+                                    <PromoTitle
+                                        promoData={data}
+                                        height={height}
+                                    />
+                                </div>
+                            );
+                        }
+                    })}
                 </Slider>
             )}
         </div>

@@ -31,7 +31,12 @@ export default function PromoSection() {
                     </div>
                 </div>
                 <div className="col-span-3">
-                    <PromoCarausel data={promos} height={"h-52"} show={2} />
+                    <PromoCarausel
+                        data={promos}
+                        height={"h-52"}
+                        show={2}
+                        length={4}
+                    />
                 </div>
             </div>
         </section>
