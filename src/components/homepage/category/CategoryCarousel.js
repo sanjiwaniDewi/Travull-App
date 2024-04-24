@@ -28,8 +28,7 @@ export default function CategoriyCarousel() {
         className: "slider variable-width",
         speed: 500,
         slidesToShow: 4,
-        scroll: false,
-        // slidesToScroll: 4,
+        slidesToScroll: 4,
         variableWidth: true,
 
         responsive: [
