@@ -1,10 +1,10 @@
 "use client";
 import { useEffect } from "react";
-import LogoutButton from "../LogoutButton";
+import LogoutButton from "../utils/LogoutButton";
 import { loginStatus } from "@/redux/features/auth/authSlice";
 import { fatchUserLogged } from "@/redux/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import ChangeRole from "../ChangeRole";
+import ChangeRole from "../utils/ChangeRole";
 import Link from "next/link";
 
 import { IoHome } from "react-icons/io5";

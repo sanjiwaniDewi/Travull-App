@@ -1,4 +1,4 @@
-import PromoForm from "@/components/PromoForm";
+import PromoForm from "@/components/dashboard/promo/PromoForm";
 
 export default function CreatePromoPage() {
     return (

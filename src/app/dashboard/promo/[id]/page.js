@@ -1,5 +1,5 @@
 "use client";
-import PromoForm from "@/components/PromoForm";
+import PromoForm from "@/components/dashboard/promo/PromoForm";
 import { useGetDataById } from "@/hooks/useGet";
 import { useEffect, useState } from "react";
 

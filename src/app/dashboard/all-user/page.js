@@ -1,4 +1,4 @@
-import AllUser from "@/components/AllUser";
+import AllUser from "@/components/dashboard/user/AllUser";
 
 export default function AllUserPage() {
     return (

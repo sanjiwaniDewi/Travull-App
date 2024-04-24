@@ -1,5 +1,5 @@
 "use client";
-import Card from "@/components/Card";
+import Card from "@/components/layout/Card";
 import { useGetAllData } from "@/hooks/useGet";
 import { useState, useEffect } from "react";
 import CategoryCard from "./CategoryCard";

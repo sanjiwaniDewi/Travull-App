@@ -1,4 +1,4 @@
-import BannerForm from "@/components/BannerForm";
+import BannerForm from "@/components/dashboard/banner/BannerForm";
 
 export default function CreateBannerPage() {
     return (

@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import ImagePreview from "./ImagePreview";
-import UploadImage from "./UploadImage";
+import ImagePreview from "../../utils/ImagePreview";
+import UploadImage from "../../utils/UploadImage";
 import { useGetAllData } from "@/hooks/useGet";
 import { useSelector } from "react-redux";
-import AddButton from "./AddButton";
-import ImageCarousel from "./ImageCarousel";
+import AddButton from "../../utils/AddButton";
+import ImageCarousel from "../../utils/ImageCarousel";
 import { handleActivityForm } from "@/utils/handleInputForm";
 import useCreate from "@/hooks/useCreate";
 import useUpdate from "@/hooks/useUpdate";

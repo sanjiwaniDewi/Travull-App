@@ -1,5 +1,5 @@
 "use client";
-import CategoryForm from "@/components/CategoryForm";
+import CategoryForm from "@/components/dashboard/category/CategoryForm";
 import { useGetDataById } from "@/hooks/useGet";
 import { useEffect, useState } from "react";
 export default function EditCategoryPage(context) {

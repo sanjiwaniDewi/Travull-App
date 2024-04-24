@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ImageCarousel from "../ImageCarousel";
+import ImageCarousel from "../utils/ImageCarousel";
 import {
     formatDate,
     formatFacilities,
@@ -7,7 +7,7 @@ import {
     priceFormatRp,
 } from "@/utils/handleFormatData";
 import parse from "html-react-parser";
-import Card from "../Card";
+import Card from "../layout/Card";
 
 export default function ActivityDetail({ data }) {
     const newFacilities = formatFacilities(data.facilities);

@@ -1,4 +1,4 @@
-import CategoryForm from "@/components/CategoryForm";
+import CategoryForm from "@/components/dashboard/category/CategoryForm";
 
 export default function CreateCategoryPage() {
     return (

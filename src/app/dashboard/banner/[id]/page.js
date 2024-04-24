@@ -1,5 +1,5 @@
 "use client";
-import BannerForm from "@/components/BannerForm";
+import BannerForm from "@/components/dashboard/banner/BannerForm";
 import { useGetDataById } from "@/hooks/useGet";
 import { useEffect, useState } from "react";
 

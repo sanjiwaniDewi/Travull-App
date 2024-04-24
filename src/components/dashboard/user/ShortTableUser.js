@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ChangeRole from "./ChangeRole";
+import ChangeRole from "../../utils/ChangeRole";
 export default function ShortTableUser({ data }) {
     const tableTitle = [
         ...new Set(data?.map((item) => Object.keys(item)).flat()),

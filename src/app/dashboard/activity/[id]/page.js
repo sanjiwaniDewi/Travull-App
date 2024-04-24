@@ -1,5 +1,5 @@
 "use client";
-import ActivityForm from "@/components/ActivityForm";
+import ActivityForm from "@/components/dashboard/activity/ActivityForm";
 import { useGetAllData, useGetDataById } from "@/hooks/useGet";
 import useUpdate from "@/hooks/useUpdate";
 import { useEffect, useState } from "react";

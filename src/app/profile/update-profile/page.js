@@ -1,9 +1,9 @@
 "use client";
-import Card from "@/components/Card";
-import FormUpdate from "@/components/FormUpdate";
-import Layout from "@/components/Layout";
-import ProfieImage from "@/components/ProfileImage";
-import UploadImage from "@/components/UploadImage";
+import Card from "@/components/layout/Card";
+import FormUpdate from "@/components/profile/FormUpdate";
+import Layout from "@/components/layout/Layout";
+import ProfieImage from "@/components/profile/ProfileImage";
+import UploadImage from "@/components/utils/UploadImage";
 import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
 import { fatchUserLogged, updateUser } from "@/redux/features/user/userSlice";
 import { useRouter } from "next/navigation";

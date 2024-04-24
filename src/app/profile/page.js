@@ -1,7 +1,7 @@
 "use client";
-import Card from "@/components/Card";
-import Layout from "@/components/Layout";
-import Profile from "@/components/Profile";
+import Card from "@/components/layout/Card";
+import Layout from "@/components/layout/Layout";
+import Profile from "@/components/profile/Profile";
 import { fatchUserLogged } from "@/redux/features/user/userSlice";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -41,7 +41,6 @@ export default function ProfilePage() {
             <div className="flex justify-center items-center mt-20">
                 <Card>
                     <Profile userData={userData} />
-
                     <Link href="/profile/update-profile">
                         <button className="mt-4 py-3 bg-slate-500 text-white px-4 font-semibold text-sm rounded-xl w-full">
                             Edit Profile

@@ -1,5 +1,5 @@
-import Card from "@/components/Card";
-import ImageCarousel from "@/components/ImageCarousel";
+import Card from "@/components/layout/Card";
+import ImageCarousel from "@/components/utils/ImageCarousel";
 import ActivityDescriptionCard from "./ActivityDescriptionCard";
 import Link from "next/link";
 

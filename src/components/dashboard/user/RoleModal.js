@@ -1,5 +1,5 @@
 import { getAllUser, updateRoleUser } from "@/redux/features/user/userSlice";
-import Card from "./Card";
+import Card from "../../layout/Card";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";

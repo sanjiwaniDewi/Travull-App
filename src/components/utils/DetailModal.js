@@ -1,12 +1,12 @@
 "use client";
 import Modal from "./Modal";
-import DetailBanner from "./DetailBanner";
-import Card from "./Card";
+import DetailBanner from "../dashboard/banner/DetailBanner";
+import Card from "../layout/Card";
 import CloseBtnModal from "./CLoseBtnModal";
 import { useSelector } from "react-redux";
-import DetailPromo from "./DetailPromo";
-import DetailCategory from "./DetailCategory";
-import DetailActivity from "./DetailActivity";
+import DetailPromo from "../dashboard/promo/DetailPromo";
+import DetailCategory from "../dashboard/category/DetailCategory";
+import DetailActivity from "../dashboard/activity/DetailActivity";
 
 export default function DetailModal() {
     const { type } = useSelector((state) => state.modal);

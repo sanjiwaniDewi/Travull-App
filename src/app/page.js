@@ -1,5 +1,5 @@
-import Layout from "@/components/Layout";
-import Navbar from "@/components/Navbar";
+import Layout from "@/components/layout/Layout";
+import Navbar from "@/components/layout/Navbar";
 import ActivitySection from "@/components/homepage/activity/ActivitySection";
 import CategorySection from "@/components/homepage/category/CategorySection";
 import HeaderImage from "@/components/homepage/header/HeaderImage";

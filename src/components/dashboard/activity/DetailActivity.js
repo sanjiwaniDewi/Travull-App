@@ -1,7 +1,7 @@
 "use client";
 
 import { useSelector, dispatch, useDispatch } from "react-redux";
-import ImageCarousel from "./ImageCarousel";
+import ImageCarousel from "../../utils/ImageCarousel";
 import { formatDate } from "@/utils/handleFormatData";
 import parse from "html-react-parser";
 import { setModalData, setModalType } from "@/redux/features/modal/modalSlice";

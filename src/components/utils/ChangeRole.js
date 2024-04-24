@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RoleModal from "./RoleModal";
+import RoleModal from "../dashboard/user/RoleModal";
 
 export default function ChangeRole({ userData }) {
     const [showModal, SetShowModal] = useState(false);

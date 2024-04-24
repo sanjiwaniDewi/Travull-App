@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { register } from "@/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
-import Card from "./Card";
+import Card from "../../layout/Card";
 import Link from "next/link";
 
 export default function RegisterForm() {

@@ -2,7 +2,7 @@ import { login } from "@/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Card from "./Card";
+import Card from "../../layout/Card";
 import Link from "next/link";
 export default function LoginForm() {
     const dispatch = useDispatch();

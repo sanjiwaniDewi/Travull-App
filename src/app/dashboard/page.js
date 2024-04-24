@@ -3,9 +3,9 @@ import { API_KEY, BASE_API } from "@/API/api";
 import axios from "axios";
 
 import { useState, useEffect } from "react";
-import AllUser from "@/components/AllUser";
-import ShortTableUser from "@/components/ShortTableUser";
-import ShortTable from "@/components/ShortTable";
+import AllUser from "@/components/dashboard/user/AllUser";
+import ShortTableUser from "@/components/dashboard/user/ShortTableUser";
+import ShortTable from "@/components/utils/ShortTable";
 import { useGetAllData } from "@/hooks/useGet";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -13,7 +13,7 @@ import {
     changeDeleteSatus,
     changeEditStatus,
 } from "@/redux/features/status/statusSilce";
-import DetailModal from "@/components/DetailModal";
+import DetailModal from "@/components/utils/DetailModal";
 
 export default function DashboardPage() {
     const [latesUsers, setLatestUsers] = useState();

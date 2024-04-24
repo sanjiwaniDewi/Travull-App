@@ -1,5 +1,5 @@
 "use client";
-import TabelAllData from "@/components/TableAllData";
+import TabelAllData from "@/components/utils/TableAllData";
 import { useGetAllData } from "@/hooks/useGet";
 import { useSelector, useDispatch } from "react-redux";
 import {

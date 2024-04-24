@@ -1,4 +1,4 @@
-import ChangeRole from "./ChangeRole";
+import ChangeRole from "../../utils/ChangeRole";
 import Image from "next/image";
 
 export default function TableUser({ data }) {

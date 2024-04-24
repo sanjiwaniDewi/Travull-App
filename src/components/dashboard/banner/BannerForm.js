@@ -1,7 +1,7 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import ImagePreview from "./ImagePreview";
-import UploadImage from "./UploadImage";
+import ImagePreview from "../../utils/ImagePreview";
+import UploadImage from "../../utils/UploadImage";
 import useCreate from "@/hooks/useCreate";
 import { useRouter } from "next/navigation";
 import { deleteImageUrl } from "@/redux/features/upload/imageSlice";

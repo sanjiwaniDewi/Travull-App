@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadImage } from "@/redux/features/upload/imageSlice";
-import ProfieImage from "./ProfileImage";
+import ProfieImage from "../profile/ProfileImage";
 
 export default function UploadImage({ handleMultiple }) {
     const imageUploadRef = useRef();

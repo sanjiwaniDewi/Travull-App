@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import UploadImage from "./UploadImage";
-import ImagePreview from "./ImagePreview";
+import UploadImage from "../../utils/UploadImage";
+import ImagePreview from "../../utils/ImagePreview";
 import useCreate from "@/hooks/useCreate";
 import { handlePromoForm } from "@/utils/handleInputForm";
 import { useRouter } from "next/navigation";
