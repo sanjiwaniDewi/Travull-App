@@ -59,11 +59,11 @@ export function handlerGetItemById(id, type) {
 export function handleCreateRoute(type) {
     switch (type) {
         case "banner":
-            return "/dashboard/banners/create-banner";
+            return "/dashboard/banner/create-banner";
         case "promo":
-            return "/dashboard/promos/create-promo";
+            return "/dashboard/promo/create-promo";
         case "category":
-            return "/dashboard/categories/create-category";
+            return "/dashboard/category/create-category";
         case "activity":
             return "/dashboard/activity/create-activity";
         default:
@@ -74,11 +74,11 @@ export function handleCreateRoute(type) {
 export function handleUpdateRoute(id, type) {
     switch (type) {
         case "banner":
-            return `/dashboard/banners/${id}`;
+            return `/dashboard/banner/${id}`;
         case "promo":
-            return `/dashboard/promos/${id}`;
+            return `/dashboard/promo/${id}`;
         case "category":
-            return `/dashboard/categories/${id}`;
+            return `/dashboard/category/${id}`;
         case "activity":
             return `/dashboard/activity/${id}`;
         default:
