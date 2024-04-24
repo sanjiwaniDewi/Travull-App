@@ -20,7 +20,7 @@ export default function ImagePreview({ figureUrl }) {
     };
 
     useEffect(() => {
-        // handleFirstLoad();
+        handleFirstLoad();
         handleshowFigure();
     }, []);
 

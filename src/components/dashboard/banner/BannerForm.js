@@ -4,18 +4,22 @@ import ImagePreview from "../../utils/ImagePreview";
 import UploadImage from "../../utils/UploadImage";
 import useCreate from "@/hooks/useCreate";
 import { useRouter } from "next/navigation";
-import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
+import {
+    deleteImageUrl,
+    getImageUrl,
+} from "@/redux/features/upload/imageSlice";
 import useUpdate from "@/hooks/useUpdate";
 import {
     changeCreateSatus,
     changeEditStatus,
 } from "@/redux/features/status/statusSilce";
 import ImageBtnOption from "@/components/utils/ImageBtnOption";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function BannerForm({ bannerData }) {
     const [isHaveImageUrl, setIsHaveImageUrl] = useState(false);
     const [isUploadImage, setIsUploadImage] = useState(true);
+    // const [updatedImageUrl, setUpdatedImageUrl] = useState();
     const { createBanner } = useCreate();
     const { updateBanner } = useUpdate();
     const { imageUrl } = useSelector((store) => store.image);
@@ -38,9 +42,11 @@ export default function BannerForm({ bannerData }) {
         const urlImage = formData.get("imageUrl");
 
         if (bannerData) {
+            const imageUpdate = imageUrl ? imageUrl : urlImage;
+            dispatch(getImageUrl(imageUpdate));
             updateBanner(bannerData.id, {
                 name,
-                imageUrl: bannerData.imageUrl,
+                imageUrl: imageUpdate,
             });
 
             dispatch(changeEditStatus());
@@ -50,7 +56,7 @@ export default function BannerForm({ bannerData }) {
             dispatch(changeCreateSatus());
             // router.back();
         }
-        dispatch(deleteImageUrl());
+        // dispatch(deleteImageUrl());
         // router.push("/dashboard");
     };
 
@@ -59,7 +65,7 @@ export default function BannerForm({ bannerData }) {
             <div className=" w-3/4 mb-4 rounded-lg">
                 {bannerData?.imageUrl || imageUrl?.length !== 0 ? (
                     <ImagePreview
-                        figureUrl={bannerData && bannerData?.imageUrl}
+                        figureUrl={bannerData ? bannerData?.imageUrl : imageUrl}
                     />
                 ) : (
                     <div className="h-96 flex justify-center items-center content-center">

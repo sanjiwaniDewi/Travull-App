@@ -43,7 +43,7 @@ const imageSlice = createSlice({
             state.imageUrl = action.payload;
         },
 
-        setimagesUrls(state, action) {
+        setImagesUrls(state, action) {
             if (state.imageUrls.length > 0) {
                 state.imageUrls = [...state.imageUrls, action.payload];
             } else if (state.imageUrls.includes(action.payload)) {
@@ -62,6 +62,7 @@ const imageSlice = createSlice({
     },
 });
 
-export const { getImageUrl, deleteImageUrl } = imageSlice.actions;
+export const { getImageUrl, deleteImageUrl, setImagesUrls } =
+    imageSlice.actions;
 
 export default imageSlice.reducer;
