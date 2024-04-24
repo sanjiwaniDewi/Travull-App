@@ -11,21 +11,31 @@ export default function TableUser({ data }) {
     }
 
     return (
-        <table>
+        <table className="w-full overflow-x-visible table table-compact">
             <thead>
                 <tr>
                     {tableTitle?.map((item) => {
                         if (item === "id") {
-                            return <th>No</th>;
+                            return (
+                                <th key={item} className="text-left">
+                                    no
+                                </th>
+                            );
                         } else if (item === "profilePictureUrl") {
                             return;
+                        } else if (item === "action") {
+                            return <th key={item}>{item}</th>;
                         } else {
-                            return <th>{item}</th>;
+                            return (
+                                <th key={item} className="text-left">
+                                    {item}
+                                </th>
+                            );
                         }
                     })}
                 </tr>
             </thead>
-            <tbody>
+            <tbody className=" divide-y divide-slate-200">
                 {data?.map((item, index) => {
                     return (
                         <tr>
@@ -36,9 +46,9 @@ export default function TableUser({ data }) {
                                     return;
                                 } else if (indexs === 1) {
                                     return (
-                                        <div className="flex flex-row gap-2">
+                                        <div className="flex flex-row gap-2 items-center py-1">
                                             <img
-                                                className="table-avatar w-10 rounded-full h-10"
+                                                className="table-avatar lg:w-10  w-8 rounded-full lg:h-10 h-8"
                                                 src={
                                                     item[
                                                         "profilePictureUrl"
@@ -54,7 +64,13 @@ export default function TableUser({ data }) {
                                         </div>
                                     );
                                 } else if (head === "action") {
-                                    return <ChangeRole userData={item} />;
+                                    return (
+                                        <td key={item["id"]}>
+                                            <div className=" flex  justify-center content-start">
+                                                <ChangeRole userData={item} />
+                                            </div>
+                                        </td>
+                                    );
                                 }
                                 return <td>{item[head]}</td>;
                             })}

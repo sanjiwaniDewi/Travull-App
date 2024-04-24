@@ -9,29 +9,39 @@ export default function ShortTableUser({ data }) {
         tableTitle.push("action");
     }
     return (
-        <div className="w-full">
+        <div className="w-full overflow-x-auto">
             <h1 className="text-2xl font-bold mb-3">Kelola User</h1>
-            <table className="table table-compact w-full text-left">
+            <table className="table table-compact w-full ">
                 <thead>
-                    <tr>
+                    <tr className="lg:text-md text-sm">
                         {tableTitle?.map((item) => {
                             if (item === "id") {
-                                return <th key={item}>No</th>;
+                                return (
+                                    <th key={item} className="text-left">
+                                        no
+                                    </th>
+                                );
                             } else if (
                                 item === "profilePictureUrl" ||
                                 item === "no"
                             ) {
                                 return;
-                            } else {
+                            } else if (item === "action") {
                                 return <th key={item}>{item}</th>;
+                            } else {
+                                return (
+                                    <th key={item} className="text-left">
+                                        {item}
+                                    </th>
+                                );
                             }
                         })}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="lg:text-md text-sm divide-y divide-slate-200">
                     {data?.map((item, index) => {
                         return (
-                            <tr key={index}>
+                            <tr key={index} className="">
                                 {tableTitle.map((head, indexs) => {
                                     if (head === "id") {
                                         return (
@@ -47,11 +57,11 @@ export default function ShortTableUser({ data }) {
                                     } else if (indexs === 1) {
                                         return (
                                             <td
-                                                className="flex flex-row gap-2"
+                                                className="flex flex-row gap-2 items-center py-1"
                                                 key={item[head]}
                                             >
                                                 <img
-                                                    className="table-avatar w-10 rounded-full h-10"
+                                                    className="table-avatar lg:w-10  w-8 rounded-full lg:h-10 h-8"
                                                     src={
                                                         item[
                                                             "profilePictureUrl"
@@ -65,7 +75,11 @@ export default function ShortTableUser({ data }) {
                                     } else if (head === "action") {
                                         return (
                                             <td key={item["id"]}>
-                                                <ChangeRole userData={item} />
+                                                <div className=" flex  justify-center content-start">
+                                                    <ChangeRole
+                                                        userData={item}
+                                                    />
+                                                </div>
                                             </td>
                                         );
                                     }
@@ -78,8 +92,11 @@ export default function ShortTableUser({ data }) {
                     })}
                 </tbody>
             </table>
-            <div className="mt-2 mb-4">
-                <Link href="dashboard/all-user" className="text-black">
+            <div className="mt-6">
+                <Link
+                    href="dashboard/all-user"
+                    className="text-blue-400 font-medium underline"
+                >
                     show more
                 </Link>
             </div>

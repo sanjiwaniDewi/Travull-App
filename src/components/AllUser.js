@@ -19,8 +19,11 @@ export default function AllUser() {
     }, []);
 
     return (
-        <div>
-            <TableUser data={userData.users.data} />
+        <div className="w-full flex justify-center">
+            <div className="w-full px-12 py-8 container bg-white border shadow-md border-gray-200 rounded-lg">
+                <div className="text-2xl font-bold mb-3">Tabel User</div>
+                <TableUser data={userData.users.data} />
+            </div>
         </div>
     );
 }
