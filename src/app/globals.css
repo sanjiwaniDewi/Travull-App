@@ -56,3 +56,16 @@ body {
 .customMargin {
     margin-right: 7px;
 }
+
+.slick-prev:before,
+.slick-next:before {
+    color: yellow !important;
+}
+
+th {
+    padding-bottom: 12px;
+}
+
+td {
+    padding-top: 4px;
+}
