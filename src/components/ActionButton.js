@@ -1,19 +1,6 @@
-"use client";
-
-import { changeEditStatus } from "@/redux/features/status/statusSilce";
-import {
-    changeModalStatus,
-    setModalType,
-} from "@/redux/features/modal/modalSlice";
-import {
-    handleDeleteItem,
-    handleUpdateRoute,
-} from "@/utils/handleActionButton";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-
-import { useDispatch } from "react-redux";
-
+import { FaTrashAlt } from "react-icons/fa";
+import { MdEditSquare } from "react-icons/md";
+import { RiEyeFill } from "react-icons/ri";
 export default function ActionButtons({
     handleShowModal,
     handleDelete,
@@ -23,22 +10,22 @@ export default function ActionButtons({
         <>
             <div className="flex flex-row  gap-x-3">
                 <button
-                    className="bg-slate-500 text-sm text-white p-2 rounded-2xl"
+                    className="bg-blue-600 text-sm text-white p-2 rounded-2xl"
                     onClick={handleShowModal}
                 >
-                    Detail
+                    <RiEyeFill />
                 </button>
                 <button
                     onClick={handleEdit}
-                    className="bg-slate-500 text-sm text-white p-2 rounded-2xl"
+                    className="bg-green-600 text-sm text-white p-2 rounded-2xl"
                 >
-                    Edit
+                    <MdEditSquare />
                 </button>
                 <button
-                    className="bg-slate-500 text-sm text-white p-2 rounded-2xl"
+                    className="bg-red-700 text-sm text-white p-2 rounded-2xl"
                     onClick={handleDelete}
                 >
-                    Delete
+                    <FaTrashAlt />
                 </button>
             </div>
         </>
