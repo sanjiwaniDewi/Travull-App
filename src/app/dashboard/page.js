@@ -178,7 +178,7 @@ export default function DashboardPage() {
                     <ShortTable
                         data={lastBanner}
                         title={"Kelola Banner"}
-                        detileLink={"dashboard/banners"}
+                        detileLink={"dashboard/banner"}
                         type={"banner"}
                     />
                 )}
@@ -186,7 +186,7 @@ export default function DashboardPage() {
                     <ShortTable
                         data={lastPromos}
                         title={"Kelola Promo"}
-                        detileLink={"dashboard/promos"}
+                        detileLink={"dashboard/promo"}
                         type={"promo"}
                     />
                 )}
@@ -194,8 +194,8 @@ export default function DashboardPage() {
                 {lastCategories && (
                     <ShortTable
                         data={lastCategories}
-                        title={"Kelola Kategori"}
-                        detileLink={"dashboard/categories"}
+                        title={"Kelola Destinasi"}
+                        detileLink={"dashboard/category"}
                         type={"category"}
                     />
                 )}
