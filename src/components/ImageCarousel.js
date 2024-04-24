@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function ImageCarousel({ images }) {
+export default function ImageCarousel({ images, height }) {
     const settings = {
         // dots: true,
         // infinite: true,
@@ -22,7 +22,7 @@ export default function ImageCarousel({ images }) {
                         <img
                             key={index}
                             src={image}
-                            className="w-full h-40 object-cover rounded-t-2xl"
+                            className={`w-full ${height} object-cover rounded-t-2xl`}
                             alt="activity image"
                         />
                     ))}
