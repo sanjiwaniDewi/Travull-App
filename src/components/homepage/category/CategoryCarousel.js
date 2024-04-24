@@ -8,8 +8,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CategoryContent from "./CategoriyContent";
-import next from "next";
-import { FaArrowRight } from "react-icons/fa";
 
 export default function CategoriyCarousel() {
     const [dataCategory, setDataCategory] = useState();
