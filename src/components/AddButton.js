@@ -1,10 +1,14 @@
-export default function AddButton({ handleAddItem }) {
+import { MdAdd } from "react-icons/md";
+export default function AddButton({ handleAddItem, type }) {
     return (
         <button
-            className="bg-slate-500 text-sm text-white py-2 px-4 rounded-2xl"
+            className=" text-sm outline flex justify-center  py-2 px-2 rounded-xl outline-1 outline-slate-300 "
             onClick={handleAddItem}
         >
-            Add
+            <span className="self-center text-lg">
+                <MdAdd />
+            </span>
+            Add {type}
         </button>
     );
 }
