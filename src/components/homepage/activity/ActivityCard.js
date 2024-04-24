@@ -1,17 +1,22 @@
 import Card from "@/components/Card";
 import ImageCarousel from "@/components/ImageCarousel";
 import ActivityDescriptionCard from "./ActivityDescriptionCard";
+import Link from "next/link";
 
-export default function ActivityCard({ datas }) {
-    console.log(datas);
+export default function ActivityCard({ datas, length }) {
+    const newLength = length === "all" ? datas.length : length;
+    console.log("new length", newLength);
     return (
         <div className="w-full">
             {datas && (
                 <div className="grid xl:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-2 w-full">
                     {datas.map((activity, index) => {
-                        if (index < 6) {
+                        if (index < newLength) {
                             return (
-                                <div className="w-full bg-white border border-gray-200 rounded-2xl">
+                                <Link
+                                    href={`/activity/${activity.id}`}
+                                    className="w-full min-h-80 bg-white border border-gray-200 rounded-2xl"
+                                >
                                     <div className="">
                                         {activity.imageUrls.length <= 1 ? (
                                             <img
@@ -31,7 +36,7 @@ export default function ActivityCard({ datas }) {
                                             />
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             );
                         }
                     })}

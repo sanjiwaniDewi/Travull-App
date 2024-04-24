@@ -58,3 +58,16 @@ export async function getActivityByIdAPI(id) {
         return res.data.data;
     }
 }
+
+export async function getActivitiesByCategoryIdAPI(id) {
+    const { token, headers } = apiInstance();
+    if (token) {
+        const res = await axios.get(
+            `${BASE_API}/activities-by-category/${id}`,
+            {
+                headers: headers,
+            }
+        );
+        return res.data.data;
+    }
+}

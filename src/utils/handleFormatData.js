@@ -26,7 +26,14 @@ export function formatSizeMap(maps, width, height) {
     );
     const rounded = replaceHeight?.replace(
         /style="(.*)"/g,
-        "style=' border-radius: 2rem'"
+        "style=' border-radius: 24px'"
     );
     return rounded;
+}
+
+export function formatFacilities(facilities) {
+    const newfacilities = facilities.includes(",")
+        ? facilities?.split(",")
+        : facilities;
+    return newfacilities;
 }

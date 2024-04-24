@@ -10,7 +10,7 @@ export default function ActivitySection() {
                 </p>
             </div>
             <div>
-                <ActivityCountainer />
+                <ActivityCountainer length={6} />
             </div>
         </div>
     );
