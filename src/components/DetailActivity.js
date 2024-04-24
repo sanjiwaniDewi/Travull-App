@@ -20,14 +20,11 @@ export default function DetailActivity() {
         dispatch(setModalData(dataCategory));
         dispatch(setModalType("category"));
     };
-    console.log(dataCategory);
-
-    console.log(modalData);
 
     return (
         <div className="flex gap-4 ">
             <div>
-                <ImageCarousel images={modalData.imageUrls} />
+                <ImageCarousel images={modalData.imageUrls} height="h-40" />
                 <div className="text-2xl font-bold mb-3 flex gap-3 mt-8">
                     <h1>{modalData.title}</h1>
                     <button
