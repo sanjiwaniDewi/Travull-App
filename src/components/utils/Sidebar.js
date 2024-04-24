@@ -1,10 +1,10 @@
 "use client";
 import { useEffect } from "react";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "../LogoutButton";
 import { loginStatus } from "@/redux/features/auth/authSlice";
 import { fatchUserLogged } from "@/redux/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import ChangeRole from "./ChangeRole";
+import ChangeRole from "../ChangeRole";
 export default function Sidebar() {
     const dataUser = useSelector((store) => store.user);
     const dispatch = useDispatch();
