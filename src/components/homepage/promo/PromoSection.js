@@ -18,7 +18,7 @@ export default function PromoSection() {
     }, []);
 
     return (
-        <section className="container mx-auto w-full px-5">
+        <section className="container mx-auto w-full lg:px-1 px-5">
             <div className="grid grid-cols-5 ">
                 <div className="col-span-2 flex flex-col justify-center h-52 mt-8 ">
                     <div className="">

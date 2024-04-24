@@ -6,11 +6,12 @@ export default function CategoryContent({
     length,
     large,
     thin,
+    padding,
 }) {
     return (
         <div className="" key={index}>
             {index < length && (
-                <div key={index} className="text-center py-1 px-1">
+                <div key={index} className={`text-center py-1 ${padding}`}>
                     <CategoryCard
                         data={category}
                         size={index % 2 === 0 ? "large" : "thin"}

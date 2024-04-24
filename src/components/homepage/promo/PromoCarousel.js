@@ -36,6 +36,13 @@ export default function PromoCarausel({ data, height, show, length }) {
                                     <PromoImage
                                         imageUrl={data?.imageUrl}
                                         height={height}
+                                        padding={
+                                            index === 0
+                                                ? "ps-0"
+                                                : index === length - 1
+                                                ? "px-2"
+                                                : "ps-2"
+                                        }
                                     />
 
                                     <PromoTitle
