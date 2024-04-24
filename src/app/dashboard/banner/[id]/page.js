@@ -15,8 +15,10 @@ export default function EditBanerPage(context) {
         handleBannerData();
     }, []);
     return (
-        <div className="w-full">
-            <BannerForm bannerData={bannerData} />
+        <div className="w-full ">
+            <div className="w-full mt-20 container mx-auto flex flex-col  items-center ">
+                <BannerForm bannerData={bannerData} />
+            </div>
         </div>
     );
 }
