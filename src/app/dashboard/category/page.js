@@ -18,7 +18,16 @@ export default function CategoriesPage() {
     const dispatch = useDispatch();
     const handleShowAllData = async () => {
         const res = await getAllCategoryData();
-        setCategoriesData(res);
+
+        const newCategoriesData = res?.map((item, index) => {
+            {
+                return {
+                    ...item,
+                    no: index + 1,
+                };
+            }
+        });
+        setCategoriesData(newCategoriesData);
     };
 
     useEffect(() => {
@@ -43,12 +52,12 @@ export default function CategoriesPage() {
     }, [isDelete, isCreate, isUpdate]);
 
     return (
-        <div>
+        <div className="w-full pt-16">
             {categoriesData && (
                 <TabelAllData
                     data={categoriesData}
                     type="category"
-                    title="All Category Data"
+                    title="Tabel Destinasi"
                 />
             )}
         </div>

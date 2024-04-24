@@ -9,19 +9,28 @@ export default function PromosPage() {
     const { getAllPromoData } = useGetAllData();
 
     const handleShowAllData = async () => {
-        await getAllPromoData().then((res) => setPromosData(res));
+        const res = await getAllPromoData();
+        const newPromosData = res?.map((item, index) => {
+            {
+                return {
+                    ...item,
+                    no: index + 1,
+                };
+            }
+        });
+        setPromosData(newPromosData);
     };
 
     useEffect(() => {
         handleShowAllData();
     }, []);
     return (
-        <div>
+        <div className="w-full pt-16">
             {promosData && (
                 <TabelAllData
                     data={promosData}
                     type="promo"
-                    title="All Promo Data"
+                    title="Tabel Promo"
                 />
             )}
         </div>

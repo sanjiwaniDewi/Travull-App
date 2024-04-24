@@ -18,7 +18,13 @@ export default function BannersPage() {
     const dispatch = useDispatch();
     const handleShowAllData = async () => {
         const res = await getAllBennerData();
-        setBannerData(res);
+        const newBannerData = res?.map((item, index) => {
+            return {
+                ...item,
+                no: index + 1,
+            };
+        });
+        setBannerData(newBannerData);
     };
 
     useEffect(() => {
@@ -43,11 +49,11 @@ export default function BannersPage() {
     }, [isDelete, isCreate, isUpdate]);
 
     return (
-        <div>
+        <div className="w-full pt-16">
             {bannerData && (
                 <TabelAllData
                     data={bannerData}
-                    title="All Banners Data"
+                    title="Tabel Banner"
                     type="banner"
                 />
             )}

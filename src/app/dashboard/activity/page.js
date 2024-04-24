@@ -9,7 +9,18 @@ export default function ActivityPage() {
     const { getAllActivityData } = useGetAllData();
 
     const handleShowAllData = async () => {
-        await getAllActivityData().then((res) => setActivitiesData(res));
+        const res = await getAllActivityData();
+
+        const newActivitiesData = res?.map((item, index) => {
+            {
+                return {
+                    ...item,
+                    no: index + 1,
+                };
+            }
+        });
+
+        setActivitiesData(newActivitiesData);
     };
 
     useEffect(() => {
@@ -17,12 +28,12 @@ export default function ActivityPage() {
     }, []);
 
     return (
-        <div>
+        <div className="w-full pt-16">
             {activitiesData && (
                 <TabelAllData
                     data={activitiesData}
                     type="activity"
-                    title="All Activity Data"
+                    title="Tabel Aktivitas"
                 />
             )}
         </div>
