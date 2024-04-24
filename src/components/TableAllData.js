@@ -22,6 +22,7 @@ import {
     handleDeleteItem,
     handleUpdateRoute,
 } from "@/utils/handleActionButton";
+import { formatDate } from "@/utils/handleFormatData";
 
 export default function TabelAllData({ data, title, type }) {
     const dispatch = useDispatch();
@@ -72,26 +73,37 @@ export default function TabelAllData({ data, title, type }) {
     };
 
     return (
-        <div className="overflow-x-auto">
-            <div>
-                <h1 className="text-2xl font-bold mb-3">{title}</h1>
-                <AddButton handleAddItem={handleAddItem} />
+        <div className="container mx-auto w-full p-6 bg-white border shadow-md border-gray-200 rounded-lg">
+            <div className="flex justify-start content-center pt-1 gap-4 mb-3">
+                <h1 className="text-2xl font-bold ">{title}</h1>
+                <div className="flex self-center">
+                    <AddButton handleAddItem={handleAddItem} type={type} />
+                </div>
             </div>
-            <table className="table table-compact w-full">
-                <thead className="text-left">
+            <table className="table table-compact w-full overflow-x-auto">
+                <thead>
                     <tr>
                         {tableTitle?.map((item) => {
                             if (item === "id") {
-                                return <th key={item}>No</th>;
+                                return (
+                                    <th key={item} className="text-left">
+                                        no
+                                    </th>
+                                );
                             } else if (item === "no") {
                                 return;
                             } else if (
                                 item === "updatedAt" ||
                                 item === "createdAt" ||
                                 item === "title" ||
-                                item === "name" ||
-                                item === "action"
+                                item === "name"
                             ) {
+                                return (
+                                    <th key={item} className="text-left">
+                                        {item}
+                                    </th>
+                                );
+                            } else if (item === "action") {
                                 return <th key={`${item}`}>{item}</th>;
                             }
 
@@ -99,7 +111,7 @@ export default function TabelAllData({ data, title, type }) {
                         })}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className=" divide-y divide-slate-200">
                     {data.map((row) => (
                         <tr key={row.id}>
                             {tableTitle.map((head, indexs) => {
@@ -110,37 +122,42 @@ export default function TabelAllData({ data, title, type }) {
                                 } else if (head === "action") {
                                     return (
                                         <td key={row["id"]}>
-                                            <ActionButtons
-                                                // id={row["id"]}
-                                                // type={type}
-                                                handleShowModal={() =>
-                                                    handleShowModal(
-                                                        row["id"],
-                                                        type
-                                                    )
-                                                }
-                                                handleDelete={() =>
-                                                    handleDelete(
-                                                        row["id"],
-                                                        type
-                                                    )
-                                                }
-                                                handleEdit={() =>
-                                                    handleEdit(row["id"], type)
-                                                }
-                                            />
+                                            <div className=" flex  justify-center content-start">
+                                                <ActionButtons
+                                                    // id={row["id"]}
+                                                    // type={type}
+                                                    handleShowModal={() =>
+                                                        handleShowModal(
+                                                            row["id"],
+                                                            type
+                                                        )
+                                                    }
+                                                    handleDelete={() =>
+                                                        handleDelete(
+                                                            row["id"],
+                                                            type
+                                                        )
+                                                    }
+                                                    handleEdit={() =>
+                                                        handleEdit(
+                                                            row["id"],
+                                                            type
+                                                        )
+                                                    }
+                                                />
+                                            </div>
                                         </td>
                                     );
                                 } else if (head === "updatedAt") {
                                     return (
                                         <td key={`${row[head]}updt`}>
-                                            {row[head]}
+                                            {formatDate(row[head])}
                                         </td>
                                     );
                                 } else if (head === "createdAt") {
                                     return (
                                         <td key={`${row[head]}crt`}>
-                                            {row[head]}
+                                            {formatDate(row[head])}
                                         </td>
                                     );
                                 } else if (

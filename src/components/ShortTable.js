@@ -26,7 +26,7 @@ import {
 
 export default function ShortTable({ data, title, detileLink, type }) {
     const dispatch = useDispatch();
-    const { showModal } = useSelector((state) => state.modal);
+
     const tableTitle = [
         ...new Set(data?.map((item) => Object.keys(item)).flat()),
     ];
@@ -73,35 +73,45 @@ export default function ShortTable({ data, title, detileLink, type }) {
     };
 
     return (
-        <>
-            <div className="overflow-x-auto">
-                <div>
-                    <h1 className="text-2xl font-bold mb-3">{title}</h1>
-                    <AddButton handleAddItem={handleAddItem} />
+        <div className="w-full p-6 bg-white border shadow-md border-gray-200 rounded-lg overflow-x-auto">
+            <div className="">
+                <div className="flex justify-start content-center pt-1 gap-4 mb-3">
+                    <h1 className="text-2xl font-bold ">{title}</h1>
+                    <div className="flex self-center">
+                        <AddButton handleAddItem={handleAddItem} type={type} />
+                    </div>
                 </div>
                 <table className="table table-compact w-full">
-                    <thead className="text-left">
-                        <tr>
+                    <thead>
+                        <tr className="lg:text-md text-sm">
                             {tableTitle?.map((item) => {
                                 if (item === "id") {
-                                    return <th key={item}>No</th>;
+                                    return (
+                                        <th key={item} className="text-left">
+                                            no
+                                        </th>
+                                    );
                                 } else if (item === "no") {
                                     return;
                                 } else if (
                                     item === "updatedAt" ||
                                     item === "createdAt" ||
                                     item === "title" ||
-                                    item === "name" ||
-                                    item === "action"
+                                    item === "name"
                                 ) {
+                                    return (
+                                        <th key={item} className="text-left">
+                                            {item}
+                                        </th>
+                                    );
+                                } else if (item === "action") {
                                     return <th key={`${item}`}>{item}</th>;
                                 }
-
                                 return;
                             })}
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="lg:text-md text-sm divide-y divide-slate-200">
                         {data.map((row) => (
                             <tr key={row.id}>
                                 {tableTitle.map((head, indexs) => {
@@ -114,28 +124,30 @@ export default function ShortTable({ data, title, detileLink, type }) {
                                     } else if (head === "action") {
                                         return (
                                             <td key={row["id"]}>
-                                                <ActionButtons
-                                                    // id={row["id"]}
-                                                    // type={type}
-                                                    handleShowModal={() =>
-                                                        handleShowModal(
-                                                            row["id"],
-                                                            type
-                                                        )
-                                                    }
-                                                    handleDelete={() =>
-                                                        handleDelete(
-                                                            row["id"],
-                                                            type
-                                                        )
-                                                    }
-                                                    handleEdit={() =>
-                                                        handleEdit(
-                                                            row["id"],
-                                                            type
-                                                        )
-                                                    }
-                                                />
+                                                <div className=" flex  justify-center content-start">
+                                                    <ActionButtons
+                                                        // id={row["id"]}
+                                                        // type={type}
+                                                        handleShowModal={() =>
+                                                            handleShowModal(
+                                                                row["id"],
+                                                                type
+                                                            )
+                                                        }
+                                                        handleDelete={() =>
+                                                            handleDelete(
+                                                                row["id"],
+                                                                type
+                                                            )
+                                                        }
+                                                        handleEdit={() =>
+                                                            handleEdit(
+                                                                row["id"],
+                                                                type
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
                                             </td>
                                         );
                                     } else if (head === "updatedAt") {
@@ -166,13 +178,15 @@ export default function ShortTable({ data, title, detileLink, type }) {
                         ))}
                     </tbody>
                 </table>
-                <div className="mt-2 mb-4">
-                    <Link href={detileLink} className="text-black">
+                <div className="mt-6">
+                    <Link
+                        href={detileLink}
+                        className="text-blue-400 font-medium underline"
+                    >
                         show more
                     </Link>
                 </div>
             </div>
-            {/* {showModal && <DetailModal />} */}
-        </>
+        </div>
     );
 }
