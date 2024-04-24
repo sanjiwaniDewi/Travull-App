@@ -4,6 +4,7 @@ import axios from "axios";
 
 const initialState = {
     imageUrl: "",
+    imageUrls: [],
 };
 
 export const uploadImage = createAsyncThunk(
@@ -21,7 +22,7 @@ export const uploadImage = createAsyncThunk(
             });
 
             const imageUrl = res?.data?.url;
-            console.log(res);
+            // console.log(res);
             console.log(imageUrl);
 
             return thunkAPI.dispatch({
@@ -39,16 +40,21 @@ const imageSlice = createSlice({
     initialState,
     reducers: {
         getImageUrl(state, action) {
-            if (state.imageUrl !== "" && typeof state.imageUrl === "string") {
-                state.imageUrl = [state.imageUrl, action.payload];
-            } else if (state.imageUrl !== "" && Array.isArray(state.imageUrl)) {
-                state.imageUrl = [...state.imageUrl, action.payload];
+            state.imageUrl = action.payload;
+        },
+
+        setimagesUrls(state, action) {
+            if (state.imageUrls.length > 0) {
+                state.imageUrls = [...state.imageUrls, action.payload];
+            } else if (state.imageUrls.includes(action.payload)) {
+                return;
             } else {
-                state.imageUrl = action.payload;
+                state.imageUrls = action.payload;
             }
         },
         deleteImageUrl(state) {
             state.imageUrl = "";
+            state.imageUrls = [];
         },
     },
     extraReducers: (builder) => {
