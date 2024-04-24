@@ -25,12 +25,12 @@ export default function UploadImage({ handleMultiple }) {
         <form
             onSubmit={handleUploadImage}
             encType="multipart/form-data"
-            className="flex flex-row justify-center gap-x-1 w-96"
+            className="flex flex-row justify-center gap-x-1 w-full"
         >
             <input
                 type="file"
                 name="image"
-                className="self-center bg-slate-200 col-span-2 w-full"
+                className="self-center bg-slate-200 col-span-2 w-full py-3 px-3 rounded-xl"
                 ref={imageUploadRef}
             />
             <div className="flex justify-start">

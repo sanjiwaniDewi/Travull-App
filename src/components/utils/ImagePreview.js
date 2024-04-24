@@ -9,9 +9,9 @@ export default function ImagePreview({ figureUrl }) {
     const dispatch = useDispatch();
 
     const handleshowFigure = () => {
+        //default value from update
         if (figureUrl) setNewImage(figureUrl);
     };
-    useEffect(() => {}, []);
 
     const handleFirstLoad = () => {
         if (imageUrl) {
@@ -20,7 +20,7 @@ export default function ImagePreview({ figureUrl }) {
     };
 
     useEffect(() => {
-        handleFirstLoad();
+        // handleFirstLoad();
         handleshowFigure();
     }, []);
 
@@ -34,7 +34,11 @@ export default function ImagePreview({ figureUrl }) {
 
     return (
         <div className="flex justify-center h-96 mb-3">
-            <img src={newImage} alt="avatar" className="" />
+            <img
+                src={newImage}
+                alt="image"
+                className="w-full object-cover rounded-3xl "
+            />
         </div>
     );
 }
