@@ -19,7 +19,7 @@ export default function CategoryCarousel({ data, length }) {
         fade: true,
     };
     return (
-        <div className="w-full h-100">
+        <div className=" h-100">
             {data && (
                 <Slider {...settings}>
                     {data.map((category, index) => (
