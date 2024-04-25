@@ -3,6 +3,8 @@ import authReducer from "@/redux/features/auth/authSlice";
 import imageReducer from "@/redux/features/upload/imageSlice";
 import modalReducer from "@/redux/features/modal/modalSlice";
 import userReducer from "@/redux/features/user/userSlice";
+import statusReducer from "@/redux/features/status/statusSilce";
+import dataReducer from "@/redux/features/data/dataSlice";
 export const makeStore = () => {
     return configureStore({
         devTools: true,
@@ -11,6 +13,8 @@ export const makeStore = () => {
             image: imageReducer,
             user: userReducer,
             modal: modalReducer,
+            status: statusReducer,
+            data: dataReducer,
         },
     });
 };
