@@ -13,6 +13,11 @@ export default function ImagePreview({ figureUrl }) {
         if (figureUrl) setNewImage(figureUrl);
     };
 
+    console.log(figureUrl);
+    useEffect(() => {
+        handleshowFigure();
+    }, [figureUrl]);
+
     const handleFirstLoad = () => {
         if (imageUrl) {
             dispatch(deleteImageUrl());
@@ -33,12 +38,20 @@ export default function ImagePreview({ figureUrl }) {
     }, [imageUrl]);
 
     return (
-        <div className="flex justify-center h-96 mb-3">
-            <img
-                src={newImage}
-                alt="image"
-                className="w-full object-cover rounded-3xl "
-            />
+        <div>
+            {figureUrl || imageUrl ? (
+                <div className="flex justify-center h-96 mb-3">
+                    <img
+                        src={newImage}
+                        alt="image"
+                        className="w-full object-cover rounded-3xl "
+                    />
+                </div>
+            ) : (
+                <div className="h-96 flex justify-center items-center content-center">
+                    <p className="text-lg font-bold text-slate-300">No Image</p>
+                </div>
+            )}
         </div>
     );
 }
