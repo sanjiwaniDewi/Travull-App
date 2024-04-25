@@ -49,7 +49,7 @@ const imageSlice = createSlice({
             } else if (state.imageUrls.includes(action.payload)) {
                 return;
             } else {
-                state.imageUrls = action.payload;
+                state.imageUrls = [action.payload];
             }
         },
         deleteImageUrl(state) {

@@ -2,11 +2,12 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { uploadImage } from "@/redux/features/upload/imageSlice";
+import { setImagesUrls, uploadImage } from "@/redux/features/upload/imageSlice";
 import ProfieImage from "../profile/ProfileImage";
 
 export default function UploadImage({ handleMultiple }) {
     const imageUploadRef = useRef();
+    const { imageUrl } = useSelector((store) => store.image);
 
     const dispatch = useDispatch();
 
@@ -15,11 +16,24 @@ export default function UploadImage({ handleMultiple }) {
         const uploadedImage = imageUploadRef.current.files[0];
         const formData = new FormData();
         formData.append("image", uploadedImage);
-        dispatch(uploadImage(formData));
+        try {
+            dispatch(uploadImage(formData));
+        } catch (err) {
+            console.log(err);
+        }
         if (handleMultiple) {
             handleMultiple();
         }
     };
+    // const handleMultileImage = () => {
+    //     if (imageUrl) {
+    //         dispatch(setImagesUrls(imageUrl));
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     handleMultileImage();
+    // }, [imageUrl]);
 
     return (
         <form
