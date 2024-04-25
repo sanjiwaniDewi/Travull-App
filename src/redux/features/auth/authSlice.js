@@ -5,6 +5,8 @@ import axios from "axios";
 import { BloomFilter } from "next/dist/shared/lib/bloom-filter";
 const initialState = {
     isLogin: false,
+    isLoading: false,
+    errMessage: "",
 };
 
 export const login = createAsyncThunk(
@@ -67,12 +69,26 @@ const authSlice = createSlice({
         loginStatus(state, action) {
             state.isLogin = action.payload;
         },
+        setErrMessage(state, action) {
+            state.errMessage = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(login.fulfilled, (state, action) => {
             state.isLogin = true;
         });
-        builder.addCase(register.fulfilled, (state, action) => {});
+        builder.addCase(register.fulfilled, (state, action) => {
+            state.isLoading = false;
+        });
+        builder.addCase(register.pending, (state, action) => {
+            state.isLoading = true;
+        });
+        builder.addCase(register.rejected, (state, action) => {
+            state.isLoading = false;
+            state.errMessage = action.payload.response.data.errors.map(
+                (item) => item.message
+            );
+        });
         builder.addCase(logout.fulfilled, (state, action) => {
             localStorage.removeItem("access_token");
             state.isLogin = false;
@@ -80,6 +96,6 @@ const authSlice = createSlice({
     },
 });
 
-export const { loginStatus } = authSlice.actions;
+export const { loginStatus, setErrMessage } = authSlice.actions;
 
 export default authSlice.reducer;
