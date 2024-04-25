@@ -16,6 +16,7 @@ import { handleCreateRoute } from "@/utils/handleActionButton";
 import {
     changeEditStatus,
     changeDeleteSatus,
+    changeCreateSatus,
 } from "@/redux/features/status/statusSilce";
 import { changeModalStatus } from "@/redux/features/modal/modalSlice";
 import {
@@ -23,13 +24,16 @@ import {
     handleUpdateRoute,
 } from "@/utils/handleActionButton";
 import { formatDate } from "@/utils/handleFormatData";
+import { deleteItem } from "@/redux/features/data/dataSlice";
 
 export default function TabelAllData({ data, title, type }) {
     const dispatch = useDispatch();
     const { showModal } = useSelector((state) => state.modal);
+    console.log("ini", data);
     const tableTitle = [
-        ...new Set(data?.map((item) => Object.keys(item)).flat()),
+        ...new Set(data?.map((item) => Object?.keys(item)).flat()),
     ];
+
     const router = useRouter();
 
     if (tableTitle.length !== 0) {
@@ -52,6 +56,7 @@ export default function TabelAllData({ data, title, type }) {
     };
 
     const handleAddItem = () => {
+        dispatch(changeCreateSatus());
         router.push(handleCreateRoute(type));
     };
 
@@ -64,6 +69,7 @@ export default function TabelAllData({ data, title, type }) {
     };
     const handleDelete = (id, type) => {
         handleDeleteItem(id, type);
+        dispatch(deleteItem(id));
         dispatch(changeDeleteSatus());
     };
 
@@ -112,11 +118,11 @@ export default function TabelAllData({ data, title, type }) {
                     </tr>
                 </thead>
                 <tbody className=" divide-y divide-slate-200">
-                    {data.map((row) => (
+                    {data.map((row, index) => (
                         <tr key={row.id}>
                             {tableTitle.map((head, indexs) => {
                                 if (head === "id") {
-                                    return <td key={row["no"]}>{row["no"]}</td>;
+                                    return <td key={index}>{index + 1}</td>;
                                 } else if (head === "no") {
                                     return;
                                 } else if (head === "action") {
