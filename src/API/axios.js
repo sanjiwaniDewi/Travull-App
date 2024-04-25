@@ -1,6 +1,6 @@
 import { BASE_API, API_KEY } from "./api";
 
-export default function apiInstance() {
+export function apiInstance() {
     const token = localStorage.getItem("access_token");
     const headers = {
         apiKey: API_KEY,
@@ -13,4 +13,14 @@ export default function apiInstance() {
             headers,
         };
     }
+}
+
+export function apiInstanceWithoutToken() {
+    const headers = {
+        apiKey: API_KEY,
+    };
+
+    return {
+        headers,
+    };
 }

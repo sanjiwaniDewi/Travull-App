@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { BASE_API, API_KEY } from "./api";
-import apiInstance from "./axios";
+import { apiInstance, apiInstanceWithoutToken } from "./axios";
 
 export async function createBannerAPI(payload) {
     const { token, headers } = apiInstance();
@@ -24,18 +24,17 @@ export async function deleteBannerAPI(id) {
 }
 
 export async function getAllBannerAPI() {
-    const { token, headers } = apiInstance();
-    if (token) {
-        const res = await axios.get(`${BASE_API}/banners`, {
-            headers: headers,
-        });
+    const { headers } = apiInstanceWithoutToken();
 
-        return res.data.data;
-    }
+    const res = await axios.get(`${BASE_API}/banners`, {
+        headers: headers,
+    });
+
+    return res.data.data;
 }
 
 export async function getBannerByIdAPI(id) {
-    const { token, headers } = apiInstance();
+    const { token, headers } = apiInstanceWithoutToken();
     if (token) {
         const res = await axios.get(`${BASE_API}/banner/${id}`, {
             headers: headers,

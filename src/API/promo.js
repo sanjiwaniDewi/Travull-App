@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { BASE_API, API_KEY } from "./api";
-import apiInstance from "./axios";
+import { apiInstance, apiInstanceWithoutToken } from "./axios";
 
 export async function deletePromoAPI(id) {
     const { token, headers } = apiInstance();
@@ -15,14 +15,13 @@ export async function deletePromoAPI(id) {
 }
 
 export async function getAllPromoAPI() {
-    const { token, headers } = apiInstance();
-    if (token) {
-        const res = await axios.get(`${BASE_API}/promos`, {
-            headers: headers,
-        });
+    const { headers } = apiInstanceWithoutToken();
 
-        return res.data.data;
-    }
+    const res = await axios.get(`${BASE_API}/promos`, {
+        headers: headers,
+    });
+
+    return res.data.data;
 }
 
 export async function createPromoAPI(payload) {
@@ -52,12 +51,11 @@ export async function updatePromoAPI(id, payload) {
 }
 
 export async function getPromoByIdAPI(id) {
-    const { token, headers } = apiInstance();
-    if (token) {
-        const res = await axios.get(`${BASE_API}/promo/${id}`, {
-            headers: headers,
-        });
-        console.log(res.data);
-        return res.data.data;
-    }
+    const { headers } = apiInstanceWithoutToken();
+
+    const res = await axios.get(`${BASE_API}/promo/${id}`, {
+        headers: headers,
+    });
+    console.log(res.data);
+    return res.data.data;
 }

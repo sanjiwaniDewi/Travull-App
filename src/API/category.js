@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { BASE_API } from "./api";
-import apiInstance from "./axios";
+import { apiInstance, apiInstanceWithoutToken } from "./axios";
 
 export async function createCategoryAPI(payload) {
     const { token, headers } = apiInstance();
@@ -24,24 +24,22 @@ export async function deleteCategoryAPI(id) {
 }
 
 export async function getAllCategoryAPI() {
-    const { token, headers } = apiInstance();
-    if (token) {
-        const res = await axios.get(`${BASE_API}/categories`, {
-            headers: headers,
-        });
+    const { headers } = apiInstanceWithoutToken();
 
-        return res.data.data;
-    }
+    const res = await axios.get(`${BASE_API}/categories`, {
+        headers: headers,
+    });
+
+    return res.data.data;
 }
 
 export async function getCategoryByIdAPI(id) {
-    const { token, headers } = apiInstance();
-    if (token) {
-        const res = await axios.get(`${BASE_API}/category/${id}`, {
-            headers: headers,
-        });
-        return res.data.data;
-    }
+    const { headers } = apiInstanceWithoutToken();
+
+    const res = await axios.get(`${BASE_API}/category/${id}`, {
+        headers: headers,
+    });
+    return res.data.data;
 }
 
 export async function updateCategoryAPI(id, payload) {
