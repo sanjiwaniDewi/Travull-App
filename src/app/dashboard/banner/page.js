@@ -8,6 +8,7 @@ import {
     changeEditStatus,
 } from "@/redux/features/status/statusSilce";
 import { useEffect, useState } from "react";
+import { getBanners, setData } from "@/redux/features/data/dataSlice";
 
 export default function BannersPage() {
     const [bannerData, setBannerData] = useState();
@@ -15,16 +16,11 @@ export default function BannersPage() {
     const { isDelete, isUpdate, isCreate } = useSelector(
         (state) => state.status
     );
+    const { data: dataBanner } = useSelector((state) => state.data);
     const dispatch = useDispatch();
     const handleShowAllData = async () => {
         const res = await getAllBennerData();
-        const newBannerData = res?.map((item, index) => {
-            return {
-                ...item,
-                no: index + 1,
-            };
-        });
-        setBannerData(newBannerData);
+        dispatch(setData(res));
     };
 
     useEffect(() => {
@@ -33,13 +29,16 @@ export default function BannersPage() {
 
     const handleOnDataChange = () => {
         if (isDelete) {
-            handleShowAllData();
+            // handleShowAllData();
+            // setBannerData(dataBanner);
             dispatch(changeDeleteSatus());
         } else if (isCreate) {
-            handleShowAllData();
+            console.log("masuk create");
+            // handleShowAllData();
             dispatch(changeCreateSatus());
         } else if (isUpdate) {
-            handleShowAllData();
+            console.log("masuk update");
+            // handleShowAllData();
             dispatch(changeEditStatus());
         }
     };
@@ -49,10 +48,10 @@ export default function BannersPage() {
     }, [isDelete, isCreate, isUpdate]);
 
     return (
-        <div className="w-full pt-16">
-            {bannerData && (
+        <div className="w-full pt-16 px-10">
+            {dataBanner && (
                 <TabelAllData
-                    data={bannerData}
+                    data={dataBanner}
                     title="Tabel Banner"
                     type="banner"
                 />

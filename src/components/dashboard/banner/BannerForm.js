@@ -15,6 +15,7 @@ import {
 } from "@/redux/features/status/statusSilce";
 import ImageBtnOption from "@/components/utils/ImageBtnOption";
 import { useEffect, useState } from "react";
+import { updateItem } from "@/redux/features/data/dataSlice";
 
 export default function BannerForm({ bannerData }) {
     const [isHaveImageUrl, setIsHaveImageUrl] = useState(false);
@@ -28,10 +29,12 @@ export default function BannerForm({ bannerData }) {
     const router = useRouter();
 
     const handleHaveImageUrl = () => {
+        dispatch(deleteImageUrl());
         setIsHaveImageUrl(true);
         setIsUploadImage(false);
     };
     const handleUploadImage = () => {
+        dispatch(deleteImageUrl());
         setIsUploadImage(true);
         setIsHaveImageUrl(false);
     };
@@ -40,22 +43,30 @@ export default function BannerForm({ bannerData }) {
         const formData = new FormData(e.currentTarget);
         const name = formData.get("name");
         const urlImage = formData.get("imageUrl");
+        const newImageUrl = imageUrl ? imageUrl : urlImage;
 
         if (bannerData) {
-            const imageUpdate = imageUrl ? imageUrl : urlImage;
-            dispatch(getImageUrl(imageUpdate));
+            dispatch(getImageUrl(newImageUrl));
+
+            const imageUrlPayload = newImageUrl
+                ? newImageUrl
+                : bannerData.imageUrl;
+
             updateBanner(bannerData.id, {
                 name,
-                imageUrl: imageUpdate,
+                imageUrl: imageUrlPayload,
             });
+            dispatch(updateItem(bannerData));
 
             dispatch(changeEditStatus());
             // router.back();
         } else {
-            createBanner({ name, imageUrl });
+            dispatch(getImageUrl(newImageUrl));
+            createBanner({ name, imageUrl: newImageUrl });
             dispatch(changeCreateSatus());
             // router.back();
         }
+
         // dispatch(deleteImageUrl());
         // router.push("/dashboard");
     };
@@ -63,17 +74,7 @@ export default function BannerForm({ bannerData }) {
     return (
         <div className="w-full container mx-auto flex flex-col py-16  items-center ">
             <div className=" w-3/4 mb-4 rounded-lg">
-                {bannerData?.imageUrl || imageUrl?.length !== 0 ? (
-                    <ImagePreview
-                        figureUrl={bannerData ? bannerData?.imageUrl : imageUrl}
-                    />
-                ) : (
-                    <div className="h-96 flex justify-center items-center content-center">
-                        <p className="text-lg font-bold text-slate-300">
-                            No Image
-                        </p>
-                    </div>
-                )}
+                <ImagePreview figureUrl={bannerData?.imageUrl} />
             </div>
             <div className=" lg:w-1/3 w-3/4 p-6 bg-white border shadow-md border-gray-200 rounded-xl">
                 <div className="flex flex-col justify-center items-center gap-y-4">
