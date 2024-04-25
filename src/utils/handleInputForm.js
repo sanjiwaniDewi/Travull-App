@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export function handlePromoForm(formData, figureUrl, isHaveImageUrl) {
     let imageUrl = figureUrl;
     const title = formData.get("title");
@@ -72,4 +74,28 @@ export function handleActivityForm(formData, figureUrl, isHaveImageUrl) {
             location_maps: locationMaps,
         };
     }
+}
+
+export function handleRegistationForm(formData, image) {
+    // const [error, setError] = useState("");
+
+    const name = formData.get("name");
+    const phoneNumber = formData.get("phoneNumber");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const passwordRepeat = formData.get("passwordRepeat");
+    const role = formData.get("role");
+
+    if (password !== passwordRepeat) {
+    }
+
+    return {
+        name,
+        email,
+        password,
+        passwordRepeat,
+        profilePictureUrl: image,
+        phoneNumber,
+        role,
+    };
 }
