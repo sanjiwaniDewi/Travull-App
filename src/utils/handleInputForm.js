@@ -1,9 +1,9 @@
-export function handlePromoForm(formData, figureUrl) {
+export function handlePromoForm(formData, figureUrl, isHaveImageUrl) {
     let imageUrl = figureUrl;
     const title = formData.get("title");
     const description = formData.get("description");
 
-    if (!figureUrl) {
+    if (!figureUrl || isHaveImageUrl) {
         imageUrl = formData.get("imageUrl");
     }
 
@@ -35,7 +35,7 @@ export function handleCategoryForm(formData, figureUrl) {
     };
 }
 
-export function handleActivityForm(formData, figureUrl) {
+export function handleActivityForm(formData, figureUrl, isHaveImageUrl) {
     let imageUrls = figureUrl;
     const title = formData.get("title");
     const description = formData.get("description");
@@ -51,7 +51,7 @@ export function handleActivityForm(formData, figureUrl) {
     const city = formData.get("city");
     const province = formData.get("province");
     const locationMaps = formData.get("locationMaps");
-    if (!figureUrl) {
+    if (!figureUrl || isHaveImageUrl) {
         const url = formData.get("imageUrl");
         imageUrls = url?.split(",");
     }
