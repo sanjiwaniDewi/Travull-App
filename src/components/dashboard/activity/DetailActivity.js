@@ -6,6 +6,7 @@ import { formatDate } from "@/utils/handleFormatData";
 import parse from "html-react-parser";
 import { setModalData, setModalType } from "@/redux/features/modal/modalSlice";
 import { useGetDataById } from "@/hooks/useGet";
+import ImagePreview from "@/components/utils/ImagePreview";
 
 export default function DetailActivity() {
     const { modalData } = useSelector((state) => state.modal);
@@ -20,11 +21,24 @@ export default function DetailActivity() {
         dispatch(setModalData(dataCategory));
         dispatch(setModalType("category"));
     };
+    console.log("iniii ", modalData.imageUrls.join(""));
 
     return (
-        <div className="flex gap-4 ">
+        <div className="flex gap-4 w-1/2 ">
             <div>
-                <ImageCarousel images={modalData.imageUrls} height="h-40" />
+                <div className="w-96">
+                    {modalData.imageUrls.length === 1 ? (
+                        <ImagePreview
+                            figureUrl={modalData.imageUrls.join("")}
+                        />
+                    ) : (
+                        <ImageCarousel
+                            images={modalData.imageUrls}
+                            height="h-96"
+                        />
+                    )}
+                </div>
+
                 <div className="text-2xl font-bold mb-3 flex gap-3 mt-8">
                     <h1>{modalData.title}</h1>
                     <button

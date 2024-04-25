@@ -6,13 +6,15 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default function ImageCarousel({ images, height }) {
     const settings = {
-        // dots: true,
+        dots: true,
         // infinite: true,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
     };
+
+    console.log("adaaa", images);
 
     return (
         <div className="w-full">
@@ -22,7 +24,7 @@ export default function ImageCarousel({ images, height }) {
                         <img
                             key={index}
                             src={image}
-                            className={`w-full ${height} object-cover rounded-t-2xl`}
+                            className={`w-full ${height} object-cover rounded-2xl`}
                             alt="activity image"
                         />
                     ))}
