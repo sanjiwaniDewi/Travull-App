@@ -13,9 +13,7 @@ import { handleLoginForm } from "@/utils/handleInputForm";
 export default function LoginForm() {
     const dispatch = useDispatch();
 
-    const { isLogin, isLoading, errMessage } = useSelector(
-        (store) => store.auth
-    );
+    const { isLoading, errMessage } = useSelector((store) => store.auth);
 
     const router = useRouter();
 

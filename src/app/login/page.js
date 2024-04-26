@@ -2,7 +2,10 @@
 
 import LoginForm from "@/components/auth/login/LoginForm";
 import Toast from "@/components/utils/Toast";
-import { loginStatus } from "@/redux/features/auth/authSlice";
+import {
+    loginStatus,
+    successLoginStatus,
+} from "@/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,15 +13,15 @@ import { BsPatchCheck } from "react-icons/bs";
 import Modal from "@/components/utils/Modal";
 
 export default function LoginPage() {
-    const { isLogin } = useSelector((state) => state.auth);
+    const { isSuccessLogin } = useSelector((state) => state.auth);
 
     const dispatch = useDispatch();
     const router = useRouter();
 
-    const handleIsRegister = () => {
-        if (isLogin) {
+    const handleIsLogin = () => {
+        if (isSuccessLogin) {
             setTimeout(() => {
-                dispatch(loginStatus(false));
+                dispatch(successLoginStatus(false));
             }, 2000);
             setTimeout(() => {
                 router.push("/");
@@ -26,8 +29,8 @@ export default function LoginPage() {
         }
     };
     useEffect(() => {
-        handleIsRegister();
-    }, [isLogin]);
+        handleIsLogin();
+    }, [isSuccessLogin]);
 
     return (
         <div className="relative container mx-auto w-full h-screen flex flex-col justify-center items-center content-center ">
@@ -35,7 +38,7 @@ export default function LoginPage() {
                 <LoginForm />
             </div>
 
-            {isLogin && (
+            {isSuccessLogin && (
                 <Modal>
                     <div className="w-96 h-40 rounded-3xl flex flex-col justify-center items-center text-center">
                         <p className="text-3xl font-bold mb-4">Login Sukses</p>
