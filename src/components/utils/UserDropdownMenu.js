@@ -1,9 +1,13 @@
+"use client";
 import { useState } from "react";
 import Link from "next/link";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "../layout/LogoutButton";
+import { useSelector } from "react-redux";
 
 export default function DropdownMenu({ dataUser, handleLogout }) {
     const [showDropdown, setShowDropdown] = useState(false);
+
+    const { role } = useSelector((store) => store.user);
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
@@ -45,14 +49,16 @@ export default function DropdownMenu({ dataUser, handleLogout }) {
                             Profile
                         </Link>
                     </li>
-                    <li>
-                        <Link
-                            href="/dashboard"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                            Dashboard
-                        </Link>
-                    </li>
+                    {role === "admin" && (
+                        <li>
+                            <Link
+                                href="/dashboard"
+                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            >
+                                Dashboard
+                            </Link>
+                        </li>
+                    )}
                 </ul>
                 <div className="py-2">
                     <LogoutButton
