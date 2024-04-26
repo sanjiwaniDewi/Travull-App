@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import LogoutButton from "../utils/LogoutButton";
+import LogoutButton from "@/components/layout/LogoutButton";
 import { loginStatus } from "@/redux/features/auth/authSlice";
 import { fatchUserLogged } from "@/redux/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
