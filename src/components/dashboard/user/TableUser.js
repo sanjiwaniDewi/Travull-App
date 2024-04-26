@@ -11,7 +11,7 @@ export default function TableUser({ data, currentPage }) {
     }
 
     return (
-        <table className="w-full overflow-x-visible table table-compact">
+        <table className="w-full overflow-x-visible table table-compact text-md">
             <thead>
                 <tr>
                     {tableTitle?.map((item) => {

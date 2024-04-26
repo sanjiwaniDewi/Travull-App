@@ -86,9 +86,9 @@ export default function TabelAllData({ data, title, type }) {
                     <AddButton handleAddItem={handleAddItem} type={type} />
                 </div>
             </div>
-            <table className="table table-compact w-full overflow-x-auto">
+            <table className="table text-lg table-compact w-full overflow-x-auto">
                 <thead>
-                    <tr>
+                    <tr className="text-md">
                         {tableTitle?.map((item) => {
                             if (item === "id") {
                                 return (
@@ -119,7 +119,7 @@ export default function TabelAllData({ data, title, type }) {
                 </thead>
                 <tbody className=" divide-y divide-slate-200">
                     {data.map((row, index) => (
-                        <tr key={row.id}>
+                        <tr key={row.id} className=" text-md">
                             {tableTitle.map((head, indexs) => {
                                 if (head === "id") {
                                     return <td key={index}>{index + 1}</td>;
@@ -127,7 +127,7 @@ export default function TabelAllData({ data, title, type }) {
                                     return;
                                 } else if (head === "action") {
                                     return (
-                                        <td key={row["id"]}>
+                                        <td key={row["id"]} className="py-2">
                                             <div className=" flex  justify-center content-start">
                                                 <ActionButtons
                                                     // id={row["id"]}

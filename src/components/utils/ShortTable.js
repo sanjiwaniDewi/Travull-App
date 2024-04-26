@@ -83,7 +83,7 @@ export default function ShortTable({ data, title, detileLink, type }) {
                 </div>
                 <table className="table table-compact w-full">
                     <thead>
-                        <tr className="lg:text-md text-sm">
+                        <tr className="text-md ">
                             {tableTitle?.map((item) => {
                                 if (item === "id") {
                                     return (
@@ -111,7 +111,7 @@ export default function ShortTable({ data, title, detileLink, type }) {
                             })}
                         </tr>
                     </thead>
-                    <tbody className="lg:text-md text-sm divide-y divide-slate-200">
+                    <tbody className=" text-md divide-y divide-slate-200">
                         {data.map((row) => (
                             <tr key={row.id}>
                                 {tableTitle.map((head, indexs) => {

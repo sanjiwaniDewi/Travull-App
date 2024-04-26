@@ -13,7 +13,7 @@ export default function ShortTableUser({ data }) {
             <h1 className="text-2xl font-bold mb-3">Kelola User</h1>
             <table className="table table-compact w-full ">
                 <thead>
-                    <tr className="lg:text-md text-sm">
+                    <tr className="lg:text-md text-md">
                         {tableTitle?.map((item) => {
                             if (item === "id") {
                                 return (
@@ -38,7 +38,7 @@ export default function ShortTableUser({ data }) {
                         })}
                     </tr>
                 </thead>
-                <tbody className="lg:text-md text-sm divide-y divide-slate-200">
+                <tbody className="lg:text-md text-md divide-y divide-slate-200">
                     {data?.map((item, index) => {
                         return (
                             <tr key={index} className="">
