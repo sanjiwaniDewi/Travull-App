@@ -9,10 +9,12 @@ export default function LogoutButton({ isDashboard, styleButon }) {
     const router = useRouter();
     const handleLogout = () => {
         dispatch(logout());
-        console.log(isDashboard);
+
         if (isDashboard) {
             router.push("/");
         }
+
+        router.push("/");
     };
     return (
         <button className={styleButon} onClick={handleLogout}>
