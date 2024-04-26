@@ -114,3 +114,33 @@ export function handleRegistationForm(formData, image) {
         customError,
     };
 }
+
+export function handleLoginForm(formData) {
+    let customError = "";
+    const email = formData.get("email");
+    const password = formData.get("password");
+    if (!email && !password) {
+        return {
+            customError: "Please fill all the input",
+        };
+    }
+    if (!email) {
+        return {
+            customError: "Please fill email",
+        };
+    }
+    if (!password) {
+        return {
+            customError: "Please fill password",
+        };
+    }
+
+    const payload = {
+        email,
+        password,
+    };
+
+    return {
+        payload,
+    };
+}
