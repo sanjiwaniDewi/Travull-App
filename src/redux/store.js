@@ -5,6 +5,7 @@ import modalReducer from "@/redux/features/modal/modalSlice";
 import userReducer from "@/redux/features/user/userSlice";
 import statusReducer from "@/redux/features/status/statusSilce";
 import dataReducer from "@/redux/features/data/dataSlice";
+import roleReducer from "@/redux/features/role/roleSlice";
 export const makeStore = () => {
     return configureStore({
         devTools: true,
@@ -15,6 +16,7 @@ export const makeStore = () => {
             modal: modalReducer,
             status: statusReducer,
             data: dataReducer,
+            role: roleReducer,
         },
     });
 };

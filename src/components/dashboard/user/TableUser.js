@@ -1,7 +1,7 @@
 import ChangeRole from "../../utils/ChangeRole";
 import Image from "next/image";
 
-export default function TableUser({ data }) {
+export default function TableUser({ data, currentPage }) {
     const tableTitle = [
         ...new Set(data?.map((item) => Object.keys(item)).flat()),
     ];
@@ -41,7 +41,11 @@ export default function TableUser({ data }) {
                         <tr>
                             {tableTitle.map((head, indexs) => {
                                 if (head === "id") {
-                                    return <td>{index + 1}</td>;
+                                    return (
+                                        <td>
+                                            {index + 1 + (currentPage - 1) * 12}
+                                        </td>
+                                    );
                                 } else if (head === "profilePictureUrl") {
                                     return;
                                 } else if (indexs === 1) {

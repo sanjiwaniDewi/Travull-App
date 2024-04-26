@@ -1,10 +1,25 @@
+"use client";
 import { useState } from "react";
 import RoleModal from "../dashboard/user/RoleModal";
+import { useDispatch, useSelector } from "react-redux";
+import { setCangeRoleDataUser } from "@/redux/features/role/roleSlice";
+import {
+    changeModalStatus,
+    setModalData,
+    setModalType,
+} from "@/redux/features/modal/modalSlice";
 
 export default function ChangeRole({ userData }) {
-    const [showModal, SetShowModal] = useState(false);
+    // const [showModal, SetShowModal] = useState(false);
+    const dispatch = useDispatch();
+    // const userData = useSelector((state) => state.role);
+
     function handleShowModal() {
-        SetShowModal(!showModal);
+        dispatch(setCangeRoleDataUser(userData));
+        dispatch(changeModalStatus());
+        // dispatch(setModalData({ ...userData }));
+        dispatch(setModalType("changeRole"));
+        // SetShowModal(!showModal);
     }
 
     return (
@@ -15,14 +30,6 @@ export default function ChangeRole({ userData }) {
             >
                 Change Role
             </button>
-
-            {showModal && (
-                <RoleModal
-                    showModal={showModal}
-                    handleShowModal={handleShowModal}
-                    userData={userData}
-                />
-            )}
         </div>
     );
 }

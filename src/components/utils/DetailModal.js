@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import DetailPromo from "../dashboard/promo/DetailPromo";
 import DetailCategory from "../dashboard/category/DetailCategory";
 import DetailActivity from "../dashboard/activity/DetailActivity";
+import RoleModal from "../dashboard/user/RoleModal";
 
 export default function DetailModal() {
     const { type } = useSelector((state) => state.modal);
@@ -18,6 +19,7 @@ export default function DetailModal() {
             {type === "promo" && <DetailPromo />}
             {type === "category" && <DetailCategory />}
             {type === "activity" && <DetailActivity />}
+            {type === "changeRole" && <RoleModal />}
         </Modal>
     );
 }

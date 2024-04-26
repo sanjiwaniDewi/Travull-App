@@ -1,6 +1,13 @@
+import { API_KEY, BASE_API } from "@/API/api";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
 const initialState = {
     id: "",
+    name: "",
     role: "",
+    profilePictureUrl: "",
+    showUsers: [],
 };
 
 export const updateRoleUser = createAsyncThunk(
@@ -22,6 +29,11 @@ export const updateRoleUser = createAsyncThunk(
                         },
                     }
                 );
+
+                return dispatch({
+                    type: "role/setNewRole",
+                    payload: payload.role,
+                });
             }
         } catch (err) {
             return rejectWithValue(err);
@@ -32,8 +44,46 @@ export const updateRoleUser = createAsyncThunk(
 const roleSlice = createSlice({
     name: "role",
     initialState,
-    reducers: {},
+    reducers: {
+        setCangeRoleDataUser: (state, action) => {
+            state.role = action.payload.role;
+            state.id = action.payload.id;
+            state.name = action.payload.name;
+            state.profilePictureUrl = action.payload.profilePictureUrl;
+        },
+        setNewRole: (state, action) => {
+            state.role = action.payload;
+            const user = state.showUsers.filter((user) => {
+                return user.id === state.id;
+            })[0];
+            const updatedUser = {
+                ...user,
+                role: state.role,
+            };
+
+            state.showUsers = [
+                ...state.showUsers.filter((user) => {
+                    return user.id !== state.id;
+                }),
+                updatedUser,
+            ];
+        },
+        setShowUsers: (state, action) => {
+            state.showUsers = action.payload;
+        },
+        clearRoleUserData: (state, action) => {
+            state.id = "";
+            state.name = "";
+            state.role = "";
+            state.profilePictureUrl = "";
+        },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(updateRoleUser.fulfilled, (state, action) => {});
+        builder.addCase(updateRoleUser.rejected, (state, action) => {});
+    },
 });
 
-// export const { getLoggedUser, updateUserRole } = roleSlice.actions;
+export const { setCangeRoleDataUser, setShowUsers, clearRoleUserData } =
+    roleSlice.actions;
 export default roleSlice.reducer;
