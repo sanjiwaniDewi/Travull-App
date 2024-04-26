@@ -141,7 +141,9 @@ const userSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(fatchUserLogged.fulfilled, (state, action) => {});
+        builder.addCase(fatchUserLogged.fulfilled, (state, action) => {
+            localStorage.setItem("role", state.role);
+        });
         builder.addCase(updateUser.fulfilled, (state, action) => {});
         builder.addCase(updateRoleUser.fulfilled, (state, action) => {
             if (state.id === action.payload.id) {
