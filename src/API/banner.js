@@ -34,13 +34,13 @@ export async function getAllBannerAPI() {
 }
 
 export async function getBannerByIdAPI(id) {
-    const { token, headers } = apiInstanceWithoutToken();
-    if (token) {
-        const res = await axios.get(`${BASE_API}/banner/${id}`, {
-            headers: headers,
-        });
-        return res.data.data;
-    }
+    const { headers } = apiInstanceWithoutToken();
+
+    const res = await axios.get(`${BASE_API}/banner/${id}`, {
+        headers: headers,
+    });
+    console.log("ini dataanya ada?", res.data.data);
+    return res.data.data;
 }
 
 export async function updateBannerAPI(id, payload) {
