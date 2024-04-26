@@ -2,8 +2,9 @@
 import { logout } from "@/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
+import { MdLogout } from "react-icons/md";
 
-export default function LogoutButton({ isDashboard, styleButon }) {
+export default function LogoutButton({ isDashboard, styleButon, isSideClose }) {
     const dispatch = useDispatch();
 
     const router = useRouter();
@@ -18,7 +19,7 @@ export default function LogoutButton({ isDashboard, styleButon }) {
     };
     return (
         <button className={styleButon} onClick={handleLogout}>
-            Logout
+            {isSideClose ? <MdLogout /> : "Logout"}
         </button>
     );
 }
