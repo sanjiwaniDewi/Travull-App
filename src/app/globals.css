@@ -77,3 +77,29 @@ th {
 td {
     padding-top: 4px;
 }
+
+.navDashbord {
+    display: none !important;
+    @media (max-width: 800px) {
+        display: block !important;
+    }
+}
+.sidebarShow {
+    display: none !important;
+    @media (min-width: 800px) {
+        display: flex !important;
+    }
+}
+
+.smallSizeNavbar {
+    display: none !important;
+    @media (max-width: 800px) {
+        display: block !important;
+    }
+}
+.expanNav {
+    display: none !important;
+    @media (min-width: 800px) {
+        display: flex !important;
+    }
+}
