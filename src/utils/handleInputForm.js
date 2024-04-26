@@ -77,7 +77,8 @@ export function handleActivityForm(formData, figureUrl, isHaveImageUrl) {
 }
 
 export function handleRegistationForm(formData, image) {
-    // const [error, setError] = useState("");
+    // const [customError, setCustomError] = useState("");
+    let customError = "";
 
     const name = formData.get("name");
     const phoneNumber = formData.get("phoneNumber");
@@ -87,9 +88,18 @@ export function handleRegistationForm(formData, image) {
     const role = formData.get("role");
 
     if (password !== passwordRepeat) {
+        customError = "Password not match";
+        return {
+            customError,
+        };
     }
-
-    return {
+    if (!name || !phoneNumber || !email || !password || !passwordRepeat) {
+        customError = "Please fill all the input";
+        return {
+            customError,
+        };
+    }
+    const payload = {
         name,
         email,
         password,
@@ -97,5 +107,10 @@ export function handleRegistationForm(formData, image) {
         profilePictureUrl: image,
         phoneNumber,
         role,
+    };
+
+    return {
+        payload,
+        customError,
     };
 }

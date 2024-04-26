@@ -1,10 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
 import Image from "next/image";
-import { register, setErrMessage } from "@/redux/features/auth/authSlice";
+import {
+    register,
+    registerStatus,
+    setErrMessage,
+} from "@/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
 import Card from "../../layout/Card";
 import Link from "next/link";
@@ -12,23 +16,32 @@ import { handleRegistationForm } from "@/utils/handleInputForm";
 
 export default function RegisterForm() {
     const [image, setImage] = useState("/Avatar-Image.png");
-    const { errMessage } = useSelector((state) => state.auth);
+    // const [successRegister, setSuccesRegister] = useState(false);
+    const { errMessage, isLoading, isRegister } = useSelector(
+        (state) => state.auth
+    );
     const dispatch = useDispatch();
 
     const router = useRouter();
+
     const handleSubmitForm = (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
 
         try {
-            const payload = handleRegistationForm(formData, image);
+            const { customError, payload } = handleRegistationForm(
+                formData,
+                image
+            );
 
-            if (errMessage.length === 0 || payload) {
-                dispatch(register(payload));
+            if (customError) {
+                dispatch(setErrMessage(customError));
             }
 
-            // router.push("/login");
+            if (errMessage.length === 0 && !customError && payload) {
+                dispatch(register(payload));
+            }
         } catch (err) {
             console.log(err);
         }
@@ -45,7 +58,6 @@ export default function RegisterForm() {
             <h1 className="text-3xl font-bold text-center mb-6">Register</h1>
             <div className="flex justify-center">
                 <p className="text-sm w-96 text-center text-red-600  ">
-                    {" "}
                     {Array.isArray(errMessage)
                         ? errMessage.join(" ")
                         : errMessage}
@@ -57,14 +69,14 @@ export default function RegisterForm() {
                 className="flex flex-col  gap-y-1 text-black "
                 onChange={handleChange}
             >
-                <label className="text-sm">Name</label>
+                <label className="text-sm">Nama</label>
                 <input
                     type="text"
                     name="name"
                     placeholder="Nama"
                     className="bg-slate-100 px-3 py-3 rounded-xl focus:outline-none"
                 />
-                <label className="text-sm ">Phone Number</label>
+                <label className="text-sm ">Nomor Handphone</label>
                 <input
                     type="text"
                     name="phoneNumber"
@@ -111,9 +123,19 @@ export default function RegisterForm() {
                 </select>
                 <button
                     type="submit"
-                    className="text-slate-50 mt-4 px-2 py-3 rounded-xl font-bold bg-slate-500"
+                    className="text-slate-50 mt-4 px-2 py-3 rounded-xl font-bold bg-slate-500 disabled:bg-slate-200 disabled:text-slate-400"
+                    disabled={errMessage.length || isLoading}
                 >
-                    Register
+                    {isLoading ? (
+                        <div
+                            className="spinner-border text-secondary"
+                            role="status"
+                        >
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    ) : (
+                        "Register"
+                    )}
                 </button>
             </form>
             <div className="mt-4 flex justify-center gap-3">

@@ -7,6 +7,7 @@ const initialState = {
     isLogin: false,
     isLoading: false,
     errMessage: "",
+    isRegister: false,
 };
 
 export const login = createAsyncThunk(
@@ -72,6 +73,9 @@ const authSlice = createSlice({
         setErrMessage(state, action) {
             state.errMessage = action.payload;
         },
+        registerStatus(state, action) {
+            state.isRegister = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(login.fulfilled, (state, action) => {
@@ -79,15 +83,20 @@ const authSlice = createSlice({
         });
         builder.addCase(register.fulfilled, (state, action) => {
             state.isLoading = false;
+            state.isRegister = true;
+            state.errMessage = "";
         });
         builder.addCase(register.pending, (state, action) => {
             state.isLoading = true;
         });
         builder.addCase(register.rejected, (state, action) => {
+            console.log(action.payload);
             state.isLoading = false;
-            state.errMessage = action.payload.response.data.errors.map(
-                (item) => item.message
-            );
+            state.errMessage = action.payload.response.data.errors
+                ? action.payload.response.data.errors.map(
+                      (item) => item.message
+                  )
+                : action.payload.response.data?.message;
         });
         builder.addCase(logout.fulfilled, (state, action) => {
             localStorage.removeItem("access_token");
@@ -96,6 +105,6 @@ const authSlice = createSlice({
     },
 });
 
-export const { loginStatus, setErrMessage } = authSlice.actions;
+export const { loginStatus, setErrMessage, registerStatus } = authSlice.actions;
 
 export default authSlice.reducer;
