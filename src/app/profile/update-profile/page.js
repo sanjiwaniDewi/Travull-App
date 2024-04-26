@@ -53,21 +53,25 @@ export default function UpdateProfilePage() {
 
     return (
         <Layout>
-            <div className="flex justify-center items-center mt-20">
-                <Card>
-                    <div className="flex md:flex-row flex-col md:gap-10 gap:3">
-                        <div className="flex flex-col md:w-96 w-full">
-                            <ProfieImage image={dataUser.profilePictureUrl} />
-                            <div className="flex justify-center">
-                                <UploadImage />
+            <div className="container mx-auto w-full h-full py-52">
+                <div className="flex justify-center items-center w-full ">
+                    <Card>
+                        <div className="flex md:flex-row flex-col md:gap-10 gap:3 p-4">
+                            <div className="flex flex-col w-full">
+                                <ProfieImage
+                                    image={dataUser.profilePictureUrl}
+                                />
+                                <div className="flex justify-center">
+                                    <UploadImage />
+                                </div>
                             </div>
+                            <FormUpdate
+                                handleUpdateUser={handleUpdateUser}
+                                dataUser={dataUser}
+                            />
                         </div>
-                        <FormUpdate
-                            handleUpdateUser={handleUpdateUser}
-                            dataUser={dataUser}
-                        />
-                    </div>
-                </Card>
+                    </Card>
+                </div>
             </div>
         </Layout>
     );

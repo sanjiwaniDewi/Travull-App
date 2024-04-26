@@ -39,7 +39,7 @@ export default function ProfieImage({ image }) {
                 <img
                     src={newImage}
                     alt="avatar"
-                    className="rounded-3xl w-80 h-80 object-cover "
+                    className="rounded-3xl w-full h-80 object-cover "
                 />
             )}
         </div>
