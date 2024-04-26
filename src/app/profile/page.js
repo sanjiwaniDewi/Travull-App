@@ -1,11 +1,14 @@
 "use client";
+import ActivitySection from "@/components/homepage/activity/ActivitySection";
 import Card from "@/components/layout/Card";
 import Layout from "@/components/layout/Layout";
 import Profile from "@/components/profile/Profile";
+import { useGetAllData } from "@/hooks/useGet";
 import { fatchUserLogged } from "@/redux/features/user/userSlice";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import PromoCarausel from "@/components/homepage/promo/PromoCarousel";
 
 // async function getUserLogged() {
 //     if (typeof window !== "undefined") {
@@ -27,27 +30,42 @@ import { useDispatch, useSelector } from "react-redux";
 export default function ProfilePage() {
     const dispatch = useDispatch();
     const userData = useSelector((store) => store.user);
+    const [promo, setPromo] = useState([]);
+    const { getAllPromoData } = useGetAllData();
 
-    const handleUserData = () => {
-        dispatch(fatchUserLogged());
+    const handleLoadPromoData = async () => {
+        const res = await getAllPromoData();
+        setPromo(res);
     };
 
     useEffect(() => {
-        handleUserData();
+        handleLoadPromoData();
     }, []);
 
+    // const handleUserData = () => {
+    //     dispatch(fatchUserLogged());
+    // };
+
+    // useEffect(() => {
+    //     handleUserData();
+    // }, []);
+
     return (
-        <Layout>
-            <div className="flex justify-center items-center mt-20">
-                <Card>
-                    <Profile userData={userData} />
-                    <Link href="/profile/update-profile">
-                        <button className="mt-4 py-3 bg-slate-500 text-white px-4 font-semibold text-sm rounded-xl w-full">
-                            Edit Profile
-                        </button>
-                    </Link>
-                </Card>
+        <div className="pb-20">
+            <div className="container mx-auto w-full pt-20 ">
+                <div className="">
+                    <Card>
+                        <Profile userData={userData} />
+                    </Card>
+                    <PromoCarausel
+                        data={promo}
+                        height={"h-32"}
+                        show={4}
+                        length={promo?.length}
+                    />
+                </div>
             </div>
-        </Layout>
+            <ActivitySection />
+        </div>
     );
 }
