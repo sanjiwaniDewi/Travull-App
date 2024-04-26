@@ -166,14 +166,16 @@ export default function DashboardPage() {
 
     return (
         <div className=" w-full">
-            <div className="container mx-auto">
+            <div className="container mx-auto lg:px-1 px-5">
                 <h1 className="text-4xl font-bold mb-6 mt-12 ">Dashboard</h1>
             </div>
-            <div className="w-full p-6 container mx-auto bg-white border shadow-md border-gray-200 rounded-lg mb-4 ">
-                {latesUsers && <ShortTableUser data={latesUsers} />}
+            <div className="container mx-auto lg:px-1 px-5 ">
+                <div className="p-6 bg-white border shadow-md border-gray-200 rounded-lg mb-4  ">
+                    {latesUsers && <ShortTableUser data={latesUsers} />}
+                </div>
             </div>
 
-            <div className="grid lg:grid-cols-2 grid-cols-1 container mx-auto gap-4">
+            <div className="grid lg:grid-cols-2 grid-cols-1 container mx-auto lg:px-1 px-5 gap-4">
                 {lastBanner && (
                     <ShortTable
                         data={lastBanner}
