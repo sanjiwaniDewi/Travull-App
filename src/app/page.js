@@ -10,7 +10,6 @@ export default function Home() {
         <Layout>
             <article className="static w-full mb-auto pb-28 flex min-h-screen flex-col items-center justify-between top-0">
                 <HeaderImage />
-
                 <PromoSection />
                 <CategorySection />
                 <ActivitySection />
