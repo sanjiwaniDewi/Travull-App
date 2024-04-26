@@ -13,10 +13,11 @@ export default function LoginButton() {
     const dataUser = useSelector((store) => store.user);
 
     const checkToken = () => {
-        const token = localStorage.getItem("access_token");
+        const token = localStorage?.getItem("access_token");
         if (token) {
             dispatch(loginStatus(true));
             dispatch(fatchUserLogged());
+            // localStorage.setItem("role", dataUser?.role);
         }
     };
 
