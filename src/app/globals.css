@@ -25,7 +25,7 @@ body {
     }
 }
 
-.triangle-shape {
+/* .triangle-shape {
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     background-image: url("../../public/Designer-removebg.png");
     object-fit: cover;
@@ -34,6 +34,14 @@ body {
     @media (max-width: 900px) {
         clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 50% 0%, 0% 50%);
     }
+} */
+
+.loginPage {
+    /* background-image: url("../../public/Background2.jpeg");
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: cover;
+    background-size: cover; */
 }
 
 .orangeGrad {
@@ -57,10 +65,10 @@ body {
     margin-right: 7px;
 }
 
-.slick-prev:before,
+/* .slick-prev:before,
 .slick-next:before {
     color: yellow !important;
-}
+} */
 
 th {
     padding-bottom: 12px;
