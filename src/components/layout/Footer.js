@@ -46,7 +46,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="flex gap-x-16 lg:mt-0 mt-8 ">
+                <div className="flex gap-x-16 lg:mt-0 mt-12 ">
                     <div>
                         <h2 className="font-bold mb-3">Perusahaan</h2>
                         <ul className="flex flex-col gap-y-2 text-sm">
@@ -79,124 +79,140 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="flex flex-col lg:col-span-1 md:col-span-2 col-span-1 lg:mt-0 mt-8 ">
-                    <h2 className="font-bold mb-2 lg:text-start text-center lg:ps-14 ps-0 w-full">
-                        Pembayaran
-                    </h2>
-                    <div className="mt-3 flex flex-wrap gap-2 lg:justify-end justify-center ">
-                        <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
-                            <img
-                                src="/Logo_Indomaret.png"
-                                alt="wonderfull indonesia logo"
-                                className="object-fit w-full h-full"
-                            />
-                        </div>
-                        <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
-                            <img
-                                src="/BNI Bank Negara Indonesia.png"
-                                alt="wonderfull indonesia logo"
-                                className="object-fit w-full h-full"
-                            />
-                        </div>
-                        <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
-                            <img
-                                src="/836405_720.jpg"
-                                alt="wonderfull indonesia logo"
-                                className="object-fit w-full h-full"
-                            />
-                        </div>
-                        <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
-                            <img
-                                src="/png-clipart-bank-mandiri-logo-credit-card-bank-text-logo.png"
-                                alt="wonderfull indonesia logo"
-                                className="object-fit w-full h-full"
-                            />
-                        </div>{" "}
-                        <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
-                            <img
-                                src="/Logo_Indomaret.png"
-                                alt="wonderfull indonesia logo"
-                                className="object-fit w-full h-full"
-                            />
-                        </div>
-                        <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
-                            <img
-                                src="/BNI Bank Negara Indonesia.png"
-                                alt="wonderfull indonesia logo"
-                                className="object-fit w-full h-full"
-                            />
-                        </div>
-                        <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
-                            <img
-                                src="/836405_720.jpg"
-                                alt="wonderfull indonesia logo"
-                                className="object-fit w-full h-full"
-                            />
-                        </div>
-                        <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
-                            <img
-                                src="/png-clipart-bank-mandiri-logo-credit-card-bank-text-logo.png"
-                                alt="wonderfull indonesia logo"
-                                className="object-fit w-full h-full"
-                            />
-                        </div>{" "}
-                        <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
-                            <img
-                                src="/Logo_Indomaret.png"
-                                alt="wonderfull indonesia logo"
-                                className="object-fit w-full h-full"
-                            />
-                        </div>
-                        <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
-                            <img
-                                src="/BNI Bank Negara Indonesia.png"
-                                alt="wonderfull indonesia logo"
-                                className="object-fit w-full h-full"
-                            />
-                        </div>
-                        <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
-                            <img
-                                src="/836405_720.jpg"
-                                alt="wonderfull indonesia logo"
-                                className="object-fit w-full h-full"
-                            />
-                        </div>
-                        <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
-                            <img
-                                src="/png-clipart-bank-mandiri-logo-credit-card-bank-text-logo.png"
-                                alt="wonderfull indonesia logo"
-                                className="object-fit w-full h-full"
-                            />
-                        </div>
-                    </div>
-                    <div className="mt-8 w-full lg:justify-end justify-center">
-                        <h2 className="font-bold mb-2 lg:text-start text-center lg:ps-14 ps-0 w-full">
-                            Ikuti Kami
+                <div className="lg:col-span-1 md:col-span-2 col-span-1 lg:mt-0 mt-12 ">
+                    <div className="lg:w-fit  w-full lg:ps-3 ps-0">
+                        <h2 className="font-bold mb-2 lg:text-start text-center ps-0">
+                            Pembayaran
                         </h2>
-                        <ul className="flex gap-2 lg:ps-14 ps-0 justify-center pt-2">
-                            <li className="text-xl w-10 h-10">
-                                <FaFacebookF />
-                            </li>
-                            <li className="text-xl w-10 h-10">
-                                {" "}
-                                <RiInstagramFill />
-                            </li>
-                            <li className="text-xl w-10 h-10">
-                                <FaYoutube />
-                            </li>
-                            <li className="text-xl w-10 h-10">
-                                {" "}
-                                <FaTiktok />
-                            </li>
-                            <li className="text-xl w-10 h-10">
-                                {" "}
-                                <FaLinkedinIn />
-                            </li>
-                            <li className="text-xl w-10 h-10">
-                                {" "}
-                                <FaXTwitter />
-                            </li>
-                        </ul>
+                        <div className="mt-3 flex flex-wrap gap-2 lg:justify-end justify-center w-fit">
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/Logo_Indomaret.png"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/BNI Bank Negara Indonesia.png"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/Logo_Indomaret.png"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/BNI Bank Negara Indonesia.png"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/836405_720.jpg"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/png-clipart-bank-mandiri-logo-credit-card-bank-text-logo.png"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>{" "}
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/Logo_Indomaret.png"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/BNI Bank Negara Indonesia.png"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/836405_720.jpg"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/png-clipart-bank-mandiri-logo-credit-card-bank-text-logo.png"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>{" "}
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/Logo_Indomaret.png"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/BNI Bank Negara Indonesia.png"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/836405_720.jpg"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>
+                            <div className="w-16 h-10 bg-white p-2 rounded-lg  ">
+                                <img
+                                    src="/png-clipart-bank-mandiri-logo-credit-card-bank-text-logo.png"
+                                    alt="wonderfull indonesia logo"
+                                    className="object-fit w-full h-full"
+                                />
+                            </div>
+                        </div>
+                        <div className="mt-8 w-full flex-col lg:justify-end justify-center">
+                            <h2 className="font-bold mb-2 lg:text-start text-center w-full">
+                                Ikuti Kami
+                            </h2>
+                            <ul className="flex gap-2  lg:justify-start justify-center pt-2">
+                                <li className="text-xl w-10 h-10">
+                                    <FaFacebookF />
+                                </li>
+                                <li className="text-xl w-10 h-10">
+                                    {" "}
+                                    <RiInstagramFill />
+                                </li>
+                                <li className="text-xl w-10 h-10">
+                                    <FaYoutube />
+                                </li>
+                                <li className="text-xl w-10 h-10">
+                                    {" "}
+                                    <FaTiktok />
+                                </li>
+                                <li className="text-xl w-10 h-10">
+                                    {" "}
+                                    <FaLinkedinIn />
+                                </li>
+                                <li className="text-xl w-10 h-10">
+                                    {" "}
+                                    <FaXTwitter />
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
