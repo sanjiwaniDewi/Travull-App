@@ -71,7 +71,7 @@ export const getAllUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
     "user/updateUser",
     async (payload, thunkAPI) => {
-        const { rejectWithValue, dispatch } = thunkAPI;
+        const { rejectWithValue, fulfillWithValue, dispatch } = thunkAPI;
 
         try {
             const token = localStorage.getItem("access_token");
@@ -88,10 +88,7 @@ export const updateUser = createAsyncThunk(
                     }
                 );
 
-                return dispatch({
-                    type: "user/getLoggedUser",
-                    payload: res.data.data,
-                });
+                return fulfillWithValue(payload);
             }
         } catch (err) {}
     }
@@ -159,12 +156,12 @@ const userSlice = createSlice({
         builder.addCase(fatchUserLogged.fulfilled, (state, action) => {
             localStorage.setItem("role", state.role);
         });
-        builder.addCase(updateUser.fulfilled, (state, action) => {});
-        // builder.addCase(updateRoleUser.fulfilled, (state, action) => {
-        //     if (state.id === action.payload.id) {
-        //         state.role = action.payload.role;
-        //     }
-        // });
+        builder.addCase(updateUser.fulfilled, (state, action) => {
+            state.name = action.payload.name;
+            state.email = action.payload.email;
+            state.phoneNumber = action.payload.phoneNumber;
+            state.profilePictureUrl = action.payload.profilePictureUrl;
+        });
     },
 });
 
