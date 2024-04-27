@@ -11,6 +11,8 @@ import { getCategoryByIdAPI } from "@/API/category";
 import { useState } from "react";
 
 export function useGetAllData() {
+    const [err, setErr] = useState();
+    const [loading, setLoading] = useState(false);
     const getAllBennerData = async () => {
         try {
             const res = await getAllBannerAPI();
@@ -41,8 +43,9 @@ export function useGetAllData() {
     };
     const getAllActivityData = async () => {
         try {
+            setLoading(true);
             const res = await getAllActivityAPI();
-            console.log(res);
+            setLoading(false);
             return res;
         } catch (err) {
             console.log(err);
@@ -54,6 +57,7 @@ export function useGetAllData() {
         getAllPromoData,
         getAllCategoryData,
         getAllActivityData,
+        loading,
     };
 }
 
