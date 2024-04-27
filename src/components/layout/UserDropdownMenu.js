@@ -15,19 +15,31 @@ export default function DropdownMenu({ dataUser, handleLogout }) {
 
     return (
         <>
-            <button
-                id="dropdownMenuIconButton"
-                data-dropdown-toggle="dropdownDots"
-                type="button"
-                onClick={toggleDropdown}
-                className=" flex self-center"
-            >
-                <img
-                    src={dataUser.profilePictureUrl}
-                    className="w-8 h-8 rounded-full object-cover"
-                    alt="User Avatar"
-                />
-            </button>
+            <div className="flex gap-x-3 content-center items-center">
+                <div>
+                    <p className="m-0 p-0 text-sm font-medium">
+                        {dataUser.name}
+                    </p>
+                    {role === "admin" && (
+                        <p className="m-0 p-0 text-xs font-normal bg-gray-500 w-fit px-2 py-1 rounded-xl bg-opacity-50">
+                            {dataUser.role}
+                        </p>
+                    )}
+                </div>
+                <button
+                    id="dropdownMenuIconButton"
+                    data-dropdown-toggle="dropdownDots"
+                    type="button"
+                    onClick={toggleDropdown}
+                    className=" flex self-center"
+                >
+                    <img
+                        src={dataUser.profilePictureUrl}
+                        className="w-10 h-10 rounded-full object-cover"
+                        alt="User Avatar"
+                    />
+                </button>
+            </div>
 
             <div
                 id="dropdownDots"
