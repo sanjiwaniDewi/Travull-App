@@ -21,7 +21,7 @@ export default function ActivitiesSection() {
     };
 
     return (
-        <div className="container mx-auto lg:px-1 px-5 py-20">
+        <div className="container mx-auto lg:px-1 px-5">
             <div>
                 <h2></h2>
             </div>
