@@ -56,7 +56,10 @@ body {
     background-size: cover; */
 }
 .title-homepage {
-    font-size: 130px !important;
+    font-size: 68px !important;
+    @media (min-width: 800px) {
+        font-size: 130px !important;
+    }
 }
 
 .orangeGrad {
@@ -93,7 +96,7 @@ td {
     padding-top: 4px;
 }
 
-.navDashbord {
+/* .navDashbord {
     display: none !important;
     @media (max-width: 800px) {
         display: block !important;
@@ -117,4 +120,4 @@ td {
     @media (min-width: 800px) {
         display: flex !important;
     }
-}
+} */

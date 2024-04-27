@@ -41,7 +41,7 @@ export default function Navbar() {
                         <LoginButton />
                     </div>
                 </div>
-                <div className="smallSizeNavbar col-span-2 ">
+                <div className="lg:dispay-none display-block smallSizeNavbar col-span-2 ">
                     <div className="flex justify-end  align-items-end">
                         <button
                             onClick={handleShowMenu}
@@ -51,7 +51,7 @@ export default function Navbar() {
                         </button>
                     </div>
                 </div>
-                <div className="dispay-none col-span-2 smallSizeNavbar ">
+                <div className="lg:dispay-none display-block col-span-2 smallSizeNavbar ">
                     <div>{showMenu && <MenuNav />}</div>
                 </div>
             </div>
