@@ -18,7 +18,15 @@ export default function HeaderImage() {
     return (
         <div className="relative w-full h-screen ">
             <div className="w-full h-screen absolute">
-                <ImageCarousel datas={data} />
+                {data && <ImageCarousel datas={data} />}
+                {!data && (
+                    <div>
+                        <img
+                            src="/bc18.countries_japan_crop.jpg"
+                            className="w-full h-screen object-cover"
+                        />
+                    </div>
+                )}
             </div>
 
             <div className="top-0 w-full  bg-black opacity-50 absolute h-screen"></div>
