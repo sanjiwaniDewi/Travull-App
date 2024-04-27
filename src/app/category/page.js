@@ -10,7 +10,7 @@ import CategorySection from "@/components/category/CategorySection";
 export default function CategoryPage() {
     const [categoies, setCategories] = useState([]);
     const [promo, setPromo] = useState([]);
-    const { getAllCategoryData, getAllPromoData } = useGetAllData();
+    const { getAllCategoryData, getAllPromoData, loading } = useGetAllData();
 
     const handleLoadCategoryData = async () => {
         const res = await getAllCategoryData();
@@ -30,17 +30,22 @@ export default function CategoryPage() {
     return (
         <div className="py-20">
             <div className="container mx-auto lg:px-1 px-5 ">
-                <CategoryCarousel data={categoies} length={categoies.length} />
+                <CategoryCarousel
+                    data={categoies}
+                    length={categoies.length}
+                    loading={loading}
+                />
 
                 <PromoCarausel
                     data={promo}
                     height={"h-32"}
                     show={4}
                     length={promo.length}
+                    loading={loading}
                 />
             </div>
 
-            <CategorySection data={categoies} />
+            <CategorySection data={categoies} loading={loading} />
             <ActivitySection />
         </div>
     );

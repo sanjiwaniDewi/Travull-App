@@ -15,8 +15,9 @@ export function useGetAllData() {
     const [loading, setLoading] = useState(false);
     const getAllBennerData = async () => {
         try {
+            setLoading(true);
             const res = await getAllBannerAPI();
-            console.log(res);
+            setLoading(false);
             return res;
         } catch (err) {
             console.log(err);
@@ -24,8 +25,9 @@ export function useGetAllData() {
     };
     const getAllPromoData = async () => {
         try {
+            setLoading(true);
             const res = await getAllPromoAPI();
-            console.log(res);
+            setLoading(false);
             return res;
         } catch (err) {
             console.log(err);
@@ -33,9 +35,10 @@ export function useGetAllData() {
     };
 
     const getAllCategoryData = async () => {
+        setLoading(true);
         try {
             const res = await getAllCategoryAPI();
-            console.log(res);
+            setLoading(false);
             return res;
         } catch (err) {
             console.log(err);
