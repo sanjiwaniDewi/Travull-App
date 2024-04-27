@@ -12,8 +12,8 @@ export default function NavbarDashboard() {
     };
     return (
         <div>
-            <nav className="display-none py-4 bg-opacity-60 bg-primary-200 fixed top-0 z-50 w-full navDashbord">
-                <div className="container mx-auto lg:px-1 px-5 flex justify-between">
+            <nav className="lg:hidden py-4 bg-opacity-60 bg-primary-200 fixed top-0 z-50 w-full">
+                <div className="container mx-auto lg:px-1 px-5 flex justify-between ">
                     <div className="nav-logo text-slate-900 font-extrabold text-3xl content-center">
                         <Link href={"/"}>Travull</Link>
                     </div>
@@ -24,7 +24,9 @@ export default function NavbarDashboard() {
                         {showMenu ? <GrClose /> : <CgMenuRight />}
                     </button>
                 </div>
-                <div>{showMenu && <MenuNavDashboard />}</div>
+                <div className="container mx-auto  bg-primary-100">
+                    {showMenu && <MenuNavDashboard />}
+                </div>
             </nav>
         </div>
     );

@@ -11,7 +11,7 @@ import { IoCloseSharp } from "react-icons/io5";
 
 export default function MenuNavDashboard() {
     return (
-        <div className="container mx-auto px-5 w-full  mt-2 h-fit pb-12">
+        <div className="lg:hidden fixed container mx-auto px-5 bg-secondary-200 bg-opacity-40  mt-2 w-full pb-12">
             <ul className="flex flex-col gap-y-1 text-xl font-semibold  ">
                 <div></div>
                 <Link

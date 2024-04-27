@@ -10,7 +10,7 @@ export default function MenuNav() {
     const role = localStorage.getItem("role");
 
     return (
-        <div className="w-full mt-6 pb-4 ">
+        <div className="lg:hidden block w-full mt-6 pb-4 ">
             <ul className="flex flex-col gap-y-4">
                 {role === "admin" && (
                     <div>

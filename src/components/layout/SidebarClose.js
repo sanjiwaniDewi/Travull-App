@@ -18,7 +18,7 @@ import { TiThMenu } from "react-icons/ti";
 
 export default function SidebarClose({ handleShowSideBar }) {
     return (
-        <aside className="self-start sticky top-0 h-screen flex justify-center w-fit  bg-primary-200 text-white sidebarShow">
+        <aside className="self-start sticky top-0 h-screen lg:flex hidden justify-center w-fit  bg-primary-200 text-white sidebarShow">
             <div className="container mx-auto flex flex-col">
                 <div className="pt-6 px-8">
                     <div className="flex justify-center gap-2 text-2xl font-semibold items-center py-2 px-2 rounded-lg  hover:bg-slate-200 hover:text-zinc-700">
