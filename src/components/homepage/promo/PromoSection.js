@@ -4,6 +4,8 @@ import PromoImage from "./PromoImage";
 import PromoTitle from "./PromoTitle";
 import { useEffect, useState } from "react";
 import { useGetAllData } from "@/hooks/useGet";
+import { RiDiscountPercentFill } from "react-icons/ri";
+import Link from "next/link";
 
 export default function PromoSection() {
     const [promos, setPromos] = useState();
@@ -18,16 +20,22 @@ export default function PromoSection() {
     }, []);
 
     return (
-        <section className="container mx-auto w-full lg:px-1 px-5">
+        <section className="container mx-auto w-full lg:px-1 px-5 pt-12">
             <div className="grid grid-cols-5 ">
                 <div className="col-span-2 flex flex-col justify-center h-52 mt-8 ">
                     <div className="">
-                        <h1 className="text-2xl font-bold mb-3">
+                        <div className="text-5xl font-bold mb-1 promoHomepage">
+                            <RiDiscountPercentFill />
+                        </div>
+                        <h1 className="text-3xl font-bold mb-3">
                             Kuy, cek promo untuk liburanmu sekarang!
                         </h1>
-                        <button className="border border-slate-600 text-blue-700  p-2 rounded-xl">
+                        <Link
+                            href="/promo"
+                            className="border border-slate-400 font-semibold text-slate-800 text-md  p-2 rounded-xl"
+                        >
                             Lihat Semua Promo
-                        </button>
+                        </Link>
                     </div>
                 </div>
                 <div className="col-span-3">
