@@ -85,7 +85,7 @@ export default function ShortTableUser({ data }) {
                                             );
                                         }
                                         return (
-                                            <td key={item[head]}>
+                                            <td key={item[head] + item["id"]}>
                                                 {item[head]}
                                             </td>
                                         );

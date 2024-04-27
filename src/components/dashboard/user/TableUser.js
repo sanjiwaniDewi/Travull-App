@@ -43,7 +43,13 @@ export default function TableUser({ data, currentPage }) {
                                 {tableTitle.map((head, indexs) => {
                                     if (head === "id") {
                                         return (
-                                            <td key={item[head] + 1}>
+                                            <td
+                                                key={
+                                                    index +
+                                                    1 +
+                                                    (currentPage - 1) * 12
+                                                }
+                                            >
                                                 {index +
                                                     1 +
                                                     (currentPage - 1) * 12}
@@ -84,13 +90,16 @@ export default function TableUser({ data, currentPage }) {
                                             </td>
                                         );
                                     }
-                                    return <td>{item[head]}</td>;
+                                    return (
+                                        <td key={item[head] + item["id"]}>
+                                            {item[head]}
+                                        </td>
+                                    );
                                 })}
                             </tr>
                         );
                     })}
                 </tbody>
-                <tfoot></tfoot>
             </table>
         </div>
     );
