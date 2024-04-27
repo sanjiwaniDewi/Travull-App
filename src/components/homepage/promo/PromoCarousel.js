@@ -4,6 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import PromoImage from "./PromoImage";
 import PromoTitle from "./PromoTitle";
+import Link from "next/link";
+import EmptyData from "@/components/utils/EmptyData";
 
 export default function PromoCarausel({ data, height, show, length }) {
     const settings = {
@@ -32,7 +34,11 @@ export default function PromoCarausel({ data, height, show, length }) {
                     {data.map((data, index) => {
                         if (index < length) {
                             return (
-                                <div className="relative" key={index}>
+                                <Link
+                                    href={`/promo/${data?.id}`}
+                                    className="relative"
+                                    key={index}
+                                >
                                     <PromoImage
                                         imageUrl={data?.imageUrl}
                                         height={height}
@@ -49,12 +55,13 @@ export default function PromoCarausel({ data, height, show, length }) {
                                         promoData={data}
                                         height={height}
                                     />
-                                </div>
+                                </Link>
                             );
                         }
                     })}
                 </Slider>
             )}
+            {!data && <EmptyData heigh={height} />}
         </div>
     );
 }

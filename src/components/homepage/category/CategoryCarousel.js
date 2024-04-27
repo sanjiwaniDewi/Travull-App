@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CategoryContent from "./CategoriyContent";
+import EmptyData from "@/components/utils/EmptyData";
 
 export default function CategoriyCarousel() {
     const [dataCategory, setDataCategory] = useState();
@@ -58,6 +59,7 @@ export default function CategoriyCarousel() {
                     ))}
                 </Slider>
             )}
+            {!dataCategory && <EmptyData heigh={"h-52"} />}
         </div>
     );
 }

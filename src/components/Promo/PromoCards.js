@@ -1,14 +1,19 @@
 import { FaDivide } from "react-icons/fa";
 import PromoContent from "./PromoContent";
+import EmptyData from "../utils/EmptyData";
 
 export default function PromoCards({ data }) {
     return (
         <section className="container my-auto mx-auto  lg:px-1 px-5 pt-16">
-            <h2 className="text-xl font-bold">Promo Menarik Menanti Anda</h2>
-            <p className="text-sm">
-                Nikmati liburan serumu bersama keluarga dengan promo-promo
-                nemarik Travull
-            </p>
+            <div className="mb-4">
+                <h2 className="text-xl font-bold">
+                    Promo Menarik Menanti Anda
+                </h2>
+                <p className="text-sm">
+                    Nikmati liburan serumu bersama keluarga dengan promo-promo
+                    nemarik Travull
+                </p>
+            </div>
 
             <div className="w-full">
                 {data && (
@@ -23,6 +28,7 @@ export default function PromoCards({ data }) {
                         ))}
                     </div>
                 )}
+                {!data && <EmptyData heigh={"h-80"} />}
             </div>
         </section>
     );
