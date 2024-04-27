@@ -15,10 +15,10 @@ export default function MenuNav() {
                 {role === "admin" && (
                     <div>
                         <li className="mb-4">
-                            <Link href={"/Profile"}>Profil</Link>
+                            <Link href={"/profile"}>Profil</Link>
                         </li>
                         <li className="">
-                            <Link href={"/Dashboard"}>Dashboard</Link>
+                            <Link href={"/dashboard"}>Dashboard</Link>
                         </li>
                     </div>
                 )}
