@@ -14,6 +14,7 @@ export default function ActivityCard({ datas, length }) {
                         if (index < newLength) {
                             return (
                                 <Link
+                                    key={index}
                                     href={`/activity/${activity.id}`}
                                     className="w-full min-h-80 bg-white border border-gray-200 rounded-2xl"
                                 >

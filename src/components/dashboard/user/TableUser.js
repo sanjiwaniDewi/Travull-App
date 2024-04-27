@@ -39,11 +39,11 @@ export default function TableUser({ data, currentPage }) {
                 <tbody className=" divide-y divide-slate-200">
                     {data?.map((item, index) => {
                         return (
-                            <tr>
+                            <tr key={index}>
                                 {tableTitle.map((head, indexs) => {
                                     if (head === "id") {
                                         return (
-                                            <td>
+                                            <td key={item[head] + 1}>
                                                 {index +
                                                     1 +
                                                     (currentPage - 1) * 12}
@@ -53,7 +53,10 @@ export default function TableUser({ data, currentPage }) {
                                         return;
                                     } else if (indexs === 1) {
                                         return (
-                                            <div className="flex flex-row gap-2 items-center py-1">
+                                            <td
+                                                className="flex flex-row gap-2 items-center py-1"
+                                                key={item[head]}
+                                            >
                                                 <img
                                                     className="table-avatar lg:w-10  w-8 rounded-full lg:h-10 h-8"
                                                     src={
@@ -68,7 +71,7 @@ export default function TableUser({ data, currentPage }) {
                                                     alt="profilePictureUrl"
                                                 />
                                                 {item[head]}
-                                            </div>
+                                            </td>
                                         );
                                     } else if (head === "action") {
                                         return (
