@@ -6,23 +6,25 @@ import ProfieImage from "@/components/profile/ProfileImage";
 import UploadImage from "@/components/utils/UploadImage";
 import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
 import { fatchUserLogged, updateUser } from "@/redux/features/user/userSlice";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { changeEditStatus } from "@/redux/features/status/statusSilce";
 
 export default function UpdateProfilePage() {
     const dispatch = useDispatch();
     const router = useRouter();
     const dataUser = useSelector((store) => store.user);
     const { imageUrl } = useSelector((store) => store.image);
+    const { isUpdate } = useSelector((store) => store.status);
 
-    const handleUserData = () => {
-        dispatch(fatchUserLogged());
-    };
+    // const handleUserData = () => {
+    //     dispatch(fatchUserLogged());
+    // };
 
-    useEffect(() => {
-        handleUserData();
-    }, []);
+    // useEffect(() => {
+    //     handleUserData();
+    // }, []);
 
     const handleUpdateUser = (e) => {
         e.preventDefault();
@@ -36,20 +38,28 @@ export default function UpdateProfilePage() {
             name,
             email,
             phoneNumber,
-            profilePictureUrl: imageUrl,
+            profilePictureUrl:
+                imageUrl !== "" ? imageUrl : dataUser.profilePictureUrl,
         };
-
-        console.log(user);
 
         try {
             dispatch(updateUser(user));
-
-            router.push("/profile");
+            dispatch(changeEditStatus());
+            // redirect("/profile");
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
         dispatch(deleteImageUrl());
     };
+    const handleRedirect = () => {
+        if (isUpdate) {
+            dispatch(changeEditStatus());
+            router.push("/profile");
+        }
+    };
+    useEffect(() => {
+        handleRedirect();
+    }, [isUpdate]);
 
     return (
         <Layout>
