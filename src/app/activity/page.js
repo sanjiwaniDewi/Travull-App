@@ -4,7 +4,7 @@ import CategorySection from "@/components/homepage/category/CategorySection";
 
 export default function ActivityPage() {
     return (
-        <div className="py-20">
+        <div className="lg:pt-20 pt-28">
             <div className=" container mx-auto w-full lg:px-1 px-5 ">
                 <h2 className="text-xl font-bold">
                     Temukan aktivitas menarik untuk liburanmu

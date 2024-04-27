@@ -16,7 +16,7 @@ export default function ActivityDetailPage(context) {
         handleGetData();
     }, []);
     return (
-        <div className="container mx-auto lg:px-1 px-5 py-20">
+        <div className="container mx-auto lg:px-1 px-5 py-28">
             {activityData && (
                 <div className="flex justify-center">
                     <ActivityDetail data={activityData} />

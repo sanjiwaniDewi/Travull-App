@@ -34,12 +34,12 @@ export default function ActivityDetail({ data }) {
                             <h1>{data.title}</h1>
                             <Link
                                 href={`/category/${data.category.id}`}
-                                className="mx-2 py-1 text-lg   rounded-md font-semiBold  text-blue-400 underline"
+                                className="mx-2 py-1 text-lg   rounded-md font-semiBold  text-primary-200 underline"
                             >
                                 {data.category.name}
                             </Link>
                         </div>
-                        <div className="flex gap-1 text-sm font-normal text-sky-700">
+                        <div className="flex gap-1 text-sm font-normal text-secondary-300">
                             <p>Rating: {data.rating}/5</p>
                             <p>{`(${priceFormatRp(
                                 data.total_reviews
@@ -54,7 +54,7 @@ export default function ActivityDetail({ data }) {
                                     {newFacilities.map((item, index) => (
                                         <p
                                             key={index}
-                                            className="text-sm outline py-1 rounded-3xl outline-slate-200 w-fit px-2"
+                                            className="text-sm  py-1 rounded-3xl bg-secondary-100 w-fit px-2"
                                         >
                                             {parse(item)}
                                         </p>
@@ -62,7 +62,7 @@ export default function ActivityDetail({ data }) {
                                 </div>
                             ) : (
                                 <div>
-                                    <p className="text-sm outline py-1 rounded-3xl outline-slate-200 w-fit px-2">
+                                    <p className="text-sm  py-1 rounded-3xl  bg-secondary-100 w-fit px-2">
                                         {parse(newFacilities)}
                                     </p>
                                 </div>

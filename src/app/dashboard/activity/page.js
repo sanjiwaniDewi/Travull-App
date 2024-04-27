@@ -48,7 +48,7 @@ export default function ActivityPage() {
     // }, [isDelete, isCreate, isUpdate]);
 
     return (
-        <div className="container mx-auto px-5 pt-20">
+        <div className="container mx-auto px-5 lg:pt-20 pt-28">
             {activitiesData && (
                 <TabelAllData
                     data={activitiesData}
