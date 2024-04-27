@@ -24,7 +24,7 @@ export default function PromoSection() {
             <div className="grid grid-cols-5 ">
                 <div className="col-span-2 flex flex-col justify-center h-52 mt-8 ">
                     <div className="">
-                        <div className="text-5xl text-primary-100 font-bold mb-1 promoHomepage">
+                        <div className="text-5xl text-primary-200 font-bold mb-1 promoHomepage">
                             <RiDiscountPercentFill />
                         </div>
                         <h1 className="lg:text-3xl md:text-2xl text-xl font-bold mb-4">
@@ -32,7 +32,7 @@ export default function PromoSection() {
                         </h1>
                         <Link
                             href="/promo"
-                            className="border border-slate-400 font-semibold text-slate-800 text-md  p-2 rounded-xl"
+                            className="border border-primary-200 font-semibold text-slate-800 text-md  p-2 rounded-xl hover:text-primary-100 hover:scale-105 hover:bg-primary-200"
                         >
                             Lihat Semua Promo
                         </Link>

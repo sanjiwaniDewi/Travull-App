@@ -21,7 +21,7 @@ export default function DropdownMenu({ dataUser, handleLogout }) {
                         {dataUser.name}
                     </p>
                     {role === "admin" && (
-                        <p className="m-0 p-0 text-xs font-normal bg-gray-500 w-fit px-2 py-1 rounded-xl bg-opacity-50">
+                        <p className="m-0 p-0 text-xs font-normal bg-secondary-300 w-fit px-2 py-1 rounded-xl bg-opacity-50">
                             {dataUser.role}
                         </p>
                     )}
