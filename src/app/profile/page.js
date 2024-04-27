@@ -52,18 +52,15 @@ export default function ProfilePage() {
 
     return (
         <div className="pb-20">
-            <div className="container mx-auto w-full pt-20 ">
-                <div className="">
-                    <Card>
-                        <Profile userData={userData} />
-                    </Card>
-                    <PromoCarausel
-                        data={promo}
-                        height={"h-32"}
-                        show={4}
-                        length={promo?.length}
-                    />
-                </div>
+            <div className="container mx-auto w-full pt-20 lg:px-1 px-5 ">
+                <Profile userData={userData} />
+
+                <PromoCarausel
+                    data={promo}
+                    height={"h-32"}
+                    show={4}
+                    length={promo?.length}
+                />
             </div>
             <ActivitySection />
         </div>
