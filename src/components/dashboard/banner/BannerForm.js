@@ -24,7 +24,7 @@ export default function BannerForm({ bannerData }) {
     const { createBanner } = useCreate();
     const { updateBanner } = useUpdate();
     const { imageUrl } = useSelector((store) => store.image);
-    const { isEdit } = useSelector((store) => store.status);
+    const { isUpdate, isCreate } = useSelector((store) => store.status);
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -51,19 +51,27 @@ export default function BannerForm({ bannerData }) {
             const imageUrlPayload = newImageUrl
                 ? newImageUrl
                 : bannerData.imageUrl;
+            try {
+                updateBanner(bannerData.id, {
+                    name,
+                    imageUrl: imageUrlPayload,
+                });
 
-            updateBanner(bannerData.id, {
-                name,
-                imageUrl: imageUrlPayload,
-            });
-            dispatch(updateItem(bannerData));
+                dispatch(changeEditStatus());
+                dispatch(updateItem(bannerData));
+            } catch (err) {}
 
-            dispatch(changeEditStatus());
+            router.back();
+
             // router.back();
         } else {
             dispatch(getImageUrl(newImageUrl));
             createBanner({ name, imageUrl: newImageUrl });
-            dispatch(changeCreateSatus());
+
+            if (isCreate) {
+                dispatch(changeCreateSatus());
+                router.back();
+            }
             // router.back();
         }
 

@@ -26,8 +26,8 @@ export default function CategoryForm({ categoryData }) {
     const { imageUrl } = useSelector((store) => store.image);
     const dispatch = useDispatch();
     const router = useRouter();
+    const { isCreate } = useSelector((store) => store.status);
 
-    console.log("cat", categoryData);
     const handleHaveImageUrl = () => {
         dispatch(deleteImageUrl());
         setIsHaveImageUrl(true);
@@ -60,12 +60,15 @@ export default function CategoryForm({ categoryData }) {
 
             dispatch(updateItem(categoryData));
             dispatch(changeEditStatus());
-            // router.back();
+            router.back();
         } else {
             dispatch(getImageUrl(newImageUrl));
             createCategory(handleCategoryForm(formData, imageUrl));
+
             dispatch(changeCreateSatus());
-            // router.back();
+            router.back();
+
+            //
         }
 
         // dispatch(deleteImageUrl());

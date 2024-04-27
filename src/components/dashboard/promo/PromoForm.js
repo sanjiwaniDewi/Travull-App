@@ -23,6 +23,7 @@ export default function PromoForm({ promoData }) {
     const [isHaveImageUrl, setIsHaveImageUrl] = useState(false);
     const [isUploadImage, setIsUploadImage] = useState(true);
     const { imageUrl } = useSelector((store) => store.image);
+    const { isUpdate, isCreate } = useSelector((store) => store.status);
     const { createPromo } = useCreate();
     const { updatePromo } = useUpdate();
 
@@ -58,15 +59,17 @@ export default function PromoForm({ promoData }) {
                     promoData.id,
                     handlePromoForm(formData, figureUrl, isHaveImageUrl)
                 );
-                dispatch(updateItem(bannerData));
-
+                dispatch(updateItem(promoData));
                 dispatch(changeEditStatus());
+                router.back();
             } else {
                 if (isHaveImageUrl) {
                     dispatch(getImageUrl(newImageUrl));
                 }
                 createPromo(handlePromoForm(formData, imageUrl));
+
                 dispatch(changeCreateSatus());
+                router.back();
             }
         } catch (err) {
             console.log(err);

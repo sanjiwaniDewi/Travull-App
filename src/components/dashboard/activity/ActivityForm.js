@@ -21,6 +21,7 @@ import {
     changeEditStatus,
     changeDeleteSatus,
 } from "@/redux/features/status/statusSilce";
+import { useRouter } from "next/navigation";
 
 export default function ActivityForm({ activityData }) {
     const [categories, setCategories] = useState();
@@ -33,9 +34,9 @@ export default function ActivityForm({ activityData }) {
     const { imageUrl, imageUrls } = useSelector((store) => store.image);
     const { createActivity } = useCreate();
     const { updateActivity } = useUpdate();
-    const { isCreateSatus } = useSelector((store) => store.status);
 
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const { isCreate } = useSelector((store) => store.status);
 
@@ -115,6 +116,8 @@ export default function ActivityForm({ activityData }) {
             );
             dispatch(updateItem(activityData));
             dispatch(changeEditStatus());
+            router.back();
+
             // console.log("imageurl", imageUrlPayload);
             // const payload = handleActivityForm(formData, imageUrlPayload);
             // console.log(payload);
@@ -122,6 +125,7 @@ export default function ActivityForm({ activityData }) {
             // dispatch(setImagesUrls(newImageUrls));
             // const payload = handleActivityForm(formData, newImageUrls);
             // console.log(payload);
+
             if (isHaveImageUrl) {
                 dispatch(setImagesUrls(urlImage));
             }
@@ -129,7 +133,9 @@ export default function ActivityForm({ activityData }) {
             createActivity(
                 handleActivityForm(formData, newImageUrls, isHaveImageUrl)
             );
+
             dispatch(changeCreateSatus());
+            router.back();
         }
     };
 
