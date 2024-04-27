@@ -15,7 +15,7 @@ export default function Navbar() {
     return (
         <nav
             className={` py-3  bg-primary-100 fixed top-0 z-50 w-full ${
-                showMenu ? "bg-opacity-70" : "bg-opacity-60"
+                showMenu ? "bg-opacity-80" : "bg-opacity-70 shadow-lg"
             } `}
         >
             <div className="container mx-auto lg:px-1 px-5 grid lg:grid-cols-5 grid-cols-3">
@@ -25,13 +25,13 @@ export default function Navbar() {
                 <div className="hidden lg:col-span-4 col-span-2 lg:flex justify-between">
                     <div className="hidden nav-menu lg:flex justify-start self-center  font-semibold  ">
                         <ul className="flex gap-x-10">
-                            <li className="">
+                            <li className="hover:text-primary-100 hover:scale-105">
                                 <Link href={"/promo"}>Promo</Link>
                             </li>
-                            <li>
+                            <li className="hover:text-primary-100 hover:scale-105">
                                 <Link href={"/category"}>Destinasi</Link>
                             </li>
-                            <li>
+                            <li className="hover:text-primary-100 hover:scale-105">
                                 <Link href={"/activity"}>Aktivitas</Link>
                             </li>
                         </ul>

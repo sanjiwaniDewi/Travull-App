@@ -10,28 +10,28 @@ export default function MenuNav() {
     const role = localStorage.getItem("role");
 
     return (
-        <div className="lg:hidden block w-full mt-6 pb-4 ">
-            <ul className="flex flex-col gap-y-4">
+        <div className="lg:hidden block w-full mt-6 pb-4  font-semibold ">
+            <ul className="flex flex-col gap-y-5">
                 {role === "admin" && (
                     <div>
-                        <li className="mb-4">
+                        <li className="mb-4 hover:text-primary-100 hover:scale-105">
                             <Link href={"/profile"}>Profil</Link>
                         </li>
-                        <li className="">
+                        <li className="hover:text-primary-100 hover:scale-105">
                             <Link href={"/dashboard"}>Dashboard</Link>
                         </li>
                     </div>
                 )}
-                <li className="">
+                <li className="hover:text-primary-100 hover:scale-105">
                     <Link href={"/promo"}>Promo</Link>
                 </li>
-                <li>
+                <li className="hover:text-primary-100 hover:scale-105">
                     <Link href={"/category"}>Destinasi</Link>
                 </li>
-                <li>
+                <li className="hover:text-primary-100 hover:scale-105">
                     <Link href={"/activity"}>Aktivitas</Link>
                 </li>
-                <li className="">
+                <li className="hover:text-primary-100 hover:scale-105">
                     {isLogin ? (
                         <div>
                             <LogoutButton />

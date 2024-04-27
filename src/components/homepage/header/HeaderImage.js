@@ -33,7 +33,7 @@ export default function HeaderImage() {
 
             <div className="absolute top-0 w-full h-screen flex justify-center items-end">
                 <div className="triangle-shape w-screen h-full flex flex-col content-end pb-24 justify-end">
-                    <div className=" text-secondary-100 text-center">
+                    <div className=" text-primary-100 text-center">
                         <h1 className="title-homepage text-5xl mb-8 font-extrabold ">
                             Travull
                         </h1>
@@ -48,7 +48,7 @@ export default function HeaderImage() {
                             data?.map((name, index) => (
                                 <div
                                     key={index}
-                                    className="text-center text-sm font-normal outline outline-1 outline-slate-200  py-1 px-2 content-center text-secondary-100 rounded-xl"
+                                    className="text-center text-sm font-normal outline outline-1 outline-slate-200  py-1 px-2 content-center text-primary-100 rounded-xl"
                                 >
                                     {name.name}
                                 </div>
