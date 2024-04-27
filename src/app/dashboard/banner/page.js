@@ -48,7 +48,7 @@ export default function BannersPage() {
     }, [isDelete, isCreate, isUpdate]);
 
     return (
-        <div className="w-full pt-16 px-10">
+        <div className="container mx-auto px-5 pt-20">
             {dataBanner && (
                 <TabelAllData
                     data={dataBanner}

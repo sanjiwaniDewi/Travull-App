@@ -53,7 +53,7 @@ export default function PromosPage() {
     }, [isDelete, isCreate, isUpdate]);
 
     return (
-        <div className="w-full pt-16 px-10">
+        <div className="container mx-auto px-5 pt-20">
             {promoData && (
                 <TabelAllData
                     data={promoData}
