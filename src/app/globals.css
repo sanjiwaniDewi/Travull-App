@@ -36,12 +36,27 @@ body {
     }
 } */
 
+.triangle-shape {
+    background: rgb(6, 6, 6);
+    background: linear-gradient(
+        0deg,
+        rgba(6, 6, 6, 1) 0%,
+        rgba(0, 0, 0, 0) 71%
+    );
+}
+.promoHomepage {
+    font-size: 68px !important;
+}
+
 .loginPage {
     /* background-image: url("../../public/Background2.jpeg");
     object-fit: cover;
     background-repeat: no-repeat;
     background-position: cover;
     background-size: cover; */
+}
+.title-homepage {
+    font-size: 130px !important;
 }
 
 .orangeGrad {

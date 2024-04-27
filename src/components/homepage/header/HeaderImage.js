@@ -24,12 +24,15 @@ export default function HeaderImage() {
             <div className="top-0 w-full  bg-black opacity-50 absolute h-screen"></div>
 
             <div className="absolute top-0 w-full h-screen flex justify-center items-end">
-                <div className="triangle-shape w-screen xl:h-96 h-96 bg-white opacity-70 flex flex-col content-end justify-end">
-                    <div className="text-center">
-                        <h1 className="text-5xl mb-2 font-extrabold text-black text-center">
+                <div className="triangle-shape w-screen h-full flex flex-col content-end pb-24 justify-end">
+                    <div className=" text-white text-center">
+                        <h1 className="title-homepage text-5xl mb-8 font-extrabold ">
                             Travull
                         </h1>
-                        <p>Temukan aktivitas dengan promo menarik</p>
+                        <p className="mb-4 text-xl">
+                            Temukan aktivitas menarik untuk liburanmu dengan
+                            harga terjangkau
+                        </p>
                     </div>
 
                     <div className="mx-20 mt-4 flex pb-4 flex-wrap gap-x-3 gap-y-2 justify-center ">
@@ -37,7 +40,7 @@ export default function HeaderImage() {
                             data?.map((name, index) => (
                                 <div
                                     key={index}
-                                    className="text-center text-sm font-medium border-2 border-slate-300 py-1 px-1 content-center rounded-pill "
+                                    className="text-center text-sm font-normal outline outline-1 outline-slate-200  py-1 px-2 content-center text-white rounded-xl"
                                 >
                                     {name.name}
                                 </div>
