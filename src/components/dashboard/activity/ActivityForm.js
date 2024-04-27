@@ -54,7 +54,6 @@ export default function ActivityForm({ activityData }) {
     // set imageurls setelah upload
     const handdleaddImageUrl = () => {
         if (imageUrl) {
-            console.log("masukk ka");
             dispatch(setImagesUrls(imageUrl));
         }
     };

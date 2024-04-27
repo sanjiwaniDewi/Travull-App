@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function ActivityCard({ datas, length }) {
     const newLength = length === "all" ? datas.length : length;
-    console.log("new length", newLength);
+
     return (
         <div className="w-full">
             {datas && (

@@ -13,7 +13,6 @@ export default function ImagePreview({ figureUrl, customHeigh }) {
         if (figureUrl) setNewImage(figureUrl);
     };
 
-    console.log(figureUrl);
     useEffect(() => {
         handleshowFigure();
     }, [figureUrl]);

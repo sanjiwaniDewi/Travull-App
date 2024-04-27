@@ -9,7 +9,7 @@ export async function createActivityAPI(payload) {
         const res = await axios.post(`${BASE_API}/create-activity`, payload, {
             headers: headers,
         });
-        console.log(res.data);
+        
         return res.data;
     }
 }
@@ -43,7 +43,7 @@ export async function updateActivityAPI(id, payload) {
                 headers: headers,
             }
         );
-        console.log(res.data);
+        
         return res.data.data;
     }
 }

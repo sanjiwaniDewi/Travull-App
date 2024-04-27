@@ -23,7 +23,6 @@ export const uploadImage = createAsyncThunk(
 
             const imageUrl = res?.data?.url;
             // console.log(res);
-            console.log(imageUrl);
 
             return thunkAPI.dispatch({
                 type: "image/getImageUrl",

@@ -36,7 +36,6 @@ export default function DashboardLayout({ children }) {
     // }, [screenSize]);
     const handleShowSideBar = () => {
         setShowSideBar(!showSideBar);
-        console.log(showSideBar);
     };
 
     return (

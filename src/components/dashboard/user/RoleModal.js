@@ -32,9 +32,7 @@ export default function RoleModal() {
         const role = formData.get("role");
         try {
             dispatch(updateRoleUser({ id: userData.id, role }));
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
 
     const handlingUpdatedUserShow = () => {

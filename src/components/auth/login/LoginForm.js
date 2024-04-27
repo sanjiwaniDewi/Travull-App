@@ -29,8 +29,6 @@ export default function LoginForm() {
 
         const { customError, payload } = handleLoginForm(formData);
 
-        console.log(customError);
-
         if (customError) {
             dispatch(setErrMessage(customError));
         }

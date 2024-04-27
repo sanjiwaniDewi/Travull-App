@@ -29,7 +29,7 @@ import { deleteItem } from "@/redux/features/data/dataSlice";
 export default function TabelAllData({ data, title, type }) {
     const dispatch = useDispatch();
     const { showModal } = useSelector((state) => state.modal);
-    console.log("ini", data);
+    
     const tableTitle = [
         ...new Set(data?.map((item) => Object?.keys(item)).flat()),
     ];

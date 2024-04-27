@@ -71,9 +71,7 @@ export default function PromoForm({ promoData }) {
                 dispatch(changeCreateSatus());
                 router.back();
             }
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
         // router.back();
     };
 

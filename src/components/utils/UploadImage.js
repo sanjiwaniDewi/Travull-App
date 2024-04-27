@@ -19,7 +19,7 @@ export default function UploadImage({ handleMultiple }) {
         try {
             dispatch(uploadImage(formData));
         } catch (err) {
-            console.log(err);
+            
         }
         if (handleMultiple) {
             handleMultiple();

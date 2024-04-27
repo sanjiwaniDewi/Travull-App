@@ -9,7 +9,7 @@ export async function createBannerAPI(payload) {
         const res = await axios.post(`${BASE_API}/create-banner`, payload, {
             headers: headers,
         });
-        console.log(res.data);
+
         return res.data;
     }
 }
@@ -39,7 +39,7 @@ export async function getBannerByIdAPI(id) {
     const res = await axios.get(`${BASE_API}/banner/${id}`, {
         headers: headers,
     });
-    console.log("ini dataanya ada?", res.data.data);
+
     return res.data.data;
 }
 

@@ -42,9 +42,7 @@ export default function RegisterForm() {
             if (errMessage.length === 0 && !customError && payload) {
                 dispatch(register(payload));
             }
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
 
     const handleChange = () => {

@@ -9,7 +9,7 @@ export async function createCategoryAPI(payload) {
         const res = await axios.post(`${BASE_API}/create-category`, payload, {
             headers: headers,
         });
-        console.log(res.data);
+
         return res.data.data;
     }
 }
@@ -52,7 +52,7 @@ export async function updateCategoryAPI(id, payload) {
                 headers: headers,
             }
         );
-        console.log(res.data);
+
         return res.data.data;
     }
 }

@@ -9,7 +9,7 @@ export async function deletePromoAPI(id) {
         const res = await axios.delete(`${BASE_API}/delete-promo/${id}`, {
             headers: headers,
         });
-        console.log(res.data);
+
         return res.data;
     }
 }
@@ -30,7 +30,7 @@ export async function createPromoAPI(payload) {
         const res = await axios.post(`${BASE_API}/create-promo`, payload, {
             headers: headers,
         });
-        console.log(res.data);
+
         return res.data;
     }
 }
@@ -45,7 +45,7 @@ export async function updatePromoAPI(id, payload) {
                 headers: headers,
             }
         );
-        console.log(res.data);
+
         return res.data.data;
     }
 }
@@ -56,6 +56,6 @@ export async function getPromoByIdAPI(id) {
     const res = await axios.get(`${BASE_API}/promo/${id}`, {
         headers: headers,
     });
-    console.log(res.data);
+
     return res.data.data;
 }

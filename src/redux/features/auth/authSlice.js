@@ -108,7 +108,6 @@ const authSlice = createSlice({
             state.isLoading = true;
         });
         builder.addCase(register.rejected, (state, action) => {
-            console.log(action.payload);
             state.isLoading = false;
             state.errMessage = action.payload.response.data.errors
                 ? action.payload.response.data.errors.map(

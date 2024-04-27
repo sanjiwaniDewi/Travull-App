@@ -9,36 +9,24 @@ export default function useCreate() {
     const createBanner = async (payload) => {
         try {
             const res = createBannerAPI(payload);
-            console.log(res.data);
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
 
     const createPromo = async (payload) => {
         try {
             const res = createPromoAPI(payload);
-            console.log(res.data);
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
 
     const createCategory = async (payload) => {
         try {
             const res = createCategoryAPI(payload);
-            console.log(res.data);
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
     const createActivity = async (payload) => {
         try {
             const res = createActivityAPI(payload);
-            console.log(res.data);
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
 
     return { createBanner, createPromo, createCategory, createActivity };

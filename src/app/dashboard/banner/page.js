@@ -33,11 +33,9 @@ export default function BannersPage() {
             // setBannerData(dataBanner);
             dispatch(changeDeleteSatus());
         } else if (isCreate) {
-            console.log("masuk create");
             // handleShowAllData();
             dispatch(changeCreateSatus());
         } else if (isUpdate) {
-            console.log("masuk update");
             // handleShowAllData();
             dispatch(changeEditStatus());
         }

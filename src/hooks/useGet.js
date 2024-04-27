@@ -19,9 +19,7 @@ export function useGetAllData() {
             const res = await getAllBannerAPI();
             setLoading(false);
             return res;
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
     const getAllPromoData = async () => {
         try {
@@ -29,9 +27,7 @@ export function useGetAllData() {
             const res = await getAllPromoAPI();
             setLoading(false);
             return res;
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
 
     const getAllCategoryData = async () => {
@@ -40,9 +36,7 @@ export function useGetAllData() {
             const res = await getAllCategoryAPI();
             setLoading(false);
             return res;
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
     const getAllActivityData = async () => {
         try {
@@ -50,9 +44,7 @@ export function useGetAllData() {
             const res = await getAllActivityAPI();
             setLoading(false);
             return res;
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
 
     return {
@@ -68,29 +60,23 @@ export function useGetDataById() {
     const getBannerById = async (id) => {
         try {
             const res = await getBannerByIdAPI(id);
-            console.log(res);
+
             return res;
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
     const getCategoryById = async (id) => {
         try {
             const res = await getCategoryByIdAPI(id);
-            console.log(res);
+
             return res;
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
     const getPromoById = async (id) => {
         try {
             const res = await getPromoByIdAPI(id);
-            console.log(res);
+
             return res;
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
 
     const getActivityById = async (id) => {
