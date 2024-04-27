@@ -10,19 +10,19 @@ export default function ActionButtons({
         <>
             <div className="flex flex-row  gap-x-3">
                 <button
-                    className="bg-blue-600 text-sm text-white p-2 rounded-2xl"
+                    className="bg-secondary-200 text-sm text-primary-200 p-2 rounded-2xl hover:scale-110"
                     onClick={handleShowModal}
                 >
                     <RiEyeFill />
                 </button>
                 <button
                     onClick={handleEdit}
-                    className="bg-green-600 text-sm text-white p-2 rounded-2xl"
+                    className="bg-secondary-100 text-sm text-primary-200 p-2 rounded-2xl hover:scale-110"
                 >
                     <MdEditSquare />
                 </button>
                 <button
-                    className="bg-red-700 text-sm text-white p-2 rounded-2xl"
+                    className="bg-primary-200 text-sm text-white p-2 rounded-2xl hover:scale-110"
                     onClick={handleDelete}
                 >
                     <FaTrashAlt />

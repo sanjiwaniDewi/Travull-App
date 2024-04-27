@@ -29,7 +29,7 @@ import { deleteItem } from "@/redux/features/data/dataSlice";
 export default function TabelAllData({ data, title, type }) {
     const dispatch = useDispatch();
     const { showModal } = useSelector((state) => state.modal);
-    
+
     const tableTitle = [
         ...new Set(data?.map((item) => Object?.keys(item)).flat()),
     ];
@@ -81,7 +81,7 @@ export default function TabelAllData({ data, title, type }) {
     };
 
     return (
-        <div className="container w-full p-6 bg-white border shadow-md border-gray-200 rounded-lg">
+        <div className="container w-full p-6 bg-slate-50 border shadow-md border-gray-200 rounded-lg">
             <div className="flex justify-start content-center pt-1 gap-4 mb-3">
                 <h1 className="text-2xl font-bold ">{title}</h1>
                 <div className="flex self-center">
@@ -89,7 +89,7 @@ export default function TabelAllData({ data, title, type }) {
                 </div>
             </div>
             <table className="table text-lg table-compact w-full overflow-x-auto">
-                <thead>
+                <thead className="shadow-xl">
                     <tr className="text-md">
                         {tableTitle?.map((item) => {
                             if (item === "id") {

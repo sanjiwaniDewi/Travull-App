@@ -79,7 +79,7 @@ export default function ShortTable({ data, title, detileLink, type }) {
     };
 
     return (
-        <div className="w-full p-6 bg-white border shadow-md border-gray-200 rounded-lg overflow-x-auto">
+        <div className="w-full p-6  border shadow-md border-gray-200 rounded-lg overflow-x-auto">
             <div className="">
                 <div className="flex justify-start content-center pt-1 gap-4 mb-3">
                     <h1 className="text-2xl font-bold ">{title}</h1>
@@ -88,12 +88,15 @@ export default function ShortTable({ data, title, detileLink, type }) {
                     </div>
                 </div>
                 <table className="table table-compact w-full">
-                    <thead>
-                        <tr className="text-md ">
+                    <thead className=" pb-2 px-2 ">
+                        <tr className="text-md shadow-md  bg-primary-200 text-secondary-200">
                             {tableTitle?.map((item) => {
                                 if (item === "id") {
                                     return (
-                                        <th key={item} className="text-left">
+                                        <th
+                                            key={item}
+                                            className="text-left py-2 ps-4"
+                                        >
                                             no
                                         </th>
                                     );
@@ -106,12 +109,19 @@ export default function ShortTable({ data, title, detileLink, type }) {
                                     item === "name"
                                 ) {
                                     return (
-                                        <th key={item} className="text-left">
+                                        <th
+                                            key={item}
+                                            className="text-left py-2"
+                                        >
                                             {item}
                                         </th>
                                     );
                                 } else if (item === "action") {
-                                    return <th key={`${item}`}>{item}</th>;
+                                    return (
+                                        <th key={`${item}`} className="py-2">
+                                            {item}
+                                        </th>
+                                    );
                                 }
                                 return;
                             })}
@@ -123,13 +133,21 @@ export default function ShortTable({ data, title, detileLink, type }) {
                                 {tableTitle.map((head, indexs) => {
                                     if (head === "id") {
                                         return (
-                                            <td key={row["no"]}>{row["no"]}</td>
+                                            <td
+                                                key={row["no"]}
+                                                className="ps-4 pt-3"
+                                            >
+                                                {row["no"]}
+                                            </td>
                                         );
                                     } else if (head === "no") {
                                         return;
                                     } else if (head === "action") {
                                         return (
-                                            <td key={row["id"]}>
+                                            <td
+                                                key={row["id"]}
+                                                className="pt-3"
+                                            >
                                                 <div className=" flex  justify-center content-start">
                                                     <ActionButtons
                                                         // id={row["id"]}
@@ -158,13 +176,19 @@ export default function ShortTable({ data, title, detileLink, type }) {
                                         );
                                     } else if (head === "updatedAt") {
                                         return (
-                                            <td key={`${row[head]}updt`}>
+                                            <td
+                                                key={`${row[head]}updt`}
+                                                className="pt-3"
+                                            >
                                                 {formatDate(row[head])}
                                             </td>
                                         );
                                     } else if (head === "createdAt") {
                                         return (
-                                            <td key={`${row[head]}crt`}>
+                                            <td
+                                                key={`${row[head]}crt`}
+                                                className="pt-3"
+                                            >
                                                 {formatDate(row[head])}
                                             </td>
                                         );
@@ -173,7 +197,10 @@ export default function ShortTable({ data, title, detileLink, type }) {
                                         head === "title"
                                     ) {
                                         return (
-                                            <td key={`${row[head]}`}>
+                                            <td
+                                                key={`${row[head]}`}
+                                                className="pt-3"
+                                            >
                                                 {row[head]}
                                             </td>
                                         );
@@ -187,7 +214,7 @@ export default function ShortTable({ data, title, detileLink, type }) {
                 <div className="mt-6">
                     <Link
                         href={detileLink}
-                        className="text-blue-400 font-medium underline"
+                        className="text-primary-200 font-medium underline"
                     >
                         show more
                     </Link>
