@@ -11,7 +11,7 @@ export default function CategorySection({ data, loading }) {
                     aktivitas menarik
                 </p>
             </div>
-            <div className="grid grid-cols-6 gap-2 flex-wrap">
+            <div className="grid lg:grid-cols-6 grid-cols-3 gap-2 flex-wrap">
                 {data &&
                     data.map((category, index) => (
                         <CategoryContent

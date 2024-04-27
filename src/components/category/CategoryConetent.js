@@ -21,7 +21,7 @@ export default function CategoriyContent({
                         {showButton && (
                             <Link
                                 href={`/category/${category.id}`}
-                                className="border border-slate-600 text-blue-700  p-1 w-32 rounded-xl text-center"
+                                className="border text-center w-fit px-4 border-primary-200 font-semibold text-slate-800 text-md  p-2 rounded-xl hover:text-primary-100 hover:scale-105 hover:bg-primary-200"
                             >
                                 Lihat Detail
                             </Link>

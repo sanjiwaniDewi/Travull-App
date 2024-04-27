@@ -18,7 +18,7 @@ export default function CategoryDetailPage(context) {
     }, []);
 
     return (
-        <div className="py-20">
+        <div className="py-28">
             <div className="container mx-auto w-full px-5">
                 <CategoriyContent
                     key={1}

@@ -28,7 +28,7 @@ export default function CategoryPage() {
     }, []);
 
     return (
-        <div className="py-20">
+        <div className="py-28">
             <div className="container mx-auto lg:px-1 px-5 ">
                 <CategoryCarousel
                     data={categoies}
