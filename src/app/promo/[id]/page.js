@@ -18,9 +18,9 @@ export default function PromoDetailPage(context) {
     }, []);
 
     return (
-        <div className="container mx-auto flex justify-center px-5">
+        <div className="container mx-auto flex justify-center lg:px-1 px-5 w-full py-16">
             {promoDetail && (
-                <div className="my-16 lg:w-1/2 p-4  bg-white border border-gray-200 rounded-2xl">
+                <div className="my-16 lg:w-1/2 p-4  bg-white border border-gray-200 rounded-2xl shadow-xl">
                     <img
                         src={promoDetail.imageUrl}
                         alt="gambar promo"
