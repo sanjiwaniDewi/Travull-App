@@ -51,7 +51,7 @@ export default function Navbar() {
                         </button>
                     </div>
                 </div>
-                <div class="dispay-none col-span-2 ">
+                <div className="dispay-none col-span-2 smallSizeNavbar ">
                     <div>{showMenu && <MenuNav />}</div>
                 </div>
             </div>

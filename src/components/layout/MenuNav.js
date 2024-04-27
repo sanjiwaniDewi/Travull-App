@@ -7,13 +7,14 @@ import Link from "next/link";
 
 export default function MenuNav() {
     const { isLogin } = useSelector((store) => store.auth);
+    const role = localStorage.getItem("role");
 
     return (
         <div className="w-full mt-6 pb-4 ">
-            <ul className="flex flex-col gap-y-4 font-semibold">
-                {isLogin && (
+            <ul className="flex flex-col gap-y-4">
+                {role === "admin" && (
                     <div>
-                        <li className="">
+                        <li className="mb-4">
                             <Link href={"/Profile"}>Profil</Link>
                         </li>
                         <li className="">
