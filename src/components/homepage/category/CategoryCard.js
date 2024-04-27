@@ -5,7 +5,7 @@ export default function CategoryCard({ data, size, large, thin }) {
 
     const customGrad = size === "large" ? "blueGrad" : "orangeGrad";
     return (
-        <Link href={`/category/${data.id}`}>
+        <Link href={`/category/${data.id}`} key={data.id}>
             <div className={`relative ${customSize} h-52 customMargin`}>
                 <div className="h-52 ">
                     <img

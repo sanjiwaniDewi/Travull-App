@@ -24,10 +24,10 @@ export default function PromoSection() {
             <div className="grid grid-cols-5 ">
                 <div className="col-span-2 flex flex-col justify-center h-52 mt-8 ">
                     <div className="">
-                        <div className="text-5xl font-bold mb-1 promoHomepage">
+                        <div className="text-5xl text-primary-100 font-bold mb-1 promoHomepage">
                             <RiDiscountPercentFill />
                         </div>
-                        <h1 className="text-3xl font-bold mb-3">
+                        <h1 className="lg:text-3xl md:text-2xl text-xl font-bold mb-4">
                             Kuy, cek promo untuk liburanmu sekarang!
                         </h1>
                         <Link

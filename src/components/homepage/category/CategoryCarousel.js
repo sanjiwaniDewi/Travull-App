@@ -49,13 +49,15 @@ export default function CategoriyCarousel() {
             {dataCategory && (
                 <Slider {...settings}>
                     {dataCategory?.map((category, index) => (
-                        <CategoryContent
-                            category={category}
-                            index={index}
-                            length={6}
-                            large={"w-96"}
-                            thin={"w-52"}
-                        />
+                        <div key={index}>
+                            <CategoryContent
+                                category={category}
+                                index={index}
+                                length={6}
+                                large={"w-96"}
+                                thin={"w-52"}
+                            />
+                        </div>
                     ))}
                 </Slider>
             )}
