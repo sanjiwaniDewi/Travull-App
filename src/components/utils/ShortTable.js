@@ -63,8 +63,14 @@ export default function ShortTable({ data, title, detileLink, type }) {
         handlerShowDetail(id, type);
     };
     const handleDelete = (id, type) => {
-        dispatch(changeDeleteSatus());
-        handleDeleteItem(id, type);
+        // handleDeleteItem(id, type);
+
+        dispatch(changeModalStatus());
+        dispatch(setModalType("delete"));
+        dispatch(setModalData({ id, type }));
+
+        // dispatch(deleteItem(id));
+        // dispatch(changeDeleteSatus());
     };
 
     const handleEdit = (id, type) => {

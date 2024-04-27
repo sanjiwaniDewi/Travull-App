@@ -60,17 +60,19 @@ export default function TabelAllData({ data, title, type }) {
         router.push(handleCreateRoute(type));
     };
 
-    //  const dispatch = useDispatch();
-    //  const router = useRouter();
-
     const handleShowModal = (id, type) => {
         dispatch(changeModalStatus());
         handlerShowDetail(id, type);
     };
     const handleDelete = (id, type) => {
-        handleDeleteItem(id, type);
-        dispatch(deleteItem(id));
-        dispatch(changeDeleteSatus());
+        // handleDeleteItem(id, type);
+
+        dispatch(changeModalStatus());
+        dispatch(setModalType("delete"));
+        dispatch(setModalData({ id, type }));
+
+        // dispatch(deleteItem(id));
+        // dispatch(changeDeleteSatus());
     };
 
     const handleEdit = (id, type) => {

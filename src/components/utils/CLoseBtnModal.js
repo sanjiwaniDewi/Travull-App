@@ -6,6 +6,7 @@ import {
 } from "@/redux/features/modal/modalSlice";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { GrClose } from "react-icons/gr";
 
 export default function CloseBtnModal() {
     const dispatch = useDispatch();
@@ -14,5 +15,11 @@ export default function CloseBtnModal() {
         dispatch(clearModalData());
         dispatch(setModalType(""));
     };
-    return <button onClick={handleCloseModal}>Close</button>;
+    return (
+        <div className="w-full flex justify-end mb-4">
+            <button onClick={handleCloseModal}>
+                <GrClose />
+            </button>
+        </div>
+    );
 }
