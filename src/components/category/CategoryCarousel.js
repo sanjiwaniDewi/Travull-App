@@ -5,8 +5,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
 import CategoriyContent from "./CategoryConetent";
+import EmptyData from "@/components/utils/EmptyData";
 
-export default function CategoryCarousel({ data, length }) {
+export default function CategoryCarousel({ data, length, loading }) {
     const settings = {
         // dots: true,
         // infinite: true,
@@ -33,6 +34,7 @@ export default function CategoryCarousel({ data, length }) {
                     ))}
                 </Slider>
             )}
+            {loading && <EmptyData heigh={"h-80"} />}
         </div>
     );
 }
