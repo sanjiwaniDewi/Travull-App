@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 export default function AllUserPage() {
     const { showModal } = useSelector((state) => state.modal);
     return (
-        <div className="w-full pt-16">
+        <div className="w-full lg:pt-16 pt-28">
             <AllUser />
             {showModal && <DetailModal />}
         </div>

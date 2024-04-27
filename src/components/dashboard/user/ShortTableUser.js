@@ -9,16 +9,19 @@ export default function ShortTableUser({ data }) {
         tableTitle.push("action");
     }
     return (
-        <div className="container mx-auto ">
+        <div className="container mx-auto bg-slate-50 border-gray-200">
             <h1 className="text-2xl font-bold mb-3">Kelola User</h1>
             <div className=" overflow-x-auto table-auto">
                 <table className="table text-md w-full  table-compact ">
                     <thead>
-                        <tr className="lg:text-md text-md">
+                        <tr className="lg:text-md text-md bg-primary-200 text-secondary-200">
                             {tableTitle?.map((item) => {
                                 if (item === "id") {
                                     return (
-                                        <th key={item} className="text-left">
+                                        <th
+                                            key={item}
+                                            className="text-left py-2 ps-4"
+                                        >
                                             no
                                         </th>
                                     );
@@ -28,10 +31,17 @@ export default function ShortTableUser({ data }) {
                                 ) {
                                     return;
                                 } else if (item === "action") {
-                                    return <th key={item}>{item}</th>;
+                                    return (
+                                        <th key={item} className="py-2">
+                                            {item}
+                                        </th>
+                                    );
                                 } else {
                                     return (
-                                        <th key={item} className="text-left">
+                                        <th
+                                            key={item}
+                                            className="text-left py-2"
+                                        >
                                             {item}
                                         </th>
                                     );
@@ -46,7 +56,10 @@ export default function ShortTableUser({ data }) {
                                     {tableTitle.map((head, indexs) => {
                                         if (head === "id") {
                                             return (
-                                                <td key={item["no"]}>
+                                                <td
+                                                    key={item["no"]}
+                                                    className="ps-4 pt-3"
+                                                >
                                                     {item["no"]}
                                                 </td>
                                             );
@@ -58,7 +71,7 @@ export default function ShortTableUser({ data }) {
                                         } else if (indexs === 1) {
                                             return (
                                                 <td
-                                                    className="flex flex-row gap-2 items-center py-1"
+                                                    className="flex flex-row gap-2 items-center pt-3 "
                                                     key={item[head]}
                                                 >
                                                     <img
@@ -76,7 +89,7 @@ export default function ShortTableUser({ data }) {
                                         } else if (head === "action") {
                                             return (
                                                 <td key={item["id"]}>
-                                                    <div className=" flex  justify-center content-start">
+                                                    <div className=" flex  justify-center content-start pt-3">
                                                         <ChangeRole
                                                             userData={item}
                                                         />
@@ -85,7 +98,10 @@ export default function ShortTableUser({ data }) {
                                             );
                                         }
                                         return (
-                                            <td key={item[head] + item["id"]}>
+                                            <td
+                                                key={item[head] + item["id"]}
+                                                className="pt-3"
+                                            >
                                                 {item[head]}
                                             </td>
                                         );
@@ -99,7 +115,7 @@ export default function ShortTableUser({ data }) {
             <div className="mt-6">
                 <Link
                     href="dashboard/all-user"
-                    className="text-blue-400 font-medium underline"
+                    className="text-primary font-medium underline"
                 >
                     show more
                 </Link>
