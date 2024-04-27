@@ -14,12 +14,12 @@ export default function Navbar() {
     };
     return (
         <nav
-            className={` py-3  bg-slate-300 fixed top-0 z-50 w-full ${
+            className={` py-3  bg-primary-100 fixed top-0 z-50 w-full ${
                 showMenu ? "bg-opacity-70" : "bg-opacity-60"
             } `}
         >
             <div className="container mx-auto lg:px-1 px-5 grid lg:grid-cols-5 grid-cols-3">
-                <div className="nav-logo text-slate-900 font-extrabold text-3xl content-center">
+                <div className="nav-logo text-Zinc-900 font-extrabold text-3xl content-center">
                     <Link href={"/"}>Travull</Link>
                 </div>
                 <div className="lg:col-span-4 col-span-2 flex justify-between expanNav">

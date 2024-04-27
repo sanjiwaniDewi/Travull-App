@@ -8,10 +8,12 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
     return (
-        <footer className="bg-slate-600 w-full">
+        <footer className="bg-secondary-100 w-full">
             <div className="container mx-auto lg:px-1 px-5 py-20 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
                 <div>
-                    <h1 className="text-4xl font-bold text-white">Travull</h1>
+                    <h1 className="text-4xl font-bold text-zinc-800">
+                        Travull
+                    </h1>
                     <div className="flex justify-between  md:block">
                         <div className="mt-4">
                             <h2 className="font-bold mb-1">Kerjasama</h2>

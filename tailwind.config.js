@@ -16,6 +16,13 @@ module.exports = {
                 titi: ["var(--font-titi)"],
                 inter: ["var(--font-inter)"],
             },
+            colors: {
+                primary: {
+                    100: "#7b9acc",
+                    200: "#001528",
+                },
+                secondary: { 100: "#FCF6F5", 200: "#ADEFD1" },
+            },
         },
     },
     plugins: [],

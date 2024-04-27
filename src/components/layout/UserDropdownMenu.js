@@ -14,7 +14,7 @@ export default function DropdownMenu({ dataUser, handleLogout }) {
     };
 
     return (
-        <>
+        <div className="bg-priam">
             <div className="flex gap-x-3 content-center items-center">
                 <div>
                     <p className="m-0 p-0 text-sm font-medium">
@@ -50,7 +50,7 @@ export default function DropdownMenu({ dataUser, handleLogout }) {
                 }
             >
                 <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    className="py-2 text-sm text-gray-700 dark:text-gray-200 "
                     aria-labelledby="dropdownMenuIconButton"
                 >
                     <li>
@@ -80,6 +80,6 @@ export default function DropdownMenu({ dataUser, handleLogout }) {
                     />
                 </div>
             </div>
-        </>
+        </div>
     );
 }

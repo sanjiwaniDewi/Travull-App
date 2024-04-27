@@ -32,7 +32,7 @@ export default function Sidebar({ handleShowSideBar }) {
     }, []);
 
     return (
-        <aside className="self-start sticky top-0 h-screen flex justify-center lg:w-1/6 md:w-1/4  bg-slate-500 text-white sidebarShow">
+        <aside className="self-start sticky top-0 h-screen flex justify-center lg:w-1/6 md:w-1/4  bg-primary-200 text-white sidebarShow">
             <div className="container mx-auto flex flex-col">
                 <div className="flex justify-end me-8 mt-4 text-4xl ">
                     <button onClick={handleShowSideBar}>
