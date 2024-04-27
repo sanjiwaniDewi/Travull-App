@@ -7,9 +7,11 @@ export default function CategoryContent({
     large,
     thin,
     padding,
+    colLarge,
+    colThin,
 }) {
     return (
-        <div className="" key={index}>
+        <div className={index % 2 === 0 ? colLarge : colThin} key={index}>
             {index < length && (
                 <div key={index} className={`text-center py-1 ${padding}`}>
                     <CategoryCard

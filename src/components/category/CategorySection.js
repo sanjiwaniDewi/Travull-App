@@ -1,16 +1,17 @@
 import CategoryContent from "../homepage/category/CategoriyContent";
+import EmptyData from "../utils/EmptyData";
 
-export default function CategorySection({ data }) {
+export default function CategorySection({ data, loading }) {
     return (
         <section className="mt-12 container mx-auto w-full lg:px-1  px-5">
-            <div>
+            <div className="mb-4">
                 <h2 className="text-xl font-bold">Destinasi Populer</h2>
                 <p className="text-sm">
                     Mengunjungi destinasi yang anda inginkan tambah seru dengan
                     aktivitas menarik
                 </p>
             </div>
-            <div className="flex justify-between flex-wrap gap-y-2 ">
+            <div className="grid grid-cols-6 gap-2 flex-wrap">
                 {data &&
                     data.map((category, index) => (
                         <CategoryContent
@@ -18,8 +19,8 @@ export default function CategorySection({ data }) {
                             category={category}
                             index={index}
                             length={data.length}
-                            large={"lg:w-96 md:80 w-56"}
-                            thin={"lg:w-80 md:52 w-44"}
+                            colLarge={"col-span-2 w-full"}
+                            colThin={"col-span-1 w-full"}
                             padding={
                                 index === 0
                                     ? "ps-0"
@@ -30,6 +31,7 @@ export default function CategorySection({ data }) {
                         />
                     ))}
             </div>
+            {loading && <EmptyData heigh={"h-80"} />}
         </section>
     );
 }

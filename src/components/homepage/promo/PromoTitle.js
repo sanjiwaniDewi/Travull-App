@@ -4,7 +4,7 @@ export default function PromoTitle({ promoData, height }) {
     const promoPrice = convertPrice(promoData.promo_discount_price);
 
     return (
-        <div className={`absolute top-0 ms-8 mt-6 w-full ${height}`}>
+        <div className={`absolute top-0 ms-8 mt-4 w-full ${height}`}>
             <h1 className="font-semibold text-xl text-white mb-1 text-wrap">
                 {promoData.title}
             </h1>

@@ -7,7 +7,7 @@ import PromoTitle from "./PromoTitle";
 import Link from "next/link";
 import EmptyData from "@/components/utils/EmptyData";
 
-export default function PromoCarausel({ data, height, show, length }) {
+export default function PromoCarausel({ data, height, show, length, loading }) {
     const settings = {
         dots: true,
         // infinite: true,
@@ -61,7 +61,7 @@ export default function PromoCarausel({ data, height, show, length }) {
                     })}
                 </Slider>
             )}
-            {!data && <EmptyData heigh={height} />}
+            {loading && <EmptyData heigh={height} />}
         </div>
     );
 }

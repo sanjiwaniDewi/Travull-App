@@ -18,17 +18,22 @@ export default function ActivityCard({ datas, length }) {
                                     className="w-full min-h-80 bg-white border border-gray-200 rounded-2xl"
                                 >
                                     <div className="">
-                                        {activity.imageUrls.length <= 1 ? (
-                                            <img
-                                                src={activity.imageUrls[0]}
-                                                className="w-full h-40 object-cover rounded-t-2xl"
-                                                alt="activity image"
-                                            />
-                                        ) : (
-                                            <ImageCarousel
-                                                images={activity.imageUrls}
-                                            />
-                                        )}
+                                        <div className="h-40">
+                                            {activity.imageUrls.length <= 1 ? (
+                                                <img
+                                                    src={activity.imageUrls[0]}
+                                                    className="w-full h-full object-cover rounded-t-2xl"
+                                                    alt="activity image"
+                                                />
+                                            ) : (
+                                                <ImageCarousel
+                                                    images={activity.imageUrls}
+                                                    customStyle="rounded-t-2xl"
+                                                    height={"h-40"}
+                                                    customDots={false}
+                                                />
+                                            )}
+                                        </div>
 
                                         <div>
                                             <ActivityDescriptionCard

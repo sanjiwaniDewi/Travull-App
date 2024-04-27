@@ -4,9 +4,15 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function ImageCarousel({ images, height, width }) {
+export default function ImageCarousel({
+    images,
+    height,
+    width,
+    customStyle,
+    customDots,
+}) {
     const settings = {
-        dots: true,
+        dots: !customDots ? false : true,
         // infinite: true,
         speed: 500,
         slidesToShow: 1,
@@ -22,9 +28,9 @@ export default function ImageCarousel({ images, height, width }) {
                         <img
                             key={index}
                             src={image}
-                            className={` ${height} object-cover rounded-2xl ${
-                                width ? width : "w-full"
-                            }`}
+                            className={` ${height} object-cover ${
+                                customStyle ? customStyle : "rounded-2xl"
+                            } ${width ? width : "w-full"}`}
                             alt="activity image"
                         />
                     ))}
