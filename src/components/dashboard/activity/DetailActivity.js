@@ -2,11 +2,17 @@
 
 import { useSelector, dispatch, useDispatch } from "react-redux";
 import ImageCarousel from "../../utils/ImageCarousel";
-import { formatDate } from "@/utils/handleFormatData";
+import {
+    formatDate,
+    formatFacilities,
+    formatSizeMap,
+    priceFormatRp,
+} from "@/utils/handleFormatData";
 import parse from "html-react-parser";
 import { setModalData, setModalType } from "@/redux/features/modal/modalSlice";
 import { useGetDataById } from "@/hooks/useGet";
 import ImagePreview from "@/components/utils/ImagePreview";
+import ActivityDetail from "@/components/activity/ActivityDetail";
 
 export default function DetailActivity() {
     const { modalData } = useSelector((state) => state.modal);
@@ -14,6 +20,7 @@ export default function DetailActivity() {
     const dispatch = useDispatch();
 
     let dataCategory = {};
+    const newFacilities = formatFacilities(modalData.facilities);
     const handleShowCategory = async () => {
         await getCategoryById(modalData.category.id).then(
             (res) => (dataCategory = res)
@@ -21,20 +28,21 @@ export default function DetailActivity() {
         dispatch(setModalData(dataCategory));
         dispatch(setModalType("category"));
     };
-    console.log("iniii ", modalData.imageUrls.join(""));
 
     return (
-        <div className="flex gap-4 w-1/2 ">
-            <div>
-                <div className="w-96">
+        <div className="oferflow-y-scroll">
+            <div className="w-96">
+                <div className="">
                     {modalData.imageUrls.length === 1 ? (
                         <ImagePreview
                             figureUrl={modalData.imageUrls.join("")}
+                            customHeigh="h-44"
                         />
                     ) : (
                         <ImageCarousel
                             images={modalData.imageUrls}
-                            height="h-96"
+                            height="h-44"
+                            width="w-96"
                         />
                     )}
                 </div>
@@ -48,26 +56,62 @@ export default function DetailActivity() {
                         {modalData.category.name}
                     </button>
                 </div>
-                <h2>Status:</h2>
-                <div className="flex gap-2 ">
+
+                <div className="flex gap-2 justify-between text-md mb-4 ">
                     <p>Dibuat : {formatDate(modalData.createdAt)}</p>
                     <p>Diupdate: {formatDate(modalData.updatedAt)}</p>
                 </div>
-                <p className="w-96">{modalData.description} *</p>
-                <p>Harga: {modalData.price}</p>
-                <p>Potongan : {modalData.price_discount}</p>
+                <div className="pb-4">
+                    <p className="w-96">{modalData.description} *</p>
+                </div>
+                <div className="mb-4 px-1">
+                    {Array.isArray(newFacilities) ? (
+                        <div className="flex gap-2">
+                            {newFacilities.map((item, index) => (
+                                <p
+                                    key={index}
+                                    className="text-sm outline py-1 rounded-3xl outline-slate-200 w-fit px-2"
+                                >
+                                    {parse(item)}
+                                </p>
+                            ))}
+                        </div>
+                    ) : (
+                        <div>
+                            <p className="text-sm outline py-1 rounded-3xl outline-slate-200 w-fit px-2">
+                                {parse(newFacilities)}
+                            </p>
+                        </div>
+                    )}
+                </div>
 
-                <div>{parse(modalData.facilities)}</div>
+                {modalData.price !== modalData.price_discount && (
+                    <div>
+                        <p className="text-sm line-through text-slate-400">
+                            Rp {priceFormatRp(modalData.price)}
+                        </p>
+                        <div className="text-lg font-bold text-center py-1 mt-2 outline outline-1 outline-slate-300 rounded-3xl text-orange-400">
+                            <p>Rp. {priceFormatRp(modalData.price_discount)}</p>
+                        </div>
+                    </div>
+                )}
+                {modalData.price === modalData.price_discount && (
+                    <div className="text-lg font-bold text-center py-1 mt-2 outline outline-1 outline-slate-300 rounded-3xl text-orange-400">
+                        <p>Rp {priceFormatRp(modalData.price)}</p>
+                    </div>
+                )}
 
-                <div className="w-96">
+                <div className="w-96 mt-4 mb-4">
                     <p>
                         Alamat : {modalData.address}, {modalData.city},{" "}
                         {modalData.province}
                     </p>
                 </div>
             </div>
-            <div className="w-fit">
-                <div className="">{parse(modalData.location_maps)}</div>
+            <div className="w-full">
+                <div className="">
+                    {parse(formatSizeMap(modalData.location_maps, "100%", 200))}
+                </div>
             </div>
         </div>
     );

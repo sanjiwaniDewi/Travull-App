@@ -9,7 +9,7 @@ export default function DetailBanner() {
             <div>
                 <img
                     src={modalData.imageUrl}
-                    className="w-96 object-cover"
+                    className="w-96 object-cover rounded-xl"
                     alt="banner image"
                 />
                 <form className="flex flex-col w-96">
@@ -17,7 +17,7 @@ export default function DetailBanner() {
                         defaultValue={modalData.name}
                         name="name"
                         type="text"
-                        className="text-black text-3xl font-bold  bg-slate-100 mt-1 px-0 py-4 rounded-xl focus:outline-none"
+                        className="text-black text-3xl font-bold   mt-1 px-0 py-4 rounded-xl focus:outline-none"
                         disabled
                     />
                     <div className="grid grid-cols-2">
@@ -28,7 +28,7 @@ export default function DetailBanner() {
                             <input
                                 defaultValue={modalData.createdAt}
                                 type="text"
-                                className="text-black text-sm bg-slate-100 mt-1 px-2 py-2 rounded-xl focus:outline-none"
+                                className="text-black text-sm  mt-1 px-2 py-2 rounded-xl focus:outline-none"
                                 disabled
                             />
                         </div>
@@ -39,7 +39,7 @@ export default function DetailBanner() {
                             <input
                                 defaultValue={modalData.updatedAt}
                                 type="text"
-                                className="text-black text-sm bg-slate-100 mt-1 px-2 py-2 rounded-xl focus:outline-none"
+                                className="text-black text-sm  mt-1 px-2 py-2 rounded-xl focus:outline-none"
                                 disabled
                             />
                         </div>
