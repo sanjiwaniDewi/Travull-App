@@ -3,26 +3,26 @@ import useCreate from "@/hooks/useCreate";
 import useDelete from "@/hooks/useDelete";
 import { useGetDataById } from "@/hooks/useGet";
 
-export function handleDeleteItem(id, type) {
-    const {
-        deleteBannerId,
-        deletePromoId,
-        deleteCategoryId,
-        deleteActivityId,
-    } = useDelete();
-    switch (type) {
-        case "banner":
-            return deleteBannerId(id);
-        case "promo":
-            return deletePromoId(id);
-        case "category":
-            return deleteCategoryId(id);
-        case "activity":
-            return deleteActivityId(id);
-        default:
-            return;
-    }
-}
+// export function handleDeleteItem(id, type) {
+//     const {
+//         deleteBannerId,
+//         deletePromoId,
+//         deleteCategoryId,
+//         deleteActivityId,
+//     } = useDelete();
+//     switch (type) {
+//         case "banner":
+//             return deleteBannerId(id);
+//         case "promo":
+//             return deletePromoId(id);
+//         case "category":
+//             return deleteCategoryId(id);
+//         case "activity":
+//             return deleteActivityId(id);
+//         default:
+//             return;
+//     }
+// }
 
 // export function handleAddItem(type, payload) {
 //     const { createBanner } = useCreate();
@@ -40,21 +40,21 @@ export function handleDeleteItem(id, type) {
 //     }
 // }
 
-export function handlerGetItemById(id, type) {
-    const { getCategoryById } = useGetDataById();
-    switch (type) {
-        case "banner":
-            return;
-        case "promo":
-            return;
-        case "category":
-            return getCategoryById(id);
-        case "activity":
-            return;
-        default:
-            return;
-    }
-}
+// export function handlerGetItemById(id, type) {
+//     const { getCategoryById } = useGetDataById();
+//     switch (type) {
+//         case "banner":
+//             return;
+//         case "promo":
+//             return;
+//         case "category":
+//             return getCategoryById(id);
+//         case "activity":
+//             return;
+//         default:
+//             return;
+//     }
+// }
 
 export function handleCreateRoute(type) {
     switch (type) {

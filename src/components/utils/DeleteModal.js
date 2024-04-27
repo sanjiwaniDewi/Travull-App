@@ -8,10 +8,32 @@ import {
 import { handleDeleteItem } from "@/utils/handleActionButton";
 import { changeDeleteSatus } from "@/redux/features/status/statusSilce";
 import { deleteItem } from "@/redux/features/data/dataSlice";
+import useDelete from "@/hooks/useDelete";
 
 export default function DeleteModal() {
     const { modalData } = useSelector((state) => state.modal);
     const dispatch = useDispatch();
+    const {
+        deleteBannerId,
+        deletePromoId,
+        deleteCategoryId,
+        deleteActivityId,
+    } = useDelete();
+
+    const handleDeleteItem = (id, type) => {
+        switch (type) {
+            case "banner":
+                return deleteBannerId(id);
+            case "promo":
+                return deletePromoId(id);
+            case "category":
+                return deleteCategoryId(id);
+            case "activity":
+                return deleteActivityId(id);
+            default:
+                return;
+        }
+    };
 
     const handleDelete = () => {
         handleDeleteItem(modalData.id, modalData.type);
