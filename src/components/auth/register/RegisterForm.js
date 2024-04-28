@@ -52,95 +52,104 @@ export default function RegisterForm() {
     };
 
     return (
-        <div className="card mx-auto my-auto px-4 pt-10 pb-6 rounded-5">
-            <h1 className="text-3xl font-bold text-center mb-6">Register</h1>
-            <div className="flex justify-center">
-                <p className="text-sm w-96 text-center text-red-600  ">
-                    {Array.isArray(errMessage)
-                        ? errMessage.join(" ")
-                        : errMessage}
-                </p>
-            </div>
-
-            <form
-                onSubmit={handleSubmitForm}
-                className="flex flex-col  gap-y-1 text-black "
-                onChange={handleChange}
-            >
-                <label className="text-sm">Nama</label>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Nama"
-                    className="bg-slate-100 px-3 py-3 rounded-xl focus:outline-none"
-                />
-                <label className="text-sm ">Nomor Handphone</label>
-                <input
-                    type="text"
-                    name="phoneNumber"
-                    placeholder="Phone number"
-                    className="bg-slate-100 px-3 py-3 rounded-xl focus:outline-none"
-                />
-
-                <label className="text-sm">Email</label>
-                <input
-                    type="text"
-                    name="email"
-                    placeholder="Email"
-                    className="bg-slate-100 px-3 py-3 rounded-xl focus:outline-none"
-                />
-                <div className="grid grid-cols-2 gap-2">
-                    <div className="flex flex-col gap-y-1">
-                        <label className="text-sm">Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            className="bg-slate-100 px-3 py-3 rounded-xl focus:outline-none"
-                        />
-                    </div>
-
-                    <div className="flex flex-col gap-y-1">
-                        <label className="text-sm">Repeat Password</label>
-                        <input
-                            type="password"
-                            name="passwordRepeat"
-                            placeholder="Repeat password"
-                            className="bg-slate-100 px-3 py-3 rounded-xl focus:outline-none"
-                        />
-                    </div>
+        <div className="card mx-auto my-auto rounded-5 bg-opacity-30">
+            <div className="px-4 pt-10 pb-6 rounded-5  bg-primary-100 bg-opacity-30">
+                <h1 className="text-3xl font-bold text-center mb-6">
+                    Register
+                </h1>
+                <div className="flex justify-center">
+                    <p className="text-sm w-96 text-center text-red-600  ">
+                        {Array.isArray(errMessage)
+                            ? errMessage.join(" ")
+                            : errMessage}
+                    </p>
                 </div>
 
-                <label className="text-sm">Role</label>
-                <select
-                    name="role"
-                    className="bg-slate-100 px-3 py-3 rounded-xl focus:outline-none"
+                <form
+                    onSubmit={handleSubmitForm}
+                    className="flex flex-col  gap-y-1 text-black  font-semibold"
+                    onChange={handleChange}
                 >
-                    <option value="admin">Admin</option>
-                    <option value="User">User</option>
-                </select>
-                <button
-                    type="submit"
-                    className="text-slate-50 mt-4 px-2 py-3 rounded-xl font-bold bg-slate-500 disabled:bg-slate-200 disabled:text-slate-400"
-                    disabled={errMessage.length || isLoading}
-                >
-                    {isLoading ? (
-                        <div
-                            className="spinner-border text-secondary"
-                            role="status"
-                        >
-                            <span className="visually-hidden">Loading...</span>
+                    <label className="text-sm">Nama</label>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Nama"
+                        className="bg-secondary-100 bg-opacity-30 hover:bg-secondary-100 px-3 py-3 rounded-xl focus:outline-none"
+                    />
+                    <label className="text-sm ">Nomor Handphone</label>
+                    <input
+                        type="text"
+                        name="phoneNumber"
+                        placeholder="Phone number"
+                        className="bg-secondary-100 bg-opacity-30 hover:bg-secondary-100 px-3 py-3 rounded-xl focus:outline-none"
+                    />
+
+                    <label className="text-sm">Email</label>
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        className="bg-secondary-100 bg-opacity-30 hover:bg-secondary-100 px-3 py-3 rounded-xl focus:outline-none"
+                    />
+                    <div className="grid grid-cols-2 gap-2">
+                        <div className="flex flex-col gap-y-1">
+                            <label className="text-sm">Password</label>
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                className="bg-secondary-100 bg-opacity-30 hover:bg-secondary-100 px-3 py-3 rounded-xl focus:outline-none"
+                            />
                         </div>
-                    ) : (
-                        "Register"
-                    )}
-                </button>
-            </form>
-            <div className="mt-4 flex justify-center gap-3">
-                <p>Sudah punya akun?</p>
-                <Link href="/login" className="text-blue-700 underline">
-                    Login
-                </Link>
+
+                        <div className="flex flex-col gap-y-1">
+                            <label className="text-sm">Repeat Password</label>
+                            <input
+                                type="password"
+                                name="passwordRepeat"
+                                placeholder="Repeat password"
+                                className="bg-secondary-100 bg-opacity-30 hover:bg-secondary-100 px-3 py-3 rounded-xl focus:outline-none"
+                            />
+                        </div>
+                    </div>
+
+                    <label className="text-sm">Role</label>
+                    <select
+                        name="role"
+                        className="bg-secondary-100 bg-opacity-30 hover:bg-secondary-100 px-3 py-3 rounded-xl focus:outline-none"
+                    >
+                        <option value="admin">Admin</option>
+                        <option value="User">User</option>
+                    </select>
+                    <button
+                        type="submit"
+                        className="text-slate-50 mt-4 px-2 py-3 border-2  rounded-xl font-bold bg-primary-200 hover:text-primary-200 hover:bg-secondary-200 disabled:bg-slate-200 disabled:text-slate-400"
+                        disabled={errMessage.length || isLoading}
+                    >
+                        {isLoading ? (
+                            <div
+                                className="spinner-border text-secondary"
+                                role="status"
+                            >
+                                <span className="visually-hidden">
+                                    Loading...
+                                </span>
+                            </div>
+                        ) : (
+                            "Register"
+                        )}
+                    </button>
+                </form>
+                <div className="mt-4 flex justify-center gap-3">
+                    <p>Sudah punya akun?</p>
+                    <Link
+                        href="/login"
+                        className="hover:text-blue-700 underline text-primary-200"
+                    >
+                        Login
+                    </Link>
+                </div>
             </div>
         </div>
     );

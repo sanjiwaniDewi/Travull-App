@@ -31,8 +31,8 @@ export default function RegisterPage() {
         handleIsRegister();
     }, [isRegister]);
     return (
-        <div className="relative container mx-auto w-full h-screen flex items-center content-center">
-            <div className="shadow-xl bg-slate-50 bg-opacity-60 rounded-5 mx-auto">
+        <div className="relative container mx-auto w-full h-screen flex items-center content-center bg-opacity-60 ">
+            <div className="shadow-xl  bg-opacity-60 rounded-5 mx-auto">
                 <RegisterForm />
             </div>
 
@@ -42,7 +42,7 @@ export default function RegisterPage() {
                         <p className="text-3xl font-bold mb-4">
                             Sukses Register
                         </p>
-                        <div className="text-5xl font-extrabold flex justify-center">
+                        <div className="text-5xl font-extrabold flex justify-center text-secondary-200">
                             <BsPatchCheck />
                         </div>
                     </div>
