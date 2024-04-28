@@ -34,7 +34,12 @@ export default function LoginButton() {
                     </div>
                 </div>
             ) : (
-                <Link href="/login">Login</Link>
+                <Link
+                    href="/login"
+                    className="font-bold py-2 px-2 w-fit outline outline-2 outline-primary-200 hover:bg-primary-200 hover:text-secondary-100 rounded-2xl"
+                >
+                    Login
+                </Link>
             )}
         </>
     );
