@@ -66,6 +66,7 @@ export default function CategoryForm({ categoryData }) {
             createCategory(handleCategoryForm(formData, imageUrl));
 
             dispatch(changeCreateSatus());
+            dispatch(deleteImageUrl());
             router.back();
 
             //

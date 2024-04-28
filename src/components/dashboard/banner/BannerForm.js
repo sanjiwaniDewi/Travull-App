@@ -60,7 +60,7 @@ export default function BannerForm({ bannerData }) {
                 dispatch(changeEditStatus());
                 dispatch(updateItem(bannerData));
             } catch (err) {}
-
+            dispatch(deleteImageUrl());
             router.back();
 
             // router.back();
@@ -68,14 +68,14 @@ export default function BannerForm({ bannerData }) {
             dispatch(getImageUrl(newImageUrl));
             createBanner({ name, imageUrl: newImageUrl });
 
-            if (isCreate) {
-                dispatch(changeCreateSatus());
-                router.back();
-            }
+            dispatch(deleteImageUrl());
+            dispatch(changeCreateSatus());
+            router.back();
+
             // router.back();
         }
 
-        // dispatch(deleteImageUrl());
+        //
         // router.push("/dashboard");
     };
 

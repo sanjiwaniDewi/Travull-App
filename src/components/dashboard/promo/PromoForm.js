@@ -68,6 +68,8 @@ export default function PromoForm({ promoData }) {
                 }
                 createPromo(handlePromoForm(formData, imageUrl));
 
+                dispatch(deleteImageUrl());
+
                 dispatch(changeCreateSatus());
                 router.back();
             }

@@ -39,7 +39,7 @@ const imageSlice = createSlice({
     initialState,
     reducers: {
         getImageUrl(state, action) {
-            state.imageUrl = action.payload;
+            state.imageUrl = action.payload !== null ? action.payload : "";
         },
 
         setImagesUrls(state, action) {
@@ -47,6 +47,8 @@ const imageSlice = createSlice({
                 state.imageUrls = [...state.imageUrls, action.payload];
             } else if (state.imageUrls.includes(action.payload)) {
                 return;
+            } else if (Array.isArray(action.payload)) {
+                state.imageUrls = action.payload;
             } else {
                 state.imageUrls = [action.payload];
             }
