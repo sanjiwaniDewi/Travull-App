@@ -48,12 +48,17 @@ body {
     font-size: 68px !important;
 }
 
-.loginPage {
-    /* background-image: url("../../public/Background2.jpeg");
+.notifIcons {
+    font-size: 96px !important;
+}
+
+.loginBackground,
+.registerBackground {
+    background-image: url("../../public/Designer\ \(3\).jpeg");
     object-fit: cover;
     background-repeat: no-repeat;
     background-position: cover;
-    background-size: cover; */
+    background-size: cover;
 }
 .title-homepage {
     font-size: 68px !important;
