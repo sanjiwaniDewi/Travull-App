@@ -81,75 +81,119 @@ export default function PromoForm({ promoData }) {
                 <ImagePreview figureUrl={promoData?.imageUrl} />
             </div>
 
-            <div className=" lg:w-1/3 w-3/4 p-6 bg-white border shadow-md border-gray-200 rounded-xl">
+            <div className=" lg:w-1/2 w-3/4 p-6 bg-white border shadow-md border-gray-200 rounded-xl">
                 <div className="flex flex-col justify-center items-center gap-y-4">
                     <ImageBtnOption
                         haveImageUrl={handleHaveImageUrl}
                         uploadImage={handleUploadImage}
+                        isHaveImageUrl={isHaveImageUrl}
                     />
                     {isUploadImage && (
                         <div className="w-11/12 self-center">
-                            <UploadImage />
+                            <label className="text-sm font-semibold">
+                                Upload Gambar
+                            </label>
+                            <UploadImage
+                                customStyleBtn={
+                                    "bg-primary-200 w-full px-4 rounded-xl text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 "
+                                }
+                                customStyleInput="bg-secondary-200 bg-opacity-30 mt-1 mb-0"
+                            />
                         </div>
                     )}
 
                     <form
                         onSubmit={handleSubmitForm}
-                        className="self-center w-11/12 flex flex-col gap-y-1"
+                        className="self-center w-11/12   gap-y-1"
                     >
-                        <input
-                            defaultValue={promoData?.title}
-                            name="title"
-                            className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                            placeholder="title"
-                        />
-                        {isHaveImageUrl && (
-                            <input
-                                defaultValue={promoData?.imageUrl}
-                                name="imageUrl"
-                                className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                placeholder="Image Url"
-                            />
-                        )}
+                        <div className="lg:flex  gap-x-4 pb-8">
+                            <div>
+                                <label className="text-sm font-semibold">
+                                    Judul Promo
+                                </label>
+                                <input
+                                    defaultValue={promoData?.title}
+                                    name="title"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Judul Promo"
+                                />
+                                {isHaveImageUrl && (
+                                    <div>
+                                        <label className="text-sm font-semibold">
+                                            Url gambar
+                                        </label>
+                                        <input
+                                            defaultValue={promoData?.imageUrl}
+                                            name="imageUrl"
+                                            className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                            placeholder="Url gambar"
+                                        />
+                                    </div>
+                                )}
 
-                        <input
-                            defaultValue={promoData?.promo_code}
-                            name="promoCode"
-                            className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                            placeholder="Promo Code"
-                        />
-                        <textarea
-                            defaultValue={promoData?.description}
-                            name="description"
-                            className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                            placeholder="Description"
-                        ></textarea>
-                        <textarea
-                            defaultValue={promoData?.terms_condition}
-                            name="termCondition"
-                            className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                            placeholder="termCondition"
-                        ></textarea>
-                        <input
-                            defaultValue={promoData?.promo_discount_price}
-                            type="number"
-                            name="promoDiscountPrice"
-                            className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                            placeholder="Promo Discount Price"
-                        />
-                        <input
-                            defaultValue={promoData?.minimum_claim_price}
-                            type="number"
-                            name="minClaimPrice"
-                            className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                            placeholder="Minimum Claim Price"
-                        />
+                                <label className="text-sm font-semibold">
+                                    Kode Promo
+                                </label>
+
+                                <input
+                                    defaultValue={promoData?.promo_code}
+                                    name="promoCode"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Kode promo"
+                                />
+
+                                <label className="text-sm font-semibold">
+                                    Deskripsi
+                                </label>
+                                <textarea
+                                    defaultValue={promoData?.description}
+                                    name="description"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Deskripsi"
+                                ></textarea>
+                            </div>
+                            <div>
+                                <label className="text-sm font-semibold">
+                                    Sarat & ketentuan
+                                </label>
+                                <textarea
+                                    defaultValue={promoData?.terms_condition}
+                                    name="termCondition"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder=" Sarat & Ketentuan"
+                                ></textarea>
+                                <label className="text-sm font-semibold">
+                                    Harga diskon
+                                </label>
+                                <input
+                                    defaultValue={
+                                        promoData?.promo_discount_price
+                                    }
+                                    type="number"
+                                    name="promoDiscountPrice"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Harga Promo"
+                                />
+                                <label className="text-sm font-semibold">
+                                    Minimum Klaim
+                                </label>
+                                <input
+                                    defaultValue={
+                                        promoData?.minimum_claim_price
+                                    }
+                                    type="number"
+                                    placeholder="Minium Klaim Promo"
+                                    name="minClaimPrice"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                />
+                            </div>
+                        </div>
 
                         <div className="flex justify-center">
                             <button
                                 type="submit"
                                 disabled={!isHaveImageUrl && !isUploadImage}
-                                className="bg-slate-500 text-sm text-white py-2  px-4 rounded-2xl w-1/4"
+                                className="bg-primary-200  text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 px-4 py-3 rounded-2xl w-1/4"
                             >
                                 Submit
                             </button>

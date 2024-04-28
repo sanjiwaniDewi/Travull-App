@@ -9,6 +9,7 @@ import { handleDeleteItem } from "@/utils/handleActionButton";
 import { changeDeleteSatus } from "@/redux/features/status/statusSilce";
 import { deleteItem } from "@/redux/features/data/dataSlice";
 import useDelete from "@/hooks/useDelete";
+import { TiWarningOutline } from "react-icons/ti";
 
 export default function DeleteModal() {
     const { modalData } = useSelector((state) => state.modal);
@@ -50,19 +51,22 @@ export default function DeleteModal() {
         dispatch(setModalType(""));
     };
     return (
-        <div className="text-center p-4">
-            <h1 className="text-3xl font-bold mb-8">Logout</h1>
-            <p className="mb-12">Apakah anda nyakin ingin menghapus Data?</p>
+        <div className="text-center p-2 ">
+            <h1 className="text-3xl font-bold mb-4">Delete</h1>
+            <div className="text-5xl notifIcons w-full flex items-center justify-center text-orange-600 py-2">
+                <TiWarningOutline />
+            </div>
+            <p className="mb-8">Apakah anda nyakin ingin menghapus Data?</p>
 
             <div className="w-full flex justify-between ">
                 <button
-                    className="px-4 py-2 bg-slate-500 hover:bg-slate-200 hover:text-black rounded-xl font-lg text-slate-200 font-semibold "
+                    className="px-4 py-2 bg-primary-200 text-secondary-200 hover:bg-secondary-200 hover:text-primary-200 rounded-xl font-lg  font-semibold "
                     onClick={handleCloseModal}
                 >
                     Tidak
                 </button>
                 <button
-                    className="px-4 py-2 bg-orange-400 hover:bg-orange-200 hover:text-black rounded-xl font-lg text-slate-200 font-semibold "
+                    className="px-4 py-2 bg-orange-600 hover:bg-orange-200 hover:text-black rounded-xl font-lg text-slate-200 font-semibold "
                     onClick={handleDelete}
                 >
                     Hapus

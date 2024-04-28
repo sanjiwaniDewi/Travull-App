@@ -8,6 +8,8 @@ import { TbBeach } from "react-icons/tb";
 import { FaUser } from "react-icons/fa";
 import { MdDashboardCustomize } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";
+import LogoutButton from "./LogoutButton";
+import { MdLogout } from "react-icons/md";
 
 export default function MenuNavDashboard() {
     return (
@@ -64,6 +66,13 @@ export default function MenuNavDashboard() {
                     <TbBeach />
                     <p className="pt-1">Aktivitas</p>
                 </Link>
+                <div className="flex gap-2 items-center py-3 px-2  rounded-lg hover:bg-primary-200 hover:text-secondary-200">
+                    <MdLogout />
+                    <LogoutButton
+                        isDashboard={true}
+                        styleButon={" text-start "}
+                    />
+                </div>
             </ul>
         </div>
     );

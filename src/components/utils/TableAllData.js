@@ -90,11 +90,14 @@ export default function TabelAllData({ data, title, type }) {
             </div>
             <table className="table text-lg table-compact w-full overflow-x-auto">
                 <thead className="shadow-xl">
-                    <tr className="text-md">
+                    <tr className="text-md shadow-md  bg-primary-200 text-secondary-200">
                         {tableTitle?.map((item) => {
                             if (item === "id") {
                                 return (
-                                    <th key={item} className="text-left">
+                                    <th
+                                        key={item}
+                                        className="text-left py-2 ps-4"
+                                    >
                                         no
                                     </th>
                                 );
@@ -107,12 +110,16 @@ export default function TabelAllData({ data, title, type }) {
                                 item === "name"
                             ) {
                                 return (
-                                    <th key={item} className="text-left">
+                                    <th key={item} className="text-left py-2">
                                         {item}
                                     </th>
                                 );
                             } else if (item === "action") {
-                                return <th key={`${item}`}>{item}</th>;
+                                return (
+                                    <th key={`${item}`} className="py-2">
+                                        {item}
+                                    </th>
+                                );
                             }
 
                             return;
@@ -124,12 +131,16 @@ export default function TabelAllData({ data, title, type }) {
                         <tr key={row.id} className=" text-md">
                             {tableTitle.map((head, indexs) => {
                                 if (head === "id") {
-                                    return <td key={index}>{index + 1}</td>;
+                                    return (
+                                        <td key={index} className="ps-4 pt-3">
+                                            {index + 1}
+                                        </td>
+                                    );
                                 } else if (head === "no") {
                                     return;
                                 } else if (head === "action") {
                                     return (
-                                        <td key={row["id"]} className="py-2">
+                                        <td key={row["id"]} className="pt-3">
                                             <div className=" flex  justify-center content-start">
                                                 <ActionButtons
                                                     // id={row["id"]}
@@ -158,13 +169,19 @@ export default function TabelAllData({ data, title, type }) {
                                     );
                                 } else if (head === "updatedAt") {
                                     return (
-                                        <td key={`${row[head]}updt`}>
+                                        <td
+                                            key={`${row[head]}updt`}
+                                            className="pt-3"
+                                        >
                                             {formatDate(row[head])}
                                         </td>
                                     );
                                 } else if (head === "createdAt") {
                                     return (
-                                        <td key={`${row[head]}crt`}>
+                                        <td
+                                            key={`${row[head]}crt`}
+                                            className="pt-3"
+                                        >
                                             {formatDate(row[head])}
                                         </td>
                                     );
@@ -173,7 +190,10 @@ export default function TabelAllData({ data, title, type }) {
                                     head === "title"
                                 ) {
                                     return (
-                                        <td key={`${row[head]}`}>
+                                        <td
+                                            key={`${row[head]}`}
+                                            className="pt-3"
+                                        >
                                             {row[head]}
                                         </td>
                                     );

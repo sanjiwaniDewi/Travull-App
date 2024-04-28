@@ -84,38 +84,57 @@ export default function CategoryForm({ categoryData }) {
                     <ImageBtnOption
                         haveImageUrl={handleHaveImageUrl}
                         uploadImage={handleUploadImage}
+                        isHaveImageUrl={isHaveImageUrl}
                     />
                     {isUploadImage && (
                         <div className="w-11/12 self-center">
-                            <UploadImage />
+                            <label className="text-sm font-semibold">
+                                Upload Image
+                            </label>
+                            <UploadImage
+                                customStyleBtn={
+                                    "bg-primary-200 w-full px-4 rounded-xl text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 "
+                                }
+                                customStyleInput="bg-secondary-200 bg-opacity-30 mt-1 mb-0"
+                            />
                         </div>
                     )}
                     <form
                         onSubmit={handleSubmit}
                         className="self-center w-11/12 flex flex-col gap-y-1"
                     >
+                        <label className="text-sm font-semibold">
+                            Nama Destinasi
+                        </label>
                         <input
                             defaultValue={
                                 categoryData ? categoryData?.name : ""
                             }
                             name="name"
-                            className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                            placeholder="Category Name"
+                            className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                            placeholder="Nama Destinasi"
                         />
                         {isHaveImageUrl && (
-                            <input
-                                defaultValue={
-                                    categoryData ? categoryData?.imageUrl : ""
-                                }
-                                name="imageUrl"
-                                placeholder="Image Url"
-                                className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                            />
+                            <div>
+                                <label className="text-sm font-semibold">
+                                    Url Gambar
+                                </label>
+                                <input
+                                    defaultValue={
+                                        categoryData
+                                            ? categoryData?.imageUrl
+                                            : ""
+                                    }
+                                    name="imageUrl"
+                                    placeholder="Url Gambar"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300  "
+                                />
+                            </div>
                         )}
                         <div className="flex justify-center">
                             <button
                                 type="submit"
-                                className="bg-slate-500 text-sm text-white py-2  px-4 rounded-2xl w-1/4"
+                                className="bg-primary-200  text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 px-4 py-3 rounded-2xl w-1/4"
                             >
                                 Submit
                             </button>

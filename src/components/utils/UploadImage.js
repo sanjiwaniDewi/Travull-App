@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setImagesUrls, uploadImage } from "@/redux/features/upload/imageSlice";
 import ProfieImage from "../profile/ProfileImage";
 
-export default function UploadImage({ handleMultiple }) {
+export default function UploadImage({
+    handleMultiple,
+    customStyleBtn,
+    customStyleInput,
+}) {
     const imageUploadRef = useRef();
     const { imageUrl } = useSelector((store) => store.image);
 
@@ -18,9 +22,7 @@ export default function UploadImage({ handleMultiple }) {
         formData.append("image", uploadedImage);
         try {
             dispatch(uploadImage(formData));
-        } catch (err) {
-            
-        }
+        } catch (err) {}
         if (handleMultiple) {
             handleMultiple();
         }
@@ -44,14 +46,11 @@ export default function UploadImage({ handleMultiple }) {
             <input
                 type="file"
                 name="image"
-                className="self-center bg-slate-200 col-span-2 w-full py-3 px-3 rounded-xl"
+                className={`self-center col-span-2 w-full py-3 px-3 rounded-xl ${customStyleInput}`}
                 ref={imageUploadRef}
             />
             <div className="flex justify-start">
-                <button
-                    type="submit"
-                    className="text-sm font-bold rounded-xl px-5 py-2 bg-slate-500 text-white "
-                >
+                <button type="submit" className={customStyleBtn}>
                     upload
                 </button>
             </div>

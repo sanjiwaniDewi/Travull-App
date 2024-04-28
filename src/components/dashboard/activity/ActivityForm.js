@@ -140,7 +140,7 @@ export default function ActivityForm({ activityData }) {
 
     return (
         <div className="w-full container mx-auto flex flex-col py-16  items-center ">
-            <div className=" w-3/4 mb-4 rounded-lg">
+            <div className=" lg:w-1/2 w-3/4 mb-4 rounded-lg">
                 {imageUrls?.length > 1 || activityData?.imageUrls.length > 1 ? (
                     <ImageCarousel
                         images={
@@ -165,14 +165,22 @@ export default function ActivityForm({ activityData }) {
                     <ImageBtnOption
                         haveImageUrl={handleHaveImageUrl}
                         uploadImage={handleUploadImage}
+                        isHaveImageUrl={isHaveImageUrl}
                     />
 
                     {isUploadImage && (
-                        <div className="w-11/2 self-center">
+                        <div className="w-11/12 self-center">
                             {!isMultipleImage ? (
                                 <div className="mt-8">
+                                    <label className="text-sm font-semibold">
+                                        Upload Gambar
+                                    </label>
                                     <UploadImage
                                         handleMultiple={handleMultipleImage}
+                                        customStyleBtn={
+                                            "bg-primary-200 w-full px-4 rounded-xl text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 "
+                                        }
+                                        customStyleInput="bg-secondary-200 bg-opacity-30 mt-1 mb-0"
                                     />
                                 </div>
                             ) : (
@@ -190,30 +198,42 @@ export default function ActivityForm({ activityData }) {
                     >
                         <div className="grid grid-cols-2 gap-4">
                             <div>
+                                <label className="text-sm font-semibold">
+                                    Judul Aktivitas
+                                </label>
                                 <input
                                     defaultValue={activityData?.title}
                                     name="title"
-                                    className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                    placeholder="Title"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Aktivitas"
                                 />
                                 {isHaveImageUrl && (
                                     <div>
+                                        <label className="text-sm font-semibold">
+                                            Url gambar
+                                        </label>
                                         <input
                                             defaultValue={
                                                 activityData?.imageUrls
                                             }
                                             name="imageUrl"
-                                            placeholder="Image Url"
-                                            className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                            placeholder="Url gambar"
+                                            className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                         />
                                     </div>
                                 )}
+                                <label className="text-sm font-semibold">
+                                    Deskripsi
+                                </label>
                                 <input
                                     defaultValue={activityData?.description}
                                     name="description"
                                     placeholder="Description"
-                                    className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
+                                <label className="text-sm font-semibold">
+                                    Destinasi
+                                </label>
                                 <select
                                     value={
                                         category
@@ -221,10 +241,10 @@ export default function ActivityForm({ activityData }) {
                                             : activityData?.categoryId
                                     }
                                     name="category"
-                                    className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                     onChange={handleChangeCategory}
                                 >
-                                    <option value="category">category</option>
+                                    <option value="category">Destinasi</option>
                                     {categories &&
                                         categories.map((category) => (
                                             <option
@@ -236,69 +256,97 @@ export default function ActivityForm({ activityData }) {
                                             </option>
                                         ))}
                                 </select>
+                                <label className="text-sm font-semibold">
+                                    Harga
+                                </label>
                                 <input
                                     defaultValue={activityData?.price}
                                     name="price"
-                                    placeholder="Price"
-                                    className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Harga"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
+
+                                <label className="text-sm font-semibold">
+                                    Diskon
+                                </label>
                                 <input
                                     defaultValue={activityData?.price_discount}
                                     name="priceDiscount"
-                                    placeholder="Price Discount"
-                                    className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Harga Diskon"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
+                                <label className="text-sm font-semibold">
+                                    Rating
+                                </label>
                                 <input
                                     defaultValue={activityData?.rating}
                                     name="rating"
                                     placeholder="Rating"
-                                    className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
                             </div>
 
                             <div>
+                                <label className="text-sm font-semibold">
+                                    Total Review
+                                </label>
                                 <input
                                     defaultValue={activityData?.total_reviews}
                                     name="totalReviews"
-                                    placeholder="Total Reviews"
-                                    className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Total Review"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
+                                <label className="text-sm font-semibold">
+                                    Fasilitas
+                                </label>
                                 <input
                                     defaultValue={activityData?.facilities}
                                     name="facilities"
-                                    placeholder="Facilities"
-                                    className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Fasilitas"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
+                                <label className="text-sm font-semibold">
+                                    Kota
+                                </label>
                                 <input
                                     defaultValue={activityData?.city}
                                     name="city"
-                                    placeholder="City"
-                                    className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Kota"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
+                                <label className="text-sm font-semibold">
+                                    Provinsi
+                                </label>
                                 <input
                                     defaultValue={activityData?.province}
                                     name="province"
-                                    placeholder="Province"
-                                    className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Provinsi"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
+                                <label className="text-sm font-semibold">
+                                    Alamat lengkap
+                                </label>
                                 <textarea
                                     defaultValue={activityData?.address}
                                     name="address"
-                                    placeholder="Detail Address"
-                                    className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Alamat lengap"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
+                                <label className="text-sm font-semibold">
+                                    Peta lokasi
+                                </label>
                                 <textarea
                                     defaultValue={activityData?.location_maps}
                                     name="locationMaps"
-                                    placeholder="Location Maps"
-                                    className="w-full focus:outline-slate-600 py-3 mb-2 bg-slate-100 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    placeholder="Peta lokasi"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
                             </div>
                         </div>
                         <div className="w-11/12 flex justify-center mt-4">
                             <button
                                 type="submit"
-                                className="bg-slate-500 text-sm text-white py-2  px-4 rounded-2xl w-1/4"
+                                className="bg-primary-200  text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 px-4 py-3 rounded-2xl w-1/4"
                                 disabled={!isHaveImageUrl && !isUploadImage}
                             >
                                 Submit

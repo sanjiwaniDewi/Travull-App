@@ -88,7 +88,7 @@ export default function ShortTable({ data, title, detileLink, type }) {
                     </div>
                 </div>
                 <table className="table table-compact w-full">
-                    <thead className=" pb-2 px-2 ">
+                    <thead className=" pb-2 px-2  shadow-xl ">
                         <tr className="text-md shadow-md  bg-primary-200 text-secondary-200">
                             {tableTitle?.map((item) => {
                                 if (item === "id") {

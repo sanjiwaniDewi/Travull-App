@@ -54,7 +54,20 @@ export default function RoleModal() {
             <Card>
                 <div className="flex justify-end">
                     <button onClick={handleShowModal} className="text-black">
-                        close
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
                     </button>
                 </div>
 
@@ -75,8 +88,7 @@ export default function RoleModal() {
                         <form onSubmit={changeRole} className="flex flex-col">
                             <select
                                 name="role"
-                                className="text-black bg-slate-100 mt-1 px-2
-                                    py-4 rounded-xl focus:outline-none"
+                                className="w-full  focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 defaultValue={userData.role}
                             >
                                 <option value="user">User</option>
@@ -84,7 +96,7 @@ export default function RoleModal() {
                             </select>
                             <button
                                 type="submit"
-                                className="mt-5 block px-4 py-3 text-sm text-white bg-slate-600 rounded-lg font-medium hover:bg-slate-300 hover:text-slate-800"
+                                className="bg-primary-200 w-full mt-4  text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 px-4 py-3 rounded-2xl"
                             >
                                 Submit
                             </button>
