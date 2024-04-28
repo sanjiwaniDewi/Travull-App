@@ -5,6 +5,7 @@ export default function TableUser({ data, currentPage }) {
     const tableTitle = [
         ...new Set(data?.map((item) => Object.keys(item)).flat()),
     ];
+    console.log(data);
 
     if (tableTitle.length !== 0) {
         tableTitle.push("action");
@@ -14,21 +15,28 @@ export default function TableUser({ data, currentPage }) {
         <div className="overflow-x-auto">
             <table className="w-full  table table-compact text-md">
                 <thead>
-                    <tr>
+                    <tr className="lg:text-md text-md bg-primary-200 text-secondary-200">
                         {tableTitle?.map((item) => {
                             if (item === "id") {
                                 return (
-                                    <th key={item} className="text-left">
+                                    <th
+                                        key={item}
+                                        className="text-left py-2 ps-4"
+                                    >
                                         no
                                     </th>
                                 );
                             } else if (item === "profilePictureUrl") {
                                 return;
                             } else if (item === "action") {
-                                return <th key={item}>{item}</th>;
+                                return (
+                                    <th key={item} className="py-2">
+                                        {item}
+                                    </th>
+                                );
                             } else {
                                 return (
-                                    <th key={item} className="text-left">
+                                    <th key={item} className="text-left py-2">
                                         {item}
                                     </th>
                                 );
@@ -36,7 +44,7 @@ export default function TableUser({ data, currentPage }) {
                         })}
                     </tr>
                 </thead>
-                <tbody className=" divide-y divide-slate-200">
+                <tbody className="lg:text-md text-md divide-y divide-slate-200">
                     {data?.map((item, index) => {
                         return (
                             <tr key={index}>
@@ -49,6 +57,7 @@ export default function TableUser({ data, currentPage }) {
                                                     1 +
                                                     (currentPage - 1) * 12
                                                 }
+                                                className="ps-4 pt-3"
                                             >
                                                 {index +
                                                     1 +
@@ -60,7 +69,7 @@ export default function TableUser({ data, currentPage }) {
                                     } else if (indexs === 1) {
                                         return (
                                             <td
-                                                className="flex flex-row gap-2 items-center py-1"
+                                                className="flex flex-row gap-2 items-center pt-3 "
                                                 key={item[head]}
                                             >
                                                 <img
@@ -82,7 +91,7 @@ export default function TableUser({ data, currentPage }) {
                                     } else if (head === "action") {
                                         return (
                                             <td key={item["id"]}>
-                                                <div className=" flex  justify-center content-start">
+                                                <div className=" flex  justify-center content-start pt-3">
                                                     <ChangeRole
                                                         userData={item}
                                                     />
@@ -91,7 +100,12 @@ export default function TableUser({ data, currentPage }) {
                                         );
                                     }
                                     return (
-                                        <td key={item[head] + item["id"]}>
+                                        <td
+                                            key={
+                                                item[head] + item["id"] + indexs
+                                            }
+                                            className="pt-3"
+                                        >
                                             {item[head]}
                                         </td>
                                     );
