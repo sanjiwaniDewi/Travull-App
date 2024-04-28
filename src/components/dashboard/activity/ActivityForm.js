@@ -25,7 +25,7 @@ import { useRouter } from "next/navigation";
 
 export default function ActivityForm({ activityData }) {
     const [categories, setCategories] = useState();
-    const [newImageUrls, setNewImageUrls] = useState();
+    const [newImageUrlUpload, setNewImageUrlsUpload] = useState([]);
     const [category, setCategory] = useState();
     const [isMultipleImage, setIsMultipleImage] = useState(false);
     const [isHaveImageUrl, setIsHaveImageUrl] = useState(false);
@@ -38,9 +38,11 @@ export default function ActivityForm({ activityData }) {
     const dispatch = useDispatch();
     const router = useRouter();
 
+    console.log("activityData", activityData);
+
     const { isCreate } = useSelector((store) => store.status);
 
-    //hapus image url jika ada image url di hooks
+    //hapus image url jika ada image url di redux
     const deleteImageWhenCreate = () => {
         if (imageUrl || imageUrls) {
             dispatch(deleteImageUrl());
@@ -50,6 +52,15 @@ export default function ActivityForm({ activityData }) {
     useEffect(() => {
         deleteImageWhenCreate();
     }, []);
+
+    const handleOnEditActivity = () => {
+        if (imageUrls.length === 0 && activityData?.imageUrls.length > 0) {
+            dispatch(setImagesUrls(activityData?.imageUrls));
+        }
+    };
+    useEffect(() => {
+        handleOnEditActivity();
+    }, [activityData?.imageUrls]);
 
     // set imageurls setelah upload
     const handdleaddImageUrl = () => {
@@ -115,6 +126,7 @@ export default function ActivityForm({ activityData }) {
             );
             dispatch(updateItem(activityData));
             dispatch(changeEditStatus());
+            dispatch(deleteImageUrl());
             router.back();
 
             // console.log("imageurl", imageUrlPayload);
@@ -132,7 +144,7 @@ export default function ActivityForm({ activityData }) {
             createActivity(
                 handleActivityForm(formData, newImageUrls, isHaveImageUrl)
             );
-
+            dispatch(deleteImageUrl());
             dispatch(changeCreateSatus());
             router.back();
         }
@@ -141,7 +153,7 @@ export default function ActivityForm({ activityData }) {
     return (
         <div className="w-full container mx-auto flex flex-col py-16  items-center ">
             <div className=" lg:w-1/2 w-3/4 mb-4 rounded-lg">
-                {imageUrls?.length > 1 || activityData?.imageUrls.length > 1 ? (
+                {imageUrls?.length > 1 ? (
                     <ImageCarousel
                         images={
                             imageUrls.length !== 0
@@ -262,6 +274,7 @@ export default function ActivityForm({ activityData }) {
                                 <input
                                     defaultValue={activityData?.price}
                                     name="price"
+                                    type="number"
                                     placeholder="Harga"
                                     className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
@@ -272,6 +285,7 @@ export default function ActivityForm({ activityData }) {
                                 <input
                                     defaultValue={activityData?.price_discount}
                                     name="priceDiscount"
+                                    type="number"
                                     placeholder="Harga Diskon"
                                     className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
@@ -281,6 +295,7 @@ export default function ActivityForm({ activityData }) {
                                 <input
                                     defaultValue={activityData?.rating}
                                     name="rating"
+                                    type="number"
                                     placeholder="Rating"
                                     className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
@@ -293,6 +308,7 @@ export default function ActivityForm({ activityData }) {
                                 <input
                                     defaultValue={activityData?.total_reviews}
                                     name="totalReviews"
+                                    type="number"
                                     placeholder="Total Review"
                                     className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                                 />
