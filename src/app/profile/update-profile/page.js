@@ -71,8 +71,15 @@ export default function UpdateProfilePage() {
                                 <ProfieImage
                                     image={dataUser.profilePictureUrl}
                                 />
-                                <div className="flex justify-center">
-                                    <UploadImage />
+                                <div className="flex justify-center text-sm">
+                                    <UploadImage
+                                        customStyleBtn={
+                                            "  w-full px-2 py-3 rounded-xl font-semibold text-sm  bg-secondary-100 text-primary-200"
+                                        }
+                                        customStyleInput={
+                                            "bg-primary-100  px-2 py-4 rounded-xl focus:outline-secondary-100"
+                                        }
+                                    />
                                 </div>
                             </div>
                             <FormUpdate
