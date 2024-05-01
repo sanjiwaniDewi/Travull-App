@@ -1,86 +1,104 @@
 "use client";
-import { useState } from "react";
-import UploadImage from "../../utils/UploadImage";
-import ImagePreview from "../../utils/ImagePreview";
-import useCreate from "@/hooks/useCreate";
+import { useEffect, useState } from "react";
 import { handlePromoForm } from "@/utils/handleInputForm";
 import { useRouter } from "next/navigation";
-import useUpdate from "@/hooks/useUpdate";
 import { useSelector, useDispatch } from "react-redux";
-import ImageBtnOption from "@/components/utils/ImageBtnOption";
-import {
-    deleteImageUrl,
-    getImageUrl,
-} from "@/redux/features/upload/imageSlice";
+import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
 import { updateItem } from "@/redux/features/data/dataSlice";
-import {
-    changeCreateSatus,
-    changeEditStatus,
-    changeDeleteSatus,
-} from "@/redux/features/status/statusSilce";
+
+import ImageBtnOption from "@/components/utils/ImageBtnOption";
+import useCreate from "@/hooks/useCreate";
+import useUpdate from "@/hooks/useUpdate";
+import UploadImage from "../../utils/UploadImage";
+import ImagePreview from "../../utils/ImagePreview";
 
 export default function PromoForm({ promoData }) {
     const [isHaveImageUrl, setIsHaveImageUrl] = useState(false);
     const [isUploadImage, setIsUploadImage] = useState(true);
+    const [errorMessage, setErrorMessage] = useState([]);
+
     const { imageUrl } = useSelector((store) => store.image);
-    const { isUpdate, isCreate } = useSelector((store) => store.status);
-    const { createPromo } = useCreate();
-    const { updatePromo } = useUpdate();
+    const {
+        createPromo,
+        loading: loadingCreate,
+        err: errorCreate,
+        success: successCreate,
+    } = useCreate();
+    const {
+        updatePromo,
+        loading: loadingUpdate,
+        err: errorUpdate,
+        success: successUpdate,
+    } = useUpdate();
 
     const dispatch = useDispatch();
-
     const router = useRouter();
+
+    //choose have imageurl
     const handleHaveImageUrl = () => {
         dispatch(deleteImageUrl());
         setIsHaveImageUrl(true);
         setIsUploadImage(false);
     };
+
+    //choose upload image
     const handleUploadImage = () => {
         dispatch(deleteImageUrl());
         setIsUploadImage(true);
         setIsHaveImageUrl(false);
     };
 
+    const handleErrorMessage = () => {
+        if (errorCreate) {
+            setErrorMessage(errorCreate.map((e) => e.message));
+        }
+        console.log(errorUpdate);
+        if (errorUpdate) {
+            setErrorMessage(errorUpdate.split(","));
+        }
+    };
+
+    useEffect(() => {
+        handleErrorMessage();
+    }, [errorCreate, errorUpdate]);
+
+    const handleChangePromoForm = () => {
+        setErrorMessage("");
+    };
+
     const handleSubmitForm = (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        const newImageUrl = formData.get("imageUrl");
 
-        try {
-            if (promoData) {
-                // updatePromo(promoData.id, handlePromoForm(formData));
-                if (isHaveImageUrl) {
-                    dispatch(getImageUrl(newImageUrl));
-                }
-
-                const figureUrl = imageUrl ? imageUrl : promoData?.imageUrl;
-
-                updatePromo(
-                    promoData.id,
-                    handlePromoForm(formData, figureUrl, isHaveImageUrl)
-                );
-                dispatch(updateItem(promoData));
-                dispatch(changeEditStatus());
-                router.back();
-            } else {
-                if (isHaveImageUrl) {
-                    dispatch(getImageUrl(newImageUrl));
-                }
-                createPromo(handlePromoForm(formData, imageUrl));
-
-                dispatch(deleteImageUrl());
-
-                dispatch(changeCreateSatus());
-                router.back();
-            }
-        } catch (err) {}
-        // router.back();
+        if (promoData) {
+            const figureUrl = imageUrl ? imageUrl : promoData?.imageUrl;
+            updatePromo(
+                promoData.id,
+                handlePromoForm(formData, figureUrl, isHaveImageUrl)
+            );
+            dispatch(updateItem(promoData));
+        } else {
+            createPromo(handlePromoForm(formData, imageUrl));
+            dispatch(deleteImageUrl());
+        }
     };
 
+    const handleSuccsess = () => {
+        if (successCreate || successUpdate) {
+            router.push("/dashboard/promo");
+        }
+    };
+
+    useEffect(() => {
+        handleSuccsess();
+    }, [successCreate, successUpdate]);
+
     return (
-        <div className="w-full container mx-auto flex flex-col py-16  items-center ">
+        <div className="w-full container mx-auto flex flex-col py-5  items-center ">
             <div className=" w-3/4 mb-4 rounded-lg">
-                <ImagePreview figureUrl={promoData?.imageUrl} />
+                {isUploadImage && (
+                    <ImagePreview figureUrl={promoData?.imageUrl} />
+                )}
             </div>
 
             <div className=" lg:w-1/2 w-3/4 p-6 bg-white border shadow-md border-gray-200 rounded-xl">
@@ -96,19 +114,32 @@ export default function PromoForm({ promoData }) {
                                 Upload Gambar
                             </label>
                             <UploadImage
-                                customStyleBtn={
-                                    "bg-primary-200 w-full px-4 rounded-xl text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 "
+                                customStyleBtn={` bg-primary-200 w-full px-4 rounded-xl text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 `}
+                                customStyleInput="bg-secondary-200 bg-opacity-30 mt-1 mb-0 outline outline-1 outline-slate-300"
+                                customErrorStyle={`${
+                                    errorMessage &&
+                                    errorMessage?.filter((e) =>
+                                        e.includes("imageUrl")
+                                    ).length !== 0
+                                        ? "outline outline-1 outline-red-600"
+                                        : "outline outline-1 outline-slate-300"
+                                }`}
+                                errorMessage={
+                                    errorMessage &&
+                                    errorMessage.filter((e) =>
+                                        e.includes("imageUrl")
+                                    )
                                 }
-                                customStyleInput="bg-secondary-200 bg-opacity-30 mt-1 mb-0"
                             />
                         </div>
                     )}
 
                     <form
                         onSubmit={handleSubmitForm}
-                        className="self-center w-11/12   gap-y-1"
+                        onChange={handleChangePromoForm}
+                        className="self-center w-11/12 gap-y-1"
                     >
-                        <div className="lg:flex  gap-x-4 pb-8">
+                        <div className="lg:grid lg:grid-cols-2  gap-x-4 pb-8">
                             <div>
                                 <label className="text-sm font-semibold">
                                     Judul Promo
@@ -116,9 +147,25 @@ export default function PromoForm({ promoData }) {
                                 <input
                                     defaultValue={promoData?.title}
                                     name="title"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                        errorMessage &&
+                                        errorMessage?.filter((e) =>
+                                            e.includes("title")
+                                        ).length !== 0
+                                            ? "outline outline-1 outline-red-600"
+                                            : "outline outline-1 outline-slate-300"
+                                    }  `}
                                     placeholder="Judul Promo"
                                 />
+                                {errorMessage &&
+                                    errorMessage.filter((e) =>
+                                        e.includes("title")
+                                    ).length !== 0 && (
+                                        <p className="text-red-600 text-sm flex text-start ">
+                                            Judul promo tidak boleh kosong
+                                        </p>
+                                    )}
+
                                 {isHaveImageUrl && (
                                     <div>
                                         <label className="text-sm font-semibold">
@@ -127,9 +174,25 @@ export default function PromoForm({ promoData }) {
                                         <input
                                             defaultValue={promoData?.imageUrl}
                                             name="imageUrl"
-                                            className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                            className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                                errorMessage &&
+                                                errorMessage?.filter((e) =>
+                                                    e.includes("imageUrl")
+                                                ).length !== 0
+                                                    ? "outline outline-1 outline-red-600"
+                                                    : "outline outline-1 outline-slate-300"
+                                            }  `}
                                             placeholder="Url gambar"
                                         />
+                                        {errorMessage &&
+                                            errorMessage.filter((e) =>
+                                                e.includes("imageUrl")
+                                            ).length !== 0 && (
+                                                <p className="text-red-600 text-sm flex text-start ">
+                                                    Url Gambar tidak boleh
+                                                    kosong
+                                                </p>
+                                            )}
                                     </div>
                                 )}
 
@@ -140,9 +203,24 @@ export default function PromoForm({ promoData }) {
                                 <input
                                     defaultValue={promoData?.promo_code}
                                     name="promoCode"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                        errorMessage &&
+                                        errorMessage?.filter((e) =>
+                                            e.includes("promo_code")
+                                        ).length !== 0
+                                            ? "outline outline-1 outline-red-600"
+                                            : "outline outline-1 outline-slate-300"
+                                    }  `}
                                     placeholder="Kode promo"
                                 />
+                                {errorMessage &&
+                                    errorMessage.filter((e) =>
+                                        e.includes("promo_code")
+                                    ).length !== 0 && (
+                                        <p className="text-red-600 text-sm flex text-start ">
+                                            Kode Promo tidak boleh kosong
+                                        </p>
+                                    )}
 
                                 <label className="text-sm font-semibold">
                                     Deskripsi
@@ -150,9 +228,24 @@ export default function PromoForm({ promoData }) {
                                 <textarea
                                     defaultValue={promoData?.description}
                                     name="description"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                        errorMessage &&
+                                        errorMessage?.filter((e) =>
+                                            e.includes("description")
+                                        ).length !== 0
+                                            ? "outline outline-1 outline-red-600"
+                                            : "outline outline-1 outline-slate-300"
+                                    }  `}
                                     placeholder="Deskripsi"
                                 ></textarea>
+                                {errorMessage &&
+                                    errorMessage.filter((e) =>
+                                        e.includes("description")
+                                    ).length !== 0 && (
+                                        <p className="text-red-600 text-sm flex text-start ">
+                                            Deskripsi tidak boleh kosong
+                                        </p>
+                                    )}
                             </div>
                             <div>
                                 <label className="text-sm font-semibold">
@@ -161,9 +254,25 @@ export default function PromoForm({ promoData }) {
                                 <textarea
                                     defaultValue={promoData?.terms_condition}
                                     name="termCondition"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                        errorMessage &&
+                                        errorMessage?.filter((e) =>
+                                            e.includes("terms_condition")
+                                        ).length !== 0
+                                            ? "outline outline-1 outline-red-600"
+                                            : "outline outline-1 outline-slate-300"
+                                    }  `}
                                     placeholder=" Sarat & Ketentuan"
                                 ></textarea>
+                                {errorMessage &&
+                                    errorMessage.filter((e) =>
+                                        e.includes("terms_condition")
+                                    ).length !== 0 && (
+                                        <p className="text-red-600 text-sm flex text-start ">
+                                            Sarat dan ketentuan tidak boleh
+                                            kosong
+                                        </p>
+                                    )}
                                 <label className="text-sm font-semibold">
                                     Harga diskon
                                 </label>
@@ -173,9 +282,24 @@ export default function PromoForm({ promoData }) {
                                     }
                                     type="number"
                                     name="promoDiscountPrice"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                        errorMessage &&
+                                        errorMessage?.filter((e) =>
+                                            e.includes("promo_discount_price")
+                                        ).length !== 0
+                                            ? "outline outline-1 outline-red-600"
+                                            : "outline outline-1 outline-slate-300"
+                                    }  `}
                                     placeholder="Harga Promo"
                                 />
+                                {errorMessage &&
+                                    errorMessage.filter((e) =>
+                                        e.includes("promo_discount_price")
+                                    ).length !== 0 && (
+                                        <p className="text-red-600 text-sm flex text-start ">
+                                            Harga promo tidak boleh kosong
+                                        </p>
+                                    )}
                                 <label className="text-sm font-semibold">
                                     Minimum Klaim
                                 </label>
@@ -186,8 +310,24 @@ export default function PromoForm({ promoData }) {
                                     type="number"
                                     placeholder="Minium Klaim Promo"
                                     name="minClaimPrice"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                        errorMessage &&
+                                        errorMessage?.filter((e) =>
+                                            e.includes("minimum_claim_price")
+                                        ).length !== 0
+                                            ? "outline outline-1 outline-red-600"
+                                            : "outline outline-1 outline-slate-300"
+                                    }  `}
                                 />
+                                {errorMessage &&
+                                    errorMessage.filter((e) =>
+                                        e.includes("minimum_claim_price")
+                                    ).length !== 0 && (
+                                        <p className="text-red-600 text-sm flex text-start ">
+                                            Minimum klaim promo tidak boleh
+                                            kosong
+                                        </p>
+                                    )}
                             </div>
                         </div>
 
@@ -197,7 +337,9 @@ export default function PromoForm({ promoData }) {
                                 disabled={!isHaveImageUrl && !isUploadImage}
                                 className="bg-primary-200  text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 px-4 py-3 rounded-2xl w-1/4"
                             >
-                                Submit
+                                {loadingCreate || loadingUpdate
+                                    ? "Loading..."
+                                    : "Submit"}
                             </button>
                         </div>
                     </form>
