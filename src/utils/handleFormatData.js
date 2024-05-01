@@ -37,3 +37,9 @@ export function formatFacilities(facilities) {
         : facilities;
     return newfacilities;
 }
+
+export function checkIsEmptyInput(input) {
+    if (input === "") return null;
+
+    return input;
+}

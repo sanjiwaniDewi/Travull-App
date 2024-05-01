@@ -1,18 +1,19 @@
 import { useState } from "react";
+import { checkIsEmptyInput } from "./handleFormatData";
 
 export function handlePromoForm(formData, figureUrl, isHaveImageUrl) {
     let imageUrl = figureUrl;
-    const title = formData.get("title");
-    const description = formData.get("description");
+    const title = checkIsEmptyInput(formData.get("title"));
+    const description = checkIsEmptyInput(formData.get("description"));
 
     if (!figureUrl || isHaveImageUrl) {
-        imageUrl = formData.get("imageUrl");
+        imageUrl = checkIsEmptyInput(formData.get("imageUrl"));
     }
 
-    const promoCode = formData.get("promoCode");
+    const promoCode = checkIsEmptyInput(formData.get("promoCode")); //formData.get("promoCode");
     const promoDiscountPrice = formData.get("promoDiscountPrice");
     const minClaimPrice = formData.get("minClaimPrice");
-    const termCondition = formData.get("termCondition");
+    const termCondition = checkIsEmptyInput(formData.get("termCondition"));
 
     return {
         title,
