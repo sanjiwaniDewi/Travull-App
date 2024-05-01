@@ -4,30 +4,70 @@ import { createBannerAPI } from "@/API/banner";
 import { createCategoryAPI } from "@/API/category";
 import { createPromoAPI, deletePromo } from "@/API/promo";
 import axios from "axios";
+import { useState } from "react";
 
 export default function useCreate() {
+    const [err, setErr] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
     const createBanner = async (payload) => {
+        setLoading(true);
         try {
-            const res = createBannerAPI(payload);
-        } catch (err) {}
+            await createBannerAPI(payload);
+            setSuccess(true);
+            setLoading(false);
+        } catch (err) {
+            setSuccess(false);
+            setLoading(false);
+            setErr(err);
+        }
     };
 
     const createPromo = async (payload) => {
+        setLoading(true);
         try {
-            const res = createPromoAPI(payload);
-        } catch (err) {}
+            await createPromoAPI(payload);
+            setLoading(false);
+            setSuccess(true);
+        } catch (err) {
+            setLoading(false);
+            setSuccess(false);
+            setErr(err?.response?.data?.errors);
+        }
     };
 
     const createCategory = async (payload) => {
+        setLoading(true);
         try {
-            const res = createCategoryAPI(payload);
-        } catch (err) {}
+            await createCategoryAPI(payload);
+            setLoading(false);
+            setSuccess(true);
+        } catch (err) {
+            setSuccess(false);
+            setLoading(false);
+            setErr(err);
+        }
     };
     const createActivity = async (payload) => {
+        setLoading(true);
         try {
-            const res = createActivityAPI(payload);
-        } catch (err) {}
+            await createActivityAPI(payload);
+            setLoading(false);
+            setSuccess(true);
+        } catch (err) {
+            setSuccess(false);
+            setLoading(false);
+            setErr(err);
+        }
     };
 
-    return { createBanner, createPromo, createCategory, createActivity };
+    return {
+        createBanner,
+        createPromo,
+        createCategory,
+        createActivity,
+        err,
+        loading,
+        success,
+    };
 }
