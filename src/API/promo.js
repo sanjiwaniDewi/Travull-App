@@ -31,7 +31,7 @@ export async function createPromoAPI(payload) {
             headers: headers,
         });
 
-        return res.data;
+        return res.data.data;
     }
 }
 
