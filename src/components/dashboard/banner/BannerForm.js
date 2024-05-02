@@ -16,15 +16,27 @@ import {
 import ImageBtnOption from "@/components/utils/ImageBtnOption";
 import { useEffect, useState } from "react";
 import { updateItem } from "@/redux/features/data/dataSlice";
+import { checkIsEmptyInput } from "@/utils/handleFormatData";
 
 export default function BannerForm({ bannerData }) {
     const [isHaveImageUrl, setIsHaveImageUrl] = useState(false);
     const [isUploadImage, setIsUploadImage] = useState(true);
-    // const [updatedImageUrl, setUpdatedImageUrl] = useState();
-    const { createBanner } = useCreate();
-    const { updateBanner } = useUpdate();
+    const [errorMessage, setErrorMessage] = useState([]);
+
+    const {
+        createBanner,
+        loading: loadingCreate,
+        err: errorCreate,
+        success: successCreate,
+    } = useCreate();
+    const {
+        updateBanner,
+        loading: loadingUpdate,
+        err: errorUpdate,
+        success: successUpdate,
+    } = useUpdate();
     const { imageUrl } = useSelector((store) => store.image);
-    const { isUpdate, isCreate } = useSelector((store) => store.status);
+
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -32,57 +44,80 @@ export default function BannerForm({ bannerData }) {
         dispatch(deleteImageUrl());
         setIsHaveImageUrl(true);
         setIsUploadImage(false);
+        setErrorMessage("");
     };
     const handleUploadImage = () => {
         dispatch(deleteImageUrl());
         setIsUploadImage(true);
         setIsHaveImageUrl(false);
+        setErrorMessage("");
     };
+
+    const handleErrorMessage = () => {
+        if (errorCreate) {
+            setErrorMessage(errorCreate.map((e) => e.message));
+        }
+        console.log(errorUpdate);
+        if (errorUpdate) {
+            console.log(errorUpdate);
+            setErrorMessage(errorUpdate.split(","));
+        }
+    };
+
+    useEffect(() => {
+        handleErrorMessage();
+    }, [errorCreate, errorUpdate]);
+
+    const handleChangeBannerForm = () => {
+        setErrorMessage("");
+    };
+
+    console.log(imageUrl);
+
     const handleSubmitBanner = (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        const name = formData.get("name");
-        const urlImage = formData.get("imageUrl");
-        const newImageUrl = imageUrl ? imageUrl : urlImage;
+        const name = checkIsEmptyInput(formData.get("name"));
+        const urlImage = checkIsEmptyInput(formData.get("imageUrl"));
 
         if (bannerData) {
-            dispatch(getImageUrl(newImageUrl));
-
-            const imageUrlPayload = newImageUrl
-                ? newImageUrl
-                : bannerData.imageUrl;
-            try {
+            dispatch(getImageUrl(imageUrl ? imageUrl : urlImage));
+            if (isUploadImage) {
                 updateBanner(bannerData.id, {
                     name,
-                    imageUrl: imageUrlPayload,
+                    imageUrl: imageUrl ? imageUrl : bannerData.imageUrl,
                 });
+            }
 
-                dispatch(changeEditStatus());
-                dispatch(updateItem(bannerData));
-            } catch (err) {}
-            dispatch(deleteImageUrl());
-            router.back();
-
-            // router.back();
+            if (isHaveImageUrl) {
+                updateBanner(bannerData.id, {
+                    name,
+                    imageUrl: urlImage,
+                });
+            }
         } else {
-            dispatch(getImageUrl(newImageUrl));
-            createBanner({ name, imageUrl: newImageUrl });
-
-            dispatch(deleteImageUrl());
-            dispatch(changeCreateSatus());
-            router.back();
-
-            // router.back();
+            dispatch(getImageUrl(imageUrl ? imageUrl : urlImage));
+            createBanner({ name, imageUrl: imageUrl ? imageUrl : urlImage });
         }
-
-        //
-        // router.push("/dashboard");
     };
 
+    const handleSuccsess = () => {
+        if (successCreate || successUpdate) {
+            dispatch(deleteImageUrl());
+            router.push("/dashboard/banner");
+        }
+    };
+
+    useEffect(() => {
+        handleSuccsess();
+    }, [successCreate, successUpdate]);
+
     return (
-        <div className="w-full container mx-auto flex flex-col py-16  items-center ">
+        <div className="w-full container mx-auto flex flex-col lg:content-center py-20   items-center ">
             <div className=" w-3/4 mb-4 rounded-lg">
-                <ImagePreview figureUrl={bannerData?.imageUrl} />
+                {isUploadImage && (
+                    <ImagePreview figureUrl={bannerData?.imageUrl} />
+                )}
             </div>
             <div className=" lg:w-1/3 w-3/4 p-6 bg-white border shadow-md border-gray-200 rounded-xl">
                 <div className="flex flex-col justify-center items-center gap-y-2">
@@ -101,12 +136,27 @@ export default function BannerForm({ bannerData }) {
                                     "bg-primary-200 w-full px-4 rounded-xl text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 "
                                 }
                                 customStyleInput="bg-secondary-200 bg-opacity-30 mt-1 mb-0"
+                                customErrorStyle={`${
+                                    errorMessage &&
+                                    errorMessage?.filter((e) =>
+                                        e.includes("imageUrl")
+                                    ).length !== 0
+                                        ? "outline outline-1 outline-red-600"
+                                        : "outline outline-1 outline-slate-300"
+                                }`}
+                                errorMessage={
+                                    errorMessage &&
+                                    errorMessage.filter((e) =>
+                                        e.includes("imageUrl")
+                                    )
+                                }
                             />
                         </div>
                     )}
                     <form
                         onSubmit={handleSubmitBanner}
                         className="self-center w-11/12 flex flex-col gap-y-1"
+                        onChange={handleChangeBannerForm}
                     >
                         <label className="text-sm font-semibold">
                             Nama banner
@@ -114,9 +164,22 @@ export default function BannerForm({ bannerData }) {
                         <input
                             defaultValue={bannerData ? bannerData?.name : ""}
                             name="name"
-                            className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
                             placeholder="Nama Banner"
+                            className={`w-full focus:outline-primary-200  py-3 mb-2 bg-secondary-200  bg-opacity-30 px-3 rounded-xl ${
+                                errorMessage &&
+                                errorMessage?.filter((e) => e.includes("name"))
+                                    .length !== 0
+                                    ? "outline outline-1 outline-red-600"
+                                    : "outline outline-1 outline-slate-300"
+                            }  `}
                         />
+                        {errorMessage &&
+                            errorMessage.filter((e) => e.includes("name"))
+                                .length !== 0 && (
+                                <p className="text-red-600 text-sm flex text-start ">
+                                    Nama Banner tidak boleh kosong
+                                </p>
+                            )}
                         {isHaveImageUrl && (
                             <div>
                                 <label className="text-sm font-semibold">
@@ -127,17 +190,35 @@ export default function BannerForm({ bannerData }) {
                                         bannerData ? bannerData?.imageUrl : ""
                                     }
                                     name="imageUrl"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300  "
                                     placeholder="Banner image url"
+                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                        errorMessage &&
+                                        errorMessage?.filter((e) =>
+                                            e.includes("imageUrl")
+                                        ).length !== 0
+                                            ? "outline outline-1 outline-red-600"
+                                            : "outline outline-1 outline-slate-300"
+                                    }  `}
                                 />
+                                {errorMessage &&
+                                    errorMessage.filter((e) =>
+                                        e.includes("imageUrl")
+                                    ).length !== 0 && (
+                                        <p className="text-red-600 text-sm flex text-start ">
+                                            Url Gambar tidak boleh kosong
+                                        </p>
+                                    )}
                             </div>
                         )}
                         <div className="flex justify-center">
                             <button
                                 type="submit"
+                                disabled={!isHaveImageUrl && !isUploadImage}
                                 className="bg-primary-200  text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 px-4 py-3 rounded-2xl w-1/4"
                             >
-                                Submit
+                                {loadingCreate || loadingUpdate
+                                    ? "Loading..."
+                                    : "Submit"}
                             </button>
                         </div>
                     </form>

@@ -1,17 +1,14 @@
 "use client";
-import TabelAllData from "@/components/utils/TableAllData";
+
 import { useGetAllData } from "@/hooks/useGet";
 import { useSelector, useDispatch } from "react-redux";
-import {
-    changeCreateSatus,
-    changeDeleteSatus,
-    changeEditStatus,
-} from "@/redux/features/status/statusSilce";
-import { useEffect, useState } from "react";
-import { getBanners, setData } from "@/redux/features/data/dataSlice";
+
+import { useEffect } from "react";
+import { setData } from "@/redux/features/data/dataSlice";
+
+import TabelAllData from "@/components/utils/TableAllData";
 
 export default function BannersPage() {
-    const [bannerData, setBannerData] = useState();
     const { getAllBennerData } = useGetAllData();
     const { isDelete, isUpdate, isCreate } = useSelector(
         (state) => state.status
@@ -26,24 +23,6 @@ export default function BannersPage() {
     useEffect(() => {
         handleShowAllData();
     }, []);
-
-    const handleOnDataChange = () => {
-        if (isDelete) {
-            // handleShowAllData();
-            // setBannerData(dataBanner);
-            dispatch(changeDeleteSatus());
-        } else if (isCreate) {
-            // handleShowAllData();
-            dispatch(changeCreateSatus());
-        } else if (isUpdate) {
-            // handleShowAllData();
-            dispatch(changeEditStatus());
-        }
-    };
-
-    useEffect(() => {
-        handleOnDataChange();
-    }, [isDelete, isCreate, isUpdate]);
 
     return (
         <div className="container mx-auto px-5 lg:pt-20 pt-28">
