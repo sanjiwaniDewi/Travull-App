@@ -18,7 +18,7 @@ export default function useUpdate() {
         } catch (err) {
             setSuccess(false);
             setLoading(false);
-            setErr(err);
+            setErr(err.response.data.errors);
         }
     };
     const updateCategory = async (id, payload) => {
@@ -29,7 +29,7 @@ export default function useUpdate() {
         } catch (err) {
             setSuccess(false);
             setLoading(false);
-            setErr(err);
+            setErr(err.response.data.errors);
         }
     };
 
@@ -54,7 +54,7 @@ export default function useUpdate() {
         } catch (err) {
             setSuccess(false);
             setLoading(false);
-            setErr(err);
+            setErr(err.response.data.errors);
         }
     };
 

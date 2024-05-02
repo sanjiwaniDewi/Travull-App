@@ -19,7 +19,7 @@ export default function useCreate() {
         } catch (err) {
             setSuccess(false);
             setLoading(false);
-            setErr(err);
+            setErr(err?.response?.data?.errors);
         }
     };
 
@@ -45,7 +45,7 @@ export default function useCreate() {
         } catch (err) {
             setSuccess(false);
             setLoading(false);
-            setErr(err);
+            setErr(err?.response?.data?.errors);
         }
     };
     const createActivity = async (payload) => {
@@ -57,7 +57,7 @@ export default function useCreate() {
         } catch (err) {
             setSuccess(false);
             setLoading(false);
-            setErr(err);
+            setErr(err?.response?.data?.errors);
         }
     };
 
