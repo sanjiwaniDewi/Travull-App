@@ -52,7 +52,6 @@ export default function PromoForm({ promoData }) {
         if (errorCreate) {
             setErrorMessage(errorCreate.map((e) => e.message));
         }
-        console.log(errorUpdate);
         if (errorUpdate) {
             setErrorMessage(errorUpdate.split(","));
         }
@@ -76,7 +75,6 @@ export default function PromoForm({ promoData }) {
                 promoData.id,
                 handlePromoForm(formData, figureUrl, isHaveImageUrl)
             );
-            dispatch(updateItem(promoData));
         } else {
             createPromo(handlePromoForm(formData, imageUrl));
             dispatch(deleteImageUrl());
@@ -94,7 +92,7 @@ export default function PromoForm({ promoData }) {
     }, [successCreate, successUpdate]);
 
     return (
-        <div className="w-full container mx-auto flex flex-col py-5  items-center ">
+        <div className="w-full container mx-auto flex flex-col lg:py-5 py-20 items-center ">
             <div className=" w-3/4 mb-4 rounded-lg">
                 {isUploadImage && (
                     <ImagePreview figureUrl={promoData?.imageUrl} />
