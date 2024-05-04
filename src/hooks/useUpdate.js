@@ -26,6 +26,7 @@ export default function useUpdate() {
         try {
             await updateCategoryAPI(id, payload);
             setLoading(false);
+            setSuccess(true);
         } catch (err) {
             setSuccess(false);
             setLoading(false);
