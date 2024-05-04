@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
-export default function ImagePreview({ figureUrl, customHeigh }) {
+export default function ImagePreview({ figureUrl, customHeigh, resetImage }) {
     const [newImage, setNewImage] = useState("");
     const { imageUrl } = useSelector((store) => store.image);
     const dispatch = useDispatch();
@@ -17,14 +17,14 @@ export default function ImagePreview({ figureUrl, customHeigh }) {
         handleshowFigure();
     }, [figureUrl]);
 
-    const handleFirstLoad = () => {
-        if (imageUrl) {
-            dispatch(deleteImageUrl());
-        }
-    };
+    // const handleFirstLoad = () => {
+    //     if (imageUrl && !resetImage) {
+    //         dispatch(deleteImageUrl());
+    //     }
+    // };
 
     useEffect(() => {
-        handleFirstLoad();
+        // handleFirstLoad();
         handleshowFigure();
     }, []);
 
