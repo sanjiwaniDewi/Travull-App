@@ -41,26 +41,25 @@ export default function BannerForm({ bannerData }) {
     const router = useRouter();
 
     const handleHaveImageUrl = () => {
-        dispatch(deleteImageUrl());
         setIsHaveImageUrl(true);
         setIsUploadImage(false);
-        setErrorMessage("");
     };
     const handleUploadImage = () => {
-        dispatch(deleteImageUrl());
         setIsUploadImage(true);
         setIsHaveImageUrl(false);
-        setErrorMessage("");
     };
 
     const handleErrorMessage = () => {
         if (errorCreate) {
             setErrorMessage(errorCreate.map((e) => e.message));
         }
-        console.log(errorUpdate);
+
         if (errorUpdate) {
-            console.log(errorUpdate);
-            setErrorMessage(errorUpdate.split(","));
+            if (Array.isArray(errorUpdate)) {
+                setErrorMessage(errorUpdate.map((e) => e.message));
+            } else {
+                setErrorMessage(errorUpdate.split(","));
+            }
         }
     };
 
@@ -69,16 +68,16 @@ export default function BannerForm({ bannerData }) {
     }, [errorCreate, errorUpdate]);
 
     const handleChangeBannerForm = () => {
-        setErrorMessage("");
+        setErrorMessage(undefined);
     };
-
-    console.log(imageUrl);
 
     const handleSubmitBanner = (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const name = checkIsEmptyInput(formData.get("name"));
         const urlImage = checkIsEmptyInput(formData.get("imageUrl"));
+        console.log("a", urlImage);
+        console.log("aaa", imageUrl);
 
         if (bannerData) {
             dispatch(getImageUrl(imageUrl ? imageUrl : urlImage));
@@ -97,7 +96,11 @@ export default function BannerForm({ bannerData }) {
             }
         } else {
             dispatch(getImageUrl(imageUrl ? imageUrl : urlImage));
-            createBanner({ name, imageUrl: imageUrl ? imageUrl : urlImage });
+
+            createBanner({
+                name,
+                imageUrl: isHaveImageUrl ? urlImage : imageUrl,
+            });
         }
     };
 
@@ -116,7 +119,9 @@ export default function BannerForm({ bannerData }) {
         <div className="w-full container mx-auto flex flex-col lg:content-center py-20   items-center ">
             <div className=" w-3/4 mb-4 rounded-lg">
                 {isUploadImage && (
-                    <ImagePreview figureUrl={bannerData?.imageUrl} />
+                    <ImagePreview
+                        figureUrl={bannerData && bannerData?.imageUrl}
+                    />
                 )}
             </div>
             <div className=" lg:w-1/3 w-3/4 p-6 bg-white border shadow-md border-gray-200 rounded-xl">
@@ -161,56 +166,69 @@ export default function BannerForm({ bannerData }) {
                         <label className="text-sm font-semibold">
                             Nama banner
                         </label>
-                        <input
-                            defaultValue={bannerData ? bannerData?.name : ""}
-                            name="name"
-                            placeholder="Nama Banner"
-                            className={`w-full focus:outline-primary-200  py-3 mb-2 bg-secondary-200  bg-opacity-30 px-3 rounded-xl ${
-                                errorMessage &&
-                                errorMessage?.filter((e) => e.includes("name"))
-                                    .length !== 0
-                                    ? "outline outline-1 outline-red-600"
-                                    : "outline outline-1 outline-slate-300"
-                            }  `}
-                        />
-                        {errorMessage &&
-                            errorMessage.filter((e) => e.includes("name"))
-                                .length !== 0 && (
-                                <p className="text-red-600 text-sm flex text-start ">
-                                    Nama Banner tidak boleh kosong
-                                </p>
-                            )}
+                        <div className="mb-2">
+                            <input
+                                defaultValue={
+                                    bannerData ? bannerData?.name : ""
+                                }
+                                name="name"
+                                placeholder="Nama Banner"
+                                className={`w-full focus:outline-primary-200  py-3 mb-0 bg-secondary-200  bg-opacity-30 px-3 rounded-xl ${
+                                    errorMessage &&
+                                    errorMessage?.filter((e) =>
+                                        e.includes("name")
+                                    ).length !== 0
+                                        ? "outline outline-1 outline-red-600"
+                                        : "outline outline-1 outline-slate-300"
+                                }  `}
+                            />
+                            {errorMessage &&
+                                errorMessage.filter((e) => e.includes("name"))
+                                    .length !== 0 && (
+                                    <p className="text-red-600 text-sm flex text-start ">
+                                        Nama Banner tidak boleh kosong
+                                    </p>
+                                )}
+                        </div>
+
                         {isHaveImageUrl && (
-                            <div>
+                            <div className="mb-2">
                                 <label className="text-sm font-semibold">
                                     Url Gambar
                                 </label>
-                                <input
-                                    defaultValue={
-                                        bannerData ? bannerData?.imageUrl : ""
-                                    }
-                                    name="imageUrl"
-                                    placeholder="Banner image url"
-                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
-                                        errorMessage &&
-                                        errorMessage?.filter((e) =>
+                                <div>
+                                    <input
+                                        defaultValue={
+                                            errorMessage &&
+                                            errorMessage?.filter((e) =>
+                                                e.includes("imageUrl")
+                                            ).length === 0
+                                                ? bannerData?.imageUrl
+                                                : undefined
+                                        }
+                                        name="imageUrl"
+                                        placeholder="Banner image url"
+                                        className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                            errorMessage &&
+                                            errorMessage?.filter((e) =>
+                                                e.includes("imageUrl")
+                                            ).length !== 0
+                                                ? "outline outline-1 outline-red-600"
+                                                : "outline outline-1 outline-slate-300"
+                                        }  `}
+                                    />
+                                    {errorMessage &&
+                                        errorMessage.filter((e) =>
                                             e.includes("imageUrl")
-                                        ).length !== 0
-                                            ? "outline outline-1 outline-red-600"
-                                            : "outline outline-1 outline-slate-300"
-                                    }  `}
-                                />
-                                {errorMessage &&
-                                    errorMessage.filter((e) =>
-                                        e.includes("imageUrl")
-                                    ).length !== 0 && (
-                                        <p className="text-red-600 text-sm flex text-start ">
-                                            Url Gambar tidak boleh kosong
-                                        </p>
-                                    )}
+                                        ).length !== 0 && (
+                                            <p className="text-red-600 text-sm flex text-start ">
+                                                Url Gambar tidak boleh kosong
+                                            </p>
+                                        )}
+                                </div>
                             </div>
                         )}
-                        <div className="flex justify-center">
+                        <div className="flex justify-center mt-2">
                             <button
                                 type="submit"
                                 disabled={!isHaveImageUrl && !isUploadImage}

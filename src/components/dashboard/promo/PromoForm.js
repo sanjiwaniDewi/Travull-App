@@ -53,7 +53,11 @@ export default function PromoForm({ promoData }) {
             setErrorMessage(errorCreate.map((e) => e.message));
         }
         if (errorUpdate) {
-            setErrorMessage(errorUpdate.split(","));
+            if (Array.isArray(errorUpdate)) {
+                setErrorMessage(errorUpdate.map((e) => e.message));
+            } else {
+                setErrorMessage(errorUpdate.split(","));
+            }
         }
     };
 
@@ -77,12 +81,12 @@ export default function PromoForm({ promoData }) {
             );
         } else {
             createPromo(handlePromoForm(formData, imageUrl));
-            dispatch(deleteImageUrl());
         }
     };
 
     const handleSuccsess = () => {
         if (successCreate || successUpdate) {
+            dispatch(deleteImageUrl());
             router.push("/dashboard/promo");
         }
     };
@@ -142,55 +146,61 @@ export default function PromoForm({ promoData }) {
                                 <label className="text-sm font-semibold">
                                     Judul Promo
                                 </label>
-                                <input
-                                    defaultValue={promoData?.title}
-                                    name="title"
-                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
-                                        errorMessage &&
-                                        errorMessage?.filter((e) =>
+                                <div className="mb-2">
+                                    <input
+                                        defaultValue={promoData?.title}
+                                        name="title"
+                                        className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                            errorMessage &&
+                                            errorMessage?.filter((e) =>
+                                                e.includes("title")
+                                            ).length !== 0
+                                                ? "outline outline-1 outline-red-600"
+                                                : "outline outline-1 outline-slate-300"
+                                        }  `}
+                                        placeholder="Judul Promo"
+                                    />
+                                    {errorMessage &&
+                                        errorMessage.filter((e) =>
                                             e.includes("title")
-                                        ).length !== 0
-                                            ? "outline outline-1 outline-red-600"
-                                            : "outline outline-1 outline-slate-300"
-                                    }  `}
-                                    placeholder="Judul Promo"
-                                />
-                                {errorMessage &&
-                                    errorMessage.filter((e) =>
-                                        e.includes("title")
-                                    ).length !== 0 && (
-                                        <p className="text-red-600 text-sm flex text-start ">
-                                            Judul promo tidak boleh kosong
-                                        </p>
-                                    )}
+                                        ).length !== 0 && (
+                                            <p className="text-red-600 text-sm flex text-start ">
+                                                Judul promo tidak boleh kosong
+                                            </p>
+                                        )}
+                                </div>
 
                                 {isHaveImageUrl && (
-                                    <div>
+                                    <div className="mb-2">
                                         <label className="text-sm font-semibold">
                                             Url gambar
                                         </label>
-                                        <input
-                                            defaultValue={promoData?.imageUrl}
-                                            name="imageUrl"
-                                            className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
-                                                errorMessage &&
-                                                errorMessage?.filter((e) =>
+                                        <div>
+                                            <input
+                                                defaultValue={
+                                                    promoData?.imageUrl
+                                                }
+                                                name="imageUrl"
+                                                className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                                    errorMessage &&
+                                                    errorMessage?.filter((e) =>
+                                                        e.includes("imageUrl")
+                                                    ).length !== 0
+                                                        ? "outline outline-1 outline-red-600"
+                                                        : "outline outline-1 outline-slate-300"
+                                                }  `}
+                                                placeholder="Url gambar"
+                                            />
+                                            {errorMessage &&
+                                                errorMessage.filter((e) =>
                                                     e.includes("imageUrl")
-                                                ).length !== 0
-                                                    ? "outline outline-1 outline-red-600"
-                                                    : "outline outline-1 outline-slate-300"
-                                            }  `}
-                                            placeholder="Url gambar"
-                                        />
-                                        {errorMessage &&
-                                            errorMessage.filter((e) =>
-                                                e.includes("imageUrl")
-                                            ).length !== 0 && (
-                                                <p className="text-red-600 text-sm flex text-start ">
-                                                    Url Gambar tidak boleh
-                                                    kosong
-                                                </p>
-                                            )}
+                                                ).length !== 0 && (
+                                                    <p className="text-red-600 text-sm flex text-start ">
+                                                        Url Gambar tidak boleh
+                                                        kosong
+                                                    </p>
+                                                )}
+                                        </div>
                                     </div>
                                 )}
 
@@ -198,134 +208,152 @@ export default function PromoForm({ promoData }) {
                                     Kode Promo
                                 </label>
 
-                                <input
-                                    defaultValue={promoData?.promo_code}
-                                    name="promoCode"
-                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
-                                        errorMessage &&
-                                        errorMessage?.filter((e) =>
+                                <div className="mb-2">
+                                    <input
+                                        defaultValue={promoData?.promo_code}
+                                        name="promoCode"
+                                        className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                            errorMessage &&
+                                            errorMessage?.filter((e) =>
+                                                e.includes("promo_code")
+                                            ).length !== 0
+                                                ? "outline outline-1 outline-red-600"
+                                                : "outline outline-1 outline-slate-300"
+                                        }  `}
+                                        placeholder="Kode promo"
+                                    />
+                                    {errorMessage &&
+                                        errorMessage.filter((e) =>
                                             e.includes("promo_code")
-                                        ).length !== 0
-                                            ? "outline outline-1 outline-red-600"
-                                            : "outline outline-1 outline-slate-300"
-                                    }  `}
-                                    placeholder="Kode promo"
-                                />
-                                {errorMessage &&
-                                    errorMessage.filter((e) =>
-                                        e.includes("promo_code")
-                                    ).length !== 0 && (
-                                        <p className="text-red-600 text-sm flex text-start ">
-                                            Kode Promo tidak boleh kosong
-                                        </p>
-                                    )}
+                                        ).length !== 0 && (
+                                            <p className="text-red-600 text-sm flex text-start ">
+                                                Kode Promo tidak boleh kosong
+                                            </p>
+                                        )}
+                                </div>
 
                                 <label className="text-sm font-semibold">
                                     Deskripsi
                                 </label>
-                                <textarea
-                                    defaultValue={promoData?.description}
-                                    name="description"
-                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
-                                        errorMessage &&
-                                        errorMessage?.filter((e) =>
+                                <div className="flex flex-col mb-2">
+                                    <textarea
+                                        defaultValue={promoData?.description}
+                                        name="description"
+                                        className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                            errorMessage &&
+                                            errorMessage?.filter((e) =>
+                                                e.includes("description")
+                                            ).length !== 0
+                                                ? "outline outline-1 outline-red-600"
+                                                : "outline outline-1 outline-slate-300"
+                                        }  `}
+                                        placeholder="Deskripsi"
+                                    ></textarea>
+                                    {errorMessage &&
+                                        errorMessage.filter((e) =>
                                             e.includes("description")
-                                        ).length !== 0
-                                            ? "outline outline-1 outline-red-600"
-                                            : "outline outline-1 outline-slate-300"
-                                    }  `}
-                                    placeholder="Deskripsi"
-                                ></textarea>
-                                {errorMessage &&
-                                    errorMessage.filter((e) =>
-                                        e.includes("description")
-                                    ).length !== 0 && (
-                                        <p className="text-red-600 text-sm flex text-start ">
-                                            Deskripsi tidak boleh kosong
-                                        </p>
-                                    )}
+                                        ).length !== 0 && (
+                                            <p className="text-red-600 text-sm flex text-start pt-0 ">
+                                                Deskripsi tidak boleh kosong
+                                            </p>
+                                        )}
+                                </div>
                             </div>
                             <div>
                                 <label className="text-sm font-semibold">
                                     Sarat & ketentuan
                                 </label>
-                                <textarea
-                                    defaultValue={promoData?.terms_condition}
-                                    name="termCondition"
-                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
-                                        errorMessage &&
-                                        errorMessage?.filter((e) =>
+                                <div className="flex flex-col mb-2 ">
+                                    <textarea
+                                        defaultValue={
+                                            promoData?.terms_condition
+                                        }
+                                        name="termCondition"
+                                        className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                            errorMessage &&
+                                            errorMessage?.filter((e) =>
+                                                e.includes("terms_condition")
+                                            ).length !== 0
+                                                ? "outline outline-1 outline-red-600"
+                                                : "outline outline-1 outline-slate-300"
+                                        }  `}
+                                        placeholder=" Sarat & Ketentuan"
+                                    ></textarea>
+                                    {errorMessage &&
+                                        errorMessage.filter((e) =>
                                             e.includes("terms_condition")
-                                        ).length !== 0
-                                            ? "outline outline-1 outline-red-600"
-                                            : "outline outline-1 outline-slate-300"
-                                    }  `}
-                                    placeholder=" Sarat & Ketentuan"
-                                ></textarea>
-                                {errorMessage &&
-                                    errorMessage.filter((e) =>
-                                        e.includes("terms_condition")
-                                    ).length !== 0 && (
-                                        <p className="text-red-600 text-sm flex text-start ">
-                                            Sarat dan ketentuan tidak boleh
-                                            kosong
-                                        </p>
-                                    )}
+                                        ).length !== 0 && (
+                                            <p className="text-red-600 text-sm flex text-start ">
+                                                Sarat dan ketentuan tidak boleh
+                                                kosong
+                                            </p>
+                                        )}
+                                </div>
+
                                 <label className="text-sm font-semibold">
                                     Harga diskon
                                 </label>
-                                <input
-                                    defaultValue={
-                                        promoData?.promo_discount_price
-                                    }
-                                    type="number"
-                                    name="promoDiscountPrice"
-                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
-                                        errorMessage &&
-                                        errorMessage?.filter((e) =>
+                                <div className="mb-2">
+                                    <input
+                                        defaultValue={
+                                            promoData?.promo_discount_price
+                                        }
+                                        type="number"
+                                        name="promoDiscountPrice"
+                                        className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                            errorMessage &&
+                                            errorMessage?.filter((e) =>
+                                                e.includes(
+                                                    "promo_discount_price"
+                                                )
+                                            ).length !== 0
+                                                ? "outline outline-1 outline-red-600"
+                                                : "outline outline-1 outline-slate-300"
+                                        }  `}
+                                        placeholder="Harga Promo"
+                                    />
+                                    {errorMessage &&
+                                        errorMessage.filter((e) =>
                                             e.includes("promo_discount_price")
-                                        ).length !== 0
-                                            ? "outline outline-1 outline-red-600"
-                                            : "outline outline-1 outline-slate-300"
-                                    }  `}
-                                    placeholder="Harga Promo"
-                                />
-                                {errorMessage &&
-                                    errorMessage.filter((e) =>
-                                        e.includes("promo_discount_price")
-                                    ).length !== 0 && (
-                                        <p className="text-red-600 text-sm flex text-start ">
-                                            Harga promo tidak boleh kosong
-                                        </p>
-                                    )}
+                                        ).length !== 0 && (
+                                            <p className="text-red-600 text-sm flex text-start ">
+                                                Harga promo tidak boleh kosong
+                                            </p>
+                                        )}
+                                </div>
+
                                 <label className="text-sm font-semibold">
                                     Minimum Klaim
                                 </label>
-                                <input
-                                    defaultValue={
-                                        promoData?.minimum_claim_price
-                                    }
-                                    type="number"
-                                    placeholder="Minium Klaim Promo"
-                                    name="minClaimPrice"
-                                    className={`w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
-                                        errorMessage &&
-                                        errorMessage?.filter((e) =>
+                                <div className="mb-2">
+                                    <input
+                                        defaultValue={
+                                            promoData?.minimum_claim_price
+                                        }
+                                        type="number"
+                                        placeholder="Minium Klaim Promo"
+                                        name="minClaimPrice"
+                                        className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                            errorMessage &&
+                                            errorMessage?.filter((e) =>
+                                                e.includes(
+                                                    "minimum_claim_price"
+                                                )
+                                            ).length !== 0
+                                                ? "outline outline-1 outline-red-600"
+                                                : "outline outline-1 outline-slate-300"
+                                        }  `}
+                                    />
+                                    {errorMessage &&
+                                        errorMessage.filter((e) =>
                                             e.includes("minimum_claim_price")
-                                        ).length !== 0
-                                            ? "outline outline-1 outline-red-600"
-                                            : "outline outline-1 outline-slate-300"
-                                    }  `}
-                                />
-                                {errorMessage &&
-                                    errorMessage.filter((e) =>
-                                        e.includes("minimum_claim_price")
-                                    ).length !== 0 && (
-                                        <p className="text-red-600 text-sm flex text-start ">
-                                            Minimum klaim promo tidak boleh
-                                            kosong
-                                        </p>
-                                    )}
+                                        ).length !== 0 && (
+                                            <p className="text-red-600 text-sm flex text-start ">
+                                                Minimum klaim promo tidak boleh
+                                                kosong
+                                            </p>
+                                        )}
+                                </div>
                             </div>
                         </div>
 
