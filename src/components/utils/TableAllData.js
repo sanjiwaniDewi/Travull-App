@@ -25,6 +25,7 @@ import {
 } from "@/utils/handleActionButton";
 import { formatDate } from "@/utils/handleFormatData";
 import { deleteItem } from "@/redux/features/data/dataSlice";
+import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
 
 export default function TabelAllData({ data, title, type }) {
     const dispatch = useDispatch();
@@ -56,7 +57,7 @@ export default function TabelAllData({ data, title, type }) {
     };
 
     const handleAddItem = () => {
-        dispatch(changeCreateSatus());
+        dispatch(deleteImageUrl());
         router.push(handleCreateRoute(type));
     };
 
@@ -76,7 +77,8 @@ export default function TabelAllData({ data, title, type }) {
     };
 
     const handleEdit = (id, type) => {
-        dispatch(changeEditStatus());
+        dispatch(deleteImageUrl());
+
         router.push(handleUpdateRoute(id, type));
     };
 
@@ -85,125 +87,141 @@ export default function TabelAllData({ data, title, type }) {
             <div className="flex justify-start content-center pt-1 gap-4 mb-3">
                 <h1 className="text-2xl font-bold ">{title}</h1>
                 <div className="flex self-center">
-                    <AddButton handleAddItem={handleAddItem} type={type} />
+                    <AddButton
+                        handleAddItem={handleAddItem}
+                        type={type}
+                        isMultipleImage={false}
+                    />
                 </div>
             </div>
-            <table className="table text-lg table-compact w-full overflow-x-auto">
-                <thead className="shadow-xl">
-                    <tr className="text-md shadow-md  bg-primary-200 text-secondary-200">
-                        {tableTitle?.map((item) => {
-                            if (item === "id") {
-                                return (
-                                    <th
-                                        key={item}
-                                        className="text-left py-2 ps-4"
-                                    >
-                                        no
-                                    </th>
-                                );
-                            } else if (item === "no") {
-                                return;
-                            } else if (
-                                item === "updatedAt" ||
-                                item === "createdAt" ||
-                                item === "title" ||
-                                item === "name"
-                            ) {
-                                return (
-                                    <th key={item} className="text-left py-2">
-                                        {item}
-                                    </th>
-                                );
-                            } else if (item === "action") {
-                                return (
-                                    <th key={`${item}`} className="py-2">
-                                        {item}
-                                    </th>
-                                );
-                            }
-
-                            return;
-                        })}
-                    </tr>
-                </thead>
-                <tbody className=" divide-y divide-slate-200">
-                    {data.map((row, index) => (
-                        <tr key={row.id} className=" text-md">
-                            {tableTitle.map((head, indexs) => {
-                                if (head === "id") {
+            <div className="overflow-x-auto table-auto">
+                <table className="table text-lg w-full">
+                    <thead className="shadow-xl">
+                        <tr className="text-md shadow-md  bg-primary-200 text-secondary-200">
+                            {tableTitle?.map((item) => {
+                                if (item === "id") {
                                     return (
-                                        <td key={index} className="ps-4 pt-3">
-                                            {index + 1}
-                                        </td>
+                                        <th
+                                            key={item}
+                                            className="text-left py-2 ps-4"
+                                        >
+                                            no
+                                        </th>
                                     );
-                                } else if (head === "no") {
+                                } else if (item === "no") {
                                     return;
-                                } else if (head === "action") {
-                                    return (
-                                        <td key={row["id"]} className="pt-3">
-                                            <div className=" flex  justify-center content-start">
-                                                <ActionButtons
-                                                    // id={row["id"]}
-                                                    // type={type}
-                                                    handleShowModal={() =>
-                                                        handleShowModal(
-                                                            row["id"],
-                                                            type
-                                                        )
-                                                    }
-                                                    handleDelete={() =>
-                                                        handleDelete(
-                                                            row["id"],
-                                                            type
-                                                        )
-                                                    }
-                                                    handleEdit={() =>
-                                                        handleEdit(
-                                                            row["id"],
-                                                            type
-                                                        )
-                                                    }
-                                                />
-                                            </div>
-                                        </td>
-                                    );
-                                } else if (head === "updatedAt") {
-                                    return (
-                                        <td
-                                            key={`${row[head]}updt`}
-                                            className="pt-3"
-                                        >
-                                            {formatDate(row[head])}
-                                        </td>
-                                    );
-                                } else if (head === "createdAt") {
-                                    return (
-                                        <td
-                                            key={`${row[head]}crt`}
-                                            className="pt-3"
-                                        >
-                                            {formatDate(row[head])}
-                                        </td>
-                                    );
                                 } else if (
-                                    head === "name" ||
-                                    head === "title"
+                                    item === "updatedAt" ||
+                                    item === "createdAt" ||
+                                    item === "title" ||
+                                    item === "name"
                                 ) {
                                     return (
-                                        <td
-                                            key={`${row[head]}`}
-                                            className="pt-3"
+                                        <th
+                                            key={item}
+                                            className="text-left py-2"
                                         >
-                                            {row[head]}
-                                        </td>
+                                            {item}
+                                        </th>
+                                    );
+                                } else if (item === "action") {
+                                    return (
+                                        <th key={`${item}`} className="py-2">
+                                            {item}
+                                        </th>
                                     );
                                 }
+
                                 return;
                             })}
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody className=" divide-y divide-slate-200">
+                        {data.map((row, index) => (
+                            <tr key={row.id} className=" text-md">
+                                {tableTitle.map((head, indexs) => {
+                                    if (head === "id") {
+                                        return (
+                                            <td
+                                                key={index}
+                                                className="ps-4 pt-3"
+                                            >
+                                                {index + 1}
+                                            </td>
+                                        );
+                                    } else if (head === "no") {
+                                        return;
+                                    } else if (head === "action") {
+                                        return (
+                                            <td
+                                                key={row["id"]}
+                                                className="pt-3"
+                                            >
+                                                <div className=" flex  justify-center content-start">
+                                                    <ActionButtons
+                                                        // id={row["id"]}
+                                                        // type={type}
+                                                        handleShowModal={() =>
+                                                            handleShowModal(
+                                                                row["id"],
+                                                                type
+                                                            )
+                                                        }
+                                                        handleDelete={() =>
+                                                            handleDelete(
+                                                                row["id"],
+                                                                type
+                                                            )
+                                                        }
+                                                        handleEdit={() =>
+                                                            handleEdit(
+                                                                row["id"],
+                                                                type
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                            </td>
+                                        );
+                                    } else if (head === "updatedAt") {
+                                        return (
+                                            <td
+                                                key={`${row[head]}updt`}
+                                                className="pt-3"
+                                            >
+                                                {formatDate(row[head])}
+                                            </td>
+                                        );
+                                    } else if (head === "createdAt") {
+                                        return (
+                                            <td
+                                                key={`${row[head]}crt`}
+                                                className="pt-3"
+                                            >
+                                                {formatDate(row[head])}
+                                            </td>
+                                        );
+                                    } else if (
+                                        head === "name" ||
+                                        head === "title"
+                                    ) {
+                                        return (
+                                            <td
+                                                key={`${row[head]}`}
+                                                className="pt-3"
+                                            >
+                                                {row[head]}
+                                            </td>
+                                        );
+                                    }
+                                    return;
+                                })}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
             {showModal && <DetailModal />}
         </div>
     );
