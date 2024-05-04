@@ -19,7 +19,10 @@ export function useGetAllData() {
             const res = await getAllBannerAPI();
             setLoading(false);
             return res;
-        } catch (err) {}
+        } catch (err) {
+            setLoading(false);
+            setErr(err);
+        }
     };
     const getAllPromoData = async () => {
         try {
@@ -27,7 +30,10 @@ export function useGetAllData() {
             const res = await getAllPromoAPI();
             setLoading(false);
             return res;
-        } catch (err) {}
+        } catch (err) {
+            setLoading(false);
+            setErr(err);
+        }
     };
 
     const getAllCategoryData = async () => {
@@ -36,7 +42,10 @@ export function useGetAllData() {
             const res = await getAllCategoryAPI();
             setLoading(false);
             return res;
-        } catch (err) {}
+        } catch (err) {
+            setLoading(false);
+            setErr(err);
+        }
     };
     const getAllActivityData = async () => {
         try {
@@ -44,7 +53,10 @@ export function useGetAllData() {
             const res = await getAllActivityAPI();
             setLoading(false);
             return res;
-        } catch (err) {}
+        } catch (err) {
+            setLoading(false);
+            setErr(err);
+        }
     };
 
     return {
@@ -53,45 +65,70 @@ export function useGetAllData() {
         getAllCategoryData,
         getAllActivityData,
         loading,
+        err,
+        loading,
     };
 }
 
 export function useGetDataById() {
+    const [err, setErr] = useState();
+    const [loading, setLoading] = useState(false);
     const getBannerById = async (id) => {
+        setLoading(true);
         try {
             const res = await getBannerByIdAPI(id);
-
+            setLoading(false);
             return res;
-        } catch (err) {}
+        } catch (err) {
+            setLoading(false);
+            setErr(err);
+        }
     };
     const getCategoryById = async (id) => {
+        setLoading(true);
         try {
             const res = await getCategoryByIdAPI(id);
-
+            setLoading(false);
             return res;
-        } catch (err) {}
+        } catch (err) {
+            setLoading(false);
+            setErr(err);
+        }
     };
     const getPromoById = async (id) => {
+        setLoading(true);
         try {
             const res = await getPromoByIdAPI(id);
-
+            setLoading(false);
             return res;
-        } catch (err) {}
+        } catch (err) {
+            setLoading(false);
+            setErr(err);
+        }
     };
 
     const getActivityById = async (id) => {
+        setLoading(true);
         try {
             const res = await getActivityByIdAPI(id);
-
+            setLoading(false);
             return res;
-        } catch (err) {}
+        } catch (err) {
+            setLoading(false);
+            setErr(err);
+        }
     };
 
     const getActivitiesByCategoryId = async (id) => {
+        setLoading(true);
         try {
             const res = await getActivitiesByCategoryIdAPI(id);
+            setLoading(false);
             return res;
-        } catch (err) {}
+        } catch (err) {
+            setLoading(false);
+            setErr(err);
+        }
     };
 
     return {
@@ -100,5 +137,7 @@ export function useGetDataById() {
         getPromoById,
         getActivityById,
         getActivitiesByCategoryId,
+        err,
+        loading,
     };
 }
