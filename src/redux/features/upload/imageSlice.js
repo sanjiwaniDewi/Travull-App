@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-    imageUrl: "",
+    imageUrl: null,
     imageUrls: [],
 };
 
@@ -54,7 +54,7 @@ const imageSlice = createSlice({
             }
         },
         deleteImageUrl(state) {
-            state.imageUrl = "";
+            state.imageUrl = null;
             state.imageUrls = [];
         },
     },
