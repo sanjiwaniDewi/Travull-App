@@ -4,7 +4,7 @@ export function formatDate(date) {
 }
 
 export function convertPrice(price) {
-    const newPrice = price.toString();
+    const newPrice = price !== null ? price.toString() : 0;
     if (newPrice?.length > 6) {
         const newLength = newPrice.length - 6;
         return { price: newPrice.slice(0, newLength), unit: "jt" };
@@ -15,7 +15,9 @@ export function convertPrice(price) {
 }
 
 export function priceFormatRp(price) {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return price !== null
+        ? price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        : null;
 }
 
 export function formatSizeMap(maps, width, height) {
