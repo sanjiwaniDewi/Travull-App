@@ -11,41 +11,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { setData } from "@/redux/features/data/dataSlice";
 
 export default function ActivityPage() {
-    // const [activitiesData, setActivitiesData] = useState();
     const { getAllActivityData } = useGetAllData();
-    const { isDelete, isUpdate, isCreate } = useSelector(
-        (state) => state.status
-    );
+
     const { data: activitiesData } = useSelector((state) => state.data);
     const dispatch = useDispatch();
     const handleShowAllData = async () => {
         const res = await getAllActivityData();
 
         dispatch(setData(res));
-
-        // setActivitiesData(res);
     };
 
     useEffect(() => {
         handleShowAllData();
     }, []);
-
-    // const handleOnDataChange = () => {
-    //     if (isDelete) {
-    //         // handleShowAllData();
-    //         dispatch(changeDeleteSatus());
-    //     } else if (isCreate) {
-    //         // handleShowAllData();
-    //         dispatch(changeCreateSatus());
-    //     } else if (isUpdate) {
-    //         // handleShowAllData();
-    //         dispatch(changeEditStatus());
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     handleOnDataChange();
-    // }, [isDelete, isCreate, isUpdate]);
 
     return (
         <div className="container mx-auto px-5 lg:pt-20 pt-28">
