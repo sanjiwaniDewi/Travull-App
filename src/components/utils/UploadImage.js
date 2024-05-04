@@ -60,7 +60,7 @@ export default function UploadImage({
                     </button>
                 </div>
             </form>
-            {errorMessage.length !== 0 && !isUploadImage && (
+            {errorMessage && errorMessage.length !== 0 && !isUploadImage && (
                 <p className="text-red-600 text-sm flex w-11/12 text-start ">
                     Tambahkan gambar atau upload gambar
                 </p>
