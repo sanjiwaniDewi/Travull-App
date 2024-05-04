@@ -20,7 +20,10 @@ export default function DetailActivity() {
     const dispatch = useDispatch();
 
     let dataCategory = {};
-    const newFacilities = formatFacilities(modalData.facilities);
+    const newFacilities =
+        modalData.facilities !== null
+            ? formatFacilities(modalData.facilities)
+            : null;
     const handleShowCategory = async () => {
         await getCategoryById(modalData.category.id).then(
             (res) => (dataCategory = res)
@@ -79,27 +82,39 @@ export default function DetailActivity() {
                     ) : (
                         <div>
                             <p className="text-sm outline py-1 rounded-3xl outline-slate-200 w-fit px-2">
-                                {parse(newFacilities)}
+                                {newFacilities &&
+                                newFacilities.length !== 0 &&
+                                newFacilities !== null
+                                    ? parse(newFacilities)
+                                    : "tidak ada fasilitas"}
                             </p>
                         </div>
                     )}
                 </div>
 
-                {modalData.price !== modalData.price_discount && (
-                    <div>
-                        <p className="text-sm line-through text-slate-400">
-                            Rp {priceFormatRp(modalData.price)}
-                        </p>
-                        <div className="text-lg font-bold text-center py-1 mt-2 outline outline-1 outline-slate-300 rounded-3xl text-orange-400">
-                            <p>Rp. {priceFormatRp(modalData.price_discount)}</p>
+                {modalData.price !== modalData.price_discount &&
+                    modalData.price_discount && (
+                        <div>
+                            <p className="text-sm line-through text-slate-400">
+                                Rp{" "}
+                                {modalData.price &&
+                                    priceFormatRp(modalData.price)}
+                            </p>
+                            <div className="text-lg font-bold text-center py-1 mt-2 outline outline-1 outline-slate-300 rounded-3xl text-orange-400">
+                                <p>
+                                    Rp.{" "}
+                                    {modalData.price_discount &&
+                                        priceFormatRp(modalData.price_discount)}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                )}
-                {modalData.price === modalData.price_discount && (
-                    <div className="text-lg font-bold text-center py-1 mt-2 outline outline-1 outline-slate-300 rounded-3xl text-orange-400">
-                        <p>Rp {priceFormatRp(modalData.price)}</p>
-                    </div>
-                )}
+                    )}
+                {modalData.price === modalData.price_discount ||
+                    (!modalData.price_discount && (
+                        <div className="text-lg font-bold text-center py-1 mt-2 outline outline-1 outline-slate-300 rounded-3xl text-orange-400">
+                            <p>Rp {priceFormatRp(modalData.price)}</p>
+                        </div>
+                    ))}
 
                 <div className="w-96 mt-4 mb-4">
                     <p>
@@ -110,7 +125,15 @@ export default function DetailActivity() {
             </div>
             <div className="w-full">
                 <div className="">
-                    {parse(formatSizeMap(modalData.location_maps, "100%", 200))}
+                    {modalData.location_maps !== null
+                        ? parse(
+                              formatSizeMap(
+                                  modalData.location_maps,
+                                  "100%",
+                                  200
+                              )
+                          )
+                        : "tidak ada peta lokasi"}
                 </div>
             </div>
         </div>

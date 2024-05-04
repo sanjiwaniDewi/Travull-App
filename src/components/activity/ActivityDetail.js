@@ -10,7 +10,8 @@ import parse from "html-react-parser";
 import Card from "../layout/Card";
 
 export default function ActivityDetail({ data }) {
-    const newFacilities = formatFacilities(data.facilities);
+    const newFacilities =
+        data.facilities !== null ? formatFacilities(data.facilities) : null;
     return (
         <div className="lg:w-2/3 w-full">
             <Card>
@@ -63,7 +64,9 @@ export default function ActivityDetail({ data }) {
                             ) : (
                                 <div>
                                     <p className="text-sm  py-1 rounded-3xl  bg-secondary-100 w-fit px-2">
-                                        {parse(newFacilities)}
+                                        {newFacilities.length !== 0
+                                            ? parse(newFacilities)
+                                            : "tidak ada fasilitas"}
                                     </p>
                                 </div>
                             )}
@@ -93,7 +96,7 @@ export default function ActivityDetail({ data }) {
                         )}
                     </div>
                     <div className="w-full mt-8">
-                        {data.location_maps && (
+                        {data.location_maps ? (
                             <div className="outline outline-1 outline-slate-300 rounded-3xl">
                                 {parse(
                                     formatSizeMap(
@@ -103,6 +106,8 @@ export default function ActivityDetail({ data }) {
                                     )
                                 )}
                             </div>
+                        ) : (
+                            <p>tidak ada peta lokasi</p>
                         )}
                         {!data.location_maps && (
                             <div className="outline outline-1 outline-slate-300 rounded-3xl w-full h-52 flex justify-center items-center text-lg font-semibold text-slate-300">
