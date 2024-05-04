@@ -25,42 +25,39 @@ import { useRouter } from "next/navigation";
 
 export default function ActivityForm({ activityData }) {
     const [categories, setCategories] = useState();
-    const [newImageUrlUpload, setNewImageUrlsUpload] = useState([]);
     const [category, setCategory] = useState();
     const [isMultipleImage, setIsMultipleImage] = useState(false);
-    const [isHaveImageUrl, setIsHaveImageUrl] = useState(false);
-    const [isUploadImage, setIsUploadImage] = useState(true);
+    const [isMultipleUrl, setIsMultipleUrl] = useState(false);
+    const [errorMessage, setErrorMessage] = useState([]);
+
     const { getAllCategoryData } = useGetAllData();
+    const {
+        createActivity,
+        loading: loadingCreate,
+        success: successCreate,
+        err: errorCreate,
+    } = useCreate();
+    const {
+        updateActivity,
+        loading: loadingUpdate,
+        success: successUpdate,
+        err: errorUpdate,
+    } = useUpdate();
+
     const { imageUrl, imageUrls } = useSelector((store) => store.image);
-    const { createActivity } = useCreate();
-    const { updateActivity } = useUpdate();
 
     const dispatch = useDispatch();
     const router = useRouter();
 
-    console.log("activityData", activityData);
-
-    const { isCreate } = useSelector((store) => store.status);
-
-    //hapus image url jika ada image url di redux
-    const deleteImageWhenCreate = () => {
-        if (imageUrl || imageUrls) {
-            dispatch(deleteImageUrl());
-        }
-    };
-
-    useEffect(() => {
-        deleteImageWhenCreate();
-    }, []);
-
-    const handleOnEditActivity = () => {
-        if (imageUrls.length === 0 && activityData?.imageUrls.length > 0) {
+    const handleImageUrlsOnEdit = () => {
+        if (imageUrls.length === 0 && activityData?.imageUrls) {
             dispatch(setImagesUrls(activityData?.imageUrls));
         }
     };
+
     useEffect(() => {
-        handleOnEditActivity();
-    }, [activityData?.imageUrls]);
+        handleImageUrlsOnEdit();
+    }, [activityData]);
 
     // set imageurls setelah upload
     const handdleaddImageUrl = () => {
@@ -73,22 +70,24 @@ export default function ActivityForm({ activityData }) {
         handdleaddImageUrl();
     }, [imageUrl]);
 
-    const handleHaveImageUrl = () => {
-        if (isCreate) {
-            dispatch(deleteImageUrl());
+    const handleErrorMessage = () => {
+        if (errorCreate) {
+            setErrorMessage(errorCreate.map((e) => e.message));
         }
-
-        setIsHaveImageUrl(true);
-        setIsUploadImage(false);
-    };
-    const handleUploadImage = () => {
-        if (isCreate) {
-            dispatch(deleteImageUrl());
+        if (errorUpdate) {
+            if (Array.isArray(errorUpdate)) {
+                setErrorMessage(errorUpdate.map((e) => e.message));
+            } else {
+                setErrorMessage(errorUpdate.split(","));
+            }
         }
-
-        setIsUploadImage(true);
-        setIsHaveImageUrl(false);
     };
+
+    console.log(errorMessage);
+    useEffect(() => {
+        handleErrorMessage();
+    }, [errorCreate, errorUpdate]);
+
     const handleCategoriesData = async () => {
         const res = await getAllCategoryData();
         setCategories(res);
@@ -106,6 +105,10 @@ export default function ActivityForm({ activityData }) {
         setIsMultipleImage(!isMultipleImage);
     };
 
+    const handleChangeActivityForm = () => {
+        setErrorMessage("");
+    };
+
     const handleSumitForm = (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -113,259 +116,349 @@ export default function ActivityForm({ activityData }) {
         const newImageUrls = imageUrls ? imageUrls : urlImage;
 
         if (activityData) {
-            // dispatch(setImagesUrls(newImageUrls));
-            if (isHaveImageUrl) {
-                dispatch(deleteImageUrl());
-                dispatch(setImagesUrls(urlImage));
-            }
             const imageUrlPayload =
                 imageUrls.length !== 0 ? imageUrls : activityData?.imageUrls;
+
             updateActivity(
                 activityData.id,
-                handleActivityForm(formData, imageUrlPayload, isHaveImageUrl)
+                handleActivityForm(formData, imageUrlPayload)
             );
-            dispatch(updateItem(activityData));
-            dispatch(changeEditStatus());
-            dispatch(deleteImageUrl());
-            router.back();
-
-            // console.log("imageurl", imageUrlPayload);
-            // const payload = handleActivityForm(formData, imageUrlPayload);
-            // console.log(payload);
         } else {
-            // dispatch(setImagesUrls(newImageUrls));
-            // const payload = handleActivityForm(formData, newImageUrls);
-            // console.log(payload);
-
-            if (isHaveImageUrl) {
-                dispatch(setImagesUrls(urlImage));
-            }
-
-            createActivity(
-                handleActivityForm(formData, newImageUrls, isHaveImageUrl)
-            );
-            dispatch(deleteImageUrl());
-            dispatch(changeCreateSatus());
-            router.back();
+            createActivity(handleActivityForm(formData, newImageUrls));
         }
     };
 
-    return (
-        <div className="w-full container mx-auto flex flex-col py-16  items-center ">
-            <div className=" lg:w-1/2 w-3/4 mb-4 rounded-lg">
-                {imageUrls?.length > 1 ? (
-                    <ImageCarousel
-                        images={
-                            imageUrls.length !== 0
-                                ? imageUrls
-                                : activityData?.imageUrls
-                        }
-                        height={"h-96"}
-                    />
-                ) : (
-                    <ImagePreview
-                        figureUrl={
-                            imageUrls.length !== 0
-                                ? imageUrls?.join("")
-                                : activityData?.imageUrls.join("")
-                        }
-                    />
-                )}
-            </div>
-            <div className=" lg:w-3/4 mt-4 p-6 bg-white border shadow-md border-gray-200 rounded-xl">
-                <div className="flex flex-col justify-center items-center gap-y-4">
-                    <ImageBtnOption
-                        haveImageUrl={handleHaveImageUrl}
-                        uploadImage={handleUploadImage}
-                        isHaveImageUrl={isHaveImageUrl}
-                    />
+    const handleReset = () => {
+        dispatch(deleteImageUrl());
+    };
 
-                    {isUploadImage && (
-                        <div className="w-11/12 self-center">
-                            {!isMultipleImage ? (
-                                <div className="mt-8">
-                                    <label className="text-sm font-semibold">
-                                        Upload Gambar
-                                    </label>
-                                    <UploadImage
-                                        handleMultiple={handleMultipleImage}
-                                        customStyleBtn={
-                                            "bg-primary-200 w-full px-4 rounded-xl text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 "
-                                        }
-                                        customStyleInput="bg-secondary-200 bg-opacity-30 mt-1 mb-0"
-                                    />
-                                </div>
-                            ) : (
-                                <div className="mt-8">
-                                    <AddButton
-                                        handleAddItem={handleMultipleImage}
-                                    />
-                                </div>
-                            )}
-                        </div>
+    const handleSuccsess = () => {
+        if (successCreate || successUpdate) {
+            dispatch(deleteImageUrl());
+            router.push("/dashboard/activity");
+        }
+    };
+
+    useEffect(() => {
+        handleSuccsess();
+    }, [successCreate, successUpdate]);
+
+    return (
+        <div className="w-full px-5 container mx-auto flex flex-col py-16  items-center ">
+            {imageUrls.length !== 0 ? (
+                <div className=" lg:w-1/2 w-full mb-4 rounded-lg">
+                    {imageUrls?.length > 1 ? (
+                        <ImageCarousel
+                            images={
+                                imageUrls.length !== 0
+                                    ? imageUrls
+                                    : activityData?.imageUrls
+                            }
+                            height={"h-96"}
+                            customDots={true}
+                        />
+                    ) : (
+                        <ImagePreview
+                            figureUrl={
+                                imageUrls.length !== 0
+                                    ? imageUrls?.join("")
+                                    : activityData?.imageUrls.join("")
+                            }
+                            resetImage={true}
+                        />
                     )}
+                </div>
+            ) : (
+                <div className=" lg:w-1/2 w-full mb-4 rounded-lg h-96">
+                    <div className="flex justify-center h-full items-center">
+                        <p className="text-lg font-bold text-slate-300">
+                            Tidak ada gambar
+                        </p>
+                    </div>
+                </div>
+            )}
+
+            <div className=" lg:w-1/2 w-full mt-4 p-6 bg-white border shadow-md border-gray-200 rounded-xl">
+                <div className="flex flex-col justify-center items-center gap-y-4">
+                    <div className="w-11/12 self-center">
+                        <div className="flex gap-x-2 justify-center mb-4 ">
+                            <button
+                                className=" text-sm  flex justify-center  py-2 px-2 rounded-xl font-semibold bg-primary-200 text-secondary-200 hover:text-primary-200 hover:bg-secondary-200 hover:scale-105"
+                                onClick={handleReset}
+                            >
+                                Hapus Gambar
+                            </button>
+
+                            <div className=" flex justify-center gap-x-8">
+                                <AddButton
+                                    handleAddItem={handleMultipleImage}
+                                    type="Gambar"
+                                    isMultipleImage={!isMultipleImage}
+                                />
+                            </div>
+                        </div>
+
+                        {!isMultipleImage && (
+                            <div className="">
+                                <label className="text-sm font-semibold">
+                                    Upload Gambar
+                                </label>
+                                <UploadImage
+                                    handleMultiple={handleMultipleImage}
+                                    customStyleBtn={
+                                        "bg-primary-200 w-full px-4 rounded-xl text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 "
+                                    }
+                                    customStyleInput="bg-secondary-200 bg-opacity-30 mt-1 mb-0"
+                                    customErrorStyle={`${
+                                        errorMessage &&
+                                        errorMessage?.filter((e) =>
+                                            e.includes("imageUrl")
+                                        ).length !== 0
+                                            ? "outline outline-1 outline-red-600"
+                                            : "outline outline-1 outline-slate-300"
+                                    }`}
+                                    errorMessage={
+                                        errorMessage &&
+                                        errorMessage.filter((e) =>
+                                            e.includes("imageUrl")
+                                        )
+                                    }
+                                />
+                            </div>
+                        )}
+                    </div>
+
                     <form
                         onSubmit={handleSumitForm}
-                        className="self-center w-11/12 flex flex-col gap-y-1"
+                        className="self-center lg:w-11/12 w-full flex flex-col gap-y-1"
+                        onChange={handleChangeActivityForm}
                     >
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
                             <div>
                                 <label className="text-sm font-semibold">
                                     Judul Aktivitas
-                                </label>
-                                <input
-                                    defaultValue={activityData?.title}
-                                    name="title"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                    placeholder="Aktivitas"
-                                />
-                                {isHaveImageUrl && (
-                                    <div>
-                                        <label className="text-sm font-semibold">
-                                            Url gambar
-                                        </label>
+                                    <div className="flex flex-col">
                                         <input
-                                            defaultValue={
-                                                activityData?.imageUrls
-                                            }
-                                            name="imageUrl"
-                                            placeholder="Url gambar"
-                                            className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                            defaultValue={activityData?.title}
+                                            name="title"
+                                            placeholder="Judul Aktivitas"
+                                            className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                                errorMessage &&
+                                                errorMessage?.filter((e) =>
+                                                    e.includes("title")
+                                                ).length !== 0
+                                                    ? "outline outline-1 outline-red-600"
+                                                    : "outline outline-1 outline-slate-300"
+                                            }  `}
                                         />
+                                        {errorMessage &&
+                                            errorMessage.filter((e) =>
+                                                e.includes("title")
+                                            ).length !== 0 && (
+                                                <p className="text-red-600 text-sm flex text-start mt-0 pt-0 font-medium ">
+                                                    Judul promo tidak boleh
+                                                    kosong
+                                                </p>
+                                            )}
                                     </div>
-                                )}
-                                <label className="text-sm font-semibold">
-                                    Deskripsi
                                 </label>
-                                <input
-                                    defaultValue={activityData?.description}
-                                    name="description"
-                                    placeholder="Description"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                />
+
+                                <label className="text-sm font-semibold gap-y-0 h-fit">
+                                    Deskripsi
+                                    <div className="flex flex-col">
+                                        <textarea
+                                            defaultValue={
+                                                activityData?.description
+                                            }
+                                            name="description"
+                                            placeholder="Description"
+                                            className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                                errorMessage &&
+                                                errorMessage?.filter((e) =>
+                                                    e.includes("description")
+                                                ).length !== 0
+                                                    ? "outline outline-1 outline-red-600"
+                                                    : "outline outline-1 outline-slate-300"
+                                            }  `}
+                                        ></textarea>
+                                        {errorMessage &&
+                                            errorMessage.filter((e) =>
+                                                e.includes("description")
+                                            ).length !== 0 && (
+                                                <p className="text-red-600 text-sm font-medium text-start pt-0 ">
+                                                    Deskripsi tidak boleh kosong
+                                                </p>
+                                            )}
+                                    </div>
+                                </label>
                                 <label className="text-sm font-semibold">
                                     Destinasi
-                                </label>
-                                <select
-                                    value={
-                                        category
-                                            ? category
-                                            : activityData?.categoryId
-                                    }
-                                    name="category"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                    onChange={handleChangeCategory}
-                                >
-                                    <option value="category">Destinasi</option>
-                                    {categories &&
-                                        categories.map((category) => (
-                                            <option
-                                                key={category.id}
-                                                value={category.id}
-                                            >
-                                                {" "}
-                                                {category.name}
+                                    <div className="flex flex-col">
+                                        <select
+                                            value={
+                                                category
+                                                    ? category
+                                                    : activityData?.categoryId
+                                            }
+                                            name="category"
+                                            onChange={handleChangeCategory}
+                                            className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                                errorMessage &&
+                                                errorMessage?.filter((e) =>
+                                                    e.includes("categoryId")
+                                                ).length !== 0
+                                                    ? "outline outline-1 outline-red-600"
+                                                    : "outline outline-1 outline-slate-300"
+                                            }  `}
+                                        >
+                                            <option value="category">
+                                                Destinasi
                                             </option>
-                                        ))}
-                                </select>
+                                            {categories &&
+                                                categories.map((category) => (
+                                                    <option
+                                                        key={category.id}
+                                                        value={category.id}
+                                                    >
+                                                        {" "}
+                                                        {category.name}
+                                                    </option>
+                                                ))}
+                                        </select>
+                                        {errorMessage &&
+                                            errorMessage.filter((e) =>
+                                                e.includes("categoryId")
+                                            ).length !== 0 && (
+                                                <p className="text-red-600 text-sm flex text-start pt-0 mt-0 font-medium">
+                                                    Category tidak boleh kosong
+                                                </p>
+                                            )}
+                                    </div>
+                                </label>
+
                                 <label className="text-sm font-semibold">
                                     Harga
+                                    <div className="flex flex-col">
+                                        <input
+                                            defaultValue={activityData?.price}
+                                            name="price"
+                                            type="number"
+                                            placeholder="Harga"
+                                            className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                                errorMessage &&
+                                                errorMessage?.filter((e) =>
+                                                    e.includes("price")
+                                                ).length !== 0
+                                                    ? "outline outline-1 outline-red-600"
+                                                    : "outline outline-1 outline-slate-300"
+                                            }  `}
+                                        />
+                                        {errorMessage &&
+                                            errorMessage.filter((e) =>
+                                                e.includes("price")
+                                            ).length !== 0 && (
+                                                <p className="text-red-600 text-sm flex text-start pt-0 mt-0 font-medium ">
+                                                    Harge tidak boleh kosong
+                                                </p>
+                                            )}
+                                    </div>
                                 </label>
-                                <input
-                                    defaultValue={activityData?.price}
-                                    name="price"
-                                    type="number"
-                                    placeholder="Harga"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                />
 
                                 <label className="text-sm font-semibold">
                                     Diskon
+                                    <input
+                                        defaultValue={
+                                            activityData?.price_discount
+                                        }
+                                        name="priceDiscount"
+                                        type="number"
+                                        placeholder="Harga Diskon"
+                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    />
                                 </label>
-                                <input
-                                    defaultValue={activityData?.price_discount}
-                                    name="priceDiscount"
-                                    type="number"
-                                    placeholder="Harga Diskon"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                />
                                 <label className="text-sm font-semibold">
                                     Rating
+                                    <input
+                                        defaultValue={activityData?.rating}
+                                        name="rating"
+                                        type="number"
+                                        placeholder="Rating"
+                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    />
                                 </label>
-                                <input
-                                    defaultValue={activityData?.rating}
-                                    name="rating"
-                                    type="number"
-                                    placeholder="Rating"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                />
                             </div>
 
                             <div>
                                 <label className="text-sm font-semibold">
                                     Total Review
+                                    <input
+                                        defaultValue={
+                                            activityData?.total_reviews
+                                        }
+                                        name="totalReviews"
+                                        type="number"
+                                        placeholder="Total Review"
+                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    />
                                 </label>
-                                <input
-                                    defaultValue={activityData?.total_reviews}
-                                    name="totalReviews"
-                                    type="number"
-                                    placeholder="Total Review"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                />
                                 <label className="text-sm font-semibold">
                                     Fasilitas
+                                    <input
+                                        defaultValue={activityData?.facilities}
+                                        name="facilities"
+                                        placeholder="Fasilitas"
+                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    />
                                 </label>
-                                <input
-                                    defaultValue={activityData?.facilities}
-                                    name="facilities"
-                                    placeholder="Fasilitas"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                />
                                 <label className="text-sm font-semibold">
                                     Kota
+                                    <input
+                                        defaultValue={activityData?.city}
+                                        name="city"
+                                        placeholder="Kota"
+                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    />
                                 </label>
-                                <input
-                                    defaultValue={activityData?.city}
-                                    name="city"
-                                    placeholder="Kota"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                />
                                 <label className="text-sm font-semibold">
                                     Provinsi
+                                    <input
+                                        defaultValue={activityData?.province}
+                                        name="province"
+                                        placeholder="Provinsi"
+                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    />
                                 </label>
-                                <input
-                                    defaultValue={activityData?.province}
-                                    name="province"
-                                    placeholder="Provinsi"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                />
                                 <label className="text-sm font-semibold">
                                     Alamat lengkap
+                                    <textarea
+                                        defaultValue={activityData?.address}
+                                        name="address"
+                                        placeholder="Alamat lengap"
+                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    />
                                 </label>
-                                <textarea
-                                    defaultValue={activityData?.address}
-                                    name="address"
-                                    placeholder="Alamat lengap"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                />
                                 <label className="text-sm font-semibold">
                                     Peta lokasi
+                                    <textarea
+                                        defaultValue={
+                                            activityData?.location_maps
+                                        }
+                                        name="locationMaps"
+                                        placeholder="Peta lokasi"
+                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                    />
                                 </label>
-                                <textarea
-                                    defaultValue={activityData?.location_maps}
-                                    name="locationMaps"
-                                    placeholder="Peta lokasi"
-                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                />
                             </div>
                         </div>
+
                         <div className="w-11/12 flex justify-center mt-4">
                             <button
                                 type="submit"
                                 className="bg-primary-200  text-sm font-semibold  text-secondary-200  hover:text-primary-200 hover:bg-secondary-200 px-4 py-3 rounded-2xl w-1/4"
-                                disabled={!isHaveImageUrl && !isUploadImage}
                             >
-                                Submit
+                                {loadingCreate || loadingUpdate
+                                    ? "Loading..."
+                                    : "Submit"}
                             </button>
                         </div>
                     </form>

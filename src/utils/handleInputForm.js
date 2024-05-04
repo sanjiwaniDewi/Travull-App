@@ -26,55 +26,42 @@ export function handlePromoForm(formData, figureUrl, isHaveImageUrl) {
     };
 }
 
-export function handleCategoryForm(formData, figureUrl) {
-    let imageUrl = figureUrl;
-    const name = formData.get("name");
-    if (!figureUrl) {
-        imageUrl = formData.get("imageUrl");
-    }
-    return {
-        name,
-        imageUrl,
-    };
-}
-
 export function handleActivityForm(formData, figureUrl, isHaveImageUrl) {
-    let imageUrls = figureUrl;
-    const title = formData.get("title");
-    const description = formData.get("description");
+    let imageUrls =
+        (figureUrl.length === 1 && figureUrl[0] === "") ||
+        figureUrl.length === 0
+            ? null
+            : figureUrl;
+    const title = checkIsEmptyInput(formData.get("title"));
+    const description = checkIsEmptyInput(formData.get("description"));
 
-    const category = formData.get("category");
+    const category = checkIsEmptyInput(formData.get("category"));
 
-    const price = formData.get("price");
-    const priceDiscount = formData.get("priceDiscount");
-    const rating = formData.get("rating");
-    const totalReviews = formData.get("totalReviews");
-    const facilities = formData.get("facilities");
-    const address = formData.get("address");
-    const city = formData.get("city");
-    const province = formData.get("province");
-    const locationMaps = formData.get("locationMaps");
-    if (!figureUrl || isHaveImageUrl) {
-        const url = formData.get("imageUrl");
-        imageUrls = url?.split(",");
-    }
-    if (category !== "category") {
-        return {
-            title,
-            description,
-            imageUrls,
-            categoryId: category,
-            price: parseInt(price),
-            price_discount: parseInt(priceDiscount),
-            rating: parseInt(rating),
-            total_reviews: parseInt(totalReviews),
-            facilities,
-            address,
-            city,
-            province,
-            location_maps: locationMaps,
-        };
-    }
+    const price = checkIsEmptyInput(formData.get("price"));
+    const priceDiscount = checkIsEmptyInput(formData.get("priceDiscount"));
+    const rating = checkIsEmptyInput(formData.get("rating"));
+    const totalReviews = checkIsEmptyInput(formData.get("totalReviews"));
+    const facilities = checkIsEmptyInput(formData.get("facilities"));
+    const address = checkIsEmptyInput(formData.get("address"));
+    const city = checkIsEmptyInput(formData.get("city"));
+    const province = checkIsEmptyInput(formData.get("province"));
+    const locationMaps = checkIsEmptyInput(formData.get("locationMaps"));
+
+    return {
+        title,
+        description,
+        imageUrls,
+        categoryId: category === "category" ? null : category,
+        price: parseInt(price),
+        price_discount: parseInt(priceDiscount),
+        rating: parseInt(rating),
+        total_reviews: parseInt(totalReviews),
+        facilities,
+        address,
+        city,
+        province,
+        location_maps: locationMaps,
+    };
 }
 
 export function handleRegistationForm(formData, image) {
