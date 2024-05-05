@@ -1,3 +1,4 @@
+import LinkButton from "@/components/utils/LinkButton";
 import ActivityCountainer from "./ActivitiesContainer";
 
 export default function ActivitySection() {
@@ -11,6 +12,9 @@ export default function ActivitySection() {
             </div>
             <div>
                 <ActivityCountainer length={6} />
+            </div>
+            <div className="mt-8 w-full flex justify-center">
+                <LinkButton title="Lihat Aktivitas Lainnya" link="/activity" />
             </div>
         </div>
     );
