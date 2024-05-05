@@ -21,9 +21,15 @@ export default function ActivitiesSection() {
     };
 
     return (
-        <div className="container mx-auto lg:px-1 px-5">
-            <div>
-                <h2></h2>
+        <div className="container mx-auto lg:px-1 px-5 mt-12">
+            <div className=" container mx-auto w-full">
+                <h2 className="text-xl font-bold">
+                    Temukan Semua Aktivitas Menarik untuk Liburanmu
+                </h2>
+                <p className="text-sm">
+                    Pliih aktivitas berdasarkan destinasi yang kamu tuju dan
+                    temukan promo menarik
+                </p>
             </div>
             <div>
                 <div className="py-4">
