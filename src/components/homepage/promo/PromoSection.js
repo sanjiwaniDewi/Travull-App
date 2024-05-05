@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useGetAllData } from "@/hooks/useGet";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import Link from "next/link";
+import LinkButton from "@/components/utils/LinkButton";
 
 export default function PromoSection() {
     const [promos, setPromos] = useState();
@@ -30,12 +31,10 @@ export default function PromoSection() {
                         <h1 className="lg:text-3xl md:text-2xl text-xl font-bold mb-4">
                             Kuy, cek promo untuk liburanmu sekarang!
                         </h1>
-                        <Link
-                            href="/promo"
-                            className="border border-primary-200 font-semibold text-slate-800 text-md  p-2 rounded-xl hover:text-primary-100 hover:scale-105 hover:bg-primary-200"
-                        >
-                            Lihat Semua Promo
-                        </Link>
+                        <LinkButton
+                            title={"Lihat Semua Promo"}
+                            link={"/promo"}
+                        />
                     </div>
                 </div>
                 <div className="col-span-3">
