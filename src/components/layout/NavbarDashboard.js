@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { CgMenuRight } from "react-icons/cg";
 import { GrClose } from "react-icons/gr";
 import MenuNavDashboard from "./MenuNavDashboard";
+import Link from "next/link";
 
 export default function NavbarDashboard() {
     const [showMenu, setShowMenu] = useState(false);

@@ -1,18 +1,17 @@
 "use client";
 
+import TabelAllData from "@/components/utils/TableAllData";
 import { useGetAllData } from "@/hooks/useGet";
 import { useSelector, useDispatch } from "react-redux";
-
 import { useEffect } from "react";
 import { setData } from "@/redux/features/data/dataSlice";
 
-import TabelAllData from "@/components/utils/TableAllData";
-
 export default function BannersPage() {
     const { getAllBennerData } = useGetAllData();
-
     const { data: dataBanner } = useSelector((state) => state.data);
+
     const dispatch = useDispatch();
+
     const handleShowAllData = async () => {
         const res = await getAllBennerData();
         dispatch(setData(res));

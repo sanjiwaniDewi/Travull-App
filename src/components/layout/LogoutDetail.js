@@ -1,6 +1,5 @@
 "use client";
 import { logout } from "@/redux/features/auth/authSlice";
-import Card from "./Card";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import {
@@ -13,11 +12,13 @@ import { TiWarningOutline } from "react-icons/ti";
 export default function LogoutDetail() {
     const route = useRouter();
     const dispatch = useDispatch();
+
     const handleCloseModal = () => {
         dispatch(changeModalStatus());
         dispatch(clearRoleUserData());
         dispatch(setModalType(""));
     };
+
     const handleLogout = () => {
         dispatch(logout());
         dispatch(changeModalStatus());

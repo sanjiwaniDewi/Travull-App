@@ -1,9 +1,8 @@
 "use client";
+import { useSelector } from "react-redux";
 import Modal from "./Modal";
 import DetailBanner from "../dashboard/banner/DetailBanner";
-import Card from "../layout/Card";
 import CloseBtnModal from "./CLoseBtnModal";
-import { useSelector } from "react-redux";
 import DetailPromo from "../dashboard/promo/DetailPromo";
 import DetailCategory from "../dashboard/category/DetailCategory";
 import DetailActivity from "../dashboard/activity/DetailActivity";

@@ -4,7 +4,6 @@ import { handlePromoForm } from "@/utils/handleInputForm";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
-import { updateItem } from "@/redux/features/data/dataSlice";
 
 import ImageBtnOption from "@/components/utils/ImageBtnOption";
 import useCreate from "@/hooks/useCreate";

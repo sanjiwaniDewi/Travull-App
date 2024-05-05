@@ -1,6 +1,6 @@
 "use client";
 import { useGetDataById } from "@/hooks/useGet";
-import { convertPrice, priceFormatRp } from "@/utils/handleFormatData";
+import { priceFormatRp } from "@/utils/handleFormatData";
 import { useState, useEffect } from "react";
 
 export default function PromoDetailPage(context) {

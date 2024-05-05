@@ -1,15 +1,13 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
+import Image from "next/image";
+
 export default function ImagePreview({ figureUrl, customHeigh, resetImage }) {
     const [newImage, setNewImage] = useState("");
     const { imageUrl } = useSelector((store) => store.image);
-    const dispatch = useDispatch();
 
     const handleshowFigure = () => {
-        //default value from update
         if (figureUrl) setNewImage(figureUrl);
     };
 
@@ -17,14 +15,7 @@ export default function ImagePreview({ figureUrl, customHeigh, resetImage }) {
         handleshowFigure();
     }, [figureUrl]);
 
-    // const handleFirstLoad = () => {
-    //     if (imageUrl && !resetImage) {
-    //         dispatch(deleteImageUrl());
-    //     }
-    // };
-
     useEffect(() => {
-        // handleFirstLoad();
         handleshowFigure();
     }, []);
 

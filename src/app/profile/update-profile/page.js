@@ -1,30 +1,24 @@
 "use client";
-import Card from "@/components/layout/Card";
+
 import FormUpdate from "@/components/profile/FormUpdate";
-import Layout from "@/components/layout/Layout";
 import ProfieImage from "@/components/profile/ProfileImage";
 import UploadImage from "@/components/utils/UploadImage";
 import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
-import {
-    fatchUserLogged,
-    setSuccessUpdate,
-    updateUser,
-} from "@/redux/features/user/userSlice";
-import { redirect, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { setSuccessUpdate, updateUser } from "@/redux/features/user/userSlice";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeEditStatus } from "@/redux/features/status/statusSilce";
 import { checkIsEmptyInput } from "@/utils/handleFormatData";
 
 export default function UpdateProfilePage() {
-    const dataUser = useSelector((store) => store.user);
     const { imageUrl } = useSelector((store) => store.image);
+    const dataUser = useSelector((store) => store.user);
+
     const dispatch = useDispatch();
     const router = useRouter();
 
     const handleUpdateUser = (e) => {
         e.preventDefault();
-
         const formData = new FormData(e.currentTarget);
         const name = checkIsEmptyInput(formData.get("name"));
         const phoneNumber = checkIsEmptyInput(formData.get("phoneNumber"));

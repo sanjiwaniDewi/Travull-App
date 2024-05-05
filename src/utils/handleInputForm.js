@@ -65,7 +65,6 @@ export function handleActivityForm(formData, figureUrl, isHaveImageUrl) {
 }
 
 export function handleRegistationForm(formData, image) {
-    // const [customError, setCustomError] = useState("");
     let customError = "";
 
     const name = formData.get("name");

@@ -1,4 +1,3 @@
-import { FaDivide } from "react-icons/fa";
 import PromoContent from "./PromoContent";
 import EmptyData from "../utils/EmptyData";
 

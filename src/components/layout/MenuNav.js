@@ -1,12 +1,12 @@
 "use client";
-import { useState } from "react";
-import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
+
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import LogoutButton from "./LogoutButton";
 
 export default function MenuNav() {
     const { isLogin } = useSelector((store) => store.auth);
+
     const role = localStorage.getItem("role");
 
     return (

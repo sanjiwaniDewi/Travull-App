@@ -1,27 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
-import ImagePreview from "../../utils/ImagePreview";
-import UploadImage from "../../utils/UploadImage";
 import { useGetAllData } from "@/hooks/useGet";
 import { useSelector, useDispatch } from "react-redux";
-import AddButton from "../../utils/AddButton";
-import ImageCarousel from "../../utils/ImageCarousel";
 import { handleActivityForm } from "@/utils/handleInputForm";
-import useCreate from "@/hooks/useCreate";
-import useUpdate from "@/hooks/useUpdate";
 import {
-    getImageUrl,
     deleteImageUrl,
     setImagesUrls,
 } from "@/redux/features/upload/imageSlice";
-import { updateItem } from "@/redux/features/data/dataSlice";
-import ImageBtnOption from "@/components/utils/ImageBtnOption";
-import {
-    changeCreateSatus,
-    changeEditStatus,
-    changeDeleteSatus,
-} from "@/redux/features/status/statusSilce";
 import { useRouter } from "next/navigation";
+import useCreate from "@/hooks/useCreate";
+import useUpdate from "@/hooks/useUpdate";
+import AddButton from "../../utils/AddButton";
+import ImageCarousel from "../../utils/ImageCarousel";
+import ImagePreview from "../../utils/ImagePreview";
+import UploadImage from "../../utils/UploadImage";
 
 export default function ActivityForm({ activityData }) {
     const [categories, setCategories] = useState();

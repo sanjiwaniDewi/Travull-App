@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { updateBannerAPI } from "@/API/banner";
 import { updateCategoryAPI } from "@/API/category";
 import { updatePromoAPI } from "@/API/promo";
 import { updateActivityAPI } from "@/API/activity";
-import { useState } from "react";
 
 export default function useUpdate() {
     const [err, setErr] = useState();

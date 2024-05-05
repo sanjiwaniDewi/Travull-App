@@ -1,31 +1,19 @@
 "use client";
 
-import ActionButtons from "./ActionButton";
-import Link from "next/link";
-import DetailModal from "./DetailModal";
 import { BASE_API, API_KEY } from "@/API/api";
-import axios from "axios";
-
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
 import { setModalData, setModalType } from "@/redux/features/modal/modalSlice";
-import AddButton from "./AddButton";
 import { useRouter } from "next/navigation";
 import { handleCreateRoute } from "@/utils/handleActionButton";
-
-import {
-    changeEditStatus,
-    changeDeleteSatus,
-    changeCreateSatus,
-} from "@/redux/features/status/statusSilce";
 import { changeModalStatus } from "@/redux/features/modal/modalSlice";
-import {
-    handleDeleteItem,
-    handleUpdateRoute,
-} from "@/utils/handleActionButton";
+import { handleUpdateRoute } from "@/utils/handleActionButton";
 import { formatDate } from "@/utils/handleFormatData";
-import { deleteItem } from "@/redux/features/data/dataSlice";
 import { deleteImageUrl } from "@/redux/features/upload/imageSlice";
+
+import axios from "axios";
+import ActionButtons from "./ActionButton";
+import DetailModal from "./DetailModal";
+import AddButton from "./AddButton";
 
 export default function TabelAllData({ data, title, type }) {
     const dispatch = useDispatch();
@@ -66,14 +54,9 @@ export default function TabelAllData({ data, title, type }) {
         handlerShowDetail(id, type);
     };
     const handleDelete = (id, type) => {
-        // handleDeleteItem(id, type);
-
         dispatch(changeModalStatus());
         dispatch(setModalType("delete"));
         dispatch(setModalData({ id, type }));
-
-        // dispatch(deleteItem(id));
-        // dispatch(changeDeleteSatus());
     };
 
     const handleEdit = (id, type) => {

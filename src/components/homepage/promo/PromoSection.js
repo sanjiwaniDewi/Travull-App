@@ -1,12 +1,9 @@
 "use client";
-import PromoCarausel from "./PromoCarousel";
-import PromoImage from "./PromoImage";
-import PromoTitle from "./PromoTitle";
 import { useEffect, useState } from "react";
 import { useGetAllData } from "@/hooks/useGet";
 import { RiDiscountPercentFill } from "react-icons/ri";
-import Link from "next/link";
 import LinkButton from "@/components/utils/LinkButton";
+import PromoCarausel from "./PromoCarousel";
 
 export default function PromoSection() {
     const [promos, setPromos] = useState();

@@ -1,19 +1,13 @@
 "use client";
-import { API_KEY, BASE_API } from "@/API/api";
-import axios from "axios";
 
-import { useState, useEffect } from "react";
-import AllUser from "@/components/dashboard/user/AllUser";
+import axios from "axios";
+import DetailModal from "@/components/utils/DetailModal";
 import ShortTableUser from "@/components/dashboard/user/ShortTableUser";
 import ShortTable from "@/components/utils/ShortTable";
 import { useGetAllData } from "@/hooks/useGet";
-import { useSelector, useDispatch } from "react-redux";
-import {
-    changeCreateSatus,
-    changeDeleteSatus,
-    changeEditStatus,
-} from "@/redux/features/status/statusSilce";
-import DetailModal from "@/components/utils/DetailModal";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { API_KEY, BASE_API } from "@/API/api";
 
 export default function DashboardPage() {
     const [latesUsers, setLatestUsers] = useState();

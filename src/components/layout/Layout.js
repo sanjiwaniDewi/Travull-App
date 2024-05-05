@@ -1,7 +1,7 @@
 "use client";
+import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { useSelector } from "react-redux";
 import DetailModalHomePage from "../utils/DetailModalHomePage";
 
 export default function Layout({ children }) {

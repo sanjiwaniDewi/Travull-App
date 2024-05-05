@@ -1,6 +1,6 @@
 "use client";
 
-import { useSelector, dispatch, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ImageCarousel from "../../utils/ImageCarousel";
 import {
     formatDate,
@@ -12,7 +12,6 @@ import parse from "html-react-parser";
 import { setModalData, setModalType } from "@/redux/features/modal/modalSlice";
 import { useGetDataById } from "@/hooks/useGet";
 import ImagePreview from "@/components/utils/ImagePreview";
-import ActivityDetail from "@/components/activity/ActivityDetail";
 
 export default function DetailActivity() {
     const { modalData } = useSelector((state) => state.modal);

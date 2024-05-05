@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useGetAllData } from "@/hooks/useGet";
 import CategoryCarousel from "@/components/category/CategoryCarousel";
 import PromoCarausel from "@/components/homepage/promo/PromoCarousel";
 import ActivitySection from "@/components/homepage/activity/ActivitySection";
 import CategorySection from "@/components/category/CategorySection";
+import { useState, useEffect } from "react";
+import { useGetAllData } from "@/hooks/useGet";
 
 export default function CategoryPage() {
     const [categoies, setCategories] = useState([]);

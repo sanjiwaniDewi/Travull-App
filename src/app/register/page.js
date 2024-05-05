@@ -1,14 +1,13 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
+
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { uploadImage } from "@/redux/features/upload/imageSlice";
-import RegisterForm from "@/components/auth/register/RegisterForm";
-import Toast from "@/components/utils/Toast";
-import Modal from "@/components/utils/Modal";
 import { BsPatchCheck } from "react-icons/bs";
 import { registerStatus } from "@/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
+import RegisterForm from "@/components/auth/register/RegisterForm";
+import Toast from "@/components/utils/Toast";
+import Image from "next/image";
 
 export default function RegisterPage() {
     const { isRegister } = useSelector((state) => state.auth);

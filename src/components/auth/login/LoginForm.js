@@ -1,21 +1,12 @@
-import {
-    login,
-    registerStatus,
-    setErrMessage,
-} from "@/redux/features/auth/authSlice";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { login, setErrMessage } from "@/redux/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-
-// import Card from "../../layout/Card";
-import Link from "next/link";
 import { handleLoginForm } from "@/utils/handleInputForm";
-export default function LoginForm() {
-    const dispatch = useDispatch();
+import Link from "next/link";
 
+export default function LoginForm() {
     const { isLoading, errMessage } = useSelector((store) => store.auth);
 
-    const router = useRouter();
+    const dispatch = useDispatch();
 
     const handleChange = () => {
         if (errMessage.length > 0) {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LogoutButton from "./LogoutButton";
 
 import { IoHome } from "react-icons/io5";
 import { FaImages } from "react-icons/fa";
@@ -7,8 +8,6 @@ import { BiSolidCategoryAlt } from "react-icons/bi";
 import { TbBeach } from "react-icons/tb";
 import { FaUser } from "react-icons/fa";
 import { MdDashboardCustomize } from "react-icons/md";
-import { IoCloseSharp } from "react-icons/io5";
-import LogoutButton from "./LogoutButton";
 import { MdLogout } from "react-icons/md";
 
 export default function MenuNavDashboard() {

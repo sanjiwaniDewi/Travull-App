@@ -1,33 +1,16 @@
 "use client";
 
-import ActionButtons from "./ActionButton";
 import Link from "next/link";
-import DetailModal from "./DetailModal";
-import { BASE_API, API_KEY } from "@/API/api";
-import axios from "axios";
-
-import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import { setModalData, setModalType } from "@/redux/features/modal/modalSlice";
 import AddButton from "./AddButton";
 import { useRouter } from "next/navigation";
 import { handleCreateRoute } from "@/utils/handleActionButton";
 import { formatDate } from "@/utils/handleFormatData";
 
-import {
-    changeEditStatus,
-    changeDeleteSatus,
-} from "@/redux/features/status/statusSilce";
-import { changeModalStatus } from "@/redux/features/modal/modalSlice";
-import {
-    handleDeleteItem,
-    handleUpdateRoute,
-} from "@/utils/handleActionButton";
-
 export default function ShortTable({ data, title, detileLink, type }) {
     const tableTitle = [
         ...new Set(data?.map((item) => Object.keys(item)).flat()),
     ];
+
     const router = useRouter();
 
     const handleAddItem = () => {

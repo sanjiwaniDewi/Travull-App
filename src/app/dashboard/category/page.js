@@ -2,17 +2,15 @@
 import TabelAllData from "@/components/utils/TableAllData";
 import { useGetAllData } from "@/hooks/useGet";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { setData } from "@/redux/features/data/dataSlice";
 
 export default function CategoriesPage() {
-    const [categoriesData, setCategoriesData] = useState();
     const { getAllCategoryData } = useGetAllData();
-    const { isDelete, isUpdate, isCreate } = useSelector(
-        (state) => state.status
-    );
     const { data: dataCategory } = useSelector((state) => state.data);
+
     const dispatch = useDispatch();
+
     const handleShowAllData = async () => {
         const res = await getAllCategoryData();
         dispatch(setData(res));

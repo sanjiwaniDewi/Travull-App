@@ -1,10 +1,11 @@
 "use client";
+
 import Link from "next/link";
 import LoginButton from "./LoginButton";
+import MenuNav from "./MenuNav";
 import { useState, useEffect, useRef } from "react";
 import { CgMenuRight } from "react-icons/cg";
 import { GrClose } from "react-icons/gr";
-import MenuNav from "./MenuNav";
 
 export default function Navbar() {
     const [showMenu, setShowMenu] = useState(false);

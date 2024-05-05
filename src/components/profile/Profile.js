@@ -1,4 +1,3 @@
-import Link from "next/link";
 import LinkButton from "../utils/LinkButton";
 
 export default function Profile({ userData }) {

@@ -1,6 +1,7 @@
 "use client";
 import { formatDate } from "@/utils/handleFormatData";
 import { useSelector } from "react-redux";
+
 export default function DetailPromo() {
     const { modalData } = useSelector((state) => state.modal);
 

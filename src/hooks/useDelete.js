@@ -1,10 +1,8 @@
+import { useState } from "react";
 import { deleteActivityAPI } from "@/API/activity";
-import { BASE_API } from "@/API/api";
 import { deleteBannerAPI } from "@/API/banner";
 import { deleteCategoryAPI } from "@/API/category";
 import { deletePromoAPI } from "@/API/promo";
-import axios from "axios";
-import { useState } from "react";
 
 export default function useDelete() {
     const [err, setErr] = useState();

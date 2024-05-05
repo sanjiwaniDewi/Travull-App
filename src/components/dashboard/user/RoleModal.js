@@ -1,22 +1,17 @@
-import {
-    getAllUser,
-    setUpdatedUserShow,
-} from "@/redux/features/user/userSlice";
-import Card from "../../layout/Card";
+import { setUpdatedUserShow } from "@/redux/features/user/userSlice";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import {
     clearRoleUserData,
-    setCangeRoleDataUser,
     updateRoleUser,
 } from "@/redux/features/role/roleSlice";
 import {
     changeModalStatus,
-    clearModalData,
     setModalType,
 } from "@/redux/features/modal/modalSlice";
+import Card from "../../layout/Card";
 
 export default function RoleModal() {
     const dispatch = useDispatch();

@@ -1,6 +1,7 @@
-import Link from "next/link";
 import CategoriyCarousel from "./CategoryCarousel";
 import { MdNavigateNext } from "react-icons/md";
+import Link from "next/link";
+
 export default function CategorySection() {
     return (
         <div className="mt-16 container mx-auto w-full lg:px-1 px-5 ">

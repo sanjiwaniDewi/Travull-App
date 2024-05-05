@@ -1,11 +1,11 @@
 "use client";
 import { useEffect } from "react";
-import LogoutButton from "@/components/layout/LogoutButton";
 import { loginStatus } from "@/redux/features/auth/authSlice";
 import { fatchUserLogged } from "@/redux/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import ChangeRole from "../utils/ChangeRole";
+
 import Link from "next/link";
+import LogoutButton from "@/components/layout/LogoutButton";
 
 import { IoHome } from "react-icons/io5";
 import { FaImages } from "react-icons/fa";
@@ -17,8 +17,8 @@ import { MdDashboardCustomize } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";
 
 export default function Sidebar({ handleShowSideBar }) {
-    const dataUser = useSelector((store) => store.user);
     const dispatch = useDispatch();
+
     const userLogged = () => {
         const token = localStorage.getItem("access_token");
         if (token) {
@@ -40,17 +40,6 @@ export default function Sidebar({ handleShowSideBar }) {
                     </button>
                 </div>
 
-                {/* <div className="mt-10">
-                    <img
-                        src={dataUser.profilePictureUrl}
-                        alt="avatar"
-                        className="rounded-3xl w-2/3 h-32  object-cover m-auto"
-                    />
-                    <p className="text-center mt-2">
-                        {dataUser.name}{" "}
-                        <span className="text-xs">{`(${dataUser.role})`}</span>
-                    </p>
-                </div> */}
                 <div className="mt-12 px-8  ">
                     <ul className="flex flex-col gap-y-4 text-xl font-semibold divide-y divide-secondary-100 ">
                         <div></div>

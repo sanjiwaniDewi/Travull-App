@@ -1,8 +1,9 @@
 "use client";
+
 import { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
-import { useSelector } from "react-redux";
 
 export default function DropdownMenu({ dataUser, handleLogout }) {
     const [showDropdown, setShowDropdown] = useState(false);

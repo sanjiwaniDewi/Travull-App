@@ -1,4 +1,3 @@
-import Link from "next/link";
 import CategoryImage from "./CategoryImage";
 import LinkButton from "../utils/LinkButton";
 

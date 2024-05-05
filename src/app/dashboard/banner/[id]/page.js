@@ -14,6 +14,7 @@ export default function EditBanerPage(context) {
     useEffect(() => {
         handleBannerData();
     }, []);
+
     return (
         <div className="w-full ">
             <BannerForm bannerData={bannerData} />

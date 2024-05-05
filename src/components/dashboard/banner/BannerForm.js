@@ -1,19 +1,18 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import ImagePreview from "../../utils/ImagePreview";
-import UploadImage from "../../utils/UploadImage";
-import useCreate from "@/hooks/useCreate";
 import { useRouter } from "next/navigation";
 import {
     deleteImageUrl,
     getImageUrl,
 } from "@/redux/features/upload/imageSlice";
-import useUpdate from "@/hooks/useUpdate";
-
-import ImageBtnOption from "@/components/utils/ImageBtnOption";
 import { useEffect, useState } from "react";
-
 import { checkIsEmptyInput } from "@/utils/handleFormatData";
+
+import useUpdate from "@/hooks/useUpdate";
+import ImageBtnOption from "@/components/utils/ImageBtnOption";
+import ImagePreview from "../../utils/ImagePreview";
+import UploadImage from "../../utils/UploadImage";
+import useCreate from "@/hooks/useCreate";
 
 export default function BannerForm({ bannerData }) {
     const [isHaveImageUrl, setIsHaveImageUrl] = useState(false);

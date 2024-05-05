@@ -1,6 +1,5 @@
 "use client";
 import { useSelector } from "react-redux";
-import DetailModal from "../../utils/DetailModal";
 
 export default function DetailBanner() {
     const { modalData } = useSelector((state) => state.modal);

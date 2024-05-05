@@ -5,11 +5,12 @@ import {
     clearModalData,
     setModalType,
 } from "@/redux/features/modal/modalSlice";
-import { handleDeleteItem } from "@/utils/handleActionButton";
+
 import { changeDeleteSatus } from "@/redux/features/status/statusSilce";
 import { deleteItem } from "@/redux/features/data/dataSlice";
-import useDelete from "@/hooks/useDelete";
 import { TiWarningOutline } from "react-icons/ti";
+
+import useDelete from "@/hooks/useDelete";
 
 export default function DeleteModal() {
     const { modalData } = useSelector((state) => state.modal);

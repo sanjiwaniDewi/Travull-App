@@ -1,10 +1,9 @@
 "use client";
-import Card from "@/components/layout/Card";
+
 import { useGetAllData } from "@/hooks/useGet";
 import { useState, useEffect } from "react";
-import CategoryCard from "./CategoryCard";
+
 import Slider from "react-slick";
-// Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CategoryContent from "./CategoriyContent";

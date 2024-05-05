@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 
 export default function EditPromoPage(context) {
     const [promoData, setPromoData] = useState();
-
     const { getPromoById } = useGetDataById();
+
     const handlegetPromoData = async () => {
         const res = await getPromoById(context.params.id);
         setPromoData(res);

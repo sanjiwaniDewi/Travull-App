@@ -1,10 +1,9 @@
 "use client";
 import { useState } from "react";
+import { useGetDataById } from "@/hooks/useGet";
 import ActivityCountainer from "../homepage/activity/ActivitiesContainer";
 import CategoryButton from "./CategoryButton";
-import { useGetDataById } from "@/hooks/useGet";
 import ActivitiesByCategory from "./ActivitiesByCategory";
-useGetDataById;
 
 export default function ActivitiesSection() {
     const [activities, setActivities] = useState();

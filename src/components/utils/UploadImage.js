@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { uploadImage } from "@/redux/features/upload/imageSlice";
 
 import Image from "next/image";

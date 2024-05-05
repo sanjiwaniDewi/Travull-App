@@ -1,28 +1,15 @@
 "use client";
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import Image from "next/image";
-import {
-    register,
-    registerStatus,
-    setErrMessage,
-} from "@/redux/features/auth/authSlice";
-import { useRouter } from "next/navigation";
-import Card from "../../layout/Card";
-import Link from "next/link";
+import { register, setErrMessage } from "@/redux/features/auth/authSlice";
 import { handleRegistationForm } from "@/utils/handleInputForm";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function RegisterForm() {
     const [image, setImage] = useState("/Avatar-Image.png");
-    // const [successRegister, setSuccesRegister] = useState(false);
-    const { errMessage, isLoading, isRegister } = useSelector(
-        (state) => state.auth
-    );
+    const { errMessage, isLoading } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
-
-    const router = useRouter();
 
     const handleSubmitForm = (e) => {
         e.preventDefault();

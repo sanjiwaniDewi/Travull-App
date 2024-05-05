@@ -1,10 +1,8 @@
+import { useState } from "react";
 import { createActivityAPI } from "@/API/activity";
-import { BASE_API } from "@/API/api";
 import { createBannerAPI } from "@/API/banner";
 import { createCategoryAPI } from "@/API/category";
-import { createPromoAPI, deletePromo } from "@/API/promo";
-import axios from "axios";
-import { useState } from "react";
+import { createPromoAPI } from "@/API/promo";
 
 export default function useCreate() {
     const [err, setErr] = useState("");

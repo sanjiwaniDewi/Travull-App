@@ -1,16 +1,15 @@
 "use client";
 
-import { BASE_API, API_KEY } from "@/API/api";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import TableUser from "./TableUser";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     getAllUser,
     setCurrenPageDataUser,
 } from "@/redux/features/user/userSlice";
-import Pagination from "@/components/utils/Pagination";
 import { setShowUsers } from "@/redux/features/role/roleSlice";
+
+import Pagination from "@/components/utils/Pagination";
+import TableUser from "./TableUser";
 
 export default function AllUser() {
     const dispatch = useDispatch();

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useGetAllData } from "@/hooks/useGet";
 import PromoHeader from "@/components/Promo/PromoHeader";
 import ActivitySection from "@/components/homepage/activity/ActivitySection";
 import PromoCards from "@/components/Promo/PromoCards";
+import { useEffect, useState } from "react";
+import { useGetAllData } from "@/hooks/useGet";
 
 export default function PromoPage() {
     const [promos, setPromos] = useState();

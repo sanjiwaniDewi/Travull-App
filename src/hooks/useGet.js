@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     getActivitiesByCategoryIdAPI,
     getActivityByIdAPI,
@@ -7,8 +8,6 @@ import { getAllBannerAPI, getBannerByIdAPI } from "@/API/banner";
 import { getAllCategoryAPI } from "@/API/category";
 import { getAllPromoAPI, getPromoByIdAPI } from "@/API/promo";
 import { getCategoryByIdAPI } from "@/API/category";
-
-import { useState } from "react";
 
 export function useGetAllData() {
     const [err, setErr] = useState();
