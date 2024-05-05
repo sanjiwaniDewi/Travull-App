@@ -237,217 +237,215 @@ export default function ActivityForm({ activityData }) {
                             <div>
                                 <label className="text-sm font-semibold">
                                     Judul Aktivitas
-                                    <div className="flex flex-col">
-                                        <input
-                                            defaultValue={activityData?.title}
-                                            name="title"
-                                            placeholder="Judul Aktivitas"
-                                            className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
-                                                errorMessage &&
-                                                errorMessage?.filter((e) =>
-                                                    e.includes("title")
-                                                ).length !== 0
-                                                    ? "outline outline-1 outline-red-600"
-                                                    : "outline outline-1 outline-slate-300"
-                                            }  `}
-                                        />
-                                        {errorMessage &&
-                                            errorMessage.filter((e) =>
-                                                e.includes("title")
-                                            ).length !== 0 && (
-                                                <p className="text-red-600 text-sm flex text-start mt-0 pt-0 font-medium ">
-                                                    Judul promo tidak boleh
-                                                    kosong
-                                                </p>
-                                            )}
-                                    </div>
                                 </label>
+                                <div className="flex flex-col">
+                                    <input
+                                        defaultValue={activityData?.title}
+                                        name="title"
+                                        placeholder="Judul Aktivitas"
+                                        className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                            errorMessage &&
+                                            errorMessage?.filter((e) =>
+                                                e.includes("title")
+                                            ).length !== 0
+                                                ? "outline outline-1 outline-red-600"
+                                                : "outline outline-1 outline-slate-300"
+                                        }  `}
+                                    />
+                                    {errorMessage &&
+                                        errorMessage.filter((e) =>
+                                            e.includes("title")
+                                        ).length !== 0 && (
+                                            <p className="text-red-600 text-sm flex text-start mt-0 pt-0 font-medium ">
+                                                Judul promo tidak boleh kosong
+                                            </p>
+                                        )}
+                                </div>
 
                                 <label className="text-sm font-semibold gap-y-0 h-fit">
-                                    Deskripsi
-                                    <div className="flex flex-col">
-                                        <textarea
-                                            defaultValue={
-                                                activityData?.description
-                                            }
-                                            name="description"
-                                            placeholder="Description"
-                                            className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
-                                                errorMessage &&
-                                                errorMessage?.filter((e) =>
-                                                    e.includes("description")
-                                                ).length !== 0
-                                                    ? "outline outline-1 outline-red-600"
-                                                    : "outline outline-1 outline-slate-300"
-                                            }  `}
-                                        ></textarea>
-                                        {errorMessage &&
-                                            errorMessage.filter((e) =>
+                                    Deskripsi{" "}
+                                </label>
+                                <div className="flex flex-col">
+                                    <textarea
+                                        defaultValue={activityData?.description}
+                                        name="description"
+                                        placeholder="Description"
+                                        className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                            errorMessage &&
+                                            errorMessage?.filter((e) =>
                                                 e.includes("description")
-                                            ).length !== 0 && (
-                                                <p className="text-red-600 text-sm font-medium text-start pt-0 ">
-                                                    Deskripsi tidak boleh kosong
-                                                </p>
-                                            )}
-                                    </div>
-                                </label>
-                                <label className="text-sm font-semibold">
-                                    Destinasi
-                                    <div className="flex flex-col">
-                                        <select
-                                            value={
-                                                category
-                                                    ? category
-                                                    : activityData?.categoryId
-                                            }
-                                            name="category"
-                                            onChange={handleChangeCategory}
-                                            className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
-                                                errorMessage &&
-                                                errorMessage?.filter((e) =>
-                                                    e.includes("categoryId")
-                                                ).length !== 0
-                                                    ? "outline outline-1 outline-red-600"
-                                                    : "outline outline-1 outline-slate-300"
-                                            }  `}
-                                        >
-                                            <option value="category">
-                                                Destinasi
-                                            </option>
-                                            {categories &&
-                                                categories.map((category) => (
-                                                    <option
-                                                        key={category.id}
-                                                        value={category.id}
-                                                    >
-                                                        {" "}
-                                                        {category.name}
-                                                    </option>
-                                                ))}
-                                        </select>
-                                        {errorMessage &&
-                                            errorMessage.filter((e) =>
-                                                e.includes("categoryId")
-                                            ).length !== 0 && (
-                                                <p className="text-red-600 text-sm flex text-start pt-0 mt-0 font-medium">
-                                                    Category tidak boleh kosong
-                                                </p>
-                                            )}
-                                    </div>
-                                </label>
+                                            ).length !== 0
+                                                ? "outline outline-1 outline-red-600"
+                                                : "outline outline-1 outline-slate-300"
+                                        }  `}
+                                    ></textarea>
+                                    {errorMessage &&
+                                        errorMessage.filter((e) =>
+                                            e.includes("description")
+                                        ).length !== 0 && (
+                                            <p className="text-red-600 text-sm font-medium text-start pt-0 ">
+                                                Deskripsi tidak boleh kosong
+                                            </p>
+                                        )}
+                                </div>
 
                                 <label className="text-sm font-semibold">
-                                    Harga
-                                    <div className="flex flex-col">
-                                        <input
-                                            defaultValue={activityData?.price}
-                                            name="price"
-                                            type="number"
-                                            placeholder="Harga"
-                                            className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
-                                                errorMessage &&
-                                                errorMessage?.filter((e) =>
-                                                    e.includes("price")
-                                                ).length !== 0
-                                                    ? "outline outline-1 outline-red-600"
-                                                    : "outline outline-1 outline-slate-300"
-                                            }  `}
-                                        />
-                                        {errorMessage &&
-                                            errorMessage.filter((e) =>
-                                                e.includes("price")
-                                            ).length !== 0 && (
-                                                <p className="text-red-600 text-sm flex text-start pt-0 mt-0 font-medium ">
-                                                    Harge tidak boleh kosong
-                                                </p>
-                                            )}
-                                    </div>
+                                    Destinasi{" "}
                                 </label>
-
-                                <label className="text-sm font-semibold">
-                                    Diskon
-                                    <input
-                                        defaultValue={
-                                            activityData?.price_discount
+                                <div className="flex flex-col">
+                                    <select
+                                        value={
+                                            category
+                                                ? category
+                                                : activityData?.categoryId
                                         }
-                                        name="priceDiscount"
-                                        type="number"
-                                        placeholder="Harga Diskon"
-                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                    />
-                                </label>
+                                        name="category"
+                                        onChange={handleChangeCategory}
+                                        className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                            errorMessage &&
+                                            errorMessage?.filter((e) =>
+                                                e.includes("categoryId")
+                                            ).length !== 0
+                                                ? "outline outline-1 outline-red-600"
+                                                : "outline outline-1 outline-slate-300"
+                                        }  `}
+                                    >
+                                        <option value="category">
+                                            Destinasi
+                                        </option>
+                                        {categories &&
+                                            categories.map((category) => (
+                                                <option
+                                                    key={category.id}
+                                                    value={category.id}
+                                                >
+                                                    {" "}
+                                                    {category.name}
+                                                </option>
+                                            ))}
+                                    </select>
+                                    {errorMessage &&
+                                        errorMessage.filter((e) =>
+                                            e.includes("categoryId")
+                                        ).length !== 0 && (
+                                            <p className="text-red-600 text-sm flex text-start pt-0 mt-0 font-medium">
+                                                Destinasi tidak boleh kosong
+                                            </p>
+                                        )}
+                                </div>
+
                                 <label className="text-sm font-semibold">
-                                    Rating
-                                    <input
-                                        defaultValue={activityData?.rating}
-                                        name="rating"
-                                        type="number"
-                                        placeholder="Rating"
-                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                    />
+                                    Harga{" "}
                                 </label>
+                                <div className="flex flex-col">
+                                    <input
+                                        defaultValue={activityData?.price}
+                                        name="price"
+                                        type="number"
+                                        placeholder="Harga"
+                                        className={`w-full focus:outline-primary-200 py-3 mb-0 bg-secondary-200 bg-opacity-30 px-3 rounded-xl ${
+                                            errorMessage &&
+                                            errorMessage?.filter((e) =>
+                                                e.includes("price")
+                                            ).length !== 0
+                                                ? "outline outline-1 outline-red-600"
+                                                : "outline outline-1 outline-slate-300"
+                                        }  `}
+                                    />
+                                    {errorMessage &&
+                                        errorMessage.filter((e) =>
+                                            e.includes("price")
+                                        ).length !== 0 && (
+                                            <p className="text-red-600 text-sm flex text-start pt-0 mt-0 font-medium ">
+                                                Harge tidak boleh kosong
+                                            </p>
+                                        )}
+                                </div>
+
+                                <label className="text-sm font-semibold">
+                                    Diskon{" "}
+                                </label>
+                                <input
+                                    defaultValue={activityData?.price_discount}
+                                    name="priceDiscount"
+                                    type="number"
+                                    placeholder="Harga Diskon"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                />
+
+                                <label className="text-sm font-semibold">
+                                    Rating{" "}
+                                </label>
+                                <input
+                                    defaultValue={activityData?.rating}
+                                    name="rating"
+                                    type="number"
+                                    placeholder="Rating"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                />
                             </div>
 
                             <div>
                                 <label className="text-sm font-semibold">
-                                    Total Review
-                                    <input
-                                        defaultValue={
-                                            activityData?.total_reviews
-                                        }
-                                        name="totalReviews"
-                                        type="number"
-                                        placeholder="Total Review"
-                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                    />
+                                    Total Review{" "}
                                 </label>
+                                <input
+                                    defaultValue={activityData?.total_reviews}
+                                    name="totalReviews"
+                                    type="number"
+                                    placeholder="Total Review"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                />
+
                                 <label className="text-sm font-semibold">
-                                    Fasilitas
-                                    <input
-                                        defaultValue={activityData?.facilities}
-                                        name="facilities"
-                                        placeholder="Fasilitas"
-                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                    />
+                                    Fasilitas{" "}
                                 </label>
+                                <input
+                                    defaultValue={activityData?.facilities}
+                                    name="facilities"
+                                    placeholder="Fasilitas"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                />
+
                                 <label className="text-sm font-semibold">
-                                    Kota
-                                    <input
-                                        defaultValue={activityData?.city}
-                                        name="city"
-                                        placeholder="Kota"
-                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                    />
+                                    Kota{" "}
                                 </label>
+                                <input
+                                    defaultValue={activityData?.city}
+                                    name="city"
+                                    placeholder="Kota"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                />
+
                                 <label className="text-sm font-semibold">
-                                    Provinsi
-                                    <input
-                                        defaultValue={activityData?.province}
-                                        name="province"
-                                        placeholder="Provinsi"
-                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                    />
+                                    Provinsi{" "}
                                 </label>
+                                <input
+                                    defaultValue={activityData?.province}
+                                    name="province"
+                                    placeholder="Provinsi"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                />
+
                                 <label className="text-sm font-semibold">
-                                    Alamat lengkap
-                                    <textarea
-                                        defaultValue={activityData?.address}
-                                        name="address"
-                                        placeholder="Alamat lengap"
-                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                    />
+                                    Alamat lengkap{" "}
                                 </label>
+                                <textarea
+                                    defaultValue={activityData?.address}
+                                    name="address"
+                                    placeholder="Alamat lengap"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                />
+
                                 <label className="text-sm font-semibold">
-                                    Peta lokasi
-                                    <textarea
-                                        defaultValue={
-                                            activityData?.location_maps
-                                        }
-                                        name="locationMaps"
-                                        placeholder="Peta lokasi"
-                                        className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
-                                    />
+                                    Peta lokasi{" "}
                                 </label>
+                                <textarea
+                                    defaultValue={activityData?.location_maps}
+                                    name="locationMaps"
+                                    placeholder="Peta lokasi"
+                                    className="w-full focus:outline-primary-200 py-3 mb-2 bg-secondary-200 bg-opacity-30 px-3 rounded-xl outline outline-1 outline-slate-300 "
+                                />
                             </div>
                         </div>
 
