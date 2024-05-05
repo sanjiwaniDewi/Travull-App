@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setErrMessage } from "../auth/authSlice";
 
 const initialState = {
     isCreate: false,
     isDelete: false,
     isUpdate: false,
+    errorMessage: [],
 };
 
 const statusSlice = createSlice({
@@ -18,6 +20,16 @@ const statusSlice = createSlice({
         },
         changeCreateSatus: (state) => {
             state.isCreate = !state.isCreate;
+        },
+        setErrMessage(state, action) {
+            if (state.errorMessage) {
+                state.errorMessage = [...state.errorMessage, action.payload];
+            } else {
+                state.errorMessage = [action.payload];
+            }
+        },
+        deleteErrorMessage(state) {
+            state.errorMessage = [];
         },
     },
 });
