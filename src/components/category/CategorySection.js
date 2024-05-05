@@ -5,7 +5,7 @@ export default function CategorySection({ data, loading }) {
     return (
         <section className="mt-12 container mx-auto w-full lg:px-1  px-5">
             <div className="mb-4">
-                <h2 className="text-xl font-bold">Destinasi Populer</h2>
+                <h2 className="text-xl font-bold">Semua Destinasi Populer</h2>
                 <p className="text-sm">
                     Mengunjungi destinasi yang anda inginkan tambah seru dengan
                     aktivitas menarik

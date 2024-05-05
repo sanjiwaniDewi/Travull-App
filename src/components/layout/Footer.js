@@ -12,7 +12,7 @@ export default function Footer() {
             <div className="container mx-auto lg:px-1 px-5 py-20 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
                 <div>
                     <h1 className="text-4xl font-bold text-zinc-800">
-                        Travull
+                        TravulL
                     </h1>
                     <div className="flex justify-between  md:block">
                         <div className="mt-4">

@@ -14,24 +14,24 @@ export default function MenuNav() {
             <ul className="flex flex-col gap-y-5">
                 {role === "admin" && (
                     <div>
-                        <li className="mb-4 hover:text-primary-100 hover:scale-105">
+                        <li className="mb-4 hover:text-secondary-100 hover:text-lg">
                             <Link href={"/profile"}>Profil</Link>
                         </li>
-                        <li className="hover:text-primary-100 hover:scale-105">
+                        <li className="hover:text-secondary-100 hover:text-lg">
                             <Link href={"/dashboard"}>Dashboard</Link>
                         </li>
                     </div>
                 )}
-                <li className="hover:text-primary-100 hover:scale-105">
+                <li className="hover:text-secondary-100 hover:text-lg">
                     <Link href={"/promo"}>Promo</Link>
                 </li>
-                <li className="hover:text-primary-100 hover:scale-105">
+                <li className="hover:text-secondary-100 hover:text-lg">
                     <Link href={"/category"}>Destinasi</Link>
                 </li>
-                <li className="hover:text-primary-100 hover:scale-105">
+                <li className="hover:text-secondary-100 hover:text-lg">
                     <Link href={"/activity"}>Aktivitas</Link>
                 </li>
-                <li className="hover:text-primary-100 hover:scale-105">
+                <li className="hover:text-secondary-100 hover:text-lg">
                     {isLogin ? (
                         <div>
                             <LogoutButton />

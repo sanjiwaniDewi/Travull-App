@@ -7,7 +7,7 @@ export default function PromoCards({ data }) {
         <section className="container my-auto mx-auto  lg:px-1 px-5 pt-16">
             <div className="mb-4">
                 <h2 className="text-xl font-bold">
-                    Promo Menarik Menanti Anda
+                    Semua Promo Menarik Menanti Anda
                 </h2>
                 <p className="text-sm">
                     Nikmati liburan serumu bersama keluarga dengan promo-promo

@@ -35,7 +35,8 @@ export default function HeaderImage() {
                 <div className="triangle-shape w-screen h-full flex flex-col content-end pb-24 justify-end">
                     <div className=" text-primary-100 text-center">
                         <h1 className="title-homepage text-5xl mb-8 font-extrabold ">
-                            Travull
+                            <span className="text-secondary-100">T</span>ravu
+                            <span className="text-secondary-100">lL</span>
                         </h1>
                         <p className="mb-4 text-xl">
                             Temukan aktivitas menarik untuk liburanmu dengan

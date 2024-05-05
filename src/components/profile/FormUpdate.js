@@ -71,7 +71,7 @@ export default function FormUpdate({ handleUpdateUser, dataUser }) {
                 </label>
                 <button
                     type="sumbit"
-                    className=" mt-4  w-full px-2 py-3 rounded-xl font-bold  bg-secondary-100 text-primary-200 "
+                    className=" mt-4  w-full px-2 py-3 rounded-xl font-bold  hover:bg-secondary-100 hover:text-primary-200 bg-primary-200 text-slate-200"
                 >
                     submit
                 </button>
