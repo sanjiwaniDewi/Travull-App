@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LinkButton from "../utils/LinkButton";
 
 export default function Profile({ userData }) {
     return (
@@ -25,11 +26,11 @@ export default function Profile({ userData }) {
                         <p>Email: {userData.email}</p>
                         <p>Phone Number: {userData.phoneNumber}</p>
                     </div>
-                    <Link href="/profile/update-profile">
-                        <button className="mt-4 py-3 ms-4 bg-secondary-100 text-primary-200 px-4  text-sm font-bold rounded-xl w-44">
-                            Edit Profile
-                        </button>
-                    </Link>
+                    <LinkButton
+                        link={"/profile/update-profile"}
+                        title={"Edit Profil"}
+                        customStyle={"w-fit mt-4 ms-4 px-4"}
+                    />
                 </div>
             </div>
         </div>
