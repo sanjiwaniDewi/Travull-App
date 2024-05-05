@@ -16,9 +16,6 @@ export default function PromosPage() {
     // const [promosData, setPromosData] = useState();
     const { getAllPromoData } = useGetAllData();
 
-    const { isDelete, isUpdate, isCreate } = useSelector(
-        (state) => state.status
-    );
     const { data: promoData } = useSelector((state) => state.data);
     const dispatch = useDispatch();
 
@@ -31,24 +28,6 @@ export default function PromosPage() {
     useEffect(() => {
         handleShowAllData();
     }, []);
-
-    const handleOnDataChange = () => {
-        if (isDelete) {
-            // handleShowAllData();
-            // setBannerData(dataBanner);
-            dispatch(changeDeleteSatus());
-        } else if (isCreate) {
-            // handleShowAllData();
-            dispatch(changeCreateSatus());
-        } else if (isUpdate) {
-            // handleShowAllData();
-            dispatch(changeEditStatus());
-        }
-    };
-
-    useEffect(() => {
-        handleOnDataChange();
-    }, [isDelete, isCreate, isUpdate]);
 
     return (
         <div className="container mx-auto px-5 lg:pt-20 pt-28">

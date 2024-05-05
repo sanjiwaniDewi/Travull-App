@@ -45,12 +45,6 @@ export default function UpdateProfilePage() {
         } catch (err) {}
         dispatch(deleteImageUrl());
     };
-    // const handleRedirect = () => {
-    //     router.push("/profile");
-    // };
-    // useEffect(() => {
-    //     handleRedirect();
-    // }, []);
 
     const redirectOnSuccessSubmit = () => {
         dispatch(setSuccessUpdate(false));
@@ -71,7 +65,7 @@ export default function UpdateProfilePage() {
                             <div className="flex justify-center text-sm">
                                 <UploadImage
                                     customStyleBtn={
-                                        "  w-full px-2 py-3 rounded-xl font-semibold text-sm  bg-secondary-100 text-primary-200"
+                                        "  w-full px-2 py-3 rounded-xl font-semibold text-sm hover:bg-secondary-100 hover:text-primary-200 bg-primary-200 text-slate-200"
                                     }
                                     customStyleInput={
                                         "bg-primary-100  px-2 py-4 rounded-xl focus:outline-secondary-100"

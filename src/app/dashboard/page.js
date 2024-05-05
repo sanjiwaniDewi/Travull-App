@@ -23,11 +23,6 @@ export default function DashboardPage() {
     const [lastActivities, setLatestActivities] = useState();
     const { showModal } = useSelector((state) => state.modal);
 
-    const { isDelete, isUpdate, isCreate } = useSelector(
-        (state) => state.status
-    );
-    const dispatch = useDispatch();
-
     const {
         getAllActivityData,
         getAllBennerData,
@@ -134,35 +129,6 @@ export default function DashboardPage() {
         getAllCategory();
         getAllActivity();
     }, []);
-
-    const handleOndeleteData = () => {
-        if (isDelete) {
-            getAllDataUsers();
-            getAllBanner();
-            getAllPromo();
-            getAllCategory();
-            getAllActivity();
-            dispatch(changeDeleteSatus());
-        } else if (isCreate) {
-            getAllDataUsers();
-            getAllBanner();
-            getAllPromo();
-            getAllCategory();
-            getAllActivity();
-            dispatch(changeCreateSatus());
-        } else if (isUpdate) {
-            getAllDataUsers();
-            getAllBanner();
-            getAllPromo();
-            getAllCategory();
-            getAllActivity();
-            dispatch(changeEditStatus());
-        }
-    };
-
-    useEffect(() => {
-        handleOndeleteData();
-    }, [isDelete, isCreate, isUpdate]);
 
     return (
         <div className=" w-full">

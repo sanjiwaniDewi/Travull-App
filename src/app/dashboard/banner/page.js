@@ -10,9 +10,7 @@ import TabelAllData from "@/components/utils/TableAllData";
 
 export default function BannersPage() {
     const { getAllBennerData } = useGetAllData();
-    const { isDelete, isUpdate, isCreate } = useSelector(
-        (state) => state.status
-    );
+
     const { data: dataBanner } = useSelector((state) => state.data);
     const dispatch = useDispatch();
     const handleShowAllData = async () => {

@@ -10,23 +10,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PromoCarausel from "@/components/homepage/promo/PromoCarousel";
 
-// async function getUserLogged() {
-//     if (typeof window !== "undefined") {
-//         const token = localStorage.getItem("access_token");
-//         if (token) {
-//             const res = await axios.get(`${BASE_API}/user`, {
-//                 headers: {
-//                     apiKey: API_KEY,
-//                     Authorization: `Bearer ${token}`,
-//                 },
-//             });
-//             console.log("haloo");
-
-//             return res.data.data;
-//         }
-//     }
-// }
-
 export default function ProfilePage() {
     const dispatch = useDispatch();
     const userData = useSelector((store) => store.user);
@@ -41,14 +24,6 @@ export default function ProfilePage() {
     useEffect(() => {
         handleLoadPromoData();
     }, []);
-
-    // const handleUserData = () => {
-    //     dispatch(fatchUserLogged());
-    // };
-
-    // useEffect(() => {
-    //     handleUserData();
-    // }, []);
 
     return (
         <div className="pb-20">
