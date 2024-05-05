@@ -25,57 +25,13 @@ import {
 } from "@/utils/handleActionButton";
 
 export default function ShortTable({ data, title, detileLink, type }) {
-    const dispatch = useDispatch();
-
     const tableTitle = [
         ...new Set(data?.map((item) => Object.keys(item)).flat()),
     ];
     const router = useRouter();
 
-    if (tableTitle.length !== 0) {
-        tableTitle.push("action");
-    }
-
-    const handlerShowDetail = async (id, type) => {
-        const token = localStorage.getItem("access_token");
-        if (token) {
-            const res = await axios.get(`${BASE_API}/${type}/${id}`, {
-                headers: {
-                    apiKey: API_KEY,
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            dispatch(setModalData(res.data.data));
-            dispatch(setModalType(type));
-        }
-    };
-
     const handleAddItem = () => {
         router.push(handleCreateRoute(type));
-    };
-
-    //  const dispatch = useDispatch();
-    //  const router = useRouter();
-
-    const handleShowModal = (id, type) => {
-        dispatch(changeModalStatus());
-        handlerShowDetail(id, type);
-    };
-    const handleDelete = (id, type) => {
-        // handleDeleteItem(id, type);
-
-        dispatch(changeModalStatus());
-        dispatch(setModalType("delete"));
-        dispatch(setModalData({ id, type }));
-
-        // dispatch(deleteItem(id));
-        // dispatch(changeDeleteSatus());
-    };
-
-    const handleEdit = (id, type) => {
-        dispatch(changeEditStatus());
-        router.push(handleUpdateRoute(id, type));
     };
 
     return (
@@ -150,38 +106,6 @@ export default function ShortTable({ data, title, detileLink, type }) {
                                             );
                                         } else if (head === "no") {
                                             return;
-                                        } else if (head === "action") {
-                                            return (
-                                                <td
-                                                    key={row["id"]}
-                                                    className="pt-3"
-                                                >
-                                                    <div className=" flex  justify-center content-start">
-                                                        <ActionButtons
-                                                            // id={row["id"]}
-                                                            // type={type}
-                                                            handleShowModal={() =>
-                                                                handleShowModal(
-                                                                    row["id"],
-                                                                    type
-                                                                )
-                                                            }
-                                                            handleDelete={() =>
-                                                                handleDelete(
-                                                                    row["id"],
-                                                                    type
-                                                                )
-                                                            }
-                                                            handleEdit={() =>
-                                                                handleEdit(
-                                                                    row["id"],
-                                                                    type
-                                                                )
-                                                            }
-                                                        />
-                                                    </div>
-                                                </td>
-                                            );
                                         } else if (head === "updatedAt") {
                                             return (
                                                 <td
@@ -226,7 +150,7 @@ export default function ShortTable({ data, title, detileLink, type }) {
                         href={detileLink}
                         className="text-primary-200 font-medium underline"
                     >
-                        show more
+                        Semua Tabel
                     </Link>
                 </div>
             </div>

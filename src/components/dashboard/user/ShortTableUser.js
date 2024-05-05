@@ -5,9 +5,6 @@ export default function ShortTableUser({ data }) {
         ...new Set(data?.map((item) => Object.keys(item)).flat()),
     ];
 
-    if (tableTitle.length !== 0) {
-        tableTitle.push("action");
-    }
     return (
         <div className="container mx-auto bg-slate-50 border-gray-200">
             <h1 className="text-2xl font-bold mb-3">Kelola User</h1>
@@ -86,16 +83,6 @@ export default function ShortTableUser({ data }) {
                                                     {item[head]}
                                                 </td>
                                             );
-                                        } else if (head === "action") {
-                                            return (
-                                                <td key={item["id"]}>
-                                                    <div className=" flex  justify-center content-start pt-3">
-                                                        <ChangeRole
-                                                            userData={item}
-                                                        />
-                                                    </div>
-                                                </td>
-                                            );
                                         }
                                         return (
                                             <td
@@ -117,7 +104,7 @@ export default function ShortTableUser({ data }) {
                     href="dashboard/all-user"
                     className="text-primary font-medium underline"
                 >
-                    show more
+                    Tabel User
                 </Link>
             </div>
         </div>
