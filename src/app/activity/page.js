@@ -1,21 +1,32 @@
+"use client";
+
 import ActivitiesSection from "@/components/activity/ActivitiesSection";
+import BannerCarousel from "@/components/banner/BannerCarousel";
 import ActivityCountainer from "@/components/homepage/activity/ActivitiesContainer";
 import CategorySection from "@/components/homepage/category/CategorySection";
+import ImageCarousel from "@/components/utils/ImageCarousel";
+import { useGetAllData } from "@/hooks/useGet";
+import { useState } from "react";
 
 export default function ActivityPage() {
+    const [banners, setBanners] = useState([]);
+    const { getAllBennerData } = useGetAllData();
+    const getBanner = async () => {
+        const res = await getAllBennerData();
+        setBanners(res);
+    };
+
+    useState(() => {
+        getBanner();
+    }, []);
+
     return (
-        <div className="lg:pt-20 pt-28">
-            <div className=" container mx-auto w-full lg:px-1 px-5 ">
-                <h2 className="text-xl font-bold">
-                    Temukan aktivitas menarik untuk liburanmu
-                </h2>
-                <p className="text-sm">
-                    Pliih aktivitas berdasarkan destinasi yang kamu tuju dan
-                    temukan discount menarik
-                </p>
-            </div>
-            <ActivitiesSection />
+        <div className="">
+            <BannerCarousel data={banners} />
             <CategorySection />
+            <div className="mb-28">
+                <ActivitiesSection />
+            </div>
         </div>
     );
 }
