@@ -1,13 +1,28 @@
 "use client";
 import Link from "next/link";
 import LoginButton from "./LoginButton";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CgMenuRight } from "react-icons/cg";
 import { GrClose } from "react-icons/gr";
 import MenuNav from "./MenuNav";
 
 export default function Navbar() {
     const [showMenu, setShowMenu] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const handleOutSideClick = (event) => {
+            if (!ref.current?.contains(event.target)) {
+                setShowMenu(false);
+            }
+        };
+
+        window.addEventListener("mousedown", handleOutSideClick);
+
+        return () => {
+            window.removeEventListener("mousedown", handleOutSideClick);
+        };
+    }, [ref]);
 
     const handleShowMenu = () => {
         setShowMenu(!showMenu);
@@ -20,18 +35,18 @@ export default function Navbar() {
         >
             <div className="container mx-auto lg:px-1 px-5 grid lg:grid-cols-5 grid-cols-3">
                 <div className="nav-logo text-Zinc-900 font-extrabold text-3xl content-center">
-                    <Link href={"/"}>Travull</Link>
+                    <Link href={"/"}>TravulL</Link>
                 </div>
                 <div className="hidden lg:col-span-4 col-span-2 lg:flex justify-between">
                     <div className="hidden nav-menu lg:flex justify-start self-center  font-semibold  ">
                         <ul className="flex gap-x-10">
-                            <li className="hover:text-primary-100 hover:scale-105">
+                            <li className="hover:text-secondary-100 hover:scale-105">
                                 <Link href={"/promo"}>Promo</Link>
                             </li>
-                            <li className="hover:text-primary-100 hover:scale-105">
+                            <li className="hover:text-secondary-100 hover:scale-105">
                                 <Link href={"/category"}>Destinasi</Link>
                             </li>
-                            <li className="hover:text-primary-100 hover:scale-105">
+                            <li className="hover:text-secondary-100 hover:scale-105">
                                 <Link href={"/activity"}>Aktivitas</Link>
                             </li>
                         </ul>
@@ -52,7 +67,11 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className="lg:dispay-none block col-span-2 smallSizeNavbar ">
-                    <div>{showMenu && <MenuNav />}</div>
+                    {showMenu && (
+                        <div ref={ref}>
+                            <MenuNav />
+                        </div>
+                    )}
                 </div>
             </div>
         </nav>

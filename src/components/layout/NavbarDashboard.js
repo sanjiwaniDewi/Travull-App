@@ -1,11 +1,26 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CgMenuRight } from "react-icons/cg";
 import { GrClose } from "react-icons/gr";
 import MenuNavDashboard from "./MenuNavDashboard";
 
 export default function NavbarDashboard() {
     const [showMenu, setShowMenu] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const handleOutSideClick = (event) => {
+            if (!ref.current?.contains(event.target)) {
+                setShowMenu(false);
+            }
+        };
+
+        window.addEventListener("mousedown", handleOutSideClick);
+
+        return () => {
+            window.removeEventListener("mousedown", handleOutSideClick);
+        };
+    }, [ref]);
 
     const handleShowMenu = () => {
         setShowMenu(!showMenu);
@@ -24,9 +39,11 @@ export default function NavbarDashboard() {
                         {showMenu ? <GrClose /> : <CgMenuRight />}
                     </button>
                 </div>
-                <div className="container mx-auto ">
-                    {showMenu && <MenuNavDashboard />}
-                </div>
+                {showMenu && (
+                    <div className="container mx-auto " ref={ref}>
+                        <MenuNavDashboard />
+                    </div>
+                )}
             </nav>
         </div>
     );

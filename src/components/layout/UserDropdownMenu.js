@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import { useSelector } from "react-redux";
@@ -8,6 +8,22 @@ export default function DropdownMenu({ dataUser, handleLogout }) {
     const [showDropdown, setShowDropdown] = useState(false);
 
     const { role } = useSelector((store) => store.user);
+
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const handleOutSideClick = (event) => {
+            if (!ref.current?.contains(event.target)) {
+                setShowDropdown(false);
+            }
+        };
+
+        window.addEventListener("mousedown", handleOutSideClick);
+
+        return () => {
+            window.removeEventListener("mousedown", handleOutSideClick);
+        };
+    }, [ref]);
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
@@ -41,45 +57,48 @@ export default function DropdownMenu({ dataUser, handleLogout }) {
                 </button>
             </div>
 
-            <div
-                id="dropdownDots"
-                className={
-                    showDropdown
-                        ? "absolute mt-1 2xl:right-32 xl:right-4 lg:right:16 md:right-6 right-0 z-10 show bg-black divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
-                        : "hidden"
-                }
-            >
-                <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-200 "
-                    aria-labelledby="dropdownMenuIconButton"
+            {showDropdown && (
+                <div
+                    id="dropdownDots"
+                    className={
+                        showDropdown
+                            ? "absolute mt-1 2xl:right-32 xl:right-4 lg:right:16 md:right-6 right-0 z-10 show bg-primary-100 divide-y divide-gray-100 rounded-lg w-44 shadow-lg "
+                            : "hidden"
+                    }
+                    ref={ref}
                 >
-                    <li>
-                        <Link
-                            href="/profile"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                            Profile
-                        </Link>
-                    </li>
-                    {role === "admin" && (
+                    <ul
+                        className=" text-sm text-zinc-900 font-semibold "
+                        aria-labelledby="dropdownMenuIconButton"
+                    >
                         <li>
                             <Link
-                                href="/dashboard"
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                href="/profile"
+                                className="block px-4 py-2 hover:bg-secondary-100 "
                             >
-                                Dashboard
+                                Profile
                             </Link>
                         </li>
-                    )}
-                </ul>
-                <div className="py-2">
-                    <LogoutButton
-                        styleButon={
-                            "w-full text-start block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                        }
-                    />
+                        {role === "admin" && (
+                            <li>
+                                <Link
+                                    href="/dashboard"
+                                    className="block px-4 py-2 hover:bg-secondary-100  "
+                                >
+                                    Dashboard
+                                </Link>
+                            </li>
+                        )}
+                    </ul>
+                    <div className=" mb-2">
+                        <LogoutButton
+                            styleButon={
+                                "w-full text-start block px-4 py-2 text-sm  hover:bg-secondary-100 font-semibold "
+                            }
+                        />
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }
