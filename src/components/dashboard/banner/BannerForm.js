@@ -9,13 +9,10 @@ import {
     getImageUrl,
 } from "@/redux/features/upload/imageSlice";
 import useUpdate from "@/hooks/useUpdate";
-import {
-    changeCreateSatus,
-    changeEditStatus,
-} from "@/redux/features/status/statusSilce";
+
 import ImageBtnOption from "@/components/utils/ImageBtnOption";
 import { useEffect, useState } from "react";
-import { updateItem } from "@/redux/features/data/dataSlice";
+
 import { checkIsEmptyInput } from "@/utils/handleFormatData";
 
 export default function BannerForm({ bannerData }) {
