@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CategoryImage from "./CategoryImage";
+import LinkButton from "../utils/LinkButton";
 
 export default function CategoriyContent({
     category,
@@ -19,12 +20,11 @@ export default function CategoriyContent({
                             Temukan aktivitas menarik untuk liburanmu
                         </p>
                         {showButton && (
-                            <Link
-                                href={`/category/${category.id}`}
-                                className="border text-center w-fit px-4 border-primary-200 font-semibold text-slate-800 text-md  p-2 rounded-xl hover:text-primary-100 hover:scale-105 hover:bg-primary-200"
-                            >
-                                Lihat Detail
-                            </Link>
+                            <LinkButton
+                                link={`/category/${category.id}`}
+                                title={"Lihat Detail"}
+                                customStyle={"w-fit"}
+                            />
                         )}
                     </div>
 
