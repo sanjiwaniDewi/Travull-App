@@ -77,7 +77,7 @@ export default function TabelAllData({ data, title, type }) {
                     />
                 </div>
             </div>
-            <div className="overflow-x-auto table-auto">
+            <div className="overflow-x-auto">
                 <table className="table text-lg w-full">
                     <thead className="shadow-xl">
                         <tr className="text-md shadow-md  bg-primary-200 text-secondary-200">
@@ -142,8 +142,6 @@ export default function TabelAllData({ data, title, type }) {
                                             >
                                                 <div className=" flex  justify-center content-start">
                                                     <ActionButtons
-                                                        // id={row["id"]}
-                                                        // type={type}
                                                         handleShowModal={() =>
                                                             handleShowModal(
                                                                 row["id"],

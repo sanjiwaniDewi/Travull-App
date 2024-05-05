@@ -18,7 +18,7 @@ export default function ShortTable({ data, title, detileLink, type }) {
     };
 
     return (
-        <div className="w-full p-6  border shadow-md border-gray-200 rounded-lg overflow-x-auto">
+        <div className="w-full p-6  border shadow-md border-gray-200 rounded-lg">
             <div className="">
                 <div className="flex justify-start content-center pt-1 gap-4 mb-3">
                     <h1 className="text-2xl font-bold ">{title}</h1>
@@ -30,7 +30,7 @@ export default function ShortTable({ data, title, detileLink, type }) {
                         />
                     </div>
                 </div>
-                <div className=" overflow-x-auto table-auto">
+                <div className=" overflow-x-auto">
                     <table className="table table-compact w-full">
                         <thead className=" pb-2 px-2  shadow-xl ">
                             <tr className="text-md shadow-md  bg-primary-200 text-secondary-200">
