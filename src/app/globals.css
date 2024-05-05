@@ -37,11 +37,11 @@ body {
 } */
 
 .triangle-shape {
-    background: rgb(6, 6, 6);
+    background: rgb(133, 200, 221);
     background: linear-gradient(
         0deg,
-        rgba(6, 6, 6, 1) 0%,
-        rgba(0, 0, 0, 0) 71%
+        rgba(133, 200, 221, 0.7175245098039216) 0%,
+        rgba(255, 255, 255, 0) 50%
     );
 }
 .promoHomepage {
